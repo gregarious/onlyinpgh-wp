@@ -1036,7 +1036,7 @@ for (i = 0; i < field.length; i++)
 </div> <!--Close header_content2-->
 <?php do_action( 'bp_header' ) ?>
 <div class="socialicons"><a href="https://www.facebook.com/onlyinpgh"><img src="http://onlyinpgh.com/menunav_images/fbicon.png"></a>
-<a href="https://twitter.com/#!/onlyinpgh/"><img src="<?php bloginfo('url'); menunav_images/twittericon.png"></a>
+<a href="https://twitter.com/#!/onlyinpgh/"><img src="<?php bloginfo('url'); ?> menunav_images/twittericon.png"></a>
 <a href="http://onlyinpgh.com/feed/rss/"><img src="http://onlyinpgh.com/menunav_images/rssicon.png"></a></div>
 </div><!--Close header_below-->
 </div><!--Closes header-->
