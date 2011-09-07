@@ -1,0 +1,384 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head profile="http://gmpg.org/xfn/11">
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>OnlyinPGH Map Test</title>
+<head>
+
+<style>
+body {
+    font-family: “Trebuchet MS”, “Lucida Sans Unicode”, “Lucida Grande”,” Lucida Sans”, Arial, sans-serif;
+    margin: 0px; 
+    padding: 0px;	
+}
+
+b {
+    font-family: 'Francois One', Impact, san-serif;
+	font-weight: normal;
+	font-size: 18px;
+	text-shadow: 0px 0px 3px #ccc;	
+}
+
+.infowindow {
+	padding: 5px;
+	min-height: 180px;
+	min-width: 250px;
+}
+
+#map {
+    margin:20px; 
+    padding:0px; 
+    height:500px; 
+    width:900px;	
+}
+
+</style>
+<link href='http://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
+<script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>
+<script type="text/javascript">
+
+//<![CDATA[
+    var map;
+    var markers = [];
+    var infoWindow;
+
+function load() {
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: new google.maps.LatLng(40.451503,-79.933414),
+        zoom: 17,
+        maxZoom: 19,
+        minZoom: 11,
+        mapTypeId: 'roadmap',
+        scrollwheel: false,
+        mapTypeControlOptions: {style: google.maps.MapTypeControlStyle.DEFAULT}
+      });
+    
+      infoWindow = new google.maps.InfoWindow();
+      
+      var applestore = new google.maps.LatLng(40.451305,-79.933458);
+      var americanapparel = new google.maps.LatLng(40.451427,-79.933375);
+      var coffeetreeroasters = new google.maps.LatLng(40.45146,-79.932836);
+      var thaiplace = new google.maps.LatLng(40.451474,-79.934999);
+      var libertypark = new google.maps.LatLng(40.45405,-79.93378);
+      var jitterscafe = new google.maps.LatLng(40.451746,-79.932345);
+      var communityday = new google.maps.LatLng(40.451617,-79.933094);
+      var swrandal = new google.maps.LatLng(40.451746,-79.932345);
+      var varietystore = new google.maps.LatLng(40.451066,-79.934652);
+      var chocolatestore = new google.maps.LatLng(40.451219,-79.934582);
+      var barbershop = new google.maps.LatLng(40.450703,-79.934577);
+      var artfestival = new google.maps.LatLng(40.453854,-79.927107);
+      var xshadyside = new google.maps.LatLng(40.451899,-79.931739);
+      var creativenonfiction = new google.maps.LatLng(40.451303,-79.93385);
+              
+    var amusic = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/music_eventattraction.png',
+					new google.maps.Size(30,30),
+					new google.maps.Point(0,0),
+					new google.maps.Point(30,30));
+					
+	var afun = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/genfun_eventattraction.png',
+					new google.maps.Size(30,30),
+					new google.maps.Point(0,0),
+					new google.maps.Point(30,30));
+					
+	var aarts = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/genfun_eventattraction.png',
+					new google.maps.Size(30,30),
+					new google.maps.Point(0,0),
+					new google.maps.Point(30,30));
+    
+    var emusic = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/music_event.png',
+					new google.maps.Size(30,30),
+					new google.maps.Point(0,0),
+					new google.maps.Point(30,30));
+					
+	var efood = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/food_event.png',
+					new google.maps.Size(30,30),
+					new google.maps.Point(0,0),
+					new google.maps.Point(30,30));
+
+	var efun = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/genfun_event.png',
+					new google.maps.Size(30,30),
+					new google.maps.Point(0,0),
+					new google.maps.Point(30,30));
+					
+	var emuseum = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/museum_event.png',
+					new google.maps.Size(30,30),
+					new google.maps.Point(0,0),
+					new google.maps.Point(30,30));
+					
+	var esport = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/outdoors_event.png',
+					new google.maps.Size(30,30),
+					new google.maps.Point(0,0),
+					new google.maps.Point(30,30));
+					
+	var eretail = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/retail_event.png',
+					new google.maps.Size(30,30),
+					new google.maps.Point(0,0),
+					new google.maps.Point(30,30));
+					
+	var etheater = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/theaterfilm_event.png',
+					new google.maps.Size(30,30),
+					new google.maps.Point(0,0),
+					new google.maps.Point(30,30));
+					
+	var pfood = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/food.png',
+					new google.maps.Size(28,28),
+					new google.maps.Point(0,0),
+					new google.maps.Point(0,28));
+					
+	var pretail = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/retail.png',
+					new google.maps.Size(28,28),
+					new google.maps.Point(0,0),
+					new google.maps.Point(0,28));
+	
+	var psport = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/outdoors.png',
+					new google.maps.Size(28,28),
+					new google.maps.Point(0,0),
+					new google.maps.Point(0,28));
+					
+	var pmuseum = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/museum.png',
+					new google.maps.Size(28,28),
+					new google.maps.Point(0,0),
+					new google.maps.Point(0,28));
+					
+	var apmuseum = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/museum_placeattraction.png',
+					new google.maps.Size(28,28),
+					new google.maps.Point(0,0),
+					new google.maps.Point(0,28));
+					
+	var pmusic = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/music.png',
+					new google.maps.Size(28,28),
+					new google.maps.Point(0,0),
+					new google.maps.Point(0,28));
+					
+	var ptheater = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/theaterfilm.png',
+					new google.maps.Size(28,28),
+					new google.maps.Point(0,0),
+					new google.maps.Point(0,28));
+					
+	var pfun = new google.maps.MarkerImage('http://onlyinpgh.com/test/geo_markers/genfun.png',
+					new google.maps.Size(28,28),
+					new google.maps.Point(0,0),
+					new google.maps.Point(0,28)); 
+    
+    var applep = new google.maps.Marker({
+        position: applestore,
+        map: map,
+        icon: pretail,
+    }); 
+    
+    google.maps.event.addListener(applep, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>Shadyside Apple Store</b><br>1000 Walnut St<br></div>");
+        infoWindow.open(map, applep);
+      });
+    
+    markers.push(applep);
+    
+    var amapparel = new google.maps.Marker({
+        position: americanapparel,
+        map: map,
+        icon: pretail,
+    }); 
+    
+    google.maps.event.addListener(amapparel, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>Shadyside American Apparel</b><br>1000 Walnut St<br></div>");
+        infoWindow.open(map, amapparel);
+      });
+    
+    markers.push(amapparel);
+    
+    var eamapparel = new google.maps.Marker({
+        position: americanapparel,
+        map: map,
+        icon: eretail,
+    }); 
+    
+    google.maps.event.addListener(eamapparel, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>Shadyside American Apparel</b><br>1000 Walnut St<br><br><b>Summer Sidewalk Sale</b><br>July 24th, 2011<br>12:00PM - 6:00PM<br><br>20 people attending</div>");
+        infoWindow.open(map, eamapparel);
+      });
+    
+    markers.push(eamapparel);
+    
+    var coffee = new google.maps.Marker({
+        position: coffeetreeroasters,
+        map: map,
+        icon: pfood,
+    }); 
+    
+    google.maps.event.addListener(coffee, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>Coffee Tree Roasters</b><br>1000 Walnut St<br></div>");
+        infoWindow.open(map, coffee);
+      });
+    
+    markers.push(coffee);
+    
+    var ecoffee = new google.maps.Marker({
+        position: coffeetreeroasters,
+        map: map,
+        icon: amusic,
+    }); 
+    
+    google.maps.event.addListener(ecoffee, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>Coffee Tree Roasters</b><br>1000 Walnut St<br><br><b>Open Mic Night</b><br>July 23th, 2011<br>5:00PM - 10:00PM<br><br>183 people attending</div>");
+        infoWindow.open(map, ecoffee);
+      });
+    
+    markers.push(ecoffee);
+    
+    var thai = new google.maps.Marker({
+        position: thaiplace,
+        map: map,
+        icon: pfood,
+    }); 
+    
+    google.maps.event.addListener(thai, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>Thai Place</b><br>1000 Walnut St<br></div>");
+        infoWindow.open(map, thai);
+      });
+    
+    markers.push(thai);
+    
+    var liberty = new google.maps.Marker({
+        position: libertypark,
+        map: map,
+        icon: psport,
+    }); 
+    
+    google.maps.event.addListener(liberty, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>Liberty Park</b><br>1000 Walnut St<br></div>");
+        infoWindow.open(map, liberty);
+      });
+    
+    markers.push(liberty);
+    
+    var eliberty = new google.maps.Marker({
+        position: libertypark,
+        map: map,
+        icon: etheater,
+    }); 
+    
+    google.maps.event.addListener(eliberty, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>Liberty Park</b><br>1000 Walnut St<br><br><b>Moves in the Park</b><br>July 23rd, 2011<br>9:90PM - 12:00AM<br><br>50 people attending</div>");
+        infoWindow.open(map, eliberty);
+      });
+    
+    markers.push(eliberty);
+    
+    
+        var fitness = new google.maps.Marker({
+        position: xshadyside,
+        map: map,
+        icon: psport,
+    }); 
+    
+    google.maps.event.addListener(fitness, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>X Shadyside</b><br>1000 Walnut St<br><br></div>");
+        infoWindow.open(map, fitness);
+      });
+    
+    markers.push(fitness);
+    
+    var efitness = new google.maps.Marker({
+        position: xshadyside,
+        map: map,
+        icon: esport,
+    }); 
+    
+    google.maps.event.addListener(efitness, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>X Shadyside</b><br>1000 Walnut St<br><br><b>X Shadyside Open House</b><br>July 24th, 2011<br>12:00PM - 4:00PM<br><br>30 people attending</div>");
+        infoWindow.open(map, efitness);
+      });
+    
+    markers.push(efitness);
+    
+    var randal = new google.maps.Marker({
+        position: swrandal,
+        map: map,
+        icon: pretail,
+    }); 
+    
+    google.maps.event.addListener(randal, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>SW Randal</b><br>1000 Walnut St<br></div>");
+        infoWindow.open(map, randal);
+      });
+    
+    markers.push(randal);
+    
+    var museum = new google.maps.Marker({
+        position: varietystore,
+        map: map,
+        icon: apmuseum,
+    }); 
+    
+    google.maps.event.addListener(museum, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>Toy Museum</b><br>1000 Walnut St<br><br>5,000 fans on Facebook</div>");
+        infoWindow.open(map, museum);
+      });
+    
+    markers.push(museum);
+    
+    var enonfic = new google.maps.Marker({
+        position: varietystore,
+        map: map,
+        icon: emuseum,
+    }); 
+    
+    google.maps.event.addListener(enonfic, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>Toy Museum</b><br>1000 Walnut St<br><br><b>Free Admission Sunday</b><br>July 24th, 2011<br>10:00AM - 5:00PM<br><br>70 people attending</div>");
+        infoWindow.open(map, enonfic);
+      });
+    
+    markers.push(enonfic);
+    
+    var theater = new google.maps.Marker({
+        position: barbershop,
+        map: map,
+        icon: ptheater,
+    }); 
+    
+    google.maps.event.addListener(theater, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>Shadyside Movie Theater</b><br>1000 Walnut St<br></div>");
+        infoWindow.open(map, theater);
+      });
+    
+    markers.push(theater);
+    
+    var chocolate = new google.maps.Marker({
+        position: chocolatestore,
+        map: map,
+        icon: pfood,
+    }); 
+    
+    google.maps.event.addListener(chocolate, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>Eureka! Chocolates and Gifts</b><br>1000 Walnut St<br></div>");
+        infoWindow.open(map, chocolate);
+      });
+    
+    markers.push(chocolate);
+    
+    var artfestival = new google.maps.Marker({
+        position: communityday,
+        map: map,
+        icon: aarts,
+    }); 
+    
+    google.maps.event.addListener(artfestival, 'click', function() {
+        infoWindow.setContent("<div class=\"infowindow\"<b>Shadyside Arts Festival</b><br>1000 Walnut St<br><br>July 23rd, 2011<br>9:00AM - 6:00PM<br><br>800 people attending</div>");
+        infoWindow.open(map, artfestival);
+      });
+    
+    markers.push(artfestival);
+    
+}
+
+
+
+</script>
+</head>
+<body onload="load()">
+<div id="map"></div>
+
+</body>
+</html>

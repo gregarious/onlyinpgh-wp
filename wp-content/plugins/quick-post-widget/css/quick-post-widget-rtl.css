@@ -1,0 +1,74 @@
+#quick_post_cat_checklist li {
+	margin: 0 2px 0 0;
+	padding: 0 0px 0 0;
+}
+
+#quick_post_cat_checklist li ul{
+	margin:0 10px 0 0;
+	padding: 0 5px 0 0!important;
+}
+
+#quick_post_cat_checklist #cats {
+		margin:0 2px 0 0;
+}
+
+.quick_post_taxonomy_box {
+	padding: 4px 4px 4px 0;
+}
+
+.quick_post_taxonomy_checklist li ul {
+	margin:0 10px 0 0;
+}
+
+.quick_post_option_form {
+	text-align: left;
+}
+
+.quick_post_option_form  a {
+	float: right;
+}
+
+.quick_post_option_label {
+	float: right;
+}
+
+.quick_post_option_header {
+	float: right;
+	margin-right: 2px;
+}
+
+.quick_post_option_icon {
+	padding: 0 0 2px 16px;
+}
+
+.quick_post_option_icon_no_js {
+	padding: 0 0 2px 16px;
+}
+
+.quick_post_option_div {
+	padding: 4px 2px 2px 0px;
+}
+
+.quick_post_cat_checklist_admin {
+	padding: 0 2px 4px 0;
+	text-align: right;
+}
+
+.quick_post_cat_checklist_admin li {
+	margin: 0 2px 0 0;
+}
+
+.quick_post_cat_checklist_admin li ul {
+	margin:0 10px 0 0;
+}
+
+.quick_post_custom_fields {
+	text-align: right;
+}
+
+.quick_post_admin_table {
+	text-align: right;
+}
+/* css for timepicker */
+.ui-timepicker-div dl{ text-align: right; }
+.ui-timepicker-div dl dd{ margin: -25px 65px 10px 0; }

@@ -1,0 +1,853 @@
+# Translation of the WordPress plugin Quick Post Widget 1.9 by Perry van Akkeren.
+# Copyright (C) 2011 Perry van Akkeren
+# This file is distributed under the same license as the Quick Post Widget package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Quick Post Widget\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/quick-post-widget\n"
+"POT-Creation-Date: 2011-06-25 18:25:38+00:00\n"
+"PO-Revision-Date: 2011-06-25 20:38+0100\n"
+"Last-Translator: Perry van Akkeren <vanakkeren@live.nl>\n"
+"Language-Team: Perry van Akkeren <vanakkeren@live.nl>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Dutch\n"
+"X-Poedit-Country: NETHERLANDS\n"
+
+#: quick-post-widget.php:32
+msgid "Quick Post Page"
+msgstr "Quick Post Pagina"
+
+#: quick-post-widget.php:34
+msgid "This dummy widget area can hold the Quick Post Widget to display on a page. Drag the widget here and configure it. Use the shortcode [quick-post-page] to call the widget area in a page. You can also drag some other widgets here."
+msgstr "Deze dummy widget area kan de Quick Post Widget bevatten om op een pagina te tonen. Sleep de widget hierheen en configureer het. Gebruik de shortcode [quick-post-page] om de widget op een pagina te plaatsen. Je kunt hier ook andere widgets plaatsen."
+
+#: quick-post-widget.php:105
+msgid "A new quick post has been made on"
+msgstr "Er is een nieuwe quick post gemaakt op"
+
+#: quick-post-widget.php:105
+msgid "To view the post click here:"
+msgstr "Klik hier om het bericht te bekijken:"
+
+#: quick-post-widget.php:106
+msgid "New quick post on"
+msgstr "Nieuwe quick post op"
+
+#: quick-post-widget.php:142
+msgid "Name of custom field"
+msgstr "Naam van het extra veld"
+
+#: quick-post-widget.php:183
+msgid "The Quick Post Widget provides a quick way to post directly from your site."
+msgstr "Met de Quick Post Widget kunnen berichten direct vanaf de site gemaakt worden."
+
+#: quick-post-widget.php:279
+msgid "Need help? Just click here!"
+msgstr "Hulp nodig? Klik hier!"
+
+#: quick-post-widget.php:283
+msgid "General options"
+msgstr "Algemene opties"
+
+#: quick-post-widget.php:288
+msgid "Widget title"
+msgstr "Widget titel"
+
+#: quick-post-widget.php:289
+msgid "Widget title to display"
+msgstr "Widget titel zoals getoond"
+
+#: quick-post-widget.php:291
+#: quick-post-widget.php:292
+msgid "Publish status"
+msgstr "Bericht status"
+
+#: quick-post-widget.php:293
+msgid "Publish"
+msgstr "Gepubliceerd"
+
+#: quick-post-widget.php:294
+msgid "Pending"
+msgstr "Wachten op review"
+
+#: quick-post-widget.php:295
+msgid "Draft"
+msgstr "Concept"
+
+#: quick-post-widget.php:296
+msgid "Private"
+msgstr "Privé"
+
+#: quick-post-widget.php:299
+msgid "Border error color"
+msgstr "Randkleur fout"
+
+#: quick-post-widget.php:300
+msgid "Bordercolor to use in case a required field is empty"
+msgstr "Kleur van de rand wanneer een verplicht veld leeg blijft"
+
+#: quick-post-widget.php:303
+msgid "Red"
+msgstr "Rood"
+
+#: quick-post-widget.php:304
+msgid "White"
+msgstr "Wit"
+
+#: quick-post-widget.php:305
+msgid "Yellow"
+msgstr "Geel"
+
+#: quick-post-widget.php:306
+msgid "Fuchsia"
+msgstr "Lichtpaars"
+
+#: quick-post-widget.php:307
+msgid "Silver"
+msgstr "Zilver"
+
+#: quick-post-widget.php:308
+msgid "Gray"
+msgstr "Grijs"
+
+#: quick-post-widget.php:309
+msgid "Olive"
+msgstr "Olijfgroen"
+
+#: quick-post-widget.php:310
+msgid "Purple"
+msgstr "Paars"
+
+#: quick-post-widget.php:311
+msgid "Maroon"
+msgstr "Bruin"
+
+#: quick-post-widget.php:312
+msgid "Aqua"
+msgstr "Cyaan"
+
+#: quick-post-widget.php:313
+msgid "Lime"
+msgstr "Lichtgroen"
+
+#: quick-post-widget.php:314
+msgid "Teal"
+msgstr "Donkercyaan"
+
+#: quick-post-widget.php:315
+msgid "Green"
+msgstr "Groen"
+
+#: quick-post-widget.php:316
+msgid "Blue"
+msgstr "Blauw"
+
+#: quick-post-widget.php:317
+msgid "Navy"
+msgstr "Donkerblauw"
+
+#: quick-post-widget.php:318
+msgid "Black"
+msgstr "Zwart"
+
+#: quick-post-widget.php:332
+msgid "Show tags field"
+msgstr "Toon tags veld"
+
+#: quick-post-widget.php:334
+msgid "Hide or show post tags input field, optional or required"
+msgstr "Verberg of toon bericht tags veld, optioneel of verplicht"
+
+#: quick-post-widget.php:335
+#: quick-post-widget.php:343
+#: quick-post-widget.php:350
+#: quick-post-widget.php:402
+msgid "Hide"
+msgstr "Verberg"
+
+#: quick-post-widget.php:336
+#: quick-post-widget.php:344
+#: quick-post-widget.php:351
+msgid "Optional"
+msgstr "Optioneel"
+
+#: quick-post-widget.php:337
+#: quick-post-widget.php:345
+#: quick-post-widget.php:352
+msgid "Required"
+msgstr "Verplicht"
+
+#: quick-post-widget.php:340
+msgid "Show post date"
+msgstr "Toon bericht datum"
+
+#: quick-post-widget.php:342
+msgid "Hide or show post date input field, optional or required"
+msgstr "Verberg of toon bericht datum veld, optioneel of verplicht"
+
+#: quick-post-widget.php:348
+msgid "Show excerpt"
+msgstr "Toon uittreksel"
+
+#: quick-post-widget.php:349
+msgid "Hide or show post excerpt input field, optional or required"
+msgstr "Verberg of toon bericht uittreksel veld, optioneel of verplicht"
+
+#: quick-post-widget.php:355
+msgid "Success message"
+msgstr "Succes melding"
+
+#: quick-post-widget.php:356
+msgid "Optional message after a successful post"
+msgstr "Eventuele melding na een geslaagd bericht"
+
+#: quick-post-widget.php:358
+msgid "Post fail message"
+msgstr "Bericht fout melding"
+
+#: quick-post-widget.php:359
+msgid "Optional message after a failed post"
+msgstr "Eventuele melding na een niet gelukt bericht"
+
+#: quick-post-widget.php:361
+msgid "Redirect to"
+msgstr "Redirect naar"
+
+#: quick-post-widget.php:362
+msgid "Complete URL to redirect to after a scuccesful post"
+msgstr "Complete URL om naar te redirecten na een geslaagd bericht"
+
+#: quick-post-widget.php:364
+msgid "Mail on post"
+msgstr "Mail bij bericht"
+
+#: quick-post-widget.php:365
+msgid "Mail when a new post is submitted"
+msgstr "Mail wanneer een bericht is gemaakt"
+
+#: quick-post-widget.php:366
+msgid "No"
+msgstr "Nee"
+
+#: quick-post-widget.php:367
+msgid "Guest posts"
+msgstr "Gast berichten"
+
+#: quick-post-widget.php:368
+msgid "All posts"
+msgstr "Alle berichten"
+
+#: quick-post-widget.php:371
+msgid "Post type"
+msgstr "Bericht type"
+
+#: quick-post-widget.php:375
+msgid "Post type, normal post or custom"
+msgstr "Bericht type, normaal of custom"
+
+#: quick-post-widget.php:376
+msgid "Normal (post)"
+msgstr "Normaal (bericht)"
+
+#: quick-post-widget.php:384
+msgid "Top of content"
+msgstr "Begin bericht"
+
+#: quick-post-widget.php:385
+msgid "Code to put at the top of the content"
+msgstr "Code aan begin bericht"
+
+#: quick-post-widget.php:387
+msgid "Bottom of content"
+msgstr "Einde bericht"
+
+#: quick-post-widget.php:388
+msgid "Code to put at the bottom of the content"
+msgstr "Code aan einde bericht"
+
+#: quick-post-widget.php:394
+msgid "Visibility options"
+msgstr "Zichtbaarheid opties"
+
+#: quick-post-widget.php:399
+msgid "Initial visibility"
+msgstr "Initiële zichtbaarheid"
+
+#: quick-post-widget.php:400
+msgid "Inititial visibility"
+msgstr "Initiële zichtbaarheid"
+
+#: quick-post-widget.php:401
+msgid "Show"
+msgstr "Toon"
+
+#: quick-post-widget.php:405
+msgid "Showtext"
+msgstr "Toontekst"
+
+#: quick-post-widget.php:406
+msgid "Text to click to show the widget"
+msgstr "Tekst om aan te klikken om de widget te tonen"
+
+#: quick-post-widget.php:408
+msgid "Hidetext"
+msgstr "Verbergtekst"
+
+#: quick-post-widget.php:409
+msgid "Text to click to hide the widget"
+msgstr "Tekst om aan te klikken om de widget te verbergen"
+
+#: quick-post-widget.php:415
+msgid "Category options"
+msgstr "Categorie opties"
+
+#: quick-post-widget.php:420
+#: quick-post-widget.php:421
+msgid "Category list type"
+msgstr "Categorie lijst soort"
+
+#: quick-post-widget.php:422
+msgid "Droplist"
+msgstr "Droplist"
+
+#: quick-post-widget.php:423
+msgid "Checklist"
+msgstr "Checklist"
+
+#: quick-post-widget.php:426
+msgid "Include/exclude categories"
+msgstr "In-/uitsluiten categorieën"
+
+#: quick-post-widget.php:427
+msgid "Include or exclude certain categories"
+msgstr "Bepaalde categorieën in- of uitsluiten"
+
+#: quick-post-widget.php:428
+msgid "Include"
+msgstr "Insluiten"
+
+#: quick-post-widget.php:429
+msgid "Exclude"
+msgstr "Uitsluiten"
+
+#: quick-post-widget.php:432
+msgid "Categories to include or exclude"
+msgstr "In- of uit te sluiten categorieën"
+
+#: quick-post-widget.php:434
+msgid "List of categories to include or exclude"
+msgstr "Lijst met in- of uit te sluiten categorieën"
+
+#: quick-post-widget.php:440
+#: quick-post-widget.php:441
+msgid "Default category"
+msgstr "Standaard categorie"
+
+#: quick-post-widget.php:441
+msgid "None"
+msgstr "Geen"
+
+#: quick-post-widget.php:443
+msgid "Order categories by"
+msgstr "Sorteer categorieën op"
+
+#: quick-post-widget.php:444
+msgid "Order categories by name or id"
+msgstr "Sorteer categorieën op naam of id"
+
+#: quick-post-widget.php:445
+#: quick-post-widget.php:518
+#: quick-post-widget.php:564
+msgid "Name"
+msgstr "Naam"
+
+#: quick-post-widget.php:446
+msgid "Id"
+msgstr "Id"
+
+#: quick-post-widget.php:449
+msgid "Disable new category"
+msgstr "Geen nieuwe categorie"
+
+#: quick-post-widget.php:450
+msgid "Disable creation of new categories (despite of role)"
+msgstr "Schakel het aanmaken van nieuwe categori&#235;n uit"
+
+#: quick-post-widget.php:456
+msgid "Visual editor options"
+msgstr "Visuele editor opties"
+
+#: quick-post-widget.php:461
+msgid "Disable visual editor"
+msgstr "Geen visuele editor"
+
+#: quick-post-widget.php:462
+msgid "Disable the visual editor"
+msgstr "Schakel de visuele editor uit"
+
+#: quick-post-widget.php:464
+msgid "Disable editor plugins"
+msgstr "Geen editor plugins"
+
+#: quick-post-widget.php:465
+msgid "Disable the visual editor plugins"
+msgstr "Schakel de editor plugins uit"
+
+#: quick-post-widget.php:467
+msgid "Disable media upload"
+msgstr "Geen media upload"
+
+#: quick-post-widget.php:468
+msgid "Disable media uploading in the visual editor"
+msgstr "Schakel media uploading in de visuele editor uit"
+
+#: quick-post-widget.php:470
+msgid "Shared upload directories"
+msgstr "Gedeelde upload mappen"
+
+#: quick-post-widget.php:471
+msgid "Shared instead of private upload directories"
+msgstr "Gedeelde in plaats van priv&#233; upload mappen"
+
+#: quick-post-widget.php:473
+msgid "Newlines tag"
+msgstr "Nieuwe regel tag"
+
+#: quick-post-widget.php:474
+msgid "Use P or BR tag for new lines"
+msgstr "Gebruik P of BR voor nieuwe regels"
+
+#: quick-post-widget.php:479
+msgid "Editor type on page"
+msgstr "Soort editor op pagina"
+
+#: quick-post-widget.php:480
+msgid "Show editor in popup or inline"
+msgstr "Toon editor in popup of ingesloten"
+
+#: quick-post-widget.php:481
+msgid "Inline"
+msgstr "Insluiten"
+
+#: quick-post-widget.php:482
+msgid "Popup"
+msgstr "Popup"
+
+#: quick-post-widget.php:489
+msgid "Guest posting options"
+msgstr "Gast post opties"
+
+#: quick-post-widget.php:494
+msgid "Allow guests (not logged-in)"
+msgstr "Gasten toestaan (niet ingelogd)"
+
+#: quick-post-widget.php:495
+msgid "Allow guest access (without being logged in, use with care!)"
+msgstr "Toegang door gasten toestaan (zonder te zijn ingelogd, gebruik voorzichtig!)"
+
+#: quick-post-widget.php:497
+msgid "Guest account"
+msgstr "Gast account"
+
+#: quick-post-widget.php:498
+msgid "Dedicated account to use for non-logged-in guests"
+msgstr "Speciaal account voor niet-ingelogde gasten"
+
+#: quick-post-widget.php:500
+msgid "Enable captcha"
+msgstr "Gebruik captcha"
+
+#: quick-post-widget.php:501
+msgid "Enable captcha security code"
+msgstr "Gebruik captcha beveiliging"
+
+#: quick-post-widget.php:507
+msgid "Custom fields options"
+msgstr "Extra velden opties"
+
+#: quick-post-widget.php:519
+#: quick-post-widget.php:566
+msgid "Req"
+msgstr "Vpl"
+
+#: quick-post-widget.php:520
+msgid "Label"
+msgstr "Titel"
+
+#: quick-post-widget.php:533
+msgid "Custom field"
+msgstr "Extra veld"
+
+#: quick-post-widget.php:533
+msgid "required"
+msgstr "verplicht"
+
+#: quick-post-widget.php:536
+msgid "Label for custom field"
+msgstr "Titel van het extra veld"
+
+#: quick-post-widget.php:543
+msgid "No custom fields exist!"
+msgstr "Er bestaan geen extra velden!"
+
+#: quick-post-widget.php:550
+msgid "Custom taxonomy options"
+msgstr "Eigen taxonomie opties"
+
+#: quick-post-widget.php:559
+msgid "Select taxonomies to use"
+msgstr "Selecteer te gebruiken taxonomieën"
+
+#: quick-post-widget.php:561
+msgid "List of taxonomies to use"
+msgstr "Lijst van te gebruiken taxonomieën"
+
+#: quick-post-widget.php:565
+msgid "Type"
+msgstr "Soort"
+
+#: quick-post-widget.php:567
+#: quick-post-widget.php:1106
+msgid "New"
+msgstr "Nieuw"
+
+#: quick-post-widget.php:572
+msgid "Taxonomy name"
+msgstr "Naam taxonomie"
+
+#: quick-post-widget.php:574
+msgid "Select to use taxonomy"
+msgstr "Selecteer om taxonomie te gebruiken"
+
+#: quick-post-widget.php:578
+msgid "List type taxonomy"
+msgstr "Soort lijst taxonomie"
+
+#: quick-post-widget.php:579
+msgid "Drop"
+msgstr "Drop"
+
+#: quick-post-widget.php:580
+msgid "Check"
+msgstr "Check"
+
+#: quick-post-widget.php:586
+msgid "Taxonomy required"
+msgstr "Taxonomie verplicht"
+
+#: quick-post-widget.php:592
+msgid "Allow new category for taxonomy"
+msgstr "Sta nieuwe categorie toe voor taxonomie"
+
+#: quick-post-widget.php:600
+msgid "No custom taxonomies exist!"
+msgstr "Er bestaan geen eigen taxonomieën!"
+
+#: quick-post-widget.php:603
+msgid "Require at least WordPress 3.0!"
+msgstr "Tenminste Wordpress 3.0 benodigd!"
+
+#: quick-post-widget.php:610
+#: quick-post-widget.php:699
+msgid "Labels"
+msgstr "Titels"
+
+#: quick-post-widget.php:615
+#: quick-post-widget.php:660
+#: quick-post-widget.php:684
+#: quick-post-widget.php:838
+msgid "Post title"
+msgstr "Bericht titel"
+
+#: quick-post-widget.php:616
+msgid "Label for the field [Post title]"
+msgstr "Titel van het veld [Bericht titel]"
+
+#: quick-post-widget.php:618
+#: quick-post-widget.php:663
+#: quick-post-widget.php:687
+#: quick-post-widget.php:839
+msgid "Post content"
+msgstr "Bericht inhoud"
+
+#: quick-post-widget.php:619
+msgid "Label for the field [Post content]"
+msgstr "Titel van het veld [Bericht inhoud]"
+
+#: quick-post-widget.php:621
+#: quick-post-widget.php:830
+msgid "Tags"
+msgstr "Tags"
+
+#: quick-post-widget.php:622
+msgid "Label for the field [Tags]"
+msgstr "Titel van het veld [Tags]"
+
+#: quick-post-widget.php:624
+#: quick-post-widget.php:693
+#: quick-post-widget.php:837
+msgid "Post date"
+msgstr "Bericht datum"
+
+#: quick-post-widget.php:625
+msgid "Label for the field [Post date]"
+msgstr "Titel van het veld [Bericht datum]"
+
+#: quick-post-widget.php:627
+#: quick-post-widget.php:831
+msgid "Category"
+msgstr "Categorie"
+
+#: quick-post-widget.php:628
+msgid "Label of the [Categories] droplist"
+msgstr "Titel van de [Categorie] droplist"
+
+#: quick-post-widget.php:630
+#: quick-post-widget.php:705
+#: quick-post-widget.php:832
+msgid "New category"
+msgstr "Nieuwe categorie"
+
+#: quick-post-widget.php:631
+msgid "Label of the field [New category]"
+msgstr "Titel van het veld [Nieuwe categorie]"
+
+#: quick-post-widget.php:633
+msgid "Post button"
+msgstr "Plaats knop"
+
+#: quick-post-widget.php:634
+msgid "Label of the [Post] button"
+msgstr "Titel van de [Plaats] knop"
+
+#: quick-post-widget.php:636
+msgid "Editor button"
+msgstr "Editor knop"
+
+#: quick-post-widget.php:637
+msgid "Label of the [Editor] button"
+msgstr "Titel van de [Editor] knop"
+
+#: quick-post-widget.php:639
+#: quick-post-widget.php:711
+msgid "Captcha input"
+msgstr "Captcha invoer"
+
+#: quick-post-widget.php:640
+msgid "Captcha security field"
+msgstr "Captcha beveiligingsveld"
+
+#: quick-post-widget.php:642
+msgid "Visual editor title"
+msgstr "Visuele editor titel"
+
+#: quick-post-widget.php:643
+msgid "Title popup visual editor window"
+msgstr "Titel popup visuele editor window"
+
+#: quick-post-widget.php:645
+msgid "Message title"
+msgstr "Melding titel"
+
+#: quick-post-widget.php:646
+msgid "Title popup message window"
+msgstr "Titel popup melding window"
+
+#: quick-post-widget.php:648
+#: quick-post-widget.php:723
+msgid "Post excerpt"
+msgstr "Bericht uittreksel"
+
+#: quick-post-widget.php:649
+msgid "Label of the field [Excerpt]"
+msgstr "Titel van het veld [Bericht uittreksel]"
+
+#: quick-post-widget.php:655
+msgid "Defaults"
+msgstr "Defaults"
+
+#: quick-post-widget.php:661
+msgid "Default content of the field [Post title]"
+msgstr "Default inhoud van het veld [Bericht titel]"
+
+#: quick-post-widget.php:664
+msgid "Default content of the field [Post content]"
+msgstr "Default inhoud van het veld [Bericht inhoud]"
+
+#: quick-post-widget.php:666
+msgid "Tag list"
+msgstr "Tag lijst"
+
+#: quick-post-widget.php:667
+msgid "Default content of the Tag listbox"
+msgstr "Default inhoud van de Tag lijst"
+
+#: quick-post-widget.php:669
+#: quick-post-widget.php:841
+msgid "Parent category"
+msgstr "Moedercategorie"
+
+#: quick-post-widget.php:670
+msgid "Default content of the field [Parent category]"
+msgstr "Default inhoud van het veld [Moedercategorie]"
+
+#: quick-post-widget.php:676
+msgid "Styles (override CSS)"
+msgstr "Stijlen (voorrang op CSS)"
+
+#: quick-post-widget.php:681
+msgid "Widget"
+msgstr "Widget"
+
+#: quick-post-widget.php:682
+msgid "Styling for the widget (use valid CSS syntax)"
+msgstr "Stijl voor de widget (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:685
+msgid "Styling for the field [Post title] (use valid CSS syntax)"
+msgstr "Stijl voor het veld [Bericht titel] (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:688
+msgid "Styling for the field [Post content] (use valid CSS syntax)"
+msgstr "Stijl voor het veld [Bericht inhoud] (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:690
+msgid "Post tags"
+msgstr "Bericht tags"
+
+#: quick-post-widget.php:691
+msgid "Styling for the field [Tags] (use valid CSS syntax)"
+msgstr "Stijl voor het veld [Tags] (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:694
+msgid "Styling for the field [Post date] (use valid CSS syntax)"
+msgstr "Stijl voor het veld [Bericht datum] (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:696
+msgid "Category checklist"
+msgstr "Categorie checklist"
+
+#: quick-post-widget.php:697
+msgid "Styling for the [Category checklist] (use valid CSS syntax)"
+msgstr "Stijl voor de [Categorie checklist] (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:700
+msgid "Styling for labels (use valid CSS syntax)"
+msgstr "Stijl voor titels (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:702
+msgid "Radio"
+msgstr "Radio knoppen"
+
+#: quick-post-widget.php:703
+msgid "Styling for the radio button (use valid CSS syntax)"
+msgstr "Stijl voor de radio knoppen (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:706
+msgid "Styling for the field [New category] (use valid CSS syntax)"
+msgstr "Stijl voor het veld [Nieuwe categorie] (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:708
+msgid "Buttons"
+msgstr "Knoppen"
+
+#: quick-post-widget.php:709
+msgid "Styling for the [Post] button (use valid CSS syntax)"
+msgstr "Stijl voor de knoppen (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:712
+msgid "Styling for the field [Captcha security] (use valid CSS syntax)"
+msgstr "Stijl voor het veld [Captcha beveiliging] (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:714
+msgid "Captcha image"
+msgstr "Captcha afb."
+
+#: quick-post-widget.php:715
+msgid "Styling for the captcha image (use valid CSS syntax)"
+msgstr "Stijl voor de captcha afbeelding (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:717
+msgid "Custom fields"
+msgstr "Extra velden"
+
+#: quick-post-widget.php:718
+msgid "Styling for the custom fields (use valid CSS syntax)"
+msgstr "Stijl voor de extra velden (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:720
+msgid "Taxonomy box"
+msgstr "Taxonomie box"
+
+#: quick-post-widget.php:721
+msgid "Styling for the taxonomy boxes (use valid CSS syntax)"
+msgstr "Stijl voor de taxonomie boxen (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:724
+msgid "Styling for the field [Post excerpt] (use valid CSS syntax)"
+msgstr "Stijl voor het veld [Bericht uittreksel] (gebruik valide CSS syntax)"
+
+#: quick-post-widget.php:828
+msgid "Title"
+msgstr "Titel"
+
+#: quick-post-widget.php:829
+msgid "Content"
+msgstr "Inhoud"
+
+#: quick-post-widget.php:833
+msgid "Post"
+msgstr "Plaats"
+
+#: quick-post-widget.php:834
+msgid "Quick Post Widget Editor"
+msgstr "Quick Post Widget Editor"
+
+#: quick-post-widget.php:835
+msgid "Quick Post Widget Message"
+msgstr "Quick Post Widget Melding"
+
+#: quick-post-widget.php:836
+msgid "Excerpt"
+msgstr "Uittreksel"
+
+#: quick-post-widget.php:840
+msgid "Quickselect a tag"
+msgstr "Kies een bestaande tag"
+
+#: quick-post-widget.php:867
+msgid "Visual Editor"
+msgstr "Visuele Editor"
+
+#: quick-post-widget.php:875
+msgid "Captcha security"
+msgstr "Captcha beveiliging"
+
+#: quick-post-widget.php:1134
+msgid "OK"
+msgstr "OK"
+
+#: quick-post-widget.php:1135
+msgid "Cancel"
+msgstr "Annuleren"
+
+#. Description of the plugin/theme
+msgid "This plugin provides a widget to post directly from the frontpanel of your site without going into the backend."
+msgstr "Met de Quick Post Widget kunnen berichten direct vanaf de site gemaakt worden."
+
+#~ msgid "Hide or excerpt input field, optional or required"
+#~ msgstr "Verberg of toon uittreksel veld, optioneel of verplicht"
+
+#~ msgid "Show tags input field"
+#~ msgstr "Toon tags invoerveld"
+
+#~ msgid "Visibility"
+#~ msgstr "Zichtbaarheid"
+
+#~ msgid "New cat."
+#~ msgstr "Nieuwe cat."
+
+#~ msgid "Parent cat."
+#~ msgstr "Moedercat."

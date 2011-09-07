@@ -1,0 +1,851 @@
+# Translation of the WordPress plugin Quick Post Widget 1.9 by Perry van Akkeren.
+# Copyright (C) 2011 Perry van Akkeren
+# This file is distributed under the same license as the Quick Post Widget package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Quick Post Widget\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/quick-post-widget\n"
+"POT-Creation-Date: 2011-06-25 18:25:38+00:00\n"
+"PO-Revision-Date: 2011-06-25 20:39+0100\n"
+"Last-Translator: Jaakko Kangosjärvi <jaakko@mediamonttu.fi>\n"
+"Language-Team: Mediamonttu <info@mediamonttu.fi>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Finnish\n"
+"X-Poedit-Country: FINLAND\n"
+"X-Poedit-Bookmarks: -1,-1,-1,-1,-1,-1,-1,-1,117,-1\n"
+
+#: quick-post-widget.php:32
+msgid "Quick Post Page"
+msgstr ""
+
+#: quick-post-widget.php:34
+msgid "This dummy widget area can hold the Quick Post Widget to display on a page. Drag the widget here and configure it. Use the shortcode [quick-post-page] to call the widget area in a page. You can also drag some other widgets here."
+msgstr ""
+
+#: quick-post-widget.php:105
+msgid "A new quick post has been made on"
+msgstr "Uusi artikkeli on pikajulkaistu"
+
+#: quick-post-widget.php:105
+msgid "To view the post click here:"
+msgstr "Lue artikkeli klikkaamalla tähän:"
+
+#: quick-post-widget.php:106
+msgid "New quick post on"
+msgstr "Uusi artikkeli pikajulkaistu"
+
+#: quick-post-widget.php:142
+msgid "Name of custom field"
+msgstr "Valinnaisen kentän nimi"
+
+#: quick-post-widget.php:183
+msgid "The Quick Post Widget provides a quick way to post directly from your site."
+msgstr "The Quick Post Widget tarjoaa nopean tavan julkaista artikkeleita suoraan sivuiltasi."
+
+#: quick-post-widget.php:279
+msgid "Need help? Just click here!"
+msgstr "Tarvitsetko apua? Klikkaa tähän!"
+
+#: quick-post-widget.php:283
+msgid "General options"
+msgstr "Yleiset asetukset"
+
+#: quick-post-widget.php:288
+msgid "Widget title"
+msgstr "Vimpaimen otsikko"
+
+#: quick-post-widget.php:289
+msgid "Widget title to display"
+msgstr "Vimpaimen näkyvä otsikko"
+
+#: quick-post-widget.php:291
+#: quick-post-widget.php:292
+msgid "Publish status"
+msgstr "Julkaisutila"
+
+#: quick-post-widget.php:293
+msgid "Publish"
+msgstr "Julkaistu"
+
+#: quick-post-widget.php:294
+msgid "Pending"
+msgstr "Odottaa"
+
+#: quick-post-widget.php:295
+msgid "Draft"
+msgstr "Luonnos"
+
+#: quick-post-widget.php:296
+msgid "Private"
+msgstr "Yksityinen"
+
+#: quick-post-widget.php:299
+msgid "Border error color"
+msgstr "Virheväri"
+
+#: quick-post-widget.php:300
+msgid "Bordercolor to use in case a required field is empty"
+msgstr "Kentän reunuksen väri, joka ilmaisee pakollisen kentän olevan tyhjä"
+
+#: quick-post-widget.php:303
+msgid "Red"
+msgstr "Punainen"
+
+#: quick-post-widget.php:304
+msgid "White"
+msgstr "Valkoinen"
+
+#: quick-post-widget.php:305
+msgid "Yellow"
+msgstr "Keltainen"
+
+#: quick-post-widget.php:306
+msgid "Fuchsia"
+msgstr "Verenpisara"
+
+#: quick-post-widget.php:307
+msgid "Silver"
+msgstr "Hopea"
+
+#: quick-post-widget.php:308
+msgid "Gray"
+msgstr "Harmaa"
+
+#: quick-post-widget.php:309
+msgid "Olive"
+msgstr "Oliivi"
+
+#: quick-post-widget.php:310
+msgid "Purple"
+msgstr "Purppura"
+
+#: quick-post-widget.php:311
+msgid "Maroon"
+msgstr "Kastanja"
+
+#: quick-post-widget.php:312
+msgid "Aqua"
+msgstr "Vesi"
+
+#: quick-post-widget.php:313
+msgid "Lime"
+msgstr "Limetti"
+
+#: quick-post-widget.php:314
+msgid "Teal"
+msgstr "Sinivihreä"
+
+#: quick-post-widget.php:315
+msgid "Green"
+msgstr "Vihreä"
+
+#: quick-post-widget.php:316
+msgid "Blue"
+msgstr "Sininen"
+
+#: quick-post-widget.php:317
+msgid "Navy"
+msgstr "Laivasto"
+
+#: quick-post-widget.php:318
+msgid "Black"
+msgstr "Musta"
+
+#: quick-post-widget.php:332
+msgid "Show tags field"
+msgstr "Näytä avainsanakenttä"
+
+#: quick-post-widget.php:334
+msgid "Hide or show post tags input field, optional or required"
+msgstr "Piilota tai näytä avainsanojen lisäyskenttä, valinnainen tai pakollinen"
+
+#: quick-post-widget.php:335
+#: quick-post-widget.php:343
+#: quick-post-widget.php:350
+#: quick-post-widget.php:402
+msgid "Hide"
+msgstr "Piilota"
+
+#: quick-post-widget.php:336
+#: quick-post-widget.php:344
+#: quick-post-widget.php:351
+msgid "Optional"
+msgstr "Valinnainen"
+
+#: quick-post-widget.php:337
+#: quick-post-widget.php:345
+#: quick-post-widget.php:352
+msgid "Required"
+msgstr "Pakollinen"
+
+#: quick-post-widget.php:340
+msgid "Show post date"
+msgstr "Näytä julkaisupäivä"
+
+#: quick-post-widget.php:342
+msgid "Hide or show post date input field, optional or required"
+msgstr "Piilota tai näytä julkaisupäivän lisäyskenttä, valinnainen tai pakollinen"
+
+#: quick-post-widget.php:348
+msgid "Show excerpt"
+msgstr "Näytä ote"
+
+#: quick-post-widget.php:349
+msgid "Hide or show post excerpt input field, optional or required"
+msgstr "Piilota tai näytä otteen syöttökenttä, valinnainen tai pakollinen"
+
+#: quick-post-widget.php:355
+msgid "Success message"
+msgstr "Julkaisukuittaus"
+
+#: quick-post-widget.php:356
+msgid "Optional message after a successful post"
+msgstr "Valinnainen ilmoitusviesti onnistuneesta julkaisusta"
+
+#: quick-post-widget.php:358
+msgid "Post fail message"
+msgstr "Virheilmoitus"
+
+#: quick-post-widget.php:359
+msgid "Optional message after a failed post"
+msgstr "Valinnainen ilmoitusviesti epäonnistuneesta julkaisusta"
+
+#: quick-post-widget.php:361
+msgid "Redirect to"
+msgstr "Ohjaussivu"
+
+#: quick-post-widget.php:362
+msgid "Complete URL to redirect to after a scuccesful post"
+msgstr "Täydellinen url-osoite, johon siirrytään onnistuneen julkaisun jälkeen"
+
+#: quick-post-widget.php:364
+msgid "Mail on post"
+msgstr "Ilmoita artikkelista "
+
+#: quick-post-widget.php:365
+msgid "Mail when a new post is submitted"
+msgstr "Ilmoita sähköpostiviestillä, kun uusi artikkeli on julkaistu"
+
+#: quick-post-widget.php:366
+msgid "No"
+msgstr "Ei"
+
+#: quick-post-widget.php:367
+msgid "Guest posts"
+msgstr "Vierasartikkelit"
+
+#: quick-post-widget.php:368
+msgid "All posts"
+msgstr "Kaikki artikkelit"
+
+#: quick-post-widget.php:371
+msgid "Post type"
+msgstr "Artikkelin laji"
+
+#: quick-post-widget.php:375
+msgid "Post type, normal post or custom"
+msgstr "Artikkelin laji, vakioartikkeli tai valinnainen"
+
+#: quick-post-widget.php:376
+msgid "Normal (post)"
+msgstr "Vakio (artikkeli)"
+
+#: quick-post-widget.php:384
+msgid "Top of content"
+msgstr ""
+
+#: quick-post-widget.php:385
+msgid "Code to put at the top of the content"
+msgstr ""
+
+#: quick-post-widget.php:387
+msgid "Bottom of content"
+msgstr ""
+
+#: quick-post-widget.php:388
+msgid "Code to put at the bottom of the content"
+msgstr ""
+
+#: quick-post-widget.php:394
+msgid "Visibility options"
+msgstr "Näyttöasetukset"
+
+#: quick-post-widget.php:399
+msgid "Initial visibility"
+msgstr "Oletusnäyttö"
+
+#: quick-post-widget.php:400
+msgid "Inititial visibility"
+msgstr "Näytetäänkö vimpain sivulla avattuna vai piilotettuna Näytä-linkin taakse"
+
+#: quick-post-widget.php:401
+msgid "Show"
+msgstr "Näytä"
+
+#: quick-post-widget.php:405
+msgid "Showtext"
+msgstr "Näytä-linkki"
+
+#: quick-post-widget.php:406
+msgid "Text to click to show the widget"
+msgstr "Linkkiteksti, jota klikkaamalla vimpain avataaan"
+
+#: quick-post-widget.php:408
+msgid "Hidetext"
+msgstr "Piilota-linkki"
+
+#: quick-post-widget.php:409
+msgid "Text to click to hide the widget"
+msgstr "Linkkiteksti, jota klikkaamalla vimpain piilotetaan"
+
+#: quick-post-widget.php:415
+msgid "Category options"
+msgstr "Kategoria-asetukset"
+
+#: quick-post-widget.php:420
+#: quick-post-widget.php:421
+msgid "Category list type"
+msgstr "Kategorialistan muoto"
+
+#: quick-post-widget.php:422
+msgid "Droplist"
+msgstr "Pudotusvalikko"
+
+#: quick-post-widget.php:423
+msgid "Checklist"
+msgstr "Valintalista"
+
+#: quick-post-widget.php:426
+msgid "Include/exclude categories"
+msgstr "Näytä / piilota kategoriat"
+
+#: quick-post-widget.php:427
+msgid "Include or exclude certain categories"
+msgstr "Näytä tai piilota kategorioita"
+
+#: quick-post-widget.php:428
+msgid "Include"
+msgstr "Näytä"
+
+#: quick-post-widget.php:429
+msgid "Exclude"
+msgstr "Piilota"
+
+#: quick-post-widget.php:432
+msgid "Categories to include or exclude"
+msgstr "Näytettävät tai piilotettavat kategoriat"
+
+#: quick-post-widget.php:434
+msgid "List of categories to include or exclude"
+msgstr "Lista kategorioista, jotka näytetään vimpaimessa tai piilotetaan siitä"
+
+#: quick-post-widget.php:440
+#: quick-post-widget.php:441
+msgid "Default category"
+msgstr "Oletuskategoria"
+
+#: quick-post-widget.php:441
+msgid "None"
+msgstr "EI mikään"
+
+#: quick-post-widget.php:443
+msgid "Order categories by"
+msgstr "Kategorioiden järjestys"
+
+#: quick-post-widget.php:444
+msgid "Order categories by name or id"
+msgstr "Järjestetäänkö kategoriat nimen tai tunnuksen mukaan"
+
+#: quick-post-widget.php:445
+#: quick-post-widget.php:518
+#: quick-post-widget.php:564
+msgid "Name"
+msgstr "Nimi"
+
+#: quick-post-widget.php:446
+msgid "Id"
+msgstr "Tunnus (id)"
+
+#: quick-post-widget.php:449
+msgid "Disable new category"
+msgstr "Ei uusia kategorioita"
+
+#: quick-post-widget.php:450
+msgid "Disable creation of new categories (despite of role)"
+msgstr "Estää uusien kategorioiden lisäämisen (roolista riippumatta)"
+
+#: quick-post-widget.php:456
+msgid "Visual editor options"
+msgstr "Graafisen muokkaimen asetukset"
+
+#: quick-post-widget.php:461
+msgid "Disable visual editor"
+msgstr "Poista käytöstä"
+
+#: quick-post-widget.php:462
+msgid "Disable the visual editor"
+msgstr "Poista graafinen muokkain käytöstä"
+
+#: quick-post-widget.php:464
+msgid "Disable editor plugins"
+msgstr "Poista lisäosat käytöstä"
+
+#: quick-post-widget.php:465
+msgid "Disable the visual editor plugins"
+msgstr "Poista graafisen muokkaimen lisäosat käytöstä"
+
+#: quick-post-widget.php:467
+msgid "Disable media upload"
+msgstr "Poista mediatallennus"
+
+#: quick-post-widget.php:468
+msgid "Disable media uploading in the visual editor"
+msgstr "Poista kuvien ja videoiden lataaminen käytöstä graafisessa muokkaimessa"
+
+#: quick-post-widget.php:470
+msgid "Shared upload directories"
+msgstr "Jaetut kansiot"
+
+#: quick-post-widget.php:471
+msgid "Shared instead of private upload directories"
+msgstr "Käytä jaettuja latauskansioita yksityisten hakemistojen sijasta"
+
+#: quick-post-widget.php:473
+msgid "Newlines tag"
+msgstr "Rivinvaihto"
+
+#: quick-post-widget.php:474
+msgid "Use P or BR tag for new lines"
+msgstr "Käytä P tai BR tagia rivinvaihtoon"
+
+#: quick-post-widget.php:479
+msgid "Editor type on page"
+msgstr ""
+
+#: quick-post-widget.php:480
+msgid "Show editor in popup or inline"
+msgstr ""
+
+#: quick-post-widget.php:481
+msgid "Inline"
+msgstr ""
+
+#: quick-post-widget.php:482
+msgid "Popup"
+msgstr ""
+
+#: quick-post-widget.php:489
+msgid "Guest posting options"
+msgstr "Vierasasetukset"
+
+#: quick-post-widget.php:494
+msgid "Allow guests (not logged-in)"
+msgstr "Salli vieraat (kirjautumattomat)"
+
+#: quick-post-widget.php:495
+msgid "Allow guest access (without being logged in, use with care!)"
+msgstr "Salli vieraiden pääsy vimpaimeen (kirjautumatta, käytä varoen!)"
+
+#: quick-post-widget.php:497
+msgid "Guest account"
+msgstr "Vierastili"
+
+#: quick-post-widget.php:498
+msgid "Dedicated account to use for non-logged-in guests"
+msgstr "Kirjautumattomien vieraiden käyttäjätili"
+
+#: quick-post-widget.php:500
+msgid "Enable captcha"
+msgstr "Ota captcha käyttöön "
+
+#: quick-post-widget.php:501
+msgid "Enable captcha security code"
+msgstr "Ota käyttöön captcha-varmennuskoodi"
+
+#: quick-post-widget.php:507
+msgid "Custom fields options"
+msgstr "Valinnaisten kenttien asetukset"
+
+#: quick-post-widget.php:519
+#: quick-post-widget.php:566
+msgid "Req"
+msgstr "P?"
+
+#: quick-post-widget.php:520
+msgid "Label"
+msgstr "Nimike"
+
+#: quick-post-widget.php:533
+msgid "Custom field"
+msgstr "Valinnainen kenttä"
+
+#: quick-post-widget.php:533
+msgid "required"
+msgstr "pakollinen"
+
+#: quick-post-widget.php:536
+msgid "Label for custom field"
+msgstr "Nimike valinnaiselle kentälle"
+
+#: quick-post-widget.php:543
+msgid "No custom fields exist!"
+msgstr "Valinnaista kenttää ei ole!"
+
+#: quick-post-widget.php:550
+msgid "Custom taxonomy options"
+msgstr "Luokittelun asetukset"
+
+#: quick-post-widget.php:559
+msgid "Select taxonomies to use"
+msgstr "Valitse luokittelut"
+
+#: quick-post-widget.php:561
+msgid "List of taxonomies to use"
+msgstr "Ota käyttöön"
+
+#: quick-post-widget.php:565
+msgid "Type"
+msgstr "Tyyppi"
+
+#: quick-post-widget.php:567
+#: quick-post-widget.php:1106
+msgid "New"
+msgstr "Uusi"
+
+#: quick-post-widget.php:572
+msgid "Taxonomy name"
+msgstr "Luokittelun nimi"
+
+#: quick-post-widget.php:574
+msgid "Select to use taxonomy"
+msgstr "Valitse luokittelu"
+
+#: quick-post-widget.php:578
+msgid "List type taxonomy"
+msgstr "Luettelomainen luokittelu"
+
+#: quick-post-widget.php:579
+msgid "Drop"
+msgstr "Pudotus"
+
+#: quick-post-widget.php:580
+msgid "Check"
+msgstr "Valinta"
+
+#: quick-post-widget.php:586
+msgid "Taxonomy required"
+msgstr "Luokittelu pakollinen"
+
+#: quick-post-widget.php:592
+msgid "Allow new category for taxonomy"
+msgstr "Salli uudet luokittelukategoriat"
+
+#: quick-post-widget.php:600
+msgid "No custom taxonomies exist!"
+msgstr "Valinnaisia luokitteluja ei ole!"
+
+#: quick-post-widget.php:603
+msgid "Require at least WordPress 3.0!"
+msgstr "Vain WordPress 3.0 tai uudemmat!"
+
+#: quick-post-widget.php:610
+#: quick-post-widget.php:699
+msgid "Labels"
+msgstr "Nimikkeet"
+
+#: quick-post-widget.php:615
+#: quick-post-widget.php:660
+#: quick-post-widget.php:684
+#: quick-post-widget.php:838
+msgid "Post title"
+msgstr "Artikkelin otsikko"
+
+#: quick-post-widget.php:616
+msgid "Label for the field [Post title]"
+msgstr "Nimike kentälle [Artikkelin otsikko]"
+
+#: quick-post-widget.php:618
+#: quick-post-widget.php:663
+#: quick-post-widget.php:687
+#: quick-post-widget.php:839
+msgid "Post content"
+msgstr "Artikkelin sisältö"
+
+#: quick-post-widget.php:619
+msgid "Label for the field [Post content]"
+msgstr "Nimike kentälle [Artikkelin sisältö]"
+
+#: quick-post-widget.php:621
+#: quick-post-widget.php:830
+msgid "Tags"
+msgstr "Avainsanat"
+
+#: quick-post-widget.php:622
+msgid "Label for the field [Tags]"
+msgstr "Nimike kentälle [Avainsanat]"
+
+#: quick-post-widget.php:624
+#: quick-post-widget.php:693
+#: quick-post-widget.php:837
+msgid "Post date"
+msgstr "Julkaisupäivä"
+
+#: quick-post-widget.php:625
+msgid "Label for the field [Post date]"
+msgstr "Nimike kentälle [Julkaisupäivä]"
+
+#: quick-post-widget.php:627
+#: quick-post-widget.php:831
+msgid "Category"
+msgstr "Kategoria"
+
+#: quick-post-widget.php:628
+msgid "Label of the [Categories] droplist"
+msgstr "Nimike pudotusvalikolle [Kategoriat]"
+
+#: quick-post-widget.php:630
+#: quick-post-widget.php:705
+#: quick-post-widget.php:832
+msgid "New category"
+msgstr "Lisää kategoria"
+
+#: quick-post-widget.php:631
+msgid "Label of the field [New category]"
+msgstr "Nimike kentälle [Lisää kategoria]"
+
+#: quick-post-widget.php:633
+msgid "Post button"
+msgstr "Julkaise-painike"
+
+#: quick-post-widget.php:634
+msgid "Label of the [Post] button"
+msgstr "Nimike painikkeelle [Julkaise]"
+
+#: quick-post-widget.php:636
+msgid "Editor button"
+msgstr "Muokkain-painike"
+
+#: quick-post-widget.php:637
+msgid "Label of the [Editor] button"
+msgstr "Nimike painikkeelle [Muokkain]"
+
+#: quick-post-widget.php:639
+#: quick-post-widget.php:711
+msgid "Captcha input"
+msgstr "Captcha-kenttä"
+
+#: quick-post-widget.php:640
+msgid "Captcha security field"
+msgstr "Captcha-varmennuskoodin syöttökenttä"
+
+#: quick-post-widget.php:642
+msgid "Visual editor title"
+msgstr "Muokkaimen otsikko"
+
+#: quick-post-widget.php:643
+msgid "Title popup visual editor window"
+msgstr "Ponnahdusikkunaan avautuvan graafisen muokkaimen otsikko"
+
+#: quick-post-widget.php:645
+msgid "Message title"
+msgstr "Viestin otsikko"
+
+#: quick-post-widget.php:646
+msgid "Title popup message window"
+msgstr "Otsikon ponnahdusviesti-ikkuna"
+
+#: quick-post-widget.php:648
+#: quick-post-widget.php:723
+msgid "Post excerpt"
+msgstr "Ote"
+
+#: quick-post-widget.php:649
+msgid "Label of the field [Excerpt]"
+msgstr "Nimike kentälle [Ote]"
+
+#: quick-post-widget.php:655
+msgid "Defaults"
+msgstr "Oletusarvot"
+
+#: quick-post-widget.php:661
+msgid "Default content of the field [Post title]"
+msgstr "Kentän [Artikkelin otsikko] oletussisältö"
+
+#: quick-post-widget.php:664
+msgid "Default content of the field [Post content]"
+msgstr "Kentän [Artikkelin sisältö] oletussisältö"
+
+#: quick-post-widget.php:666
+msgid "Tag list"
+msgstr "Avainsanalista"
+
+#: quick-post-widget.php:667
+msgid "Default content of the Tag listbox"
+msgstr "Avainsanalaatikon oletussisältö"
+
+#: quick-post-widget.php:669
+#: quick-post-widget.php:841
+msgid "Parent category"
+msgstr "Yläkategoria"
+
+#: quick-post-widget.php:670
+msgid "Default content of the field [Parent category]"
+msgstr "Kentän [Yläkategoria)"
+
+#: quick-post-widget.php:676
+msgid "Styles (override CSS)"
+msgstr "Ulkoasu (syrjäyttää CSS:n)"
+
+#: quick-post-widget.php:681
+msgid "Widget"
+msgstr "Vimpain"
+
+#: quick-post-widget.php:682
+msgid "Styling for the widget (use valid CSS syntax)"
+msgstr "Vimpaimen ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:685
+msgid "Styling for the field [Post title] (use valid CSS syntax)"
+msgstr "Kentän [Artikkelin otsikko] ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:688
+msgid "Styling for the field [Post content] (use valid CSS syntax)"
+msgstr "Kentän [Artikkelin sisältö] ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:690
+msgid "Post tags"
+msgstr "Avainsanat"
+
+#: quick-post-widget.php:691
+msgid "Styling for the field [Tags] (use valid CSS syntax)"
+msgstr "Kentän [Avainsanat] ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:694
+msgid "Styling for the field [Post date] (use valid CSS syntax)"
+msgstr "Kentän [Julkaisupäivä] ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:696
+msgid "Category checklist"
+msgstr "Kategorialista"
+
+#: quick-post-widget.php:697
+msgid "Styling for the [Category checklist] (use valid CSS syntax)"
+msgstr "Pudotusvalikon [Kategoriat] ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:700
+msgid "Styling for labels (use valid CSS syntax)"
+msgstr "Nimikkeiden ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:702
+msgid "Radio"
+msgstr "Radiopainike"
+
+#: quick-post-widget.php:703
+msgid "Styling for the radio button (use valid CSS syntax)"
+msgstr "Radiopainikkeen ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:706
+msgid "Styling for the field [New category] (use valid CSS syntax)"
+msgstr "Kentän [Lisää kategoria] ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:708
+msgid "Buttons"
+msgstr "Painikkeet"
+
+#: quick-post-widget.php:709
+msgid "Styling for the [Post] button (use valid CSS syntax)"
+msgstr "Painikkeen [Julkaise] ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:712
+msgid "Styling for the field [Captcha security] (use valid CSS syntax)"
+msgstr "Kentän [Captcha] ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:714
+msgid "Captcha image"
+msgstr "Captcha-kuva"
+
+#: quick-post-widget.php:715
+msgid "Styling for the captcha image (use valid CSS syntax)"
+msgstr "Varmennuskuvan ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:717
+msgid "Custom fields"
+msgstr "Valinnaiset kentät"
+
+#: quick-post-widget.php:718
+msgid "Styling for the custom fields (use valid CSS syntax)"
+msgstr "Valinnaisten kenttien ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:720
+msgid "Taxonomy box"
+msgstr "Luokittelualue"
+
+#: quick-post-widget.php:721
+msgid "Styling for the taxonomy boxes (use valid CSS syntax)"
+msgstr "Luokittelulaatikoiden ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:724
+msgid "Styling for the field [Post excerpt] (use valid CSS syntax)"
+msgstr "Kentän [Ote] ulkoasu (käytä CSS-muotosääntöjä)"
+
+#: quick-post-widget.php:828
+msgid "Title"
+msgstr "Otsikko"
+
+#: quick-post-widget.php:829
+msgid "Content"
+msgstr "Sisältö"
+
+#: quick-post-widget.php:833
+msgid "Post"
+msgstr "Julkaise"
+
+#: quick-post-widget.php:834
+msgid "Quick Post Widget Editor"
+msgstr "Quick Post Widget Muokkain"
+
+#: quick-post-widget.php:835
+msgid "Quick Post Widget Message"
+msgstr "Quick Post -vimpainviesti"
+
+#: quick-post-widget.php:836
+msgid "Excerpt"
+msgstr "Ote"
+
+#: quick-post-widget.php:840
+msgid "Quickselect a tag"
+msgstr "Valitse avainsana"
+
+#: quick-post-widget.php:867
+msgid "Visual Editor"
+msgstr "Avaa muokkain"
+
+#: quick-post-widget.php:875
+msgid "Captcha security"
+msgstr "Captcha-varmennus"
+
+#: quick-post-widget.php:1134
+msgid "OK"
+msgstr "OK"
+
+#: quick-post-widget.php:1135
+msgid "Cancel"
+msgstr "Peru"
+
+#. Description of the plugin/theme
+msgid "This plugin provides a widget to post directly from the frontpanel of your site without going into the backend."
+msgstr "Tämä lisäosa tarjoaa vimpaimen, jolla voi julkaista artikkeleita sivustolta siirtymättä ohjausnäkymään."
+
+#~ msgid "Show tags input field"
+#~ msgstr "Näytetäänkö avainsanojen syöttökenttä"
+
+#~ msgid "Visibility"
+#~ msgstr "Näyttö"
+
+#~ msgid "New cat."
+#~ msgstr "Lisää kategoria"
+
+#~ msgid "Parent cat."
+#~ msgstr "Yläkategoria"

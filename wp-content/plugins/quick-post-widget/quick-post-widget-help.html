@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<HTML>
+<HEAD>
+<META http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META name="description" content="Quick Post Widget WordPress Plugin Help" />
+<TITLE>Quick Post Widget Help</TITLE>
+</HEAD>
+<BODY>
+	<H2>Quick Post Widget Help</H2>
+	<P>Tips and instructions for using and configuring the Quick Post Widget.</P>
+	<HR>
+	<H3>Using the widget</H3>
+	<P>
+	Using the Quick Post Widget is easy. Just type in the post title, type or paste the contents of the post content en choose one, or more if you use the checklist, categories.<BR/><BR/>
+	When your role allows you to create a new category, radio buttons are displayed to choose between an existing category and a new category as well as an input box for its name.<BR/><BR/>
+	You can also choose a parent for the new category.<BR/><BR/>
+	When you create a new category with the same name as an existing one no error message is displayed, but your post is just added to your new (existing) category.<BR/><BR/>
+	You can manually type in tags or just select them from the list of existing tags. Of course you can also define new, or existing, tags just by typing them in the tags field.<BR/><BR/>
+	The widget offers visual editing directly from the frontpanel of your site, without going into the backend, with a bunch of features (spellchecking, preview,....)!
+	</P>
+	<HR>
+	<H3>Configuring the widget</H3>
+	<H4>General Options</H4>
+	<P>
+	<UL>
+		<LI>Widget title: is displayed in your front end. You could use for instance 'New post' or 'New clip'.</LI><BR/>
+		<LI>Publish status: you can choose to immediately publish your posts by selecting 'Publish' or set the default publish status to 'Pending', 'Draft' or 'Private'.</LI><BR/>
+		<LI>Border error color: when a required item stays empty its border color changes to red (default). You can choose other colors by using the droplist.<BR/>
+		Required items are post title, post content and category. Custom fields, custom taxonomies, excerpt, post date and tags can also be set required.<BR/>
+		When the categories are displayed in the droplist you cannot forget to select a category.<BR/>
+		When the categories are displayed in the checklist you should select at least one.<BR/>
+		When you choose to create a new category you should type in its name.</LI><BR/>
+		<LI>Show tags field: optionally a tags input field can be shown, required if needed, to type in post tags.</LI><BR/>
+		<LI>Show post date: optionally a date/time field can be shown, required if needed, to set the date/time of the post.</LI><BR/>
+		<LI>Show post excerpt: optionally the post excerpt field can be shown, required if needed, to type in the post excerpt.</LI><BR/>
+		<LI>Success message: define a confirmation message to be displayed after a successful post. Leave this field empty for no confirmation.</LI><BR/>
+		<LI>Post fail message: define a message to be displayed after an unsuccessful post. Leave this field empty for no message.</LI><BR/>
+		<LI>Redirect to: define a URL to redirect to after a successful post. Don't forget the http part. Leave this field empty for the normal page refresh.</LI><BR/>
+		<LI>Mail on post: define whether a mail is sent to the admin-mail whenever a guest post or any post is submitted.</LI><BR/>
+		<LI>Post type: define the post type, normal post or custom.</LI><BR/>
+		<LI>Top of content: define text and/or shortcodes to place at the top of the post content.</LI><BR/>
+		<LI>Bottom of content: define text and/or shortcodes to place at the bottom of the post content.</LI><BR/>
+	</UL>
+	</P>
+	<HR>
+	<H4>Visibility options</H4>
+	<P>
+	<UL>
+		<LI>Initial visibility: when both Showtext and Hidetext have a value this field controls the initial visibility of the widget.</LI><BR/>
+		<LI>Showtext: the text to click on to show the widget. Leave this field or the Hidetext field empty to show the widget without the option to hide it.</LI><BR/>
+		<LI>Hidetext: the text to click on to show the widget. Leave this field or the Showtext field empty to show the widget without the option to hide it.</LI><BR/>
+	</UL>
+	</P>
+	<HR>
+	<H4>Category options</H4>
+	<P>
+	<UL>
+		<LI>Category list type: determines the way the categories are displayed. You can choose between 'Droplist' and 'Checklist'.<BR/>
+		A droplist takes less space on your screen, but you can only choose one category.<BR/>
+		The checklist uses more space, but has the advantage that you can choose more than one category at a time.</LI><BR/>
+		<LI>Include/exclude cats.: you can choose to include or exclude certain categories.</LI><BR/>
+		<LI>Categories to include or exclude: select the categories to include or exclude. All categories are shown when nothing is selected.<BR/>
+		If only one category remains, the default category is the same as the only category and creating a new category is disabled, the complete category section hides itself.</LI><BR/>
+		<LI>Default category: determines the default category.</LI><BR/>
+		<LI>Order cats. by: determines the ordering of categories in the droplist or checklist.</LI><BR/>
+		<LI>Disable new cat.: when for some reason you don't want to allow the creation of new categories, you can explicitly disable this feature.</LI><BR/>
+	</UL>
+	</P>
+	<HR>
+	<H4>Visual editor options</H4>
+	<P>
+	<UL>
+		<LI>Disable visual editor: if you do not want visual editing you can disable this feature. The widget also follows the WordPress configuration option to disable visual editing per user.</LI><BR/>
+		<LI>Disable editor plugins: if you encounter difficulties you can disable the editor plugins.</LI><BR/>
+		<LI>Disable media upload: if you don't want users to upload media you can disable this feature.</LI><BR/>
+		<LI>Shared upload directories: by default every user has its own upload directory (automatically created in the WordPress upload directory). If you want to use a shared directory for all users you can select this.</LI><BR/>
+		<LI>Newlines tag: the default tag for new lines to use in the popup editor is &lt;P&gt;. If you want you can use the &lt;BR&gt; tag, for instance to minimize the space between lines.</LI><BR/>
+		<LI>Editor type on page: when the widget is defined on a page define whether to use inline or popup visual editing.</LI><BR/>
+	</UL>
+	</P>
+	<HR>
+	<H4>Guest posting options</H4>
+	<P>
+	<UL>
+		<LI>Allow guests (not logged-in): this option enables the widget to anyone who is not logged-in. Of course you should only enable this option in controlled environments, especially when you allow media uploading!</LI><BR/>
+		<LI>Guest account: because it is better to have a 'poster' for guest posts you have to select a dedicated account for non-logged-in guests. In the user tab you can select a role and enable or disable visual editing for this special guest account. Please read the <a href="http://wordpress.org/extend/plugins/quick-post-widget/faq/">FAQ</a> to configure.</LI><BR/>
+		<LI>Enable captcha: to protect your blog from spam, for instance if you have enabled guest posting, you can choose to enable captcha security.</LI><BR/>
+	</UL>
+	</P>
+	<HR>
+	<H4>Custom fields options</H4>
+	<P>
+	<UL>
+		<LI>Define up to 5 custom fields by selecting the name in the droplist.</LI><BR/>
+		<LI>For every custom field you can define whether entering a value is required.</LI><BR/>
+		<LI>For every custom field a label has to be defined.</LI><BR/>
+	</UL>
+	</P>
+	<HR>
+	<H4>Custom taxonomies options</H4>
+	<P>
+	<UL>
+		<LI>Every custom taxonomy can be selected to show in the widget.</LI><BR/>
+		<LI>For every custom taxonomy you can define whether to show its categories in a droplist or in a checklist.</LI><BR/>
+		<LI>For every custom taxonomy you can define whether entering a value is required.</LI><BR/>
+		<LI>For every custom taxonomy you can define whether entering a new category is allowed. For hierarchical taxonomies the widget allows selecting the parent category.</LI><BR/>
+	</UL>
+	</P>
+	<HR>
+	<H4>Labels</H4>
+	<P>
+	Here you can determine the labels for the fields in the widget. If you leave these options empty, defaults are used.<BR/>
+	Of course you can use labels in your own language, but you can also use labels for your own special purpose.<BR/>
+	For instance, instead of using 'Post title' you could use 'Clip title', 'Message title' etc.
+	</P>
+	<HR>
+	<H4>Defaults</H4>
+	<P>
+	Here you can determine the default text to display in the post title and content when nothing is entered yet and the parent category and tags droplists .
+	</P>
+	<HR>
+	<H4>Styles</H4>
+	<P>
+	Every element in the widget is styled by the stylesheet.<BR/>
+	If you would like to change for instance an items border color or width you can of course change the stylesheet.<BR/>
+	Instead of changing the stylesheet you can also style the elements by defining a style in the options panel.<BR/>
+	It has the advantage that when you perform an upgrade of the plugin you won't lose your customizations.<BR/>
+	You should use valid css style syntax. For instance if you want to change the post content height you could define 'height: 400px';
+	</P>
+	<HR>
+	<BR/><BR/>
+	</BODY>
+</HTML>

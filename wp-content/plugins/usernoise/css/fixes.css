@@ -1,0 +1,44 @@
+#un-window.ie7 #un-feedback-submit{
+	padding: 9px 0px;
+	font-weight: bold;
+	font-size: 14px;
+}
+#facebox.un-ie7 .close{
+	top: 12px;
+}
+
+#un-button.left.ie7, #un-button.left.ie8, #un-button.right.ie7, #un-button.right.ie8{
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+	margin-top: -60px;
+}
+#un-button.right.ie7{
+	right: -46px;
+}
+#un-button.left.ie7{
+	left: -46px;
+	top: 50%;
+}
+#un-button.left.ie8{
+	left: -46px;
+	top: 50%;
+}
+#un-button.top.ie7, #un-button.top.ie8{
+	top: -46px;
+	left: 50%;
+}
+#un-button.bottom.ie7, #un-button.bottom.ie8{
+	bottom: -45px;
+	left: 50%;
+	padding: 11px 15px 14px 15px;
+}
+#un-button.right.ie8{
+	right: -91px;
+}
+#un-window.ie7 a.un-button-gray{
+	display: inline;
+}
+#un-window.ie7 #un-feedback-submit{
+	display: inline;
+	zoom: 1;
+	padding: 9px 0;
+}
