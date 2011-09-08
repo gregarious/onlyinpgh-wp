@@ -46,6 +46,8 @@
 		<?php do_action( 'bp_after_blog_home' ) ?>
 
 		</div><!-- .padder -->
+		
 		<div id="sidebar"><?php locate_template( array( 'sidebar-blog.php' ), true ) ?></div>
+
 	</div><!-- #content -->
 <?php get_footer() ?>

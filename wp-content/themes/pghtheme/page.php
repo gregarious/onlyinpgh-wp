@@ -31,5 +31,12 @@
 		<?php do_action( 'bp_after_blog_page' ) ?>
 
 		</div><!-- .padder -->
+		
+		<div id="sidebar"><?php 
+		// Display sidebar on all pages except 'Events'
+		if ( ! is_page('events')) {
+			locate_template( array( 'sidebar-blog.php' ), true ); } ?></div>
+
+		
 </div><!-- #content -->
 <?php get_footer() ?>

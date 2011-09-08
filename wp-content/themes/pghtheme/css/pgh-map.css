@@ -1,0 +1,25 @@
+.map {
+	width: 100%;
+}
+
+#mapfilters {
+	width: 270px;
+	overflow: visible;
+	margin-left: 8px;
+	display: block;
+	float: right
+}
+
+#map { 
+	width: 600px; 
+	height: 480px;
+	float: left;
+	position: relative;
+}
+
+#map_canvas { 
+	width: 580px; 
+	height: 550px;
+	float: left;
+	position: relative;
+}

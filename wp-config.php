@@ -16,7 +16,7 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-require_once('/Users/gdn/Sites/onlyinpgh/etc/config.php');
+require_once('etc/config.php');
 
 define('DB_NAME', OIP_DB_NAME);
 
@@ -80,7 +80,7 @@ define('WPLANG', '');
 * It is strongly recommended that plugin and theme developers use WP_DEBUG
 * in their development environments.
 */
-define('WP_DEBUG', false);
+define('WP_DEBUG', true);
 
 /* That's all, stop editing! Happy blogging. */
 

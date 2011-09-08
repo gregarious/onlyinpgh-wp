@@ -10,6 +10,11 @@ Tags: buddypress, pittsburgh
 */
 
 @import url( ../../plugins/buddypress/bp-themes/bp-default/_inc/css/adminbar.css );
+@import url('css/pgh-header.css');
+@import url('css/pgh-footer.css');
+@import url('css/pgh-map.css');
+@import url('css/pgh-typography.css');
+
 
 html {
 	height: 100%;	
@@ -26,7 +31,6 @@ body {
 	background-repeat: no-repeat;
 	height: 100%;
 	min-width: 1080px;
-	
 }
 
 br {
@@ -44,211 +48,12 @@ td {
 	padding: 0px !important;
 }
 
-p {
-	font-family: “Trebuchet MS”,“Lucida Sans Unicode”,“Lucida Grande”,” Lucida Sans”,Arial,sans-serif;
-    font-size: 14px;
-    line-height: 23px;
-    margin: 0 0 10px;
-    padding: 0;
-}
-
-a {
-	text-decoration: none;
-	font-family: 'Francois One', Impact, serif;
-	color: #0f0f0f;
-	font-weight: normal;
-	border: none;
-}
-a:hover {
-	text-decoration: underline;
-	font-family: 'Francois One', Impact, serif;
-	color: #0f0f0f;
-}
-
 img {
 	border: none;
 	margin: 0px;
 	padding: 0px;
 }
 
-
-h2 {
-	padding: 0px;
-	margin: 0px 0px 20px 0px;
-   border-bottom: 1px solid #0F0F0F;
-    color: #0F0F0F;
-    font-family: 'Francois One',Impact,serif;
-    font-size: 30px;
-    letter-spacing: 1px;
-    text-shadow: 0 0 1px #CCCCCC;
-    text-transform: uppercase;
-	font-weight: normal;
-}
-
-h4 {
-    border-bottom: 1px solid #CCCCCC;
-    color: #0F0F0F;
-    font-family: 'Francois One',Impact,serif;
-    font-size: 25px;
-    margin: 0 0 5px;
-    text-shadow: 1px 1px 0 #CCCCCC;
-    text-transform: uppercase;
-    width: 200px;
-	font-weight: normal;	
-}
-
-::selection {
-	background:#ffec4b;
-	color: #080808;
-}
-
-::-moz-selection {
-	background:#ffec4b;
-	color: #080808;
-}
-
-::-webkit-selection {
-	background:#ffec4b;
-	color: #080808;
-}
-
-
-#header {
-    -moz-box-shadow: 0 5px 10px -1px #000;
--webkit-box-shadow: 0 5px 10px -1px #000;
-box-shadow: 0 5px 10px -1px #000;
-filter: progid:DXImageTransform.Microsoft.Shadow(color='#000', Direction=135, Strength=2);
-    background-color: #0F0F0F;
-    height: 260px;
-    margin: 5px auto 0;
-    padding: 0;
-    position: relative;
-    width: 1080px;
-    z-index: 200;
-}
-
-#header ul li a {
-	display: inline;
-}
-
-
-.header_content {
-	width: 960px;
-	margin: auto;
-	padding-top: 0px;
-}
-
-#header_left {
-    height: 207px;
-    position: absolute;
-    top: -65px;
-}
-
-#header_left_other {
-	-moz-border-radius: 5px 5px 5px 5px;
--webkit-border-radius: 5px 5px 5px 5px;
-border-radius: 5px 5px 5px 5px;
-    -moz-box-shadow: 2px 2px 10px #0F0F0F;
--webkit-box-shadow: 2px 2px 10px #0F0F0F;
-box-shadow: 2px 2px 10px #0F0F0F;
-    background-color: #0F0F0F;
-    border: 10px solid #FFFFFF;
-    padding: 8px 10px;
-    text-align: center;
-    width: 400px;
-background-image: url("http://www.onlyinpgh.com/wp-content/uploads/2011/06/pghphotos.png")
-}
-
-ul.navigation {
-	margin: 0px;
-	padding: 6px 0px 0px 20px;
-}
-
-.logo a {
-        color: #FFFFFF;
-    font-family: "helvetica","sans-serif";
-    font-size: 80px;
-    font-weight: bold;
-    position: absolute;
-    text-decoration: none;
-    text-shadow: 3px 3px 0 #000000;
-}
-
-#yellowtext {
-	background-color: #0f0f0f;
-    color: #ffec4b;
-    font-size: 30px;
-	margin: auto;
-	margin-bottom: 10px;
-	text-align: center;
-	text-transform: uppercase;
-    text-shadow: 1px 1px #000000;
-}
-
-#login a {
-	color: #ffffff;
-	text-decoration: none;
-}
-
-#login a:hover {
-	color: #ffec4b;
-}
-
-#header_navigation {
-	display: inline;
-	text-transform: uppercase;
-	list-style: none;
-}
-
-#header_navigation ul li {
-	background-color: #ffffff;
-    display: inline;
-    font-size: 16px;
-    list-style-type: none;
-    margin-right: 20px;
-    padding: 52px 2px 0;
-}
-
-#header_navigation ul li:hover {
-	background-color: #ffec4b;
-	-moz-box-shadow: 0px 0px 10px 0px #ffffff;
-}
-
-#header_navigation li {
-	-moz-border-radius: 2px 2px 2px 2px;
-	-webkit-border-radius: 2px 2px 2px 2px;
-	border-radius: 2px 2px 2px 2px;
-    float: left;
-    list-style: none outside none;
-    text-align: center;
-    width: 80px;
-}
-
-#header_navigation li a {
-	color: #000000;
-	text-shadow: 0px 0px 2px #ccc;
-}
-
-
-#header_navigation li a:hover {
-	color: #000000;
-	text-shadow: 1px 1px 0px #ccc;
-	text-decoration: none;
-}
-
-#header_below {
-     height: 92px;
-    margin-top: 125px;
-    padding: 8px 0;
-    position: absolute;
-	left: 60px;
-	top: 15px;
-    z-index: 200;
-}
-
-#header_below .header_content {
-		padding: 0px;
-}
 #wrapper {
 	width: 980px;
 	margin: auto;
@@ -268,27 +73,6 @@ ul.navigation {
 	overflow: visible;
 }
 
-#mapfilters {
-	width: 270px;
-	overflow: visible;
-	margin-left: 8px;
-	display: block;
-	float: right
-}
-
-#map { 
-	width: 600px; 
-	height: 480px;
-	float: left;
-	position: relative;
-}
-
-#map_canvas { 
-	width: 580px; 
-	height: 550px;
-	float: left;
-	position: relative;
-}
 
 .filter_column {
 	width: 270px;
@@ -312,123 +96,6 @@ ul.navigation {
 font-weight: normal;
 }
 
-#footer {
-    height: 250px;
-    margin: auto;
-    padding: 0;
-    width: 1080px;
-    z-index: 300;
-	background-color: #0f0f0f;
-	color: #ffffff;
-	-moz-box-shadow: 0px 0px 10px -1px #000;
-	-webkit-box-shadow: 0px 0px 10px -1px #000;
-	box-shadow: 0px 0px 10px -1px #000;
-}
-
-#footer a {
-	color: #ffffff;
-	text-decoration: none;
-}
-
-
-#footer a:hover {
-	color: #ffec4b;
-	text-decoration: underline;
-}
-
-#footer_textnav {
-	height: 50px;
-	width: 960px;
-	text-align: center;
-	color: #ffffff;
-	clear: both;
-	font-size: 14px;
-	margin: auto;
-	padding: 10px 0px 0px;
-}
-
-#footer_textnav ul li {
-	display: inline;
-	list-style: none;
-	text-transform: uppercase;
-}
-
-#footer_textnav li {
-	padding: 0px 5px 0px 5px;
-}
-
-#footer_textnav a {
-	color: #ffffff;
-	text-decoration: none;
-}
-
-#footer_textnav .current_page_item a {
-	color: #ffec4b;
-	text-decoration: none;
-	background-color: #0f0f0f;
-}
-
-#footer_textnav a:hover {
-	color: #ffec4b;
-	text-decoration: none;
-}
-
-#footer_content {
-	width: 960px;
-	margin: auto;
-	padding-top: 20px;
-	margin-bottom: 10px;
-}
-
-#footer_left {
-	width: 300px;
-	float: left;
-	margin-right: 10px;
-	margin-bottom: 10px;		
-}
-
-#footer_right {
-	width: 300px;
-	float: left;
-	margin-right: 30px;
-	margin-bottom: 10px;
-}
-
-
-#footer_right2 {
-	width: 300px;
-	float: left;
-	margin-bottom: 10px;
-}
-
-.disclaimerheader {
-	font-family: 'Francois One', Impact, serif;
-	font-size: 20px;
-	color: #ffffff;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: #0F0F0F;
-	margin-bottom: 5px;
-	width: 640px;
-	text-shadow: 1px 1px 0px #000;
-	letter-spacing: 1px;
-font-weight: normal;
-}
-
-
-.footerlogo {
-	font-family: "helvetica", "sans-serif";
-	font-size: 40px;
-	color: #ffec4b;
-	font-weight: bold;
-	text-shadow: 1px 1px 0px #000;
-}
-
-.map {
-	width: 100%;
-}
 
 .info_box {
 	background-color: #0f0f0f;
@@ -552,25 +219,6 @@ font-weight: normal;
 
 }
 
-strong {
-    color: #0F0F0F;
-    font-family: 'Francois One',Impact,serif;
-    font-size: 18px;
-    font-weight: normal;
-    text-shadow: 0 0 3px #CCCCCC;
-    text-transform: uppercase;
-}
-
-h3 {
-    color: #0F0F0F;
-    font-family: 'Francois One',Impact,serif;
-    font-size: 25px;
-    letter-spacing: 0;
-    text-shadow: 0 0 1px #CCCCCC;
-    text-transform: uppercase;
-	margin: 0px;
-font-weight: normal;
-}
 
 table.fullcalendar{
 	width: 920px;
