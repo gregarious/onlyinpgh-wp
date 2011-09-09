@@ -1,14 +1,15 @@
 
 /* Everything seemingly after the BP defaults */
 
-.page_item page-item-61 {
+/* These links are dead */
+/*.page_item page-item-61 {
 	background-image: url('http://www.onlyinpgh.com/wp-content/uploads/2011/06/homeicon.jpg');
 }
 
 li.page_item page-item-53 {
 	background-image: url('http://www.onlyinpgh.com/wp-content/uploads/2011/06/mypgh_icon.jpg');
 	background-position: left top
-}
+}*/
 
 #header li.current_page_item {
 	background-color: #ffec4b !important;
@@ -219,7 +220,7 @@ ul#menu-header-menu li:hover > a {
 #photoborder {
 	height: 260px;
 	width: 1080px;
-	background-image: url("http://www.onlyinpgh.com/wp-content/uploads/2011/06/newphotocorner_border.png");
+	background-image: url("../images/newphotocorner_border.png");
 	z-index: 250;
 }
 
@@ -453,7 +454,7 @@ font-weight: normal;
  -moz-border-radius: 5px 5px 0 0;
 -webkit-border-radius: 5px 5px 0 0;
     background-color: #0F0F0F;
-	background-image: url(http://www.onlyinpgh.com/wp-content/uploads/2011/07/searbarbg.jpg);
+	background-image: url("../images/searbarbg.jpg);
     float: right;
     font-size: 17px;
     letter-spacing: 1px;
@@ -560,7 +561,7 @@ padding-top: 10px;
 }
 
 #dropdown_search {
-float: left;
+	float: left;
     height: 70px;
     width: 960px;
 }
@@ -900,7 +901,7 @@ font-weight: normal;
 }
 
 .gohomelink {
-	background-image: url(http://www.onlyinpgh.com/wp-content/uploads/2011/06/homenav.png);
+	background-image: url("../images/homenav.png");
     background-position: center top !important;
     background-repeat: no-repeat;
     font-size: 16px;
@@ -908,7 +909,7 @@ font-weight: normal;
 }
 
 .mypghlink {
-	background-image: url(http://www.onlyinpgh.com/wp-content/uploads/2011/06/mypghnav.png);
+	background-image: url("../images/mypghnav.png");
     background-position: center top !important;
     background-repeat: no-repeat;
     font-size: 16px;
@@ -936,18 +937,17 @@ font-weight: normal;
 
 @-moz-document url-prefix() {
     .multiline{
-
-color: #F0F0F0;
-    display: inline;
-float: right;
-margin: 0px 5px !important;
-    font-family: 'Francois One','Impact',san-serif;
-font-weight: normal;
-    font-size: 12px;
-    line-height: 14px;
-    padding: 0;
-    text-transform: uppercase;
-}
+		color: #F0F0F0;
+	    display: inline;
+		float: right;
+		margin: 0px 5px !important;
+	    font-family: 'Francois One','Impact',san-serif;
+		font-weight: normal;
+	    font-size: 12px;
+	    line-height: 14px;
+	    padding: 0;
+	    text-transform: uppercase;
+	}
 }
 
 #dropdownsearch p {
@@ -955,14 +955,14 @@ font-weight: normal;
 }
 
 dt {
- -moz-border-radius: 5px 5px 5px 5px;
- -webkit-border-radius: 5px 5px 5px 5px;
+ 	-moz-border-radius: 5px 5px 5px 5px;
+	 -webkit-border-radius: 5px 5px 5px 5px;
     background-color: #0F0F0F;
     color: #F0F0F0;
     padding: 10px;
     text-align: center;
     text-transform: uppercase;
-background-image: url(http://www.onlyinpgh.com/wp-content/uploads/2011/07/searbarbg.jpg);
+	background-image: url("../images/searbarbg.jpg");
 }
 
 dt a {

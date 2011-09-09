@@ -46,9 +46,9 @@ table.em-calendar td.eventless-today {
 	height: 115px; 
 	width: 960px;
 	background-color: #0f0f0f;
-	 -moz-border-radius: 0 0 10px 10px;
--webkit-border-radius: 0 0 10px 10px;
-	background-image: url(http://www.onlyinpgh.com/wp-content/uploads/2011/07/searbarbg.jpg);
+	-moz-border-radius: 0 0 10px 10px;
+	-webkit-border-radius: 0 0 10px 10px;
+	background-image: url("../images/searbarbg.jpg");
 	background-repeat: repeat-x;
 	-moz-box-shadow: 0px 5px 5px 0px #a0a0a0;
 }

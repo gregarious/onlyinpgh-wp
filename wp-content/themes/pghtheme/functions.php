@@ -133,7 +133,6 @@ register_nav_menus( array(
 	'primary' => __( 'Primary Navigation' ),
 	) );
 
-// Not sure if this is doing anything - wp_enqueue_script('jquery'); can be moved to header.php? Also change onlyinpgh url to includes_url()
 function my_init_method() {
 	wp_enqueue_script('jquery', 'http://onlyinpgh.com/wp-includes/js/jquery/jquery.js');
 }

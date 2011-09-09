@@ -117,7 +117,7 @@ font-weight: normal;
 
 #profilemapcontentholder #maplocationkey {
 	    -moz-box-shadow: 0 0 4px 0 #CCCCCC;
-	background-image: url(http://www.onlyinpgh.com/wp-content/uploads/2011/07/searbarbg.jpg);
+	background-image: url("../images/searbarbg.jpg");
     background-color: #0F0F0F;
     border: 3px solid #FFEC4B;
     height: 60px;
@@ -204,7 +204,7 @@ font-weight: normal;
 
 #maplocationkey {
     -moz-box-shadow: 0 0 4px 0 #CCCCCC;
-	background-image: url(http://www.onlyinpgh.com/wp-content/uploads/2011/07/searbarbg.jpg);
+	background-image: url("./images/searbarbg.jpg");
     background-color: #0F0F0F;
     border: 3px solid #FFEC4B;
     height: 60px;

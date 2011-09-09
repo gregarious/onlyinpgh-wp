@@ -4,12 +4,12 @@ html {
 }
 
 body {
-	font-family: “Trebuchet MS”, “Lucida Sans Unicode”, “Lucida Grande”,” Lucida Sans”, Arial, sans-serif;
+	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 	margin: 0px;
 	padding: 0px;
 	color: #0f0f0f;
 	background-color: #ffffff;
-	background-image: url(http://www.onlyinpgh.com/wp-content/uploads/2011/08/pghlight2-16.jpg);
+	background-image: url("../images/pghlight2-16.jpg");
 	background-position: top center;
 	background-repeat: no-repeat;
 	height: 100%;
@@ -55,7 +55,6 @@ img {
 	margin: auto;
 	overflow: visible;
 }
-
 
 .filter_column {
 	width: 270px;
