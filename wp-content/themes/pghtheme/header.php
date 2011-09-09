@@ -4,7 +4,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />	
 	<meta name="generator" content="WordPress <?php bloginfo('version'); ?>" />
-	<title><?php wp_title(''); ?></title>
+	<title><?php bp_page_title() ?></title>
 
 <?php do_action( 'bp_head' ) ?>
 

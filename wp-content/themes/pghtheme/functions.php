@@ -133,6 +133,7 @@ register_nav_menus( array(
 	'primary' => __( 'Primary Navigation' ),
 	) );
 
+// Not sure if this is doing anything - wp_enqueue_script('jquery'); can be moved to header.php? Also change onlyinpgh url to includes_url()
 function my_init_method() {
 	wp_enqueue_script('jquery', 'http://onlyinpgh.com/wp-includes/js/jquery/jquery.js');
 }
@@ -152,5 +153,19 @@ function new_excerpt_length($length) {
 add_filter('excerpt_length', 'new_excerpt_length');
 
 
+// Customizing title for BuddyPress Profile page
+// http://buddypress.org/community/groups/how-to-and-troubleshooting/forum/topic/editing-group-and-forum-page-title-tags/
+function my_page_title( $title, $b ) {
+	global $bp;
+
+	if ( $bp->current_action == 'forum' && $bp->action_variables[0] == 'topic' ) {
+		if ( bp_has_topic_posts() ) {
+			$topic_title = bp_get_the_topic_title();
+			$title .= ' | ' . $topic_title;
+		}
+	}
+	return $title;
+}
+add_filter( 'bp_page_title', 'my_page_title', 10, 2 );
 
 ?>
