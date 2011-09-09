@@ -11,19 +11,19 @@
 <table id="locationtypes"><tr>
 <td style="padding-left:5px;"><p class="searchbar_head" style="float: left;font-size: 17px;">Also Show me...</p></td>
 
-<td><input type="checkbox" name="locations" id="food" onclick="placeRequest('food')"><img src="http://onlyinpgh.com/place_dots/food.png"><p>Bars & Restaurants</p></td>
+<td><input type="checkbox" name="locations" id="food" onclick="placeRequest('food')"><img src="<?php bloginfo('url'); ?>/place_dots/food.png"><p>Bars & Restaurants</p></td>
 
-<td><input type="checkbox" name="locations" id="music" onclick="placeRequest('music')"><img src="http://onlyinpgh.com/place_dots/music.png"><p>Music Venues</p></td>
+<td><input type="checkbox" name="locations" id="music" onclick="placeRequest('music')"><img src="<?php bloginfo('url'); ?>/place_dots/music.png"><p>Music Venues</p></td>
 
-<td><input type="checkbox" name="locations" id="museum" onclick="placeRequest('museum')"><img src="http://onlyinpgh.com/place_dots/museum.png"><p>Museums & Galleries</p></td></tr><tr>
+<td><input type="checkbox" name="locations" id="museum" onclick="placeRequest('museum')"><img src="<?php bloginfo('url'); ?>/place_dots/museum.png"><p>Museums & Galleries</p></td></tr><tr>
 
-<td><input type="checkbox" name="locations" id="sports" onclick="placeRequest('sports')"><img src="http://onlyinpgh.com/place_dots/spots.png"><p>Sports & Outdoors</p></td>
+<td><input type="checkbox" name="locations" id="sports" onclick="placeRequest('sports')"><img src="<?php bloginfo('url'); ?>/place_dots/spots.png"><p>Sports & Outdoors</p></td>
 
-<td><input type="checkbox" name="locations" id="shops" onclick="placeRequest('shops')"><img src="http://onlyinpgh.com/place_dots/shopping.png"><p>Shops</p></td>
+<td><input type="checkbox" name="locations" id="shops" onclick="placeRequest('shops')"><img src="<?php bloginfo('url'); ?>/place_dots/shopping.png"><p>Shops</p></td>
 
-<td><input type="checkbox" name="locations" id="theater" onclick="placeRequest('theater')"><img src="http://onlyinpgh.com/place_dots/theaterfilm.png"><p>Theaters</p></td>
+<td><input type="checkbox" name="locations" id="theater" onclick="placeRequest('theater')"><img src="<?php bloginfo('url'); ?>/place_dots/theaterfilm.png"><p>Theaters</p></td>
 
-<td><input type="checkbox" name="locations" id="attractions" onclick="placeRequest('attractions')"><img src="http://onlyinpgh.com/place_dots/attractions.png"><p>Attractions</p></td>
+<td><input type="checkbox" name="locations" id="attractions" onclick="placeRequest('attractions')"><img src="<?php bloginfo('url'); ?>/place_dots/attractions.png"><p>Attractions</p></td>
 
 </tr>
 </table>

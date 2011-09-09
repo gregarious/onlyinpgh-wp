@@ -6,6 +6,11 @@
 	<meta name="generator" content="WordPress <?php bloginfo('version'); ?>" />
 	<title><?php wp_title(''); ?></title>
 
+	<!-- Define a JS global to hold the site url -->
+	<script type="text/javascript">
+		var OIP_url = <?php bloginfo('url'); ?>;
+	</script>
+	
 <?php do_action( 'bp_head' ) ?>
 
 	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
@@ -16,7 +21,6 @@
 
 <?php wp_head(); ?>
 
-<link href="<?php includes_url() ?>/js/jquery/jquery.js" type="text/javascript" />
 <link href="<?php includes_url() ?>/js/jquery/ui.tabs.js" type="text/javascript" />
 <link href="<?php includes_url() ?>/js/jquery/ui.widget.js" type="text/javascript" />
 <link href="<?php includes_url() ?>/js/jquery/ui.datepicker.js" type="text/javascript" />
@@ -208,25 +212,25 @@ function createMarker(place) {
 		var ltype = place.types[0];	
 //Determines the type of marker to plot based on the place type
 if ((ltype == 'bakery')||(ltype == 'bar')||(ltype == 'cafe')||(ltype == 'food')||(ltype == 'grocery_or_supermarket')||(ltype == 'restaurant')){
-		var placedot = 'http://www.onlyinpgh.com/place_dots/food.png';
+		var placedot = '<?php bloginfo('url'); ?>/place_dots/food.png';
 	} 
 	else if (ltype == 'night_club') {
-var placedot = 'http://www.onlyinpgh.com/place_dots/music.png';
+var placedot = '<?php bloginfo('url'); ?>/place_dots/music.png';
 	} 
 	else if ((ltype == 'art_gallery')||(ltype == 'museum')) {
-var placedot = 'http://www.onlyinpgh.com/place_dots/museum.png';
+var placedot = '<?php bloginfo('url'); ?>/place_dots/museum.png';
 	} 
 	else if ((ltype == 'bowling_allery')||(ltype == 'campground')||(ltype == 'park')||(ltype == 'stadium')) {
-		var placedot = 'http://www.onlyinpgh.com/place_dots/spots.png';
+		var placedot = '<?php bloginfo('url'); ?>/place_dots/spots.png';
 	} 
 	else if ((ltype == 'beauty_salon')||(ltype == 'bicycle_store')||(ltype == 'book_store')||(ltype == 'clothing_store')||(ltype == 'convenience_store')||(ltype == 'department_store')||(ltype == 'electronics_store')||(ltype == 'florist')||(ltype == 'furniture_store')||(ltype == 'hair_care')||(ltype == 'hardware_store')||(ltype == 'home_goods_store')||(ltype == 'jewelry_store')||(ltype == 'liquor_store')||(ltype == 'pet_store')||(ltype == 'pharmacy')||(ltype == 'shoe_store')||(ltype == 'shopping_mall')||(ltype == 'spa')||(ltype == 'store')) {
-		var placedot = 'http://www.onlyinpgh.com/place_dots/shopping.png';
+		var placedot = '<?php bloginfo('url'); ?>/place_dots/shopping.png';
 	} 
 	else if (ltype == 'movie_theater') {
-var placedot = 'http://www.onlyinpgh.com/place_dots/theaterfilm.png';
+var placedot = '<?php bloginfo('url'); ?>/place_dots/theaterfilm.png';
 	} 
 	else if ((ltype == 'amusement_park')||(ltype == 'aquarium')||(ltype == 'casio')||(ltype == 'library')||(ltype == 'university')){
-var placedot = 'http://www.onlyinpgh.com/place_dots/attractions.png';
+var placedot = '<?php bloginfo('url'); ?>/place_dots/attractions.png';
 	}	
 		  var placeLoc = place.geometry.location;
           var marker = new google.maps.Marker({
@@ -575,43 +579,43 @@ function createEventMarker(latlng, name, address, organization, category, event_
 	//Determines the icon to plot on the map and if it should be considered an attraction or not  		       	
 	var icontype;
 	if (category == 'Food &amp; Drink' && fans < 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/food.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/food.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
 	}
 	else if (category == 'Theater' && fans < 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/theaterfilm.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/theaterfilm.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
 	}
 	else if (category == 'Shopping' && fans < 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/retail.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/retail.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
 	}
 	else if (category == 'Sports &amp; Outdoors' && fans < 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/outdoors.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/outdoors.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
 	}
 	else if (category == 'Educational' && fans < 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/education.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/education.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
 	}
 	else if (category == 'Arts' && fans < 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/arts.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/arts.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
 	}
 	else if (category == 'Music' && fans < 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/music.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/music.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
@@ -621,50 +625,50 @@ function createEventMarker(latlng, name, address, organization, category, event_
 		var icontype = pic;
 	}
 	else if (fans < 100) {
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/genfun.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/genfun.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));	
 	}
 	
 	else if (category == 'Food &amp; Drink' && fans > 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/food_attraction.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/food_attraction.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
 	}
 	else if (category == 'Theater' && fans > 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/theaterfilm_attraction.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/theaterfilm_attraction.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
 	}
 	else if (category == 'Music' && fans > 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/music_attraction.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/music_attraction.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
 	}
 	else if (category == 'Shopping' && fans > 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/retail_attraction.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/retail_attraction.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
 	}
 	else if (category == 'Sports &amp; Outdoors' && fans > 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/outdoors_attraction.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/outdoors_attraction.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
 	}
 	else if (category == 'Educational' && fans > 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/education_attraction.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/education_attraction.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
 	}
 	else if (category == 'Arts' && fans > 100){
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/arts_attraction.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/arts_attraction.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));
@@ -673,7 +677,7 @@ function createEventMarker(latlng, name, address, organization, category, event_
 		var icontype = pic;
 	}
 	else {
-		var icontype = new google.maps.MarkerImage('http://onlyinpgh.com/newplace_markers/genfun_attraction.png',
+		var icontype = new google.maps.MarkerImage('<?php bloginfo('url'); ?>/newplace_markers/genfun_attraction.png',
 					new google.maps.Size(20, 20),
 					new google.maps.Point(0,0),
 					new google.maps.Point(0, 20));	
@@ -683,10 +687,10 @@ function createEventMarker(latlng, name, address, organization, category, event_
 	if (isloggedin == 'y'){
 		//If logged in the button will add an entry to attendance table
       var userid = document.getElementById("loggedinid").value;
-      var html = "<div class=\"infowindow\"><img src=\"" + pic + "\"><b>" + name + "</b><br/>" + address + "<br/><a target=\"_blank\" href=\"http://maps.google.com/maps?saddr=&daddr=" + address + "\">Get Directions</a><br/>" + event_date + "<br/>" + stime + " - " + etime + "<br/><br/>" + description + "...<a target=\"_blank\" href=\"http://www.onlyinpgh.com/events/event/" + slug + "/\">Get more info</a><br/><br/><input type=\"button\" value=\"Count me in!\" id=\"" + eventid + "window\" onclick=\"attendEventWindow(" + eventid + ")\"></div>";
+      var html = "<div class=\"infowindow\"><img src=\"" + pic + "\"><b>" + name + "</b><br/>" + address + "<br/><a target=\"_blank\" href=\"http://maps.google.com/maps?saddr=&daddr=" + address + "\">Get Directions</a><br/>" + event_date + "<br/>" + stime + " - " + etime + "<br/><br/>" + description + "...<a target=\"_blank\" href=\"<?php bloginfo('url'); ?>/events/event/" + slug + "/\">Get more info</a><br/><br/><input type=\"button\" value=\"Count me in!\" id=\"" + eventid + "window\" onclick=\"attendEventWindow(" + eventid + ")\"></div>";
 	} else {
 		//If they're not logged in the button will promt them to login or register
-      	var html = "<div class=\"infowindow\"><img src=\"" + pic + "\"><b>" + name + "</b><br/>" + address + "<br/><a target=\"_blank\" href=\"http://maps.google.com/maps?saddr=&daddr=" + address + "\">Get Directions</a><br/>" + event_date + "<br/>" + stime + " - " + etime + "<br/><br/>" + description + "...<a target=\"_blank\" href=\"http://www.onlyinpgh.com/events/event/" + slug + "/\">Get more info</a><br/><br/><input type=\"button\" value=\"Count me in!\" onclick=\"attendEvent(" + eventid + ")\" id=\"" + eventid + "window\"></div>";
+      	var html = "<div class=\"infowindow\"><img src=\"" + pic + "\"><b>" + name + "</b><br/>" + address + "<br/><a target=\"_blank\" href=\"http://maps.google.com/maps?saddr=&daddr=" + address + "\">Get Directions</a><br/>" + event_date + "<br/>" + stime + " - " + etime + "<br/><br/>" + description + "...<a target=\"_blank\" href=\"<?php bloginfo('url'); ?>/events/event/" + slug + "/\">Get more info</a><br/><br/><input type=\"button\" value=\"Count me in!\" onclick=\"attendEvent(" + eventid + ")\" id=\"" + eventid + "window\"></div>";
       }
 	//Used to toggle the event markers
       var customdata = {
@@ -716,10 +720,10 @@ function createEventSidebar(marker, name, address, distance, fans, organization,
       if (isloggedin == 'y'){
       var userid = document.getElementById("loggedinid").value;
       //If logged in the button will add an entry to attendance table
-      var html = "<div style=\"display:block;\" class=\"eside\" name=\"" + category + "\"><img src=\"" + pic + "\"> <b>" + name + "</b> <br/><p class=\"hostedby\">Hosted By</p><p class=\"host\">" + organization + "</p>" + address + "<br/><a target=\"_blank\" href=\"http://maps.google.com/maps?saddr=&daddr=" + address + "\">Get Directions</a><br/><br/>" + event_date + "<br/>" + stime + " - " + etime + "<br/><br/>" + description + "... <a target=\"_blank\" href=\"http://www.onlyinpgh.com/events/event/" + slug + "/\">Get more info</a><br/><br/><input type=\"button\" value=\"Count me in!\" id=\"" + eventid + "\" onclick=\"attendEvent(" + eventid + ")\"></div>";
+      var html = "<div style=\"display:block;\" class=\"eside\" name=\"" + category + "\"><img src=\"" + pic + "\"> <b>" + name + "</b> <br/><p class=\"hostedby\">Hosted By</p><p class=\"host\">" + organization + "</p>" + address + "<br/><a target=\"_blank\" href=\"http://maps.google.com/maps?saddr=&daddr=" + address + "\">Get Directions</a><br/><br/>" + event_date + "<br/>" + stime + " - " + etime + "<br/><br/>" + description + "... <a target=\"_blank\" href=\"<?php bloginfo('url'); ?>/events/event/" + slug + "/\">Get more info</a><br/><br/><input type=\"button\" value=\"Count me in!\" id=\"" + eventid + "\" onclick=\"attendEvent(" + eventid + ")\"></div>";
       } else {
       	//If they're not logged in the button will promt them to login or register
-      	var html = "<div style=\"display:block;\" class=\"eside\" name=\"" + category + "\"><img src=\"" + pic + "\"> <b>" + name + "</b> <br/><p class=\"hostedby\">Hosted By</p><p class=\"host\">" + organization + "</p>" + address + "<br/><a target=\"_blank\" href=\"http://maps.google.com/maps?saddr=&daddr=" + address + "\">Get Directions</a><br/><br/>" + event_date + "<br/>" + stime + " - " + etime + "<br/><br/>" + description + "... <a target=\"_blank\" href=\"http://www.onlyinpgh.com/events/event/" + slug + "/\">Get more info</a><br/><br/><input type=\"button\" value=\"Count me in!\" onclick=\"textLoginChange(" + eventid + ")\" id=\"" + eventid + "\"></div>";
+      	var html = "<div style=\"display:block;\" class=\"eside\" name=\"" + category + "\"><img src=\"" + pic + "\"> <b>" + name + "</b> <br/><p class=\"hostedby\">Hosted By</p><p class=\"host\">" + organization + "</p>" + address + "<br/><a target=\"_blank\" href=\"http://maps.google.com/maps?saddr=&daddr=" + address + "\">Get Directions</a><br/><br/>" + event_date + "<br/>" + stime + " - " + etime + "<br/><br/>" + description + "... <a target=\"_blank\" href=\"<?php bloginfo('url'); ?>/events/event/" + slug + "/\">Get more info</a><br/><br/><input type=\"button\" value=\"Count me in!\" onclick=\"textLoginChange(" + eventid + ")\" id=\"" + eventid + "\"></div>";
       }
       
       eventdiv.innerHTML = html;
@@ -854,7 +858,7 @@ function downloadUrl(url, callback) {
     //]]>
 </script>
 <?php else : ?>
-<script src="http://www.onlyinpgh.com/map_js/profilepage.js" type="text/javascript"></script>
+<script src="<?php bloginfo('template_url'); ?>/scripts/profilepage.js" type="text/javascript"></script>
 <?php endif; ?>
 
 
@@ -996,7 +1000,7 @@ for (i = 0; i < field.length; i++)
 <div id="header_left">
 <div class="logo">
 <a href="<?php bloginfo('url'); ?>" title="Home">
-<img src="http://www.onlyinpgh.com/wp-content/uploads/2011/08/logoframe2_beta.png">
+<img src="<?php bloginfo('url'); ?>/wp-content/uploads/2011/08/logoframe2_beta.png">
 </a>
 </div><!--Closes logo-->
 </div><!--Closes headerleft-->
@@ -1007,9 +1011,9 @@ for (i = 0; i < field.length; i++)
 <div id="header_navigation">
 <ul id="staticheader">
 <?php if( is_front_page()) : ?>
-<li class="current_page_item"><a class="gohomelink" href="http://www.onlyinpgh.com/">Home</a></li>
+<li class="current_page_item"><a class="gohomelink" href="<?php bloginfo('url'); ?>/">Home</a></li>
 <?php else : ?>
-<li><a class="gohomelink" href="http://www.onlyinpgh.com/">Home</a></li>
+<li><a class="gohomelink" href="<?php bloginfo('url'); ?>/">Home</a></li>
 <?php endif; ?>
 
 
@@ -1036,9 +1040,9 @@ for (i = 0; i < field.length; i++)
 </div> <!--Close header_navigation-->
 </div> <!--Close header_content2-->
 <?php do_action( 'bp_header' ) ?>
-<div class="socialicons"><a href="https://www.facebook.com/onlyinpgh"><img src="http://onlyinpgh.com/menunav_images/fbicon.png"></a>
-<a href="https://twitter.com/#!/onlyinpgh/"><img src="<?php bloginfo('url'); ?> menunav_images/twittericon.png"></a>
-<a href="http://onlyinpgh.com/feed/rss/"><img src="http://onlyinpgh.com/menunav_images/rssicon.png"></a></div>
+<div class="socialicons"><a href="https://www.facebook.com/onlyinpgh"><img src="<?php bloginfo('url'); ?>/menunav_images/fbicon.png"></a>
+<a href="https://twitter.com/#!/onlyinpgh/"><img src="<?php bloginfo('url'); ?>/menunav_images/twittericon.png"></a>
+<a href="<?php bloginfo('url'); ?>/feed/rss/"><img src="<?php bloginfo('url'); ?>/menunav_images/rssicon.png"></a></div>
 </div><!--Close header_below-->
 </div><!--Closes header-->
 <?php do_action( 'bp_after_header' ) ?>

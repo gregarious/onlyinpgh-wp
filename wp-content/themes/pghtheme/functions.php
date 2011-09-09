@@ -134,7 +134,15 @@ register_nav_menus( array(
 	) );
 
 function my_init_method() {
-	wp_enqueue_script('jquery', 'http://onlyinpgh.com/wp-includes/js/jquery/jquery.js');
+      
+      // let WP load jQuery on it's own if we're in the admin panel. if we load 
+      // this in the admin panel, conflicts will arise.
+      // See http://digwp.com/2009/06/use-google-hosted-javascript-libraries-still-the-right-way/
+      if( !is_admin()) {      
+            wp_deregister_script('jquery'); 
+            wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"), false, '1.6.3');
+            wp_enqueue_script('jquery');
+      }
 }
 add_action('init', 'my_init_method');
 

@@ -10,13 +10,13 @@ ul#menu-header-menu li > a,ul#menu-header-menu li:hover > a{
 	padding-left: 23px;
 	}
 ul#menu-header-menu li.cmi_menu_item_125 > a,ul#menu-header-menu li.cmi_menu_item_125:hover > a {
-	background-image: url(http://onlyinpgh.com/menunav_images/calendarnav.png);	
+	background-image: url(/menunav_images/calendarnav.png);	
 	}
 ul#menu-header-menu li.cmi_menu_item_124 > a,ul#menu-header-menu li.cmi_menu_item_124:hover > a {
-	background-image: url(http://onlyinpgh.com/menunav_images/blognav.png);	
+	background-image: url(/menunav_images/blognav.png);	
 	}
 ul#menu-header-menu li.cmi_menu_item_123 > a,ul#menu-header-menu li.cmi_menu_item_123:hover > a {
-	background-image: url(http://onlyinpgh.com/menunav_images/photonav.png);	
+	background-image: url(/menunav_images/photonav.png);	
 	}
 /* END <HEADER-MENU>*/
 
