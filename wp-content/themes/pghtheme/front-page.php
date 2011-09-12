@@ -8,7 +8,6 @@ get_header(); ?>
 //if (have_posts()) : while (have_posts()) : the_post(); 
 ?>
 
-<<<<<<< HEAD
 	<div id="eventsearch_bar">
 		<input id="limitvalue" type="hidden" value="0" />
 		<div id="dropdown_search">
@@ -198,21 +197,6 @@ events in</p>
 		</div>
 	</div>
 </div> 
-=======
-<td><input type="checkbox" name="locations" id="food" onclick="placeRequest('food')"><img src="<?php bloginfo('url'); ?>/place_dots/food.png"><p>Bars & Restaurants</p></td>
-
-<td><input type="checkbox" name="locations" id="music" onclick="placeRequest('music')"><img src="<?php bloginfo('url'); ?>/place_dots/music.png"><p>Music Venues</p></td>
-
-<td><input type="checkbox" name="locations" id="museum" onclick="placeRequest('museum')"><img src="<?php bloginfo('url'); ?>/place_dots/museum.png"><p>Museums & Galleries</p></td></tr><tr>
-
-<td><input type="checkbox" name="locations" id="sports" onclick="placeRequest('sports')"><img src="<?php bloginfo('url'); ?>/place_dots/spots.png"><p>Sports & Outdoors</p></td>
-
-<td><input type="checkbox" name="locations" id="shops" onclick="placeRequest('shops')"><img src="<?php bloginfo('url'); ?>/place_dots/shopping.png"><p>Shops</p></td>
-
-<td><input type="checkbox" name="locations" id="theater" onclick="placeRequest('theater')"><img src="<?php bloginfo('url'); ?>/place_dots/theaterfilm.png"><p>Theaters</p></td>
-
-<td><input type="checkbox" name="locations" id="attractions" onclick="placeRequest('attractions')"><img src="<?php bloginfo('url'); ?>/place_dots/attractions.png"><p>Attractions</p></td>
->>>>>>> c69f482cbc5403d62a99cf3e5973d9a8e58d5cce
 
 </div>
 <?php //endwhile; else: ?>
