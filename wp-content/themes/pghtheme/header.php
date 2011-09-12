@@ -171,7 +171,7 @@ for (i = 0; i < field.length; i++)
 <div id="header_left">
 <div class="logo">
 <a href="<?php bloginfo('url'); ?>" title="Home">
-<img src="<?php bloginfo('url'); ?>/wp-content/uploads/2011/08/logoframe2_beta.png">
+<img src="<?php bloginfo('stylesheet_directory'); ?>/images/logoframe2_beta.png">
 </a>
 </div><!--Closes logo-->
 </div><!--Closes headerleft-->
