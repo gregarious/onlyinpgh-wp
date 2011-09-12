@@ -7,7 +7,7 @@
 
 		<div class="page 404">
 
-<img style="margin-left:120px;" src="<?php bloginfo('template_url'); ?>/images/404signal.jpg"/>
+<img style="margin-left:120px;" src="<?php bloginfo('stylesheet_url'); ?>/images/404signal.jpg"/>
 <p class="notfound">The page you were looking for couldn't be found</p>
 			<div id="message" class="info">
 

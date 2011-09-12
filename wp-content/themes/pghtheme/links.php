@@ -15,20 +15,20 @@
 <div id="photos_sidebar">
 <dl>
 <dt>
-<a href="/">Photos Key</a><img src="<?php echo template_url(); ?>/images/expandarrow.png"/>
+<a href="/">Photos Key</a><img src="<?php bloginfo('stylesheet_directory'); ?>/images/expandarrow.png"/>
 </dt>
 <dd>
 <?php echo GeoMashup::category_legend() ?>
 </dd>
 <dt>
-<a href="/">Submit a Photo</a><img src="<?php echo template_url(); ?>/images/expandarrow.png"/>
+<a href="/">Submit a Photo</a><img src="<?php bloginfo('stylesheet_directory'); ?>/images/expandarrow.png"/>
 </dt>
 <dd>
 <div id="submitwidget"><?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Submit Photos') ) : ?>
 <?php endif; ?></div>
 </dd>
 <dt>
-<a href="/">Recent Photos</a><img src="<?php echo template_url(); ?>/images/expandarrow.png"/>
+<a href="/">Recent Photos</a><img src="<?php bloginfo('stylesheet_directory'); ?>/images/expandarrow.png"/>
 </dt>
 <dd>
 <div id="submitwidget"><?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Photo Sidebar 3') ) : ?>

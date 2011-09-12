@@ -49,4 +49,6 @@
 <?php endif; ?></div>
 </div>
 </div>
+
+<script src="<?php bloginfo('stylesheet_directory'); ?>/scripts/map.js"></script>
 <?php get_footer(); ?>
