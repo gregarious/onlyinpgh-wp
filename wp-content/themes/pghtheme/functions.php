@@ -157,22 +157,8 @@ add_filter('excerpt_more', 'new_excerpt_more');
 function new_excerpt_length($length) {
 	return 30;
 }
-add_filter('excerpt_length', 'new_excerpt_length');
+add_filter('excerpt_length', 'new_excerpt_length'); 
 
 
-// Customizing title for BuddyPress Profile page
-// http://buddypress.org/community/groups/how-to-and-troubleshooting/forum/topic/editing-group-and-forum-page-title-tags/
-function my_page_title( $title, $b ) {
-	global $bp;
-
-	if ( $bp->current_action == 'forum' && $bp->action_variables[0] == 'topic' ) {
-		if ( bp_has_topic_posts() ) {
-			$topic_title = bp_get_the_topic_title();
-			$title .= ' | ' . $topic_title;
-		}
-	}
-	return $title;
-}
-add_filter( 'bp_page_title', 'my_page_title', 10, 2 );
 
 ?>

@@ -1,5 +1,5 @@
 <?php 
-$img_dir = get_bloginfo('stylesheet_directory') . '/images/';
+$img_dir = 'onlyinpgh' . get_bloginfo('stylesheet_directory') . '/images/';
 get_header(); ?>
 
 <div id="wrapper"> 
@@ -214,6 +214,6 @@ events in</p>
 </div>
 
 </div> <! #wrapper -->
-<script scr="<?php bloginfo('stylesheet_url'); ?>/scripts/map.js"></script>
+<script src="<?php bloginfo('stylesheet_directory'); ?>/scripts/map.js"></script>
 
 <?php get_footer(); ?>
