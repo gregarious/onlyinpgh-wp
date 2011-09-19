@@ -1,0 +1,54 @@
+/* styles for photo post thumbnails */
+
+.photo-post {	
+	float: right;	
+	width: 220px;
+	padding: 5px;
+	height: 250px;
+	overflow: hidden;
+}
+
+/* @group Thumbnails */
+
+.thumb-list {
+	margin:auto;
+	float: left;
+	width: 940px;
+	padding-top: 30px;
+}
+
+h5.thumb-title,h5.thumb-title a,h5.thumb-title a:hover {
+	font-size:.8em;
+	line-height:1.1em;
+	line-height: 100%;
+	text-align:center;
+	padding-top:2px;
+	color: black;
+}
+
+img.attachment-post-thumbnail, img.attachment-post-thumbnail wp-post-image {
+	border:1px solid #ccc;
+	-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
+	filter:alpha(opacity=100);
+	-moz-opacity:1;
+	-khtml-opacity:1;
+	opacity:1;
+	margin:0 10px;
+	padding:3px;
+}
+
+img.attachment-post-thumbnail:hover,.gallery-icon:hover {
+	-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=70);
+	filter:alpha(opacity=70);
+	-moz-opacity:0.8;
+	-khtml-opacity:0.8;
+	opacity:0.8;
+}
+
+/* @end */
+
+/* @group Search Photos widget */
+
+#photos-sidebar tr {
+	background-color: green;
+}
