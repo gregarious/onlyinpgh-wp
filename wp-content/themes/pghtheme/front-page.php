@@ -1,5 +1,5 @@
 <?php 
-$img_dir = get_bloginfo('stylesheet_directory') . '/images/';
+$img_dir = get_bloginfo('stylesheet_directory') . '/images';
 get_header(); ?>
 
 <div id="wrapper"> 
@@ -9,17 +9,23 @@ get_header(); ?>
 ?>
 
 	<div id="eventsearch_bar">
-		<input id="limitvalue" type="hidden" value="0" />
 		<div id="dropdown_search">
 			<p class="searchbar_head" style="float: left;">Find upcoming
 events in</p>
 
 			<ul>
-				<li class="border"> <select id="addressInput" onkeydown="javascript:return submitonEnter(event);"> <option value="all">All Regions</option> <option value="301-347 Fifth Ave 15222">City</option> <option value="40.57522,-80.004">North</option> <option value="40.35582,-79.995">South</option> <option value="40.44054,-79.819">East</option> <option value="40.44315,-80.135">West</option> </select></li>
+				<li class="border">
+					<select id="regionSelector" onkeydown="javascript:return submitonEnter(event);"> 
+						<option value="all">All Regions</option> 
+						<option value="city">City</option> 
+						<option value="north">North</option> 
+						<option value="south">South</option> 
+						<option value="east">East</option> 
+						<option value="west">West</option> </select></li>
 				<li style="margin: 0px; padding: 0px;">					
 					<div id="bydate" style="display: block;">					
 						<p class="searchbar_header" style="float: left;">Happening</p>
-						<select id="spanSelect" onkeydown="javascript:return submitonEnter(event);"> 
+						<select id="timespanSelect" onkeydown="javascript:return submitonEnter(event);"> 
 							<option value="0">Today</option> 
 							<option value="1">Tomorrow</option> 
 							<option selected="selected" value="7">Next 7 days</option> 
@@ -39,11 +45,11 @@ events in</p>
 					</div>
 				</li>
 				<li class="border"> 
-					<input id="searchword" style="margin: 0px 10px 0px 10px;" onkeydown="javascript:return submitonEnter(event);" size="20" type="text" value="Add a keyword (optional)" />
+					<input id="keywordsearch" style="margin: 0px 10px 0px 10px;" onkeydown="javascript:return submitonEnter(event);" size="30" type="text" value="Keyword search (optional)" onfocus="clearkeywordtip(this)" />
 				</li>
 			</ul>
 			
-			<button onclick="beginSearch();clearChecks();jqCheckAll('event_types','events',1)">Submit</button>
+			<button onclick="newSearchRequested();clearChecks();jqCheckAll('event_types','events',1)">Submit</button>
 
 		</div>
 
@@ -55,7 +61,7 @@ events in</p>
 						<tr>
 							<td>
 								<input onclick="toggleMarkers('category', 'oip_feeds')" checked="checked" name="events" type="checkbox" value="locations" />
-								<img src="<?php echo $img_dir ?>newplace_markers/featured_icon.png" alt="" />
+								<img src="<?php echo $img_dir ?>/event_markers/featured_icon.png" alt="" />
 								<div class="typeholder">
 									<p>Featured</p>
 								</div>
@@ -63,7 +69,7 @@ events in</p>
 
 							<td>
 								<input onclick="toggleMarkers('category', 'Food &amp; Drink')" checked="checked" name="events" type="checkbox" value="locations" />
-								<img src="<?php echo $img_dir ?>newplace_markers/food.png" alt="" />
+								<img src="<?php echo $img_dir ?>/event_markers/food.png" alt="" />
 								<div class="typeholder">
 									<p>Food &amp; Drink</p>
 								</div>
@@ -71,14 +77,14 @@ events in</p>
 
 							<td>
 								<input onclick="toggleMarkers('category', 'Shopping')" checked="checked" name="events" type="checkbox" value="locations" />
-								<img src="<?php echo $img_dir ?>newplace_markers/retail.png" alt="" />
+								<img src="<?php echo $img_dir ?>/event_markers/retail.png" alt="" />
 								<div class="typeholder">
 									<p>Shopping</p>
 								</div>
 							</td>
 
 							<td>
-								<input onclick="toggleMarkers('category', 'Music')" checked="checked" name="events" type="checkbox" value="locations" /><img src="<?php echo $img_dir ?>newplace_markers/music.png" alt="" />
+								<input onclick="toggleMarkers('category', 'Music')" checked="checked" name="events" type="checkbox" value="locations" /><img src="<?php echo $img_dir ?>/event_markers/music.png" alt="" />
 								<div class="typeholder">
 									<p>Music</p>
 								</div>
@@ -86,7 +92,7 @@ events in</p>
 
 							<td>
 								<input onclick="toggleMarkers('category', 'Theater')" checked="checked" name="events" type="checkbox" value="locations" />
-								<img src="<?php echo $img_dir ?>newplace_markers/theaterfilm.png" alt="" />
+								<img src="<?php echo $img_dir ?>/event_markers/theaterfilm.png" alt="" />
 								<div class="typeholder">
 									<p>Theater &amp; Film</p>
 								</div>
@@ -94,7 +100,7 @@ events in</p>
 							
 							<td>
 								<input onclick="toggleMarkers('category', 'Educational')" checked="checked" name="events" type="checkbox" value="locations" />
-								<img src="<?php echo $img_dir ?>newplace_markers/education.png" alt="" />
+								<img src="<?php echo $img_dir ?>/event_markers/education.png" alt="" />
 								<div class="typeholder">
 									<p>Education</p>
 								</div>
@@ -102,7 +108,7 @@ events in</p>
 	
 							<td>
 								<input onclick="toggleMarkers('category', 'Arts')" checked="checked" name="events" type="checkbox" value="locations" />
-								<img src="<?php echo $img_dir ?>newplace_markers/arts.png" alt="" />
+								<img src="<?php echo $img_dir ?>/event_markers/arts.png" alt="" />
 								<div class="typeholder">
 									<p>Arts</p>
 								</div>
@@ -110,7 +116,7 @@ events in</p>
 
 							<td>
 								<input onclick="toggleMarkers('category','General Fun')" checked="checked" name="events" type="checkbox" value="locations" />
-								<img src="<?php echo $img_dir ?>newplace_markers/genfun.png" alt="" />
+								<img src="<?php echo $img_dir ?>/event_markers/genfun.png" alt="" />
 								<div class="typeholder">
 									<p>General Fun</p>
 								</div>
@@ -118,7 +124,7 @@ events in</p>
 							
 							<td>
 								<input onclick="toggleMarkers('category', 'Sports &amp; Outdoors')" checked="checked" name="events" type="checkbox" value="locations" />
-								<img src="<?php echo $img_dir ?>newplace_markers/outdoors.png" alt="" />
+								<img src="<?php echo $img_dir ?>/event_markers/outdoors.png" alt="" />
 								<div class="typeholder">
 									<p>Sports &amp; Outdoors</p>
 								</div>
@@ -133,67 +139,66 @@ events in</p>
 	<div id="main-content" style="padding: 0px;">
 		<?php //the_content(); -- not needed without loop ?>
 		<div id="mapcontentholder">
-			<div style="float:left;">
-				<div id="map"></div>
-				<div id="maplocationkey">
-					<table id="locationtypes">
-						<tr>
-							<td style="padding-left:5px;"><p class="searchbar_head" style="float: left;font-size: 17px;">Also Show me...</p></td>
-								<td>
-									<input type="checkbox" name="locations" id="food" onclick="placeRequest('food')">
-									<img src="<?php echo $img_dir ?>place_dots/food.png"><p>Bars & Restaurants</p>
-							</td>
-		
+			<div id="map"></div>
+			<div id="maplocationkey">
+				<table id="locationtypes">
+					<tr>
+						<td style="padding-left:5px;"><p class="searchbar_head" style="float: left;font-size: 17px;">Also Show me...</p></td>
 							<td>
-								<input type="checkbox" name="locations" id="music" onclick="placeRequest('music')">
-								<img src="<?php echo $img_dir ?>place_dots/music.png">
-								<p>Music Venues</p>
-							</td>
-		
-							<td>
-								<input type="checkbox" name="locations" id="museum" onclick="placeRequest('museum')">
-								<img src="<?php echo $img_dir ?>place_dots/museum.png">
-								<p>Museums & Galleries</p>
-							</td>						
-						</tr>			
-						<tr>
-							<td>
-								<input type="checkbox" name="locations" id="sports" onclick="placeRequest('sports')">
-								<img src="<?php echo $img_dir ?>place_dots/spots.png">
-								<p>Sports & Outdoors</p>
-							</td>
+								<input type="checkbox" name="locations" id="food" onclick="placeRequestClicked('food')">
+								<img src="<?php echo $img_dir ?>/place_markers/food.png"><p>Bars & Restaurants</p>
+						</td>
 	
-							<td>
-								<input type="checkbox" name="locations" id="shops" onclick="placeRequest('shops')">
-								<img src="<?php echo $img_dir ?>place_dots/shopping.png">
-								<p>Shops</p>
-							</td>
+						<td>
+							<input type="checkbox" name="locations" id="music" onclick="placeRequestClicked('music')">
+							<img src="<?php echo $img_dir ?>/place_markers/music.png">
+							<p>Music Venues</p>
+						</td>
 	
-							<td>
-								<input type="checkbox" name="locations" id="theater" onclick="placeRequest('theater')">
-								<img src="<?php echo $img_dir ?>place_dots/theaterfilm.png">
-								<p>Theaters</p>
-							</td>
-	
-							<td>
-								<input type="checkbox" name="locations" id="attractions" onclick="placeRequest('attractions')">
-								<img src="<?php echo $img_dir ?>place_dots/attractions.png">
-								<p>Attractions</p>
-							</td>
-						</tr>
-					</table>
-				</div> <!-- #maplocation key-->
-			</div> <!-- #mapcontentholder -->
-		<div> <!-- #main-content -->
+						<td>
+							<input type="checkbox" name="locations" id="museum" onclick="placeRequestClicked('museum')">
+							<img src="<?php echo $img_dir ?>/place_markers/museum.png">
+							<p>Museums & Galleries</p>
+						</td>						
+					</tr>			
+					<tr>
+						<td>
+							<input type="checkbox" name="locations" id="sports" onclick="placeRequestClicked('sports')">
+							<img src="<?php echo $img_dir ?>/place_markers/sports.png">
+							<p>Sports & Outdoors</p>
+						</td>
+
+						<td>
+							<input type="checkbox" name="locations" id="shops" onclick="placeRequestClicked('shops')">
+							<img src="<?php echo $img_dir ?>/place_markers/shopping.png">
+							<p>Shops</p>
+						</td>
+
+						<td>
+							<input type="checkbox" name="locations" id="theater" onclick="placeRequestClicked('theater')">
+							<img src="<?php echo $img_dir ?>/place_markers/theaterfilm.png">
+							<p>Theaters</p>
+						</td>
+
+						<td>
+							<input type="checkbox" name="locations" id="attractions" onclick="placeRequestClicked('attractions')">
+							<img src="<?php echo $img_dir ?>/place_markers/attractions.png">
+							<p>Attractions</p>
+						</td>
+					</tr>
+				</table>
+			</div> <!-- #maplocation key-->
+		</div> <!-- #mapcontentholder -->
 		
-		<div onclick="showEvent()">
-			<p id="event" class="sidebartogglecurrent">Upcoming Events</p>
-		</div>
-		<div id="resultsholder">
-			<div id="event_sidebar"></div>
-			<div id="morebutton">
-				<input id="loadmore"  type="button" onclick="searchTen()" value="Load Next 100 Events">
+		<div id="event-sidebar">
+			<div id="sidebar-header">
+				<p class="sidebartogglecurrent">Upcoming Events</p>
 			</div>
+			<div id="sidebar-content"></div> <!-- Actual event results dynamically loaded into here -->
+			<div id="sidebar-search-status"> <!-- Only visible while waiting for an AJAX response -->
+				Searching... <img src="<?php bloginfo('stylesheet_directory'); ?>/images/loading.gif"/>
+			</div>
+			<div id="sidebar-footer"></div>	<!-- Load more events button will be rendered in here if applicable -->
 		</div>
 	</div>
 </div> 
@@ -213,7 +218,7 @@ events in</p>
 <?php endif; ?></div>
 </div>
 
-</div> <! #wrapper -->
-<script scr="<?php bloginfo('stylesheet_url'); ?>/scripts/map.js"></script>
+</div> <!-- #wrapper -->
+<script src="<?php bloginfo('stylesheet_directory'); ?>/scripts/map.js"></script>
 
 <?php get_footer(); ?>

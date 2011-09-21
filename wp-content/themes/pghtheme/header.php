@@ -8,7 +8,7 @@
 
 	<!-- Define a JS global to hold the site url -->
 	<script type="text/javascript">
-		var OIP_url = <?php bloginfo('url'); ?>;
+		var OIP_SITE_URL = "<?php bloginfo('url'); ?>";
 	</script>
 	
 <?php do_action( 'bp_head' ) ?>
@@ -57,6 +57,13 @@ function hideSearch()
 {
 document.getElementById("datepicksearch").style.display = "none";
 document.getElementById("bydate").style.display = "block";
+}
+
+function clearkeywordtip(t)
+{
+	if(t.value == 'Keyword search (optional)') {
+		t.value = '';
+	}
 }
 
 function showPlace() {
@@ -135,7 +142,7 @@ for (i = 0; i < field.length; i++)
 </head>
 
 
-<body style="margin:0px; padding:0px;" onload="load()">
+<body style="margin:0px; padding:0px;">
 <?php do_action( 'bp_before_header' ) ?>
 <div id="header"><div id="photoborder"></div>
 <div class="header_content">

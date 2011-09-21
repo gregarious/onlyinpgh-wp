@@ -292,7 +292,7 @@ form.standard-form#signup_form div div.error {
 
 a.button, input[type=submit], input[type=button], input[type=reset],
 ul.button-nav li a, div.generic-button a {
-	background: url( ../images/searbar.jpg ) top left repeat-x;
+	background: url( ../images/searbarbg.jpg ) top left repeat-x;
 	border: 1px solid #ddd;
 	padding: 3px 10px;
 	-moz-border-radius: 3px;
