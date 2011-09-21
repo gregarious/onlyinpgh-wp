@@ -47,8 +47,33 @@ img.attachment-post-thumbnail:hover,.gallery-icon:hover {
 
 /* @end */
 
-/* @group Search Photos widget */
 
-#photos-sidebar tr {
-	background-color: green;
+.prev-next {
+	display: block;
+	width: 250px;
+	float: right;
+	position: relative;
+	top: 10px;
+}
+
+.prev-next-bottom {
+	display: block;
+	margin: 0 20px 0 20px;
+}
+
+#prev {
+	float:left;
+}
+
+#next {
+	float: right;
+}
+
+#next a:hover, #prev a:hover {
+	background-color: yellow;
+	text-decoration: none;
+}
+
+#photos_sidebar dd {
+	margin: 15px 0 15px 0;
 }

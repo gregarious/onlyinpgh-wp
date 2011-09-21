@@ -9,7 +9,7 @@ Template: bp-default
 Tags: buddypress, pittsburgh
 */
 
-@import url( ../../plugins/buddypress/bp-themes/bp-default/_inc/css/adminbar.css );
+@import url( ../../plugins/buddypress/bp-themes/bp-default/_inc/css/reset.css );
 
 /* All of these will be in one sheet and minified for actual site - usability purposes right now*/
 
@@ -20,8 +20,9 @@ Tags: buddypress, pittsburgh
 @import url('css/pgh-main.css');
 @import url('css/pgh-events.css');
 @import url('css/pgh-nonbp.css');
-@import url('css/calendar.css');
 @import url('css/pgh-bpsame.css');
+@import url('css/pgh-photos.css');
+@import url('css/pgh-calendar.css');
 
 
 

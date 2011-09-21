@@ -45,17 +45,29 @@ get_header() ?>
 			</dl>
 		</div> <!-- #photos-sidebar-->
 	
-		<?php endwhile; endif; ?>
-
+		
 		<!-- Show the 10 most recent posts from the Photos category -->
 		<!-- NOTE: Will not show photos on local machine if they are not in wp-content/uploads -->
-		<div class="thumb-list">
-			<h2 class="page-title">Recent Photos</h2>		
+		
+		<div class="thumb-list">	
+		
 			<?php
-			$id = get_cat_ID( 'Photos' ); 
+
+			// http://wordpress.org/support/topic/adding-pagination-to-a-wp_query-loop
+
+			$catname = wp_title('', false);
+			$new_query = new WP_Query();
+			$new_query->query('category_name=Photos&showposts=12'.'&paged='.$paged);
+			?>
+			<div class="prev-next">
+				<div id="prev"><?php next_posts_link('&larr; Older Photos', $new_query->max_num_pages);?></div>
+				<div id="next"><?php previous_posts_link('Newer Photos &rarr;'); ?></div>
+			</div>
 			
-			// http://www.readywpthemes.com/wordpress-recent-posts-from-specific-category/
-			$recent = new WP_Query("cat=$id&showposts=12"); while($recent->have_posts()) : $recent->the_post();?>
+			<h2 class="page-title">Recent Photos</h2>	
+			
+			<?php						
+			while ($new_query->have_posts()) : $new_query->the_post(); ?>			
 			
 			<div class="photo-post"><a href="<?php the_permalink() ?>" rel="bookmark"> <?php
 				
@@ -66,12 +78,20 @@ get_header() ?>
 				<?php } ?></a>
 				
 				<h5 class="thumb-title"><?php the_title(); ?></h5>
+				
 			</div>
 			
-			<?php endwhile; ?>
+			<?php endwhile; // End $new_query loop ?>
+			
 		</div> <!-- .thumb-list -->
 
+		<div class="prev-next-bottom">
+			<div id="prev"><?php next_posts_link('&larr; Older Photos', $new_query->max_num_pages);?></div>
+			<div id="next"><?php previous_posts_link('Newer Photos &rarr;'); ?></div>
+		</div>
 
+	 <?php endwhile; endif; // End The Loop ?>
+	
 	</div> <!-- #main-content -->
 </div> <!-- #wrapper -->
 
