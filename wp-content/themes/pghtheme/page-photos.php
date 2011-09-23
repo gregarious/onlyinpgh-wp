@@ -8,11 +8,11 @@ get_header() ?>
 
 <div id="wrapper">
 
-<div id="main-content" style="padding: 0px;width:955px;">
+	<div id="content" class="page-photos">
 
 	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-		<div id="eventsearch_bar" style="height: 60px;margin-bottom: 20px;width:650px;">
+		<div id="eventsearch_bar" class="page-photos">
 			<p class="searchbar_head" style="float: left;">Find photos<br>taken</p>
 			<?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Search Photos') ) : ?>
 			<?php endif; ?>

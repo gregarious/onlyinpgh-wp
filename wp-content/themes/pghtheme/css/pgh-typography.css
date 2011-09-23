@@ -23,9 +23,7 @@ a:hover {
 strong {
     color: #0F0F0F;
     font-family: 'Francois One',Impact,serif;
-    font-size: 18px;
     font-weight: normal;
-    text-shadow: 0 0 3px #CCCCCC;
     text-transform: uppercase;
 }
 
@@ -42,15 +40,6 @@ h2 {
 	font-weight: normal;
 }
 
-strong {
-    color: #0F0F0F;
-    font-family: 'Francois One',Impact,serif;
-    font-size: 18px;
-    font-weight: normal;
-    text-shadow: 0 0 3px #CCCCCC;
-    text-transform: uppercase;
-}
-
 h3 {
     color: #0F0F0F;
     font-family: 'Francois One',Impact,serif;
@@ -58,8 +47,18 @@ h3 {
     letter-spacing: 0;
     text-shadow: 0 0 1px #CCCCCC;
     text-transform: uppercase;
-	margin: 0px;
-	font-weight: normal;
+    margin: 0px;
+    font-weight: normal;
+}
+
+/*h4 {
+    background-color: #FFEC4B;
+    font-size: 25px;
+    overflow: auto;
+    padding: 5px 0;
+    text-align: center;
+    width: 260px;
+    margin: 0px;
 }
 
 
@@ -73,19 +72,20 @@ h4 {
     text-transform: uppercase;
     width: 200px;
 	font-weight: normal;	
-}
+}*/
 
+h5 {
+    margin: 0px 0px 5px 0px;
+    padding: 4px;
+    text-transform: uppercase;
+    color: #ffec4b;
+    font-size: 17px;
+    font-family: 'Francois One', Impact, san-serif;
+    letter-spacing: 1px;
+    font-weight: normal !important;
+}
+    
 ::selection {
-	background:#ffec4b;
-	color: #080808;
-}
-
-::-moz-selection {
-	background:#ffec4b;
-	color: #080808;
-}
-
-::-webkit-selection {
 	background:#ffec4b;
 	color: #080808;
 }

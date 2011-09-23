@@ -10,7 +10,7 @@
 		margin: 15px 0 5px 0;
 	}
 
-	div#item-header div#item-actions {
+/*	div#item-header div#item-actions {
 		float: right;
 		width: 20%;
 		margin: 0 0 15px 15px;
@@ -48,7 +48,7 @@
 	div#item-header div#message.info {
 		line-height: 80%;
 	}
-
+*/
 
 
 /* > Item Tabs
@@ -69,7 +69,7 @@
 				margin-left: 20px;
 			}
 
-			div.item-list-tabs ul li.last {
+	/*		div.item-list-tabs ul li.last {
 				float: right;
 				margin: 7px 20px 0 0;
 			}
@@ -79,7 +79,7 @@
 
 				div.item-list-tabs ul li.last select {
 					max-width: 175px;
-				}
+				}*/
 
 		div.item-list-tabs ul li a,
 		div.item-list-tabs ul li span {
@@ -105,11 +105,11 @@
 /* > Item Body
 -------------------------------------------------------------- */
 
-.item-body {
+/*.item-body {
 	margin: 20px 0;
 }
 
-span.activity, div#message p {
+*/span.activity/*, div#message p */{
 	display: inline-block;
 	font-size: 11px;
 	font-weight: normal;
@@ -127,7 +127,7 @@ span.activity, div#message p {
 
 /* > Directories (Members, Groups, Blogs, Forums)
 -------------------------------------------------------------- */
-
+/*
 div.dir-search {
 	float: right;
 	margin: -37px 0 0 0;
@@ -139,7 +139,7 @@ div.dir-search {
 
 /* > Pagination
 -------------------------------------------------------------- */
-
+/*
 div.pagination {
 	margin: -20px -20px 9px -20px;
 	border-bottom: 1px solid #eaeaea;
@@ -178,7 +178,7 @@ div#pag-bottom {
 /* > Error / Success Messages
 -------------------------------------------------------------- */
 
-div#message {
+/*div#message {
 	margin: 15px 0;
 }
 	div#message.updated { clear: both; }
@@ -215,8 +215,8 @@ form.standard-form#signup_form div div.error {
 /* > Buttons
 -------------------------------------------------------------- */
 
-a.button, input[type=submit], input[type=button], input[type=reset],
-ul.button-nav li a, div.generic-button a {
+/*a.button,*/ input[type=submit], input[type=button],/* input[type=reset],
+ul.button-nav li a, div.generic-button a */{
 	background: url( ../images/searbarbg.jpg ) top left repeat-x;
 	border: 1px solid #ddd;
 	padding: 3px 10px;
@@ -230,7 +230,7 @@ ul.button-nav li a, div.generic-button a {
 	vertical-align: bottom;
 	cursor: pointer;
 }
-	a.button:hover, a.button:focus, input[type=submit]:hover, input[type=button]:hover, input[type=reset]:hover,
+	/*a.button:hover, a.button:focus,*/ input[type=submit]:hover, input[type=button]:hover, input[type=reset]:hover,
 	ul.button-nav li a:hover, ul.button-nav li.current a,
 	div.generic-button a:hover {
 		border-color: #aaa;

@@ -81,7 +81,7 @@ function JSONToEventInstance(json) {
 											position: latlng } );
 	}
 
-	inst.toInfoWindowh2 = function() {
+	inst.toInfoWindowHTML = function() {
 			var html = '<img src="' + this.image_url + '">';
 			html += '<b>' + this.name + '</b><br/>';
 			html += this.location.address + '<br/>';

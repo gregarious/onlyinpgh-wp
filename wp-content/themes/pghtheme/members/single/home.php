@@ -29,8 +29,7 @@
 				<?php elseif ( bp_is_user_blogs() ) : ?>
 					<?php locate_template( array( 'members/single/blogs.php' ), true ) ?>
 
-				<?php elseif ( bp_is_user_friends() ) : ?>
-					<?php locate_template( array( 'members/single/friends.php' ), true ) ?>
+			
 
 				<?php elseif ( bp_is_user_groups() ) : ?>
 					<?php locate_template( array( 'members/single/groups.php' ), true ) ?>
@@ -57,7 +56,5 @@
 		</div><!-- .padder -->
 	</div><!-- #content -->
 </div><!-- #wrapper -->
-
-	<?php //locate_template( array( 'sidebar.php' ), true ) ?>
 
 <?php get_footer() ?>

@@ -1,0 +1,1210 @@
+/* from pgh-default.css */
+
+
+
+div#item-header h2 span.highlight { font-size: 16px; }
+		
+/* > Item Lists (Activity, Friend, Group lists)
+-------------------------------------------------------------- */
+
+ul.item-list {
+	width: 88%;
+}
+
+.button-nav {
+
+    list-style: none outside none;
+}
+
+.activity-list .activity-header a:first-child:hover {
+			background: #000000 !important;
+			color: #FFEC4B !important;
+		}
+
+.activity-list .activity-header a:first-child, span.highlight {
+    -moz-border-radius: 4px 4px 4px 4px;
+-webkit-border-radius: 4px 4px 4px 4px;
+    background: none repeat scroll 0 0 #0F0F0F;
+    border-bottom: 1px solid #FFEC4B;
+    border-right: 1px solid #FFEC4B;
+    color: #FFEC4B;
+    margin-right: 3px;
+    padding: 3px 8px;
+    text-decoration: none;
+}
+
+
+activity-list div.activity-meta a.acomment-reply {
+    background: none repeat scroll 0 0 #FFEC4B;
+    border-bottom: 1px solid #0F0F0F;
+    border-right: 1px solid #0F0F0F;
+    color: #0F0F0F;
+}
+
+div#item-header h2 span.highlight span {
+    -moz-border-radius: 3px 3px 3px 3px;
+-webkit-border-radius: 3px 3px 3px 3px;
+    background: none repeat scroll 0 0 #FFEC4B;
+    color: #0F0F0F;
+    cursor: pointer;
+    display: none;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 2px;
+    padding: 1px 4px;
+    position: relative;
+    right: -2px;
+    top: -2px;
+    vertical-align: middle;
+}
+
+div.em-booking-message {     
+	margin-bottom: 1em;
+	background-color: #0f0f0f !important;
+	padding: 5px;
+	border: 2px solid #000000 !important;
+	color: #FFEC4B !important;
+	width: 450px;
+}
+
+div.em-booking-message-success {     
+	margin-bottom: 1em;
+	background-color: #0f0f0f !important;
+	padding: 5px;
+	border: 2px solid #000000 !important;
+	color: #FFEC4B !important;
+	width: 450px;
+}
+		
+div.em-booking-message-error {     
+	margin-bottom: 1em;
+	background-color: #0f0f0f !important;
+	padding: 5px;
+	border: 2px solid #000000 !important;
+	color: #FFEC4B !important;
+	width: 450px;
+}
+
+div.em-booking-message-error p { 
+	margin: 0px 0px 5px;
+	padding: 0px;
+}
+
+
+
+
+/* pgh-header.css */
+
+/* Dead img link */ 
+#header_left_other {
+	-moz-border-radius: 5px 5px 5px 5px;
+-webkit-border-radius: 5px 5px 5px 5px;
+border-radius: 5px 5px 5px 5px;
+    -moz-box-shadow: 2px 2px 10px #0F0F0F;
+-webkit-box-shadow: 2px 2px 10px #0F0F0F;
+box-shadow: 2px 2px 10px #0F0F0F;
+    background-color: #0F0F0F;
+    border: 10px solid #FFFFFF;
+    padding: 8px 10px;
+    text-align: center;
+    width: 400px;
+background-image: url("http://www.onlyinpgh.com/wp-content/uploads/2011/06/pghphotos.png")
+}
+
+ul.navigation {
+	margin: 0px;
+	padding: 6px 0px 0px 20px;
+}
+
+#yellowtext {
+	background-color: #0f0f0f;
+    color: #ffec4b;
+    font-size: 30px;
+	margin: auto;
+	margin-bottom: 10px;
+	text-align: center;
+	text-transform: uppercase;
+    text-shadow: 1px 1px #000000;
+}
+
+#login a {
+	color: #ffffff;
+	text-decoration: none;
+}
+
+#login a:hover {
+	color: #ffec4b;
+}
+
+
+/* pgh-footer.css */
+
+.disclaimerheader {
+	font-family: 'Francois One', Impact, serif;
+	font-size: 20px;
+	color: #ffffff;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	background-color: #0F0F0F;
+	margin-bottom: 5px;
+	width: 640px;
+	text-shadow: 1px 1px 0px #000;
+	letter-spacing: 1px;
+font-weight: normal;
+}
+
+
+
+/* pgh-map.css */
+
+#map_canvas { 
+	width: 580px; 
+	height: 550px;
+	float: left;
+	position: relative;
+}
+
+#mapholder {
+    float: left;
+}
+
+
+#map_content {
+	width: 955px;
+	height: 550px;
+	padding: 2px;
+}
+
+#event_map {
+	width: 440px;
+	height: 350px;
+	background-color: #0f0f0f;
+	margin-bottom: 30px;
+}
+
+#mapfilters .info_box {
+	text-align: left;
+	font-size: 25px;
+	color: #ffec4b;
+	padding-left: 5px;
+	height: 45px;
+	width: 270px;
+}
+
+#maptoggles {
+    background-color: #FFEC4B;
+    left: 603px;
+    padding: 10px;
+    position: absolute;
+    top: 426px;
+}
+
+#mapkey img {
+    border: medium none;
+    display: inline;
+    margin: 0 5px 0 7px;
+    padding: 0;
+}
+
+#mapkey ul {
+	display: block;
+	margin: 0px;
+	padding: 0px;
+}
+
+#mapkey ul li {
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+#mappulldown p {
+	padding: 0px;
+	margin: 0px;
+	display:inline;	
+	font-family: “Trebuchet MS”, “Lucida Sans Unicode”, “Lucida Grande”,” Lucida Sans”, Arial, sans-serif;
+	text-transform: uppercase;
+	font-size: 12px;
+	cursor: pointer;
+	font-weight: bold;
+}
+
+
+#mappulldown p:hover {
+	color: #ffec4b;
+	text-shadow: 0px 0px 2px #ccc;
+}
+
+#mapkey p {
+	padding: 0px;
+	margin: 0px;
+	display:inline;	
+	text-transform: uppercase;
+	font-size: 15px;
+	font-family: 'Francois One', 'Impact', san-serif;
+font-weight: normal;
+}
+
+#profilemapcontentholder #maplocationkey {
+	    -moz-box-shadow: 0 0 4px 0 #CCCCCC;
+	background-image: url("../images/searbarbg.jpg");
+    background-color: #0F0F0F;
+    border: 3px solid #FFEC4B;
+    height: 60px;
+    margin-top: 488px;
+    width: 580px;
+}
+
+
+#mappulldown {
+    -moz-border-radius: 3px 3px 0 0;
+    -moz-box-shadow: 1px 1px 5px 2px #A0A0A0;
+-webkit-border-radius: 3px 3px 0 0;
+    -webkit-box-shadow: 1px 1px 5px 2px #A0A0A0;
+    background-color: #0F0F0F;
+    color: #F0F0F0;
+    font-size: 10px;
+    margin-left: 383px;
+    margin-top: 10px;
+    padding: 1px 0;
+    text-align: center;
+    width: 204px;
+}
+
+#mapkey {
+    -moz-box-shadow: 0 5px 5px 0 #A0A0A0;
+    background-color: #0F0F0F;
+    color: #F0F0F0;
+	margin-left: 383px;
+    padding: 10px;
+    width: 184px;
+}
+
+#pulldownholder {
+	position: absolute;
+z-index: 1;
+}
+
+#profilemapcontentholder { /* goes with ##mapcontentholder */
+	height: 550px;
+	width: 600px;
+}
+
+#profilemapcontentholder #map {
+    float: left;
+    height: 480px;
+    position: relative;
+    width: 585px;
+}
+
+#mapkey input {
+	margin: 0px;
+	padding: 0px;
+}
+
+#mapkey p.divideheader {
+	font-family: 'Francois One', 'Impact', sans-serif: 
+	font-weight: normal;
+	font-size: 15px;
+	color: #f0f0f0;
+	text-transform: uppercase;
+	margin: 10px 0px 0px 0px;
+}
+
+#maplocationkey table td, #maplocationkey table td tr {
+	margin: 0px;
+	padding: 0px;
+	width: auto;
+}
+
+#geo-mashup {
+	float: left;
+}
+
+
+
+/* pgh-typography.css */
+
+::-moz-selection {
+	background:#ffec4b;
+	color: #080808;
+}
+
+::-webkit-selection {
+	background:#ffec4b;
+	color: #080808;
+}
+
+
+/* pgh-main.css */
+
+#sidebar {
+	float: right;
+	margin: 30px 20px 0 0 ;
+	width: 250px;
+}
+
+#sidebar p {
+	font-size: 10px;
+	color: #ffffff;
+}
+
+#sidebar label {
+	font-size: 10px;
+	color: #ffffff;
+	display: inline;
+}
+
+.filter_column {
+	width: 270px;
+	float: left;
+	display: inline;
+	padding-bottom: 10px;
+}
+
+.column_header {
+	width: 270px;
+	background-color: #0f0f0f;
+	border: 1px solid #000000;
+	color: #ffec4b;
+	font-family: 'Francois One', Impact, serif;
+	font-size: 25px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	padding-left: 5px;
+	margin-bottom: 8px;
+	letter-spacing: .25px;
+font-weight: normal;
+}
+
+
+.info_box {
+	background-color: #0f0f0f;
+	width: 940px;
+	font-family: 'Francois One', Impact, serif;
+	font-size: 15px;
+	padding: 10px;
+	color: #ffffff;
+	margin-bottom: 20px;
+	letter-spacing: .25px;
+font-weight: normal;
+}
+
+.info_box a {
+	color: #ffec4b;
+}
+
+.info_box a:visited {
+	color: #ffec4b;
+}
+
+.info_box a:hover {
+	color: #ffec4b;
+	text-decoration: underline;
+}
+
+.info_box a:active {
+	color: #ffec4b;
+	text-decoration: underline;
+}
+
+#event_title {
+	font-family: 'Francois One', Impact, serif;
+	width: 910px;
+	padding: 5px 0px 5px 10px;
+	margin-bottom: 10px;
+	color: #ffec4b;
+	font-size: 25px;
+	background-color: #0f0f0f;
+font-weight: normal;
+}
+
+#event_left {
+	width: 440px;
+	float: left;
+}
+
+#event_right {
+	width: 440px;
+	float: right;
+}
+
+#attendance {
+	width: 440px;
+	height: 300px;
+	background-color: #f992f9;
+}
+
+#event_details {
+	width: 440px;
+	margin-bottom: 30px;
+	font-size: 20px;
+}
+
+#event_description {
+	width: 440px;
+}
+
+#post {
+	float: right;
+	width: 690px;
+	clear: all;
+}
+
+#post_title {
+	font-family: 'Francois One', Impact, serif;
+	width: 670px;
+	padding: 5px 0px 5px 10px;
+	margin-bottom: 10px;
+	color: #ffec4b;
+	font-size: 25px;
+	background-color: #0f0f0f;
+	text-transform: uppercase;
+font-weight: normal;
+}
+
+.author {
+	font-family: 'Francois One', Impact, serif;
+	color: #0f0f0f;
+	font-size: 20px;
+font-weight: normal;
+}
+
+#listing_info strong {
+	border-bottom: 1px solid #0F0F0F;
+    color: #0F0F0F;
+    font-family: 'Francois One',Impact,serif;
+    font-size: 18px;
+    font-weight: normal;
+    text-shadow: 0 0 3px #CCCCCC;
+    text-transform: uppercase;
+}
+
+
+/* pgh-events.css */
+
+
+.sidebartoggle:hover /* add to .sidebartogglecurrent */
+
+table.em-calendar td.eventful-pre a, table.em-calendar td.eventful-post a {
+    color: #AAAAAA !important;
+}
+
+table.em-calendar td.eventful a, table.em-calendar td.eventful-today a {
+    color: #0f0f0f !important;
+	text-shadow: 0px 0px 3px #f0f0f0;
+	font-weight: normal !important;
+}
+
+table.em-calendar td.eventful a:hover, table.em-calendar td.eventful-today a:hover {
+    text-decoration: none !important;
+}
+
+table.em-calendar td.eventless-today {
+    background-color: #ffec4b !important;
+}
+
+#event_sidebar h2, #location_sidebar h2 {
+	width: 340px;
+	padding: 5px 0px;
+	background-color: #0f0f0f;
+	color: #ffec4b;
+	text-shadow: 1px 1px #000;
+	float: right;
+	overflow: auto;
+	font-family: 'Francois One',Impact,serif;
+	font-size: 25px;
+	text-align: center;
+	display: block;
+	text-transform: uppercase;
+	font-weight: normal;
+	font-weight: normal;
+}
+
+#eventsearch_bar a.button, #eventsearch_bar input[type="submit"], #eventsearch_bar input[type="button"], #eventsearch_bar input[type="reset"], #eventsearch_bar ul.button-nav li a, #eventsearch_bar div.generic-button a {
+	background-color: #FFFFFF;
+    color: #0F0F0F;
+    float: right;
+    font-family: 'Francois One',Impact,san-serif;
+    font-size: 15px;
+	font-weight: normal;
+    margin: 4px 10px;
+    padding: 2px 8px;
+    position: relative;
+    text-shadow: 0 0 1px #cccccc;
+    text-transform: uppercase;
+    top: -0.3em;
+}
+
+#event_sidebar {
+	width: 325px;
+}
+
+.addeventsbutton {
+	background-color: #0f0f0f;
+	color: #fff;
+	text-shadow: 0px 0px 3px #ccc;
+	padding: 8px 15px;
+	margin-top: 10px;
+	-moz-border-radius: 3px;
+-webkit-border-radius: 3px;
+}
+
+.addeventsbutton:hover {
+	color: #ffec4b;
+}
+
+#eventtypes .multiline p {
+	margin: 5px 15px 0px 0px;
+	padding; 0px;
+}		
+
+#eventtypes input {
+	float: left;
+}
+
+/* Calendar */
+
+table.fullcalendar ul {
+    list-style: none outside none;
+	magin: 0px;
+	padding: 0px;
+}
+
+
+
+/* pgh-nonbp.css */
+
+
+/* Everything seemingly after the BP defaults */
+
+/* These links are dead */
+/*.page_item page-item-61 {
+	background-image: url('http://www.onlyinpgh.com/wp-content/uploads/2011/06/homeicon.jpg');
+}
+
+li.page_item page-item-53 {
+	background-image: url('http://www.onlyinpgh.com/wp-content/uploads/2011/06/mypgh_icon.jpg');
+	background-position: left top
+}*/
+
+ul#menu-header-menu .current_menu_item li {
+	background-color: #ffec4b !important;
+}
+
+.blog_content {
+	  float: left;
+    margin: 0 20px;
+    overflow: visible;
+    padding-top: 20px;
+    width: 660px;
+}
+
+.author-box {
+	float: left;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+.sidebarlists {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.commentlist{
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+
+.posttitle {
+	text-transform: uppercase;
+	text-shadow: 1px 1px 0px #ccc;
+	font-size: 30px;
+}
+
+#respond {
+	margin-top: 20px;
+}
+
+.comment-avatar-box {
+	float: left;
+	margin: 0px 10px 10px 0px;
+	padding: 0px;
+}
+
+#comments h3 {
+    	background-color: #ffec4b;
+    	color: #0f0f0f;
+	border: none;
+    	font-family: 'Francois One',Impact,serif;
+    	letter-spacing: 1px;
+    	padding: 5px 10px;
+	width: 620px;
+	text-transform: uppercase;
+	text-shadow: 1px 1px 0px #ccc;
+font-weight: normal;
+}
+
+#respond h3 {
+	color: #0f0f0f;
+	text-shadow: 1px 1px 0px #ccc;
+	text-transform: uppercase;
+	background: transparent;
+	border: none;
+	font-size: 25px;
+	padding: 0px;
+}
+
+#respond .comment-avatar-box {
+	float: none;
+}
+
+a.button,input[type="reset"], ul.button-nav li a, div.generic-button a /* Go with stuff on 19, input[submit], input type[button] */
+
+a.button:hover, a.button:focus,input[type="reset"]:hover, ul.button-nav li a:hover, div.generic-button a:hover {
+/* Go with stuff on 33, same as above:hover;*/
+	-moz-border-radius: 3px 3px 3px 3px;
+    -webkit-border-radius: 3px 3px 3px 3px;
+    background: none repeat scroll 0 0 #0F0F0F;
+    border: medium none;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: normal;
+    padding: 3px 10px;
+    text-decoration: none;
+    vertical-align: bottom;
+}
+
+table thead tr {
+    background: #FFEC4B !important;
+    padding-top: 10px !important;
+}
+
+thead {
+	margin-top: 10px !important;
+}
+
+fb_button .fb_button_text, .fb_button_rtl .fb_button_text {
+    background: url("http://static.ak.fbcdn.net/rsrc.php/v1/zL/r/FGFbc80dUKj.png") repeat scroll 0 0 #5F78AB;
+    border-bottom: 1px solid #1A356E;
+    border-top: 1px solid #879AC0;
+    color: #FFFFFF;
+    display: block;
+    font-family: "lucida grande",tahoma,verdana,arial,sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 1px 1px 0 21px;
+    padding: 2px 6px 3px;
+    text-shadow: none;
+}
+
+.inputfields {
+	font-family:  “Trebuchet MS”, “Lucida Sans Unicode”, “Lucida Grande”,” Lucida Sans”, Arial, sans-serif;
+	font-size: 17px;
+	padding-left: 10px;
+}
+
+.info_box .yellowtext {
+	text-transform: uppercase;
+}
+
+#location_sidebar {
+	width: 340px;
+	height: 450px;
+	float: right;
+	overflow: auto;
+}
+
+.ui-tabs .ui-tabs-nav li a {
+    float: left;
+    padding: 5px 8px !important;
+    text-decoration: none;
+}
+
+#footer h6 {
+	color: #ffec4b;
+	font-size: 20px;
+	font-family: 'Francois One',Impact,serif;
+	margin: 5px 0px 8px 0px;
+	letter-spacing: .25px;
+	text-transform: uppercase;
+	font-weight: normal;
+}
+
+#resultheader {
+	width: 340px;
+	padding: 5px 0px;
+	background-color: #0f0f0f;
+	color: #ffec4b;
+	text-shadow: 1px 1px #000;
+	float: right;
+	overflow: auto;
+	font-family: 'Francois One',Impact,serif;
+	font-size: 25px;
+	text-align: center;
+font-weight: normal;
+}
+
+#location_sidebar div {
+	padding: 6px;
+	margin: 8px 0px;
+}
+
+.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+	font-size: 12px !important;
+	font-family: “Trebuchet MS”, “Lucida Sans Unicode”, “Lucida Grande”,” Lucida Sans”, Arial, sans-serif;
+}
+
+.vertical_search {
+		width: 220px;
+		height: 640px;
+		overflow: auto;
+		padding: 5px;
+		background-color: #0f0f0f;
+		color: #ffffff;
+		float: left;
+		margin-right: 10px;	
+	}
+	
+	.vert_search_column {
+		width: 200px;
+		margin: 5px auto 20px auto;
+		border-top: 1px solid #ffec4b; 	
+	}
+
+.vert_search_column_top {
+		width: 200px;
+		margin: 5px auto 20px auto;	
+	}
+
+
+
+.infowindow {
+	padding: 5px;
+	min-height: 200px;
+	min-width: 350px;
+}
+
+.infowindowlocation {
+	padding: 5px;
+	min-width: 300px;
+	min-height: 100px;
+}
+
+.infowindow img, #event_sidebar div img, #location_sidebar div img, .infowindowlocation img {
+	float: left;
+    margin: 0 10px 5px 0;
+	-moz-box-shadow: 0px 0px 5px #ccc;
+-webkit-box-shadow: 0px 0px 5px #ccc;
+box-shadow: 0px 0px 5px #ccc;
+}
+
+#event_sidebar div b, #location_sidebar div b, .infowindow b, infowindowlocation b {
+	font-family: 'Francois One', Impact, san-serif;
+	font-weight: normal;
+	font-size: 18px;
+	text-shadow: 0px 0px 3px #ccc;
+}
+
+.infowindow a.button, .infowindow input[type="submit"], .infowindow input[type="button"], .infowindow input[type="reset"], .infowindow ul.button-nav li a, .infowindow div.generic-button a, #mapsidebar dv a.button, #event_sidebar div input[type="submit"], #event_sidebar div input[type="button"], #event_sidebar div input[type="reset"], #event_sidebar div ul.button-nav li a, #event_sidebar div div.generic-button a {
+	float: right;
+}
+
+#placesearch ul li {
+	display: inline;
+	float: left;
+	margin: 0px 5px 0px 0px;
+	padding: 0px;
+}
+
+#accordion {
+  float: right;
+    height: 550px;
+    overflow: auto;
+    width: 340px
+}
+
+.datesearch {
+	margin: 0px;
+	padding: 0px;
+	float: left;
+}
+
+#eventsearch_bar a.button:hover, #eventsearch_bar a.button:focus, #eventsearch_bar input[type="submit"]:hover, #eventsearch_bar input[type="button"]:hover, #eventsearch_bar input[type="reset"]:hover, #eventsearch_bar ul.button-nav li a:hover, #eventsearch_bar div.generic-button a:hover {
+	background-color: #ffec4b;
+}
+
+.datebutton { 
+	top: -.75em !important;
+}
+
+.searchbar_heading {
+	color: #636363;
+    font-family: 'francois one',impact,san-serif;
+    font-size: 17px;
+font-weight: normal;
+    left: 0.6em;
+    padding-left: 10px;
+    position: relative;
+    text-shadow: 0 0 1px #000000;
+    text-transform: uppercase;
+    top: 0.4em;
+}
+
+.sidebartoggle {
+ -moz-border-radius: 5px 5px 0 0;
+ -webkit-border-radius: 5px 5px 0 0;
+    background-color: #0F0F0F;
+    color: #F0F0F0;
+    float: right;
+    font-size: 17px;
+    letter-spacing: 1px;
+    padding: 10px 0;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 0 0 2px #000000;
+    text-transform: uppercase;
+    width: 340px;
+	font-family: 'francois one', 'impact', san-serif;
+font-weight: normal;
+}
+
+.searchlink {
+	color: #0f0f0f;
+    font-size: 14px;
+    margin: 0 20px 0px 0px;
+    padding: 3px 5px;
+	background-color: #fff;
+	text-shadow: 0px 0px 1px #000;
+cursor: pointer;
+font-family: 'francois one', 'impact', san-serif;
+font-weight: normal;
+text-transform: uppercase;
+-moz-border-radius: 2px;
+-webkit-border-radius: 2px;
+border-radius: 2px;
+float: right;
+}
+
+.keysearchlink {
+	color: #0f0f0f;
+    font-size: 14px;
+    margin: 0 10px 0px 0px;
+    padding: 3px 5px;
+	background-color: #fff;
+	text-shadow: 0px 0px 1px #000;
+cursor: pointer;
+font-family: 'francois one', 'impact', san-serif;
+font-weight: normal;
+text-transform: uppercase;
+-moz-border-radius: 2px;
+-webkit-border-radius: 2px;
+border-radius: 2px;
+float: right;
+}
+
+.keysearchlink:hover, .searchlink:hover {
+	background-color: #ffec4b;
+}
+
+.searchtext {
+	color: #F0F0F0;
+    font-family: 'francois one';
+    font-size: 15px;
+    margin: 0;
+    padding: 0;
+font-weight: normal;
+    text-shadow: 0 0 5px #000000;
+    text-transform: uppercase;
+	display: inline;
+}
+
+#location_searchbutton {
+    -moz-border-radius: 0 0 5px 5px;
+ -webkit-border-radius: 0 0 5px 5px;
+    background-color: #0F0F0F;
+    color: #F0F0F0;
+    float: left;
+    font-family: 'francois one','impact',san-serif;
+font-weight: normal;
+    margin: 0 2px 10px 10px;
+    padding: 0 5px 3px;
+    text-transform: uppercase;
+-moz-box-shadow: 0px 5px 5px 0px #a0a0a0;
+}
+
+#keyword_searchbutton {
+    -moz-border-radius: 0 0 5px 5px;
+ -webkit-border-radius: 0 0 5px 5px;
+    background-color: #0F0F0F;
+    color: #F0F0F0;
+    float: left;
+    font-family: 'francois one','impact',san-serif;
+font-weight: normal;
+    margin: 0 2px 10px 0px;
+    padding: 0 5px 3px;
+    text-transform: uppercase;
+-moz-box-shadow: 0px 5px 5px 0px #a0a0a0;
+}
+
+#keyword_searchbutton a, #location_searchbutton a {
+	font-family: 'Francois one', 'Impact', san-serif;
+font-weight: normal;
+	color: #f0f0f0;
+	text-decoration: none;
+}
+
+#search_toggle {
+	margin-bottom: 40px;
+}
+
+#keyword_search {
+	margin: 0px 0 0 15px;
+	padding-top: 10px;
+}
+
+#toggle_filter {
+ -moz-border-radius: 0 0 5px 5px;
+ -webkit-border-radius: 0 0 5px 5px;
+border-radius: 0 0 5px 5px;
+    -moz-box-shadow: 0px 5px 5px 0px #a0a0a0;
+-webkit-box-shadow: 0px 5px 5px 0px #a0a0a0;
+box-shadow: 0px 5px 5px 0px #a0a0a0;
+    background-color: #0F0F0F;
+    color: #F0F0F0;
+    float: left;
+    margin: 0 5px 0 15px;
+    padding: 0 8px 4px;
+    text-shadow: 0 0 10px #000000;
+}
+
+#toggle_keyword {
+ -moz-border-radius: 0 0 5px 5px;
+ -webkit-border-radius: 0 0 5px 5px;
+border-radius: 0 0 5px 5px;
+    -moz-box-shadow: 0px 5px 5px 0px #a0a0a0;
+-webkit-box-shadow: 0px 5px 5px 0px #a0a0a0;
+box-shadow: 0px 5px 5px 0px #a0a0a0;
+    background-color: #0F0F0F;
+    color: #F0F0F0;
+    float: left;
+    padding: 0 8px 4px;
+    text-shadow: 0 0 10px #000000;
+}
+
+.togglelink {
+	font-family: 'francois one', 'impact', san-serif;
+font-weight: normal;
+	text-transform: uppercase;
+	font-size: 15px;
+	font-weight: normal;
+	color: #f0f0f0;
+	text-shadow: 0px 0px 10px #000;
+}
+
+.togglelink:hover, .togglelinkcurrent {
+	font-family: 'francois one', 'impact', san-serif;
+font-weight: normal;
+	text-transform: uppercase;
+	font-size: 15px;
+	font-weight: normal;
+	color: #ffec4b;
+	text-shadow: 0px 0px 2px #ccc;
+}
+
+.togglebutton {
+    -moz-border-radius: 3px 3px 3px 3px;
+-webkit-border-radius: 3px 3px 3px 3px;
+	margin: 0px 0px 5px 0px;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    float: right;
+    font-family: 'francois one','impact',san serif;
+font-weight: normal;
+    font-size: 12px;
+    height: 20px;
+    padding: 5px;
+    text-transform: uppercase;
+	cursor: pointer;
+}
+
+mt {
+    -moz-border-radius: 3px 3px 3px 3px;
+   -webkit-border-radius: 3px 3px 3px 3px;
+    background-color: #0F0F0F;
+    color: #FFFFFF;
+    left: 635px;
+    margin: 0;
+    padding: 5px 20px;
+    position: absolute;
+    top: 394px;
+}
+
+mt a {
+	color: #fff;
+	text-transform: uppercase;
+	font-size: 15px;
+}
+mt a:hover {
+	color: #ffec4b;
+	text-decoration: none;
+}
+
+#morebutton input {
+	text-align: center;
+	padding: 5px 10px;
+	margin-left: 6px;
+	width: 310px;
+	background-color: #0f0f0f;
+	color: #f0f0f0;
+	text-transform: uppercase;
+	font-size: 15px;
+	cursor: pointer;
+	font-family: 'Francois One', 'Impact', san-serif;
+font-weight: normal;
+}
+
+#morebutton input:hover {
+color: #ffec4b;
+	text-shadow: 0px 0px 2px #ccc;
+	text-decoration: none;
+}
+
+#listing_button a.button, #listing_button input[type="submit"], #listing_button input[type="button"], #listing_button input[type="reset"], #listing_button ul.button-nav li a, #listing_button div.generic-button a {
+    -moz-border-radius: 3px 3px 3px 3px;
+-webkit-border-radius: 3px 3px 3px 3px;
+    background: none repeat scroll 0 0 #0F0F0F;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: normal;
+    margin-bottom: 10px;
+    padding: 8px 36px;
+    text-decoration: none;
+    text-transform: uppercase;
+    vertical-align: bottom;
+	text-shadow: 0px 0px 5px #000;
+}
+
+#listing_button a.button:hover, #listing_button a.button:focus, #listing_button input[type="submit"]:hover, #listing_button input[type="button"]:hover, #listing_button input[type="reset"]:hover, #listing_button ul.button-nav li a:hover, #listing_button div.generic-button a:hover {
+    color: #FFEC4B;
+text-shadow: 0px 0px 5px #000;
+}
+
+#listing_button {
+	margin: 10px 0px 10px 0px;
+}
+
+.avb {
+	float: left;
+    margin-right: 10px;
+}
+
+.blog_image {
+	 float: left;
+    height: 150px;
+    margin: 0 20px 35px 0;
+    overflow: hidden;
+    width: 150px;
+}
+
+.blog_list {
+	height: 150px;	
+}
+
+.post_content {
+	width: 510px;
+	min-height: 400px;
+}
+
+#feedbutton {
+	margin: 20px auto 0px auto;
+    padding: 0;
+    text-align: center;
+    width: 400px;
+}
+
+#feedbutton p {
+	font-family: 'Francois One', Impact, san-serif;
+font-weight: normal;
+	text-transform: uppercase;
+	font-weight: normal;
+	font-size: 20px;
+	margin-bottom: 10px;
+}
+
+.multiline{
+
+	color: #F0F0F0;
+    display: inline;
+	margin: 25px 5px;
+    font-family: 'Francois One','Impact',san-serif;
+font-weight: normal;
+    font-size: 12px;
+    line-height: 14px;
+    padding-left: 0px;
+    text-transform: uppercase;
+	float: right !important;
+}
+
+#dropdownsearch p {
+	margin: 0px;
+}
+
+.locationinfo {
+    color: #0F0F0F;
+    font-family: 'Francois One',Impact,san-serif;
+font-weight: normal;
+    font-size: 80%;
+    text-transform: uppercase;
+}
+
+.locationinfo h2 a, .info-window-max h2 a {
+    color: #0F0F0F;
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+}
+
+#profile-edit-form .button-nav {
+    display: none;
+    list-style: none outside none;
+}
+
+#profile-edit-form h4 {
+    background-color: #FFEC4B;
+    font-size: 25px;
+    margin: 0;
+    padding: 5px 0 0 10px;
+    text-align: left;
+    color: #0F0F0F;
+    font-family: 'Francois One',Impact,serif;
+font-weight: normal;
+    font-size: 25px;
+    font-weight: normal;
+    text-shadow: 1px 1px 0 #CCCCCC;
+    text-transform: uppercase;
+	width: auto;
+}
+
+.notfound {
+	font-family: 'Francois One', Impact, san-serif;
+font-weight: normal;
+	text-transform: uppercase;
+	font-size: 20px;
+	text-align: center;
+    text-shadow: 1px 1px 0 #CCCCCC;
+}
+
+.blog_list h3 {
+font-size: 20px;
+}
+
+#sidebar .widget h5 {
+color: #0f0f0f;
+}

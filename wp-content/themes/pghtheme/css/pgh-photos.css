@@ -1,3 +1,20 @@
+
+
+/* main page styles */
+
+#eventsearch_bar.page-photos {
+	height: 60px;
+	margin-bottom: 20px;
+	width:650px;
+	margin-left:0px;
+}
+
+
+#content.page-photos {
+	width:950px;
+	overflow:visible;
+}
+
 /* styles for photo post thumbnails */
 
 .photo-post {	

@@ -1,113 +1,4 @@
 
-/* Anything with map or geo in it - shrinking style.css. */
-
-.map {
-	width: 100%;
-}
-
-#mapfilters {
-	width: 270px;
-	overflow: visible;
-	margin-left: 8px;
-	display: block;
-	float: right
-}
-
-#map { 
-	width: 600px; 
-	height: 480px;
-	float: left;
-	position: relative;
-}
-
-#map_canvas { 
-	width: 580px; 
-	height: 550px;
-	float: left;
-	position: relative;
-}
-
-#mapholder {
-    float: left;
-}
-
-
-#map_content {
-	width: 955px;
-	height: 550px;
-	padding: 2px;
-}
-
-#event_map {
-	width: 440px;
-	height: 350px;
-	background-color: #0f0f0f;
-	margin-bottom: 30px;
-}
-
-#mapfilters .info_box {
-	text-align: left;
-	font-size: 25px;
-	color: #ffec4b;
-	padding-left: 5px;
-	height: 45px;
-	width: 270px;
-}
-
-#maptoggles {
-    background-color: #FFEC4B;
-    left: 603px;
-    padding: 10px;
-    position: absolute;
-    top: 426px;
-}
-
-#mapkey img {
-    border: medium none;
-    display: inline;
-    margin: 0 5px 0 7px;
-    padding: 0;
-}
-
-#mapkey ul {
-	display: block;
-	margin: 0px;
-	padding: 0px;
-}
-
-#mapkey ul li {
-	list-style: none;
-	padding: 0px;
-	margin: 0px;
-}
-
-#mappulldown p {
-	padding: 0px;
-	margin: 0px;
-	display:inline;	
-	font-family: “Trebuchet MS”, “Lucida Sans Unicode”, “Lucida Grande”,” Lucida Sans”, Arial, sans-serif;
-	text-transform: uppercase;
-	font-size: 12px;
-	cursor: pointer;
-	font-weight: bold;
-}
-
-
-#mappulldown p:hover {
-	color: #ffec4b;
-	text-shadow: 0px 0px 2px #ccc;
-}
-
-#mapkey p {
-	padding: 0px;
-	margin: 0px;
-	display:inline;	
-	text-transform: uppercase;
-	font-size: 15px;
-	font-family: 'Francois One', 'Impact', san-serif;
-font-weight: normal;
-}
-
 #maplocationkey table p {
     color: #F0F0F0;
     display: inline;
@@ -119,72 +10,10 @@ font-weight: normal;
     text-transform: uppercase;
 }
 
-#profilemapcontentholder #maplocationkey {
-	    -moz-box-shadow: 0 0 4px 0 #CCCCCC;
-	background-image: url("../images/searbarbg.jpg");
-    background-color: #0F0F0F;
-    border: 3px solid #FFEC4B;
-    height: 60px;
-    margin-top: 488px;
-    width: 580px;
-}
-
-
-#mappulldown {
-    -moz-border-radius: 3px 3px 0 0;
-    -moz-box-shadow: 1px 1px 5px 2px #A0A0A0;
--webkit-border-radius: 3px 3px 0 0;
-    -webkit-box-shadow: 1px 1px 5px 2px #A0A0A0;
-    background-color: #0F0F0F;
-    color: #F0F0F0;
-    font-size: 10px;
-    margin-left: 383px;
-    margin-top: 10px;
-    padding: 1px 0;
-    text-align: center;
-    width: 204px;
-}
-
-#mapkey {
-    -moz-box-shadow: 0 5px 5px 0 #A0A0A0;
-    background-color: #0F0F0F;
-    color: #F0F0F0;
-	margin-left: 383px;
-    padding: 10px;
-    width: 184px;
-}
-
-#pulldownholder {
-	position: absolute;
-z-index: 1;
-}
-
-#mapcontentholder, #profilemapcontentholder {
+#mapcontentholder {
 	float: left;
 	height: 550px;
 	width: 600px;
-}
-
-#profilemapcontentholder #map {
-    float: left;
-    height: 480px;
-    position: relative;
-    width: 585px;
-}
-
-#mapkey input {
-	margin: 0px;
-	padding: 0px;
-}
-
-
-#mapkey p.divideheader {
-	font-family: 'Francois One', 'Impact', san-serif: 
-font-weight: normal;
-	font-size: 15px;
-	color: #f0f0f0;
-	text-transform: uppercase;
-	margin: 10px 0px 0px 0px;
 }
 
 #maplocationkey table {
@@ -216,17 +45,6 @@ font-weight: normal;
     width: 593px;
 }
 
-#maplocationkey table td, #maplocationkey table td tr {
-	margin: 0px;
-	padding: 0px;
-	width: auto;
-}
-
-
-#geo-mashup {
-	float: left;
-}
-
 .gm-map {
 float: left;
     margin: 0;
@@ -252,4 +70,12 @@ font-weight: normal;
 
 #startgeomap {
 	display: block;
+}
+
+
+#map { 
+	width: 600px; 
+	height: 480px;
+	float: left;
+	position: relative;
 }
