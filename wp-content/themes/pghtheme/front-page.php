@@ -220,5 +220,5 @@ events in</p>
 
 </div> <!-- #wrapper -->
 <script src="<?php bloginfo('stylesheet_directory'); ?>/scripts/map.js"></script>
-
+<script src="<?php bloginfo('stylesheet_directory'); ?>/scripts/frontpage.js"></script>
 <?php get_footer(); ?>

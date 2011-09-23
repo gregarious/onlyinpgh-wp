@@ -16,6 +16,7 @@
 	- 'result_limit'  : number of results to return
 	- 'userid' 		: id of user making the request (used to determine
 						value of attending in results)
+	- 'onlyattending' : if nonzero, only return results the given user is attending
 
 	Output JSON has the following type
 		{	more_results 	: boolean,
@@ -63,6 +64,7 @@ $terms_str = extract_get("search_terms");  // searches organization name, event 
 $result_offset = extract_get("offset");  // result offset to use in query (offset is 0-based)
 $result_limit = extract_get("limit");    // result limit (will return rows number <offset> to <offset+limit>)
 $userid = extract_get("userid");	// currently logged in user
+$only_attending = extract_get("onlyattending");
 /* QUERY BUILDING 
 
 	There are two basic kinds of queries: One with all event info in entire 
@@ -118,7 +120,11 @@ if( $is_query_loc_based )
 $bookings_join = '';
 if($userid!==NULL) {
 	$select .= ', b.booking_spaces';
-	$bookings_join = 'LEFT JOIN wp_em_bookings b ON (e.event_id = b.event_id) AND (b.person_id = ' . intval($userid) . ')';
+	if($only_attending) {
+		$bookings_join = 'JOIN wp_em_bookings b ON (e.event_id = b.event_id) AND (b.person_id = ' . intval($userid) . ') AND (b.booking_spaces = 1)';
+	} else {
+		$bookings_join = 'LEFT JOIN wp_em_bookings b ON (e.event_id = b.event_id) AND (b.person_id = ' . intval($userid) . ')';
+	}
 }
 
 // 2: Set the static FROM, WHERE, and ORDER BY clauses
