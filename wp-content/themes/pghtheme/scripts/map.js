@@ -139,25 +139,28 @@ function updateEventAttendance(eid) {
 // Return type of the PHP call is an array of JSON objects with the 
 // 		following "prototype":
 // 		{
-// 			id 			: number,
-// 	 		name 		: string,
-// 			wp_slug  	: string,
-// 			description : string,
-// 			categories 	: [string],
-// 			image_url 	: string,
-// 			timespan 	: {
-// 				start_date  : string,
-// 				start_time  : string,
-// 				end_date	: string,		
-// 				end_time	: string }
-// 			location 	: {
-// 				address  	: string,
-// 				lat 	 	: number,
-// 				long 	 	: number }
-// 			organization : {
-// 				name 	 	: string,
-// 				url 	 	: string,
-// 				fancount 	: number }
+//			'more_results' : boolean
+//			'events' : {
+// 				id 			: number,
+// 	 			name 		: string,
+// 				wp_slug  	: string,
+// 				description : string,
+// 				categories 	: [string],
+// 				image_url 	: string,
+// 				timespan 	: {
+// 					start_date  : string,
+// 					start_time  : string,
+// 					end_date	: string,		
+// 					end_time	: string }
+// 				location 	: {
+// 					address  	: string,
+// 					lat 	 	: number,
+// 					long 	 	: number }
+// 				organization : {
+// 					name 	 	: string,
+// 					url 	 	: string,
+// 					fancount 	: number }
+//			}
 // 		}
 function performEventSearch(search_opts) {
 	var search_status = jQuery('#sidebar-search-status');
