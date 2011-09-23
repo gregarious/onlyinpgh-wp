@@ -1,790 +1,448 @@
-  // Global OIP_SITE_URL is set in header.php
-  var site_url = OIP_SITE_URL;
-    var map;
-    var markers = [];
-    var places = [];
-    var infoWindow;
- 	var eventsidebar;
- 	var isloggedin;
- 	var placeservice;
-    //var locationSelect;
 
-//Populates map with events on page load
-function populateEventsStart() {
-   	 var today = new Date();
-     var month = today.getMonth()+1;
-     var day = today.getDate();
-     var year = today.getFullYear();
-     var startdate = + year + "-" + month + "-" + day;
-   	
-   	//Query to get events
-   	var searchUrl = '/searchevents_initial.php?&startdate=' + startdate;     	
-   	//Get and format the XML
-       downloadUrl(searchUrl, function(data) {
-       var xml = parseXml(data);
-       var markerNodes = xml.documentElement.getElementsByTagName("marker");
-       var bounds = new google.maps.LatLngBounds();
-    var sidebar = document.getElementById('event_sidebar');
-       sidebar.innerHTML = '';
-       if (markerNodes.length == 0) {
-         sidebar.innerHTML = 'Sorry! None of our event listings matched your search.';
-         return;
-       }
-       //Defines the variables for events with information from the XML
-       	document.getElementById('loadmore').value = 'There are no more search results';
-    for (var i = 0; i < markerNodes.length; i++) {
-         var name = markerNodes[i].getAttribute("ename");
-         var eventid = markerNodes[i].getAttribute("eventid");
-         var address = markerNodes[i].getAttribute("address");
-         var event_date = markerNodes[i].getAttribute("start_date");
-         var stime = markerNodes[i].getAttribute("start_time");
-         var etime = markerNodes[i].getAttribute("end_time");
-         var fans = markerNodes[i].getAttribute("fans");
-         var description = markerNodes[i].getAttribute("description");
-         var slug = markerNodes[i].getAttribute("slug");
-         var pic = markerNodes[i].getAttribute("picture");
-         var eventtype = markerNodes[i].getAttribute("type").split(',');
-		 var category = eventtype[0];
-         var organization = markerNodes[i].getAttribute("organization");
-         var distance = parseFloat(markerNodes[i].getAttribute("distance"));
-         var latlng = new google.maps.LatLng(
-              parseFloat(markerNodes[i].getAttribute("lat")),
-              parseFloat(markerNodes[i].getAttribute("lng")));
-		//Create a map marker and a sidebar entry for each event
-         var marker = createEventMarker(latlng, name, address, organization, category, event_date, stime, etime, pic, slug, eventid, fans, description);
-         bounds.extend(latlng);
+var map;
+var infoWindow;
+var infoWindowFocus;	// will either be a marker type or 'event'
 
-   		 var eventEntry = createEventSidebar(marker, name, address, distance, fans, organization, category, event_date, stime, etime, pic, slug, latlng, description, eventid);
-         sidebar.appendChild(eventEntry);
-       }
-      });
+var visible_place_markers = [];		// maps { place-type : array of place icons }
+var event_instances = [];	// global array of event instance objects returned by searches
+var cached_search_opts = null;
+
+
+/** various lookup tables **/
+// specifies lat/long value of each option in the events seach dropdown box
+region_coordinate_map = { 'all' : 	[40.440318,-79.999218],
+						  'city' : 	[40.440318,-79.999218],
+						  'west' : 	[40.57522,-80.004],
+						  'north' : [40.35582,-79.995],
+						  'south' : [40.44054,-79.819],
+						  'east' : 	[40.44315,-80.135] };
+
+// maps oips place type labels (e.g. 'food') to Google place type labels (e.g. 'food' -> ['bakery','bar','cafe',...])
+oip_google_placetype_map = { 'food' : 	['bakery','bar','cafe','food','grocery_or_supermarket'],
+							 'music' : 	['night_club'],
+							 'museum' : ['art_gallery','museum'],
+							 'sports' : ['bowling_allery','campground','park','stadium'],
+							 'shops' : 	['beauty_salon','bicycle_store','book_store','clothing_store','convenience_store','department_store','electronics_store','florist','furniture_store','hair_care','hardware_store','home_goods_store','jewelry_store','liquor_store','pet_store','pharmacy','shoe_store','shopping_mall','spa','store'],
+							 'theater' : ['movie_theater'],
+							 'attractions' : ['amusement_park','aquarium','casino','library','university'] };
+
+// maps a place type to an image filename (excluding the extension) in the images/place_dots folder 
+placemarker_imagebase_map = { 'food' :'food', 
+							 'music' : 'music',
+							 'museum' : 'museum',
+							 'sports' : 'sports',
+							 'shops' : 'shopping',
+							 'theater' : 'theaterfilm',
+							 'attractions' : 'attractions' };
+function getPlaceMarkerIconURL(marker_type) {
+	var img_dir = '/wp-content/themes/pghtheme/images/place_markers';
+	var base = placemarker_imagebase_map[marker_type]; 
+	return img_dir + '/' + base + '.png';	
+}
+
+// maps an event category to an image filename (excluding the extension) in the images/place_dots folder 
+eventcat_imagebase_map = {	'Food &amp; Drink' : 'food',
+						  	'Theater' : 'theaterfilm',
+						  	'Shopping' : 'retail',
+						  	'Sports &amp; Outdoors' : 'outdoors',
+						  	'Educational' : 'education',
+						  	'Arts' : 'arts',
+						  	'Music' : 'music' };
+function getEventMarkerIconURL(marker_cat,is_popular) {
+	var img_dir = '/wp-content/themes/pghtheme/images/event_markers';
+	var base = eventcat_imagebase_map[marker_cat]; 
+	if(base === undefined) {
+		base = 'genfun';
+	}
+	return img_dir + '/' + base + (is_popular ? '_attraction' : '') + '.png';
+}
+
+
+// converts a bare JSON object to an EventInstance (note: method changes input object!)
+function JSONToEventInstance(json) {
+	inst = json;
+
+	inst.main_category = null;
+	// if at least one categories exists, choose the first to be the main one
+	if(inst.categories && inst.categories.length) {
+		inst.main_category = inst.categories[0];
+	} 
+
+	inst.marker = null;
+	// if we have a lat and long, create a maps marker
+	if( inst.location.lat && inst.location.long ) {
+		var iconURL = getEventMarkerIconURL(inst.main_category,inst.organization.fancount>=100);
+		var icon =  new google.maps.MarkerImage( iconURL,
+			new google.maps.Size(20, 20),
+			new google.maps.Point(0,0),
+			new google.maps.Point(0, 20));
+		var latlng = new google.maps.LatLng(inst.location.lat,inst.location.long);
+		inst.marker = new google.maps.Marker( { icon: icon,
+											position: latlng } );
+	}
+
+	inst.toInfoWindowh2 = function() {
+			var html = '<img src="' + this.image_url + '">';
+			html += '<b>' + this.name + '</b><br/>';
+			html += this.location.address + '<br/>';
+			html += '<a target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions</a><br/>';
+			html +=	this.timespan.start_date + '<br/>';
+			html += this.timespan.start_time + ' - ' + this.timespan.end_time + '<br/><br/>';
+			html += this.description + '...<a target="_blank" href="/events/event/' + this.wp_slug + '/">Get more info</a><br/><br/>';
+			if(this.attending) {
+				html += '<input type="button" value="You\'re In!" id="' + this.id + 'window">';
+			}
+			else {
+				html += '<input type="button" value="Count me in!" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
+			}
+			return html;
+		}
+	inst.toSidebarEntryHTML = function() {
+			var html = '<img src="' + this.image_url + '">';
+			html += '<b>' + this.name + '</b><br/>';
+			html += '<p class="hostedby">Hosted By</p><p class="host">' + this.organization.name + '</p>';
+			html += this.location.address + '<br/>';
+			html += '<a target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions</a><br/>';
+			html +=	this.timespan.start_date + '<br/>';
+			html += this.timespan.start_time + ' - ' + this.timespan.end_time + '<br/><br/>';
+			html += this.description + '...<a target="_blank" href="/events/event/' + this.wp_slug + '/">Get more info</a><br/><br/>';
+			if(this.attending) {
+				html += '<input type="button" value="You\'re In!" id="' + this.id + 'window">';
+			}
+			else {
+				html += '<input type="button" value="Count me in!" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
+			}
+			return html;
+		}
+
+	return inst;
+}
+
+// hacky little thing put together to make sure the Count me in buttons are always in sync.
+// There are MUCH better solutions, but it would be obsolete in a month.
+function updateEventAttendance(eid) {
+	for(var i = 0; i < event_instances.length; i++) {
+		if(eid == event_instances[i].id) {
+			event_instances[i].attending = 1;
+			event_instances[i] = JSONToEventInstance(event_instances[i]);
+			eventClicked(event_instances[i]);
+			document.getElementById(eid + 'window').value = "You're in!";
+       		document.getElementById(eid + 'window').onclick = '';
+			break;
+		}
+	}
+}
+
+// makes AJAX call to server and updates display with new event instances
+// search opts can be any of the following: 'lat', 'long', 'rad', 'startdate',
+//		'enddate', 'search_terms', 'limit', or 'offset'
+// Return type of the PHP call is an array of JSON objects with the 
+// 		following "prototype":
+// 		{
+// 			id 			: number,
+// 	 		name 		: string,
+// 			wp_slug  	: string,
+// 			description : string,
+// 			categories 	: [string],
+// 			image_url 	: string,
+// 			timespan 	: {
+// 				start_date  : string,
+// 				start_time  : string,
+// 				end_date	: string,		
+// 				end_time	: string }
+// 			location 	: {
+// 				address  	: string,
+// 				lat 	 	: number,
+// 				long 	 	: number }
+// 			organization : {
+// 				name 	 	: string,
+// 				url 	 	: string,
+// 				fancount 	: number }
+// 		}
+function performEventSearch(search_opts) {
+	var search_status = jQuery('#sidebar-search-status');
+	search_status.fadeIn('fast');
+	var isloggedin = document.getElementById("isloggedin").value;
+	if(isloggedin=='y') {
+		search_opts['userid'] = parseInt(document.getElementById("loggedinid").value);
+	}
+
+	cached_search_opts = jQuery.extend({},search_opts);	// save these for findMoreResults calls
+	var callback = function(json_result) {
+			var event_insts = []
+			search_status.hide();
+			var json_events = json_result['events'];
+			for(var i = 0; i < json_events.length; i++) {
+				event_insts.push(JSONToEventInstance(json_events[i]));
+			}
+			updateEventResults(event_insts,json_result['more_results']);
+		}
+	jQuery.getJSON('/onlyinpgh/searchevents.php',search_opts,callback);
+}
+
+function eventClicked(event_instance) {
+	if(event_instance.marker) {
+		infoWindow.setContent(event_instance.toInfoWindowHTML());
+	    infoWindow.open(map, event_instance.marker);
+	    infoWindowFocus = 'event';
+	}
+	else {
+		infoWindow.close();
+		infoWindowFocus = null;
+	}
+}
+
+function updateEventResults(new_events,more_results) {
+	var bounds = new google.maps.LatLngBounds();
+	var sidebar = jQuery('#sidebar-content');
+
+	var index0 = event_instances.length;
+	for( var i = 0; i < new_events.length; i++ ) {
+		var event_inst = new_events[i];
+		// For now we're just not displaying events without markers
+		if(!event_inst.marker) {
+			continue;
+		}
+		var new_ediv = jQuery('<div class="event-listing" id="listing-' + (index0+i) + '">');
+		var bound_click_callback = (function(inst) {
+					return function() { eventClicked(inst); }
+				})(event_inst);
+		// click callback function with this event instance bound to it
+		new_ediv.click(bound_click_callback);
+		
+		// if the event has a marker associated with it, display it and add click events
+		if(event_inst.marker) {
+			new_ediv.addClass('has-marker');
+			// add the click listener to the marker (for info window) and add it to the map 
+			event_inst.marker.setMap(map);
+			google.maps.event.addListener(event_inst.marker, 'click', bound_click_callback);
+			bounds.extend(event_inst.marker.getPosition());
+		}
+		else {
+			new_ediv.addClass('no-marker');
+		}
+		new_ediv.html(event_inst.toSidebarEntryHTML());
+		sidebar.append(new_ediv);
+	
+		event_instances.push(event_inst);
+		event_inst = null;
+	}
+
+	var footer = jQuery('#sidebar-footer');
+	footer.html('');	
+	sidebar.slideDown('slow',function()
+		{
+			var loadmore = '<input id="loadmore" type="button" onclick="findMoreResults(20)" value="Load More Events">';
+			if(more_results) {
+				footer.html(loadmore);
+				footer.show();
+			}
+		});
+}
+
+// grabs event search options from form
+function extractSearchOptions() {
+	var region = document.getElementById('regionSelector').value;
+	var search = document.getElementById('keywordsearch').value;
+	var timespan_days = parseInt(document.getElementById('timespanSelect').value);
+	var limitval = 30;
+
+	var bydatesearch = document.getElementById('bydate').style.display == 'block';
+	var startdate, enddate;
+	if(bydatesearch) {
+		var today = new Date();
+		var endday = new Date();
+		endday.setDate(today.getDate()+timespan_days);
+		startdate = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate();
+		enddate = endday.getFullYear() + "-" + (endday.getMonth()+1) + "-" + endday.getDate();	
+	}
+	else {
+		startdate = document.getElementById('startdate').value;
+     	enddate = document.getElementById('enddate').value;
+	}
+	
+	var latlng = region_coordinate_map[region];
+	var search_opts = { "lat" : latlng[0], 
+						"long" : latlng[1],
+						"startdate" : startdate,
+						"enddate" : enddate,
+						"rad" : (region=='all') ? 7 : 30,	// TODO: revisit this radius hack
+						"limit" : limitval };
+	if( search !== 'Keyword search (optional)' && search != '' ) {
+		search_opts['search_terms'] = search;
+	}
+	return search_opts;
+}
+
+// Clears all event markers from map and collapses sidebar, replacing its contents with an optional string
+function clearEventResults(callback) {
+	if(infoWindowFocus == 'event') {
+		infoWindow.close();
+		infoWindowFocus = null;
+	}
+
+	// Slide results window up
+	content = jQuery('#sidebar-content');
+	content.slideUp('fast', function() {
+		content.html('');
+		return callback(); } );
+
+	jQuery('#sidebar-footer').html('');
+
+	// clear all event markers from map
+	for(var i = 0; i < event_instances.length; i++) {
+		if(event_instances[i].marker) event_instances[i].marker.setMap(null);
+	}
+	event_instances.length = 0;
+}
+
+// Clears all Google place markers from the map of a specific type
+function clearPlaceMarkers(ltype) {
+	marker_list = visible_place_markers[ltype];
+	for (var i = 0; i < marker_list.length; i++) {
+		marker_list[i].setMap(null);
+	}
+	marker_list.length = 0;
+	if(infoWindowFocus == ltype) {
+		infoWindow.close();
+		infoWindowFocus = null;
+	}
+}
+
+// Clears all Google place markers from the map of a all types
+function clearAllPlaceMarkers() {
+	for( var ltype in oip_google_placetype_map ) {
+		clearPlaceMarkers(ltype);
+	}
+}
+
+function placeRequestClicked(ltype) {
+	// if checked, get place markers from Google Places within
+	if (document.getElementById(ltype).checked) {
+		var request = {
+			location: map.getCenter(),
+			radius: '1000',			// GDN: valuable hardcode?
+			types: oip_google_placetype_map[ltype]
+		}
+		var iconURL =  getPlaceMarkerIconURL(ltype);
+		var placeservice = new google.maps.places.PlacesService(map);
+		placeservice.search( request, 
+			function(results,status) {
+				if (status == google.maps.places.PlacesServiceStatus.OK) {
+					// ensure an array is in place to hold this marker type
+					if (!(ltype in visible_place_markers)) {
+						visible_place_markers[ltype] = [];
+					}
+					// for each place, create a marker and add it to the visible list
+					for (var i = 0; i < results.length; i++) {
+						var place = results[i];
+						var marker = createPlaceMarker(results[i],ltype)
+						visible_place_markers[ltype].push(marker);
+					}
+				}			
+			} );
+	}
+	else {
+		clearPlaceMarkers(ltype);
+	}
+}
+
+// Returns a new map marker with the given properties set (this function 
+//	displays the marker on the global map automatically)
+function createPlaceMarker(place,ltype) {
+	var placeLoc = place.geometry.location;
+	var iconURL = getPlaceMarkerIconURL(ltype);
+	var marker = new google.maps.Marker(
+		{	map: 		map,
+			icon: 		iconURL,
+			position: 	new google.maps.LatLng(placeLoc.lat(), placeLoc.lng())
+		});
+	var innerHTML = '<div class="infowindow">' + 
+						'<b>' + place.name + '</b><br/>' + 
+						place.vicinity + '<br><br>' + 
+						'<a target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + place.geometry.location + '>' +
+							'Get Directions' +
+						'</a></div>';
+
+	// add a listener to display an info window on click
+	google.maps.event.addListener(marker, 'click', 
+		function () {
+			infoWindow.setContent(innerHTML);
+			infoWindow.open(map, this);
+			infoWindowFocus = ltype;
+		});
+	return marker;
+}
+
+// Creates map and runs initial homepage load search
+function initializeEventResults() {
+	map = new google.maps.Map(document.getElementById("map"), {
+		center: new google.maps.LatLng(40.44076, -80),
+		zoom: 12,
+		maxZoom: 18,
+		minZoom: 11,
+		mapTypeId: 'roadmap',
+		scrollwheel: false,
+		mapTypeControl: false,
+		zoomControl: true,
+		zoomControlOptions: {style: google.maps.ZoomControlStyle.LARGE},
+	});
+	infoWindow = new google.maps.InfoWindow();
+	infoWindowFocus = null;
+
+	var today = new Date();
+	var startdate = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
+	clearEventResults( function(){ 
+		return performEventSearch( {"startdate":startdate,"limit":40} ); }
+		);
+}
+
+// User wants to run a new search using form parameters
+function newSearchRequested() {
+	var opts = extractSearchOptions();
+	clearEventResults( function(){ 
+		return performEventSearch( opts ); }
+		);
+//	performEventSearch( opts );	
+}
+
+// Return more results from the last run search
+function findMoreResults(num_results) {
+	if(!cached_search_opts) { return; }	// should never happen, but silently fail if it does
+	jQuery('#sidebar-footer').fadeOut('fast');
+	var search_opts = jQuery.extend({},cached_search_opts);
+	var orig_offset = cached_search_opts['offset'] ? cached_search_opts['offset'] : 0;
+	search_opts['offset'] = orig_offset + cached_search_opts['limit'];
+	search_opts['limit'] = num_results;
+	performEventSearch(search_opts);
 }
 
 //Perform search with keyword when you press enter
 function submitonEnter(evt){
-var charCode = (evt.which) ? evt.which : event.keyCode
-if(charCode == "13"){
-beginSearch();
-}
-}
-//Loads the map on the page
-function load() {
-      map = new google.maps.Map(document.getElementById("map"), {
-        center: new google.maps.LatLng(40.44076, -80),
-        zoom: 12,
-        maxZoom: 18,
-        minZoom: 11,
-        mapTypeId: 'roadmap',
-        scrollwheel: false,
-        mapTypeControl: false,
-        zoomControl: true,
-        zoomControlOptions: {style: google.maps.ZoomControlStyle.LARGE},
-      });
-    
-      infoWindow = new google.maps.InfoWindow();
-      //placeservice = new google.maps.places.PlacesService(map);
-
-      eventsidebar = document.getElementById("event_sidebar");
-
-	  populateEventsStart();
+	var charCode = (evt.which) ? evt.which : event.keyCode;
+	if(charCode == "13") {
+		newSearchRequested();
+	}
 }
 
-//Sends a request for Google Places markers/information based on bounds of the map
-function placeRequest(ltype) {
-	var downtown = map.getCenter();
-	
-	var ltype;
-	if (ltype == 'food'){
-	var request = {
-    location: downtown,
-    radius: '1000',
-    types: ['bakery','bar','cafe','food','grocery_or_supermarket']
-  };
-	} else if (ltype == 'music') {
-		var request = {
-    location: downtown,
-    radius: '1000',
-    types: ['night_club']
-  };
-	} else if (ltype == 'museum') {
-		var request = {
-    location: downtown,
-    radius: '1000',
-    types: ['art_gallery','museum']
-  };
-	} else if (ltype == 'sports') {
-		var request = {
-    location: downtown,
-    radius: '1000',
-    types: ['bowling_allery','campground','park','stadium']
-  };
-	} else if (ltype == 'shops') {
-		var request = {
-    location: downtown,
-    radius: '1000',
-    types: ['beauty_salon','bicycle_store','book_store','clothing_store','convenience_store','department_store','electronics_store','florist','furniture_store','hair_care','hardware_store','home_goods_store','jewelry_store','liquor_store','pet_store','pharmacy','shoe_store','shopping_mall','spa','store']
-  };
-	} else if (ltype == 'theater') {
-		var request = {
-    location: downtown,
-    radius: '1000',
-    types: ['movie_theater']
-  };
-	} else if (ltype == 'attraction'){
-		var request = {
-    location: downtown,
-    radius: '1000',
-    types: ['amusement_park','aquarium','casio','library','university']
-  };
-	}
-	
-	
-	placeservice = new google.maps.places.PlacesService(map);
-	var ifchecked = document.getElementById(ltype).checked;
-	if (ifchecked == true){
-	placeservice.search(request, callback);	
-	} else {
-		clearPlaces();
-	}
-				
-}
-
-function callback(results, status) {
-          if (status == google.maps.places.PlacesServiceStatus.OK) {
-              for (var i = 0; i < results.length; i++) {
-                  var place = results[i];
-                  createMarker(results[i]);
-              }
-          }
-     }
-
-//function requestDetails(place) {
-//	var request = {
-//		reference: 	place.reference
-//	};
-//	
-//	var service = new google.maps.places.PlacesService(map);
-//	service.getDetails(request, callbackdetails);
-//}
-
-//function callbackdetails(results, status) {
-//	if (status == google.maps.places.PlacesServiceStatus.OK) {
-//		for (var i=0; i < results.length; i++) {
-//			var place = results[i];
-//			createMarker(results[i]);	
-//		}
-//	}
-//}
-
-
-
-//Creates map marker for Google places results
-function createMarker(place) {
-		var ltype = place.types[0];	
-//Determines the type of marker to plot based on the place type
-if ((ltype == 'bakery')||(ltype == 'bar')||(ltype == 'cafe')||(ltype == 'food')||(ltype == 'grocery_or_supermarket')||(ltype == 'restaurant')){
-		var placedot = site_url + '/place_dots/food.png';
-	} 
-	else if (ltype == 'night_club') {
-var placedot = site_url + '/place_dots/music.png';
-	} 
-	else if ((ltype == 'art_gallery')||(ltype == 'museum')) {
-var placedot = site_url + '/place_dots/museum.png';
-	} 
-	else if ((ltype == 'bowling_allery')||(ltype == 'campground')||(ltype == 'park')||(ltype == 'stadium')) {
-		var placedot = site_url + '/place_dots/spots.png';
-	} 
-	else if ((ltype == 'beauty_salon')||(ltype == 'bicycle_store')||(ltype == 'book_store')||(ltype == 'clothing_store')||(ltype == 'convenience_store')||(ltype == 'department_store')||(ltype == 'electronics_store')||(ltype == 'florist')||(ltype == 'furniture_store')||(ltype == 'hair_care')||(ltype == 'hardware_store')||(ltype == 'home_goods_store')||(ltype == 'jewelry_store')||(ltype == 'liquor_store')||(ltype == 'pet_store')||(ltype == 'pharmacy')||(ltype == 'shoe_store')||(ltype == 'shopping_mall')||(ltype == 'spa')||(ltype == 'store')) {
-		var placedot = site_url + '/place_dots/shopping.png';
-	} 
-	else if (ltype == 'movie_theater') {
-var placedot = site_url + '/place_dots/theaterfilm.png';
-	} 
-	else if ((ltype == 'amusement_park')||(ltype == 'aquarium')||(ltype == 'casio')||(ltype == 'library')||(ltype == 'university')){
-var placedot = site_url + '/place_dots/attractions.png';
-	}	
-		  var placeLoc = place.geometry.location;
-          var marker = new google.maps.Marker({
-              map: map,
-              icon: placedot,
-              position: new google.maps.LatLng(placeLoc.lat(), placeLoc.lng())
-          });
-          var innerHTML ="<div class=\"infowindow\"><b>" + place.name + "</b><br>" + place.vicinity + "<br><br><a target=\"_blank\" href=\"http://maps.google.com/maps?saddr=&daddr=" + place.geometry.location + "\">Get Directions</a></div>";
-          google.maps.event.addListener(marker, 'click', function () {
-              infoWindow.setContent(innerHTML);
-              infoWindow.open(map, this);
-          });
- return places[places.push(marker)-1];
-      }
-      
-//Clears Google place results from the map      
-function clearPlaces() {
-     infoWindow.close();
-     for (var i = 0; i < places.length; i++) {
-       places[i].setMap(null);
-     }
-     places.length = 0;  
-}
-    
-//Clears all markers from the map when you start a new searc
-function clearLocations() {
-     infoWindow.close();
-     for (var i = 0; i < markers.length; i++) {
-       markers[i].setMap(null);
-     }
-     markers.length = 0;  
-     
-     for (var i = 0; i < places.length; i++) {
-       places[i].setMap(null);
-     }
-     places.length = 0;  
-  eventsidebar.innerHTML = "";
-}  
-//Stars the search
-function beginSearch() {
-   		searchEvents();
-   }
-   //Determines which search to perform based on filled in fields
-function searchEvents() {
-	 var address = document.getElementById("addressInput").value;
-	 var search = document.getElementById("searchword").value;
-	 document.getElementById('limitvalue').value = new Number(0);
-     var geocoder = new google.maps.Geocoder();
-     
-     if (address!='all' && search == 'Add a keyword (optional)'){
-     geocoder.geocode({address: address}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	clearLocations();
-       	searchAllEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });	
-     
-     } else if (address!='all' && search == ''){
-     geocoder.geocode({address: address}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	clearLocations();
-       	searchAllEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });	
-     
-     } else if (address == 'all' && search == 'Add a keyword (optional)'){
-     geocoder.geocode({address:'40.44076, -80'}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	clearLocations();
-       	searchAllEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });
-          
-     } else if (address == 'all' && search == ''){
-     geocoder.geocode({address:'40.44076, -80'}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	clearLocations();
-       	searchAllEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });
-          
-     } else if (address == 'all' && search != 'Add a keyword (optional)'){
-          geocoder.geocode({address:'40.44076, -80'}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	clearLocations();
-       	searchAllKeyEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });
-     
-     } else if (address == 'all' && search != ''){
-          geocoder.geocode({address:'40.44076, -80'}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	clearLocations();
-       	searchAllKeyEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });
-     
-     } else {
-     	geocoder.geocode({address: address}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	clearLocations();
-       	searchAllKeyEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });
-     }
-}
-//Loads next group of events into the sidebar and on the map by changing limit in events query
-function searchTen() {
-	 var limit = document.getElementById('limitvalue').value;
-	 //Change this variable based on the number of events you need to load
-	 var newlimit = new Number(limit) + new Number(100);
-	 document.getElementById('limitvalue').value = newlimit;
-	
-	 var address = document.getElementById("addressInput").value;
-	 var search = document.getElementById("searchword").value;
-     var geocoder = new google.maps.Geocoder();
-     
-	 if (address!='all' && search == 'Add a keyword (optional)'){
-     geocoder.geocode({address: address}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	searchAllEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });	
-     
-     } else if (address!='all' && search == ''){
-     geocoder.geocode({address: address}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	searchAllEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });	
-     
-     } else if (address == 'all' && search == 'Add a keyword (optional)'){
-     geocoder.geocode({address:'40.44076, -80'}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	searchAllEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });
-          
-     } else if (address == 'all' && search == ''){
-     geocoder.geocode({address:'40.44076, -80'}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	searchAllEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });
-          
-     } else if (address == 'all' && search != 'Add a keyword (optional)'){
-          geocoder.geocode({address:'40.44076, -80'}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	searchAllKeyEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });
-     
-     } else if (address == 'all' && search != ''){
-          geocoder.geocode({address:'40.44076, -80'}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	searchAllKeyEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });
-     
-     } else {
-     	geocoder.geocode({address: address}, function(results, status) {
-       if (status == google.maps.GeocoderStatus.OK) {
-       	searchAllKeyEventsNear(results[0].geometry.location);
-       } else {
-         alert(address + ' not found');
-       }
-     });
-     }
-}
-
-//Searches events in a given time span
-function searchAllEventsNear(center) {
-	var address = document.getElementById('addressInput').value;
-	//Determines the search radius
-	if (address != 'all'){
-		var radius = '7';
-	} else {
-		var radius = '30';
-	}
-	//Gets the user input from search fields
-     var today = new Date();
-     var month = today.getMonth()+1;
-     var day = today.getDate();
-     var year = today.getFullYear();
-     var startdate = + year + "-" + month + "-" + day;
-     var sdatepick = document.getElementById('startdate').value;
-     var edatepick = document.getElementById('enddate').value;
-     var timespan = document.getElementById('spanSelect').value;
-     var limitvalue = document.getElementById('limitvalue').value;
-     var bydatesearch = document.getElementById('bydate').style.display;
-     //Changes query if there user used the date picker to select dates or not
-     if (bydatesearch == 'block'){
-     var searchUrl = '/searchevents_genxml.php?lat=' + center.lat() + '&lng=' + center.lng() + '&radius=' + radius + '&startdate=' + startdate + '&timespan=' + timespan + '&limitvalue=' + limitvalue;
-     } else {
-     	var searchUrl = '/searcheventsdatepick_genxml.php?lat=' + center.lat() + '&lng=' + center.lng() + '&radius=' + radius + '&startdate=' + sdatepick + '&enddate=' + edatepick + '&limitvalue=' + limitvalue;     	
-     }
-     //Gets the XML and changes certain display text to reflect serach results
-       downloadUrl(searchUrl, function(data) {
-       var xml = parseXml(data);
-       var markerNodes = xml.documentElement.getElementsByTagName("marker");
-       var bounds = new google.maps.LatLngBounds();
-    var sidebar = document.getElementById('event_sidebar');
-       if (markerNodes.length == 0) {
-         sidebar.innerHTML = '<div id="noresult"><b>Sorry! None of our event listings matched your search.</b><br><br><b>You could try...</b><br><p>Searching in a different neighborhood<br>Searching in all neighborhoods<br>Searching with a different keyword<br>Removing the keyword from your search<br>Or searching with a different date range</p></div>';
-         return;
-       }
-       if (markerNodes.length < 100) {
-       	document.getElementById('loadmore').value = 'There are no more search results';
-       } else {
-       	document.getElementById('loadmore').value = 'Load Next 100 Events';
-       }
-       //Defines variables with information from XML
-    for (var i = 0; i < markerNodes.length; i++) {
-         var name = markerNodes[i].getAttribute("ename");
-         var eventid = markerNodes[i].getAttribute("eventid");
-         var address = markerNodes[i].getAttribute("address");
-         var event_date = markerNodes[i].getAttribute("start_date");
-		 var edate = markerNodes[i].getAttribute("end_date");
-         var stime = markerNodes[i].getAttribute("start_time");
-         var etime = markerNodes[i].getAttribute("end_time");
-         var fans = markerNodes[i].getAttribute("fans");
-         var description = markerNodes[i].getAttribute("description");
-         var slug = markerNodes[i].getAttribute("slug");
-         var pic = markerNodes[i].getAttribute("picture");
-         var eventtype = markerNodes[i].getAttribute("type").split(',');
-		 var category = eventtype[0];
-         var organization = markerNodes[i].getAttribute("organization");
-         var distance = parseFloat(markerNodes[i].getAttribute("distance"));
-         var latlng = new google.maps.LatLng(
-              parseFloat(markerNodes[i].getAttribute("lat")),
-              parseFloat(markerNodes[i].getAttribute("lng")));
-//Creates a map marker and a sidebar entry for each event result
-         var marker = createEventMarker(latlng, name, address, organization, category, event_date, stime, etime, pic, slug, eventid, fans, description);
-         bounds.extend(latlng);
-
-   		 var eventEntry = createEventSidebar(marker, name, address, distance, fans, organization, category, event_date, stime, etime, pic, slug, latlng, description, eventid, edate);
-         sidebar.appendChild(eventEntry);
-       }
-map.fitBounds(bounds);
-      });
-}
-//Performs an event search with a keyword
-function searchAllKeyEventsNear(center) {
-var address = document.getElementById('addressInput').value;
-	//Determines search radius
-	if (address != 'all'){
-		var radius = '7';
-	} else {
-		var radius = '30';
-	}
-	//Gets user input from search fields
-     var today = new Date();
-     var month = today.getMonth()+1;
-     var day = today.getDate();
-     var year = today.getFullYear();
-     var startdate = + year + "-" + month + "-" + day;
-     var sdatepick = document.getElementById('startdate').value;
-     var edatepick = document.getElementById('enddate').value;
-     var timespan = document.getElementById('spanSelect').value;
-     var searchword = document.getElementById('searchword').value;
-     var limitvalue = document.getElementById('limitvalue').value;
-     var bydatesearch = document.getElementById('bydate').style.display;
-     //Determines which query to use based on if the datepicker was user or not
-     if (bydatesearch == 'block'){
-     var searchUrl = '/searcheventsall_genxml.php?lat=' + center.lat() + '&lng=' + center.lng() + '&radius=' + radius + '&startdate=' + startdate + '&timespan=' + timespan + '&searchword=' + searchword + '&limitvalue=' + limitvalue;
-     } else {
-     var searchUrl = '/searcheventsalldatepick_genxml.php?lat=' + center.lat() + '&lng=' + center.lng() + '&radius=' + radius + '&startdate=' + sdatepick + '&enddate=' + edatepick + '&searchword=' + searchword + '&limitvalue=' + limitvalue;    	
-     }
-     //Gets XML and changes display text to reflect search results
-       downloadUrl(searchUrl, function(data) {
-       var xml = parseXml(data);
-       var markerNodes = xml.documentElement.getElementsByTagName("marker");
-       var bounds = new google.maps.LatLngBounds();
-    var sidebar = document.getElementById('event_sidebar');
-       if (markerNodes.length == 0) {
-         sidebar.innerHTML = '<div id="noresult"><b>Sorry! None of our event listings matched your search.</b><br><br><b>You could try...</b><br><p>Searching in a different neighborhood<br>Searching in all neighborhoods<br>Searching with a different keyword<br>Removing the keyword from your search<br>Or searching with a different date range</p></div>';
-         return;
-       }
-       if (markerNodes.length < 100) {
-       	document.getElementById('loadmore').value = 'There are no more search results';
-       } else {
-       	document.getElementById('loadmore').value = 'Load Next 100 Events';
-       }
-       //Define variables with information from XML
-    for (var i = 0; i < markerNodes.length; i++) {
-         var name = markerNodes[i].getAttribute("ename");
-         var eventid = markerNodes[i].getAttribute("eventid");
-         var address = markerNodes[i].getAttribute("address");
-         var event_date = markerNodes[i].getAttribute("start_date");
-		 var edate = markerNodes[i].getAttribute("end_date");
-         var stime = markerNodes[i].getAttribute("start_time");
-         var etime = markerNodes[i].getAttribute("end_time");
-         var fans = markerNodes[i].getAttribute("org_fancount");
-         var description = markerNodes[i].getAttribute("description");
-         var slug = markerNodes[i].getAttribute("slug");
-         var pic = markerNodes[i].getAttribute("picture");
-         var eventtype = markerNodes[i].getAttribute("type").split(',');
-		 var category = eventtype[0];
-         var organization = markerNodes[i].getAttribute("organization");
-         var distance = parseFloat(markerNodes[i].getAttribute("distance"));
-         var latlng = new google.maps.LatLng(
-              parseFloat(markerNodes[i].getAttribute("lat")),
-              parseFloat(markerNodes[i].getAttribute("lng")));
-
-//Create a map marker and sidebar entry for each event result
-         var marker = createEventMarker(latlng, name, address, organization, category, event_date, stime, etime, pic, slug, eventid, fans, description);
-         bounds.extend(latlng);
-
-   		 var eventEntry = createEventSidebar(marker, name, address, distance, fans, organization, category, event_date, stime, etime, pic, slug, latlng, description, eventid, edate);
-         sidebar.appendChild(eventEntry);
-       }
-map.fitBounds(bounds);
-      });
-}
-  
-//Creates the map marker for the events
-function createEventMarker(latlng, name, address, organization, category, event_date, stime, etime, pic, slug, eventid, fans, description) {
-	   		isloggedin = document.getElementById("isloggedin").value;
-	   		var user = document.getElementById("loggedinid").value;
-	//Determines the icon to plot on the map and if it should be considered an attraction or not  		       	
-	var icontype;
-	if (category == 'Food &amp; Drink' && fans < 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/food.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	else if (category == 'Theater' && fans < 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/theaterfilm.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	else if (category == 'Shopping' && fans < 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/retail.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	else if (category == 'Sports &amp; Outdoors' && fans < 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/outdoors.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	else if (category == 'Educational' && fans < 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/education.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	else if (category == 'Arts' && fans < 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/arts.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	else if (category == 'Music' && fans < 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/music.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	//If event comes in from a feed the event_pic becomes the map marker
-	else if (category == 'oip_feeds' && fans < 100){
-		var icontype = pic;
-	}
-	else if (fans < 100) {
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/genfun.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));	
-	}
-	
-	else if (category == 'Food &amp; Drink' && fans > 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/food_attraction.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	else if (category == 'Theater' && fans > 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/theaterfilm_attraction.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	else if (category == 'Music' && fans > 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/music_attraction.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	else if (category == 'Shopping' && fans > 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/retail_attraction.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	else if (category == 'Sports &amp; Outdoors' && fans > 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/outdoors_attraction.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	else if (category == 'Educational' && fans > 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/education_attraction.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	else if (category == 'Arts' && fans > 100){
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/arts_attraction.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));
-	}
-	else if (category == 'oip_feeds' && fans > 100){
-		var icontype = pic;
-	}
-	else {
-		var icontype = new google.maps.MarkerImage(site_url + '/newplace_markers/genfun_attraction.png',
-					new google.maps.Size(20, 20),
-					new google.maps.Point(0,0),
-					new google.maps.Point(0, 20));	
-	}
-
-	//If user is logged in changes the function of the Count Me in button
-	if (isloggedin == 'y'){
-		//If logged in the button will add an entry to attendance table
-      var userid = document.getElementById("loggedinid").value;
-      var html = "<div class=\"infowindow\"><img src=\"" + pic + "\"><b>" + name + "</b><br/>" + address + "<br/><a target=\"_blank\" href=\"http://maps.google.com/maps?saddr=&daddr=" + address + "\">Get Directions</a><br/>" + event_date + "<br/>" + stime + " - " + etime + "<br/><br/>" + description + "...<a target=\"_blank\" href=\"" + site_url + "/events/event/" + slug + "/\">Get more info</a><br/><br/><input type=\"button\" value=\"Count me in!\" id=\"" + eventid + "window\" onclick=\"attendEventWindow(" + eventid + ")\"></div>";
-	} else {
-		//If they're not logged in the button will promt them to login or register
-      	var html = "<div class=\"infowindow\"><img src=\"" + pic + "\"><b>" + name + "</b><br/>" + address + "<br/><a target=\"_blank\" href=\"http://maps.google.com/maps?saddr=&daddr=" + address + "\">Get Directions</a><br/>" + event_date + "<br/>" + stime + " - " + etime + "<br/><br/>" + description + "...<a target=\"_blank\" href=\"" + site_url + "/events/event/" + slug + "/\">Get more info</a><br/><br/><input type=\"button\" value=\"Count me in!\" onclick=\"attendEvent(" + eventid + ")\" id=\"" + eventid + "window\"></div>";
-      }
-	//Used to toggle the event markers
-      var customdata = {
-		category: category,
-		location: 3,
-	} 
-
-      var marker = new google.maps.Marker({
-        map: map,
-        position: latlng,
-        icon: icontype,
-        data: customdata,
-      });
-      
-            google.maps.event.addListener(marker, 'click', function() {
-        infoWindow.setContent(html);
-        infoWindow.open(map, marker);
-      });
-	return markers[markers.push(marker)-1];
-}
-
-//Creates sidebar entry for each event
-function createEventSidebar(marker, name, address, distance, fans, organization, category, event_date, stime, etime, pic, slug, latlng, description, eventid, edate) {
-      var eventdiv = document.createElement('div');
-      isloggedin = document.getElementById("isloggedin").value;
-      //If user is logged in changes the function of the Count Me in button
-      if (isloggedin == 'y'){
-      var userid = document.getElementById("loggedinid").value;
-      //If logged in the button will add an entry to attendance table
-      var html = "<div style=\"display:block;\" class=\"eside\" name=\"" + category + "\"><img src=\"" + pic + "\"> <b>" + name + "</b> <br/><p class=\"hostedby\">Hosted By</p><p class=\"host\">" + organization + "</p>" + address + "<br/><a target=\"_blank\" href=\"http://maps.google.com/maps?saddr=&daddr=" + address + "\">Get Directions</a><br/><br/>" + event_date + "<br/>" + stime + " - " + etime + "<br/><br/>" + description + "... <a target=\"_blank\" href=\"" + site_url + "/events/event/" + slug + "/\">Get more info</a><br/><br/><input type=\"button\" value=\"Count me in!\" id=\"" + eventid + "\" onclick=\"attendEvent(" + eventid + ")\"></div>";
-      } else {
-      	//If they're not logged in the button will promt them to login or register
-      	var html = "<div style=\"display:block;\" class=\"eside\" name=\"" + category + "\"><img src=\"" + pic + "\"> <b>" + name + "</b> <br/><p class=\"hostedby\">Hosted By</p><p class=\"host\">" + organization + "</p>" + address + "<br/><a target=\"_blank\" href=\"http://maps.google.com/maps?saddr=&daddr=" + address + "\">Get Directions</a><br/><br/>" + event_date + "<br/>" + stime + " - " + etime + "<br/><br/>" + description + "... <a target=\"_blank\" href=\"" + site_url + "/events/event/" + slug + "/\">Get more info</a><br/><br/><input type=\"button\" value=\"Count me in!\" onclick=\"textLoginChange(" + eventid + ")\" id=\"" + eventid + "\"></div>";
-      }
-      
-      eventdiv.innerHTML = html;
-      eventdiv.style.cursor = 'pointer';
-      eventdiv.style.display= 'block';
-      google.maps.event.addDomListener(eventdiv, 'click', function() {
-        google.maps.event.trigger(marker, 'click');
-      });
-      google.maps.event.addDomListener(eventdiv, 'mouseover', function() {
-        eventdiv.style.backgroundColor = '#ffec4b';
-      });
-      google.maps.event.addDomListener(eventdiv, 'mouseout', function() {
-        eventdiv.style.backgroundColor = '#fff';
-      });
-      return eventdiv;
-}
-
-//Toggles the event markers on and off
-function toggleMarkers(attr,val) {
-  if (markers) {
-    for (i in markers) {
-        if(markers[i].data[attr] == val){
-	    var visibility = (markers[i].getVisible() == true) ? false : true;
-	    markers[i].setVisible(visibility);
-        }
-    }
-  }
-  
-var divshow = document.getElementsByName(val);
-for(var i=0;i<divshow.length;i++){
- 	if (divshow[i].style.display == 'block'){
-	divshow[i].style.display = "none";
- 	} 
- 	else if (divshow[i].style.display == 'none') {
- 		divshow[i].style.display = "block";
- 	}
-}
-}
-
-//Toggles place markers on and off
-//Not using this anymore but may need it in the future
-function togglePlaces(attr,val) {
-  if (places) {
-    for (i in places) {
-        if(places[i].data[attr] == val){
-	    var visibility = (places[i].getVisible() == true) ? false : true;
-	    places[i].setVisible(visibility);
-        }
-    }
-  }
-}
 //The script for the Count Me in button in the sidebar
 function attendEvent(eid) {
+	var isloggedin = document.getElementById("isloggedin").value;
+	if(!isloggedin=='y') {
+		textLoginChange(eid);
+		return;
+	}
 	//Uses event_id and the id of the logged in user
    	var user = document.getElementById("loggedinid").value;
    	var eventid = eid;
-   	//Gives the information to an insert php script and inserts them in the database
-   	var searchUrl = '/insertattend.php?&userid=' + user + '&eventid=' + eventid;       	
-       downloadUrl(searchUrl, function(data) {
-       var xml = parseXml(data);       
-       var success = xml.documentElement.getElementsByTagName("success");
-       
-    for (var i = 0; i < success.length; i++) {
-         var message = success[i].getAttribute("message");
-       }
-      });
-      //Changes the button text after the entry is recorded
-       document.getElementById(eventid + 'window').value = "You're in!";
-       document.getElementById(eventid).value = "You're in!";
-       document.getElementById(eventid).onclick = '';
-       document.getElementById(eventid + 'window').onclick = '';
-}
-//Same script as above but for the buttons in the info windows
-function attendEventWindow(eid) {
-   	var user = document.getElementById("loggedinid").value;
-   	var eventid = eid;
-   	
-   	var searchUrl = '/insertattend.php?&userid=' + user + '&eventid=' + eventid;       	
-       downloadUrl(searchUrl, function(data) {
-       var xml = parseXml(data);       
-       var success = xml.documentElement.getElementsByTagName("success");
-       
-    for (var i = 0; i < successNodes.length; i++) {
-         var message = successNodes[i].getAttribute("message");
-       }
-      });
-       document.getElementById(eventid + 'window').value = "You're in!";
-       document.getElementById(eventid).value = "You're in!";
-       document.getElementById(eventid).onclick = '';
-       document.getElementById(eventid + 'window').onclick = '';
+   	jQuery.getJSON('/insertattend.php',
+   					{ 'eventid':eventid,
+   					  'userid':user },
+   					  function(json_data) {
+   					  		if(json_data['status'] == 'success') {
+   					  			updateEventAttendance(eventid);							
+   					  		}
+						});
 }
 
 function textLoginChange(eid) {
@@ -796,32 +454,8 @@ function textLoginChange(eid) {
 }
 
 
-    //Call backs for Google maps marker plotting
-    //If any scripts need to be added that depend on the markers existing on the map ADD THEM ABOVE THESE SCRIPTS
-function downloadUrl(url, callback) {
-      var request = window.ActiveXObject ?
-          new ActiveXObject('Microsoft.XMLHTTP') :
-          new XMLHttpRequest;
-
-      request.onreadystatechange = function() {
-        if (request.readyState == 4) {
-          request.onreadystatechange = doNothing;
-          callback(request.responseText, request.status);
-        }
-      };
-
-      request.open('GET', url, true);
-      request.send(null);
-    }
-
-    function parseXml(str) {
-      if (window.ActiveXObject) {
-        var doc = new ActiveXObject('Microsoft.XMLDOM');
-        doc.loadXML(str);
-        return doc;
-      } else if (window.DOMParser) {
-        return (new DOMParser).parseFromString(str, 'text/xml');
-      }
-    }
-
-    function doNothing() {}
+//$("#map").html('hello map');
+// as soon as DOM is loaded, initialize the map & sidebar
+jQuery(document).ready(function() {
+	 initializeEventResults();
+	});

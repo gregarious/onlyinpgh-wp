@@ -8,12 +8,11 @@
 
 	<!-- Define a JS global to hold the site url -->
 	<script type="text/javascript">
-		var OIP_url = <?php bloginfo('url'); ?>;
+		var OIP_SITE_URL = "<?php bloginfo('url'); ?>";
 	</script>
 	
 <?php do_action( 'bp_head' ) ?>
 
-	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>" type="text/css" media="screen" />
 	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="<?php bloginfo('rss2_url'); ?>" />
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
@@ -57,6 +56,13 @@ function hideSearch()
 {
 document.getElementById("datepicksearch").style.display = "none";
 document.getElementById("bydate").style.display = "block";
+}
+
+function clearkeywordtip(t)
+{
+	if(t.value == 'Keyword search (optional)') {
+		t.value = '';
+	}
 }
 
 function showPlace() {
@@ -135,7 +141,7 @@ for (i = 0; i < field.length; i++)
 </head>
 
 
-<body style="margin:0px; padding:0px;" onload="load()">
+<body style="margin:0px; padding:0px;">
 <?php do_action( 'bp_before_header' ) ?>
 <div id="header"><div id="photoborder"></div>
 <div class="header_content">

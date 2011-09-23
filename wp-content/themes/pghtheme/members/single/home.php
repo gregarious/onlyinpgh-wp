@@ -1,5 +1,6 @@
 <?php get_header() ?>
 
+<div id="wrapper">
 	<div id="content">
 		<div class="padder">
 
@@ -55,6 +56,7 @@
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
+</div><!-- #wrapper -->
 
 	<?php //locate_template( array( 'sidebar.php' ), true ) ?>
 

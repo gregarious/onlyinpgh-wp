@@ -18,16 +18,20 @@
 /** The name of the database for WordPress */
 require_once('etc/config.php');
 
-define('DB_NAME', OIP_DB_NAME);
+define('DB_NAME', 'onlyinpgh_dev');
+//define('DB_NAME', OIP_DB_NAME);
 
 /** MySQL database username */
-define('DB_USER', OIP_DB_USER);
+define('DB_USER', 'root');
+//define('DB_NAME', OIP_DB_NAME);
 
 /** MySQL database password */
-define('DB_PASSWORD', OIP_DB_PASSWORD);
+define('DB_PASSWORD', 'root');
+//define('DB_NAME', OIP_DB_NAME);
 
 /** MySQL hostname */
-define('DB_HOST', OIP_DB_HOST);
+define('DB_HOST', 'localhost');
+//define('DB_NAME', OIP_DB_NAME);
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');

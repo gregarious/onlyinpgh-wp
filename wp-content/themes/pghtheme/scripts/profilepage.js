@@ -116,7 +116,7 @@ var placedot = site_url + '/place_dots/music.png';
 var placedot = site_url + '/place_dots/museum.png';
 	} 
 	else if ((ltype == 'bowling_allery')||(ltype == 'campground')||(ltype == 'park')||(ltype == 'stadium')) {
-		var placedot = site_url + '/place_dots/spots.png';
+		var placedot = site_url + '/place_dots/sports.png';
 	} 
 	else if ((ltype == 'beauty_salon')||(ltype == 'bicycle_store')||(ltype == 'book_store')||(ltype == 'clothing_store')||(ltype == 'convenience_store')||(ltype == 'department_store')||(ltype == 'electronics_store')||(ltype == 'florist')||(ltype == 'furniture_store')||(ltype == 'hair_care')||(ltype == 'hardware_store')||(ltype == 'home_goods_store')||(ltype == 'jewelry_store')||(ltype == 'liquor_store')||(ltype == 'pet_store')||(ltype == 'pharmacy')||(ltype == 'shoe_store')||(ltype == 'shopping_mall')||(ltype == 'spa')||(ltype == 'store')) {
 		var placedot = site_url + '/place_dots/shopping.png';

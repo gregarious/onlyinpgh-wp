@@ -1,9 +1,19 @@
+/* @override http://localhost:8888/onlyinpgh/wp-content/themes/pghtheme/css/pgh-events.css */
+
+/* Post map.js revision stlyes */
+
+#sidebar-content {
+	overflow:visible;
+	background-color:red;
+}
+
 
 /* Event */
 
 table.em-calendar td.eventful-pre a, table.em-calendar td.eventful-post a {
     color: #AAAAAA !important;
 }
+
 table.em-calendar td.eventful a, table.em-calendar td.eventful-today a {
     color: #0f0f0f !important;
 	text-shadow: 0px 0px 3px #f0f0f0;
@@ -45,6 +55,7 @@ table.em-calendar td.eventless-today {
 #eventsearch_bar {
 	height: 115px; 
 	width: 960px;
+	margin-left: 10px;
 	background-color: #0f0f0f;
 	-moz-border-radius: 0 0 10px 10px;
 	-webkit-border-radius: 0 0 10px 10px;
@@ -73,12 +84,12 @@ table.em-calendar td.eventless-today {
 
 
 #eventsearch_bar a.button, #eventsearch_bar input[type="submit"], #eventsearch_bar input[type="button"], #eventsearch_bar input[type="reset"], #eventsearch_bar ul.button-nav li a, #eventsearch_bar div.generic-button a {
-	     background-color: #FFFFFF;
+	background-color: #FFFFFF;
     color: #0F0F0F;
     float: right;
     font-family: 'Francois One',Impact,san-serif;
     font-size: 15px;
-font-weight: normal;
+	font-weight: normal;
     margin: 4px 10px;
     padding: 2px 8px;
     position: relative;

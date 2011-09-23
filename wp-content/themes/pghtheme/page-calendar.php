@@ -45,7 +45,7 @@ Template Name: Events Calendar
 get_header(); 
 
 ?>
-
+<div id="wrapper">
 <div id="content">
 	<div class="padder" id="cal-page">
 
@@ -80,5 +80,5 @@ get_header();
 	</div><!-- .padder -->
 		
 </div><!-- #content -->
-
+</div><!-- #wrapper -->
 <?php get_footer() ?>
