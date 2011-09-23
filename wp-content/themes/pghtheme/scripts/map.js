@@ -90,10 +90,10 @@ function JSONToEventInstance(json) {
 			html += this.timespan.start_time + ' - ' + this.timespan.end_time + '<br/><br/>';
 			html += this.description + '...<a target="_blank" href="/events/event/' + this.wp_slug + '/">Get more info</a><br/><br/>';
 			if(this.attending) {
-				html += '<input type="button" value="You\'re In!" id="' + this.id + 'window">';
+				html += '<input type="button" value="You\'re In!" class="attend-button" id="' + this.id + 'window">';
 			}
 			else {
-				html += '<input type="button" value="Count me in!" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
+				html += '<input type="button" value="Count me in!" class="attend-button" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
 			}
 			return html;
 		}
@@ -107,10 +107,10 @@ function JSONToEventInstance(json) {
 			html += this.timespan.start_time + ' - ' + this.timespan.end_time + '<br/><br/>';
 			html += this.description + '...<a target="_blank" href="/events/event/' + this.wp_slug + '/">Get more info</a><br/><br/>';
 			if(this.attending) {
-				html += '<input type="button" value="You\'re In!" id="' + this.id + 'window">';
+				html += '<input type="button" value="You\'re In!" class="attend-button" id="' + this.id + 'window">';
 			}
 			else {
-				html += '<input type="button" value="Count me in!" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
+				html += '<input type="button" value="Count me in!" class="attend-button" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
 			}
 			return html;
 		}
@@ -139,25 +139,28 @@ function updateEventAttendance(eid) {
 // Return type of the PHP call is an array of JSON objects with the 
 // 		following "prototype":
 // 		{
-// 			id 			: number,
-// 	 		name 		: string,
-// 			wp_slug  	: string,
-// 			description : string,
-// 			categories 	: [string],
-// 			image_url 	: string,
-// 			timespan 	: {
-// 				start_date  : string,
-// 				start_time  : string,
-// 				end_date	: string,		
-// 				end_time	: string }
-// 			location 	: {
-// 				address  	: string,
-// 				lat 	 	: number,
-// 				long 	 	: number }
-// 			organization : {
-// 				name 	 	: string,
-// 				url 	 	: string,
-// 				fancount 	: number }
+//			'more_results' : boolean
+//			'events' : {
+// 				id 			: number,
+// 	 			name 		: string,
+// 				wp_slug  	: string,
+// 				description : string,
+// 				categories 	: [string],
+// 				image_url 	: string,
+// 				timespan 	: {
+// 					start_date  : string,
+// 					start_time  : string,
+// 					end_date	: string,		
+// 					end_time	: string }
+// 				location 	: {
+// 					address  	: string,
+// 					lat 	 	: number,
+// 					long 	 	: number }
+// 				organization : {
+// 					name 	 	: string,
+// 					url 	 	: string,
+// 					fancount 	: number }
+//			}
 // 		}
 function performEventSearch(search_opts) {
 	var search_status = jQuery('#sidebar-search-status');
@@ -374,29 +377,6 @@ function createPlaceMarker(place,ltype) {
 	return marker;
 }
 
-// Creates map and runs initial homepage load search
-function initializeEventResults() {
-	map = new google.maps.Map(document.getElementById("map"), {
-		center: new google.maps.LatLng(40.44076, -80),
-		zoom: 12,
-		maxZoom: 18,
-		minZoom: 11,
-		mapTypeId: 'roadmap',
-		scrollwheel: false,
-		mapTypeControl: false,
-		zoomControl: true,
-		zoomControlOptions: {style: google.maps.ZoomControlStyle.LARGE},
-	});
-	infoWindow = new google.maps.InfoWindow();
-	infoWindowFocus = null;
-
-	var today = new Date();
-	var startdate = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
-	clearEventResults( function(){ 
-		return performEventSearch( {"startdate":startdate,"limit":40} ); }
-		);
-}
-
 // User wants to run a new search using form parameters
 function newSearchRequested() {
 	var opts = extractSearchOptions();
@@ -453,9 +433,19 @@ function textLoginChange(eid) {
 		
 }
 
-
-//$("#map").html('hello map');
-// as soon as DOM is loaded, initialize the map & sidebar
-jQuery(document).ready(function() {
-	 initializeEventResults();
+function initializeMap() {
+	map = new google.maps.Map(document.getElementById("map"), {
+		center: new google.maps.LatLng(40.44076, -80),
+		zoom: 12,
+		maxZoom: 18,
+		minZoom: 11,
+		mapTypeId: 'roadmap',
+		scrollwheel: false,
+		mapTypeControl: false,
+		zoomControl: true,
+		zoomControlOptions: {style: google.maps.ZoomControlStyle.LARGE},
 	});
+	infoWindow = new google.maps.InfoWindow();
+	infoWindowFocus = null;
+}
+
