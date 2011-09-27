@@ -1,5 +1,5 @@
 <?php
-require_once 'calendar.class.php';
+require_once 'include/calendar.class.php';
 
 if(!array_key_exists('anchor',$_GET)) {
 	$anchor_date_str = date('Y-m-d');
