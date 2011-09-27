@@ -173,6 +173,7 @@ class TwoWeekCalendar {
 			$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			$statement = $pdo->prepare($sql);
 			$statement->execute(array('startdate'=>$start,'enddate'=>$end));
+			$statement->setFetchMode(PDO::FETCH_ASSOC);
 		}
 		catch(PDOException $e) {  
 		    die('PDO MySQL error: ' . $e->getMessage());  
