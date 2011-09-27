@@ -201,31 +201,6 @@ font-weight: normal;
 	margin-top: 0px;
 }
 
-#space {
-	height: 150px;
-	width: 960px;
-	padding: 0px;
-	margin: auto;
-}
-
-.spacecolumn {
-	height: 230px;
-	width: 230px;
-	margin-right: 10px;
-	background-color: #ccc;
-	float: left;
-	margin-left: 2px;
-}
-
-.spacecolumnlast {
-	height: 230px;
-	width: 230px;
-	margin-right: 0px;
-	background-color: #ccc;
-	float: left;
-	margin-left: 2px;
-}
-
 .refinesearch {
 	    color: #F0F0F0;
     line-height: 16px;
@@ -344,8 +319,8 @@ font-weight: normal;
     -webkit-box-shadow: 0 5px 5px 0 #A0A0A0;
     background-color: #FFEC4B;
     float: right;
-    height: 55px;
-    margin: -78px 0;
+    height: 60px;
+    margin: -85px 0;
     padding: 1px 10px 0;
     text-align: center;
     width: 260px;

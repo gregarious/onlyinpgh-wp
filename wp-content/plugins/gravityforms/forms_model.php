@@ -352,6 +352,7 @@ class RGFormsModel{
             self::delete_form($form_id);
     }
 
+
     public static function delete_leads_by_form($form_id){
         global $wpdb;
 
@@ -390,6 +391,7 @@ class RGFormsModel{
         $sql = $wpdb->prepare("DELETE FROM $lead_table WHERE form_id=%d", $form_id);
         $wpdb->query($sql);
     }
+
 
     public static function delete_views($form_id){
         global $wpdb;
@@ -1072,15 +1074,17 @@ class RGFormsModel{
                     $value = array();
                     $value[0] = $matches[1];
                     $value[1] = $matches[2];
-                    $value[2] = $matches[3];
+                    $value[2] = rgar($matches,3);
                 }
 
                 $hour = empty($value[0]) ? "0" : strip_tags($value[0]);
                 $minute = empty($value[1]) ? "0" : strip_tags($value[1]);
                 $ampm = strip_tags($value[2]);
+                if(!empty($ampm))
+                    $ampm = " $ampm";
 
                 if(!(empty($hour) && empty($minute)))
-                    $value = sprintf("%02d:%02d %s", $hour, $minute, $ampm);
+                    $value = sprintf("%02d:%02d%s", $hour, $minute, $ampm);
                 else
                     $value = "";
 
@@ -1127,7 +1131,10 @@ class RGFormsModel{
 
                 //do not save price fields with blank price
                 if(rgar($field, "enablePrice")){
-                    list($label, $price) = explode("|", $value);
+                    $ary = explode("|", $value);
+                    $label = count($ary) > 0 ? $ary[0] : "";
+                    $price = count($ary) > 1 ? $ary[1] : "";
+
                     $is_empty = (strlen(trim($price)) <= 0);
                     if($is_empty)
                         $value = "";
@@ -1189,7 +1196,7 @@ class RGFormsModel{
             if(is_array($value) && self::choice_value_match($field, $choice, $value[$input_id])){
                 return $choice["text"];
             }
-            else if(self::choice_value_match($field, $choice, $value)){
+            else if(!is_array($value) && self::choice_value_match($field, $choice, $value)){
                 return $choice["text"];
             }
         }
@@ -1889,7 +1896,7 @@ class RGFormsModel{
         return $sql;
     }
 
-    private static function build_lead_array($results, $use_long_values = false){
+    public static function build_lead_array($results, $use_long_values = false){
 
         $leads = array();
         $lead = array();

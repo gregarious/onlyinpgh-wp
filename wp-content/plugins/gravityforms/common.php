@@ -1,7 +1,7 @@
 <?php
 class GFCommon{
 
-    public static $version = "1.5.2.8";
+    public static $version = "1.5.3";
     public static $tab_index = 1;
 
     public static function get_selection_fields($form, $selected_field_id){
@@ -407,8 +407,8 @@ class GFCommon{
                     case "checkbox" :
                     case "select" :
                     case "radio" :
-                        $use_value = $match[4] == "value";
-                        $use_price = $match[4] == "price";
+                        $use_value = rgar($match,4) == "value";
+                        $use_price = rgar($match,4) == "price";
 
                         if($use_value)
                             list($value, $price) = explode("|", $value);
@@ -1972,13 +1972,13 @@ class GFCommon{
                 $first_tabindex = self::get_tabindex();
                 $last_tabindex = self::get_tabindex();
 
-                $strength_style = !$field["passwordStrengthEnabled"] ? "style='display:none;'" : "";
-                $strength = $field["passwordStrengthEnabled"] || IS_ADMIN ? "<div id='{$field_id}_strength_indicator' class='gfield_password_strength' {$strength_style}>" . __("Strength indicator", "gravityforms") . "</div><input type='hidden' class='gform_hidden' id='{$field_id}_strength' name='input_{$id}_strength' />" : "";
+                $strength_style = !rgar($field,"passwordStrengthEnabled") ? "style='display:none;'" : "";
+                $strength = rgar($field,"passwordStrengthEnabled") || IS_ADMIN ? "<div id='{$field_id}_strength_indicator' class='gfield_password_strength' {$strength_style}>" . __("Strength indicator", "gravityforms") . "</div><input type='hidden' class='gform_hidden' id='{$field_id}_strength' name='input_{$id}_strength' />" : "";
 
                 $action = "gformShowPasswordStrength(\"$field_id\");";
-                $onchange= $field["passwordStrengthEnabled"] ? "onchange='{$action}'" : "";
-                $onkeyup = $field["passwordStrengthEnabled"] ? "onkeyup='{$action}'" : "";
-                $script = $field["passwordStrengthEnabled"] && !IS_ADMIN ? "<script type=\"text/javascript\">if(window[\"gformShowPasswordStrength\"]) jQuery(document).ready(function(){{$action}});</script>" : "";
+                $onchange= rgar($field,"passwordStrengthEnabled") ? "onchange='{$action}'" : "";
+                $onkeyup = rgar($field,"passwordStrengthEnabled") ? "onkeyup='{$action}'" : "";
+                $script = rgar($field,"passwordStrengthEnabled") && !IS_ADMIN ? "<script type=\"text/javascript\">if(window[\"gformShowPasswordStrength\"]) jQuery(document).ready(function(){{$action}});</script>" : "";
                 $pass = RGForms::post("input_" . $id ."_2");
                 return sprintf("<div class='ginput_complex$class_suffix ginput_container' id='{$field_id}_container'><span id='" . $field_id . "_1_container' class='ginput_left'><input type='password' name='input_%d' id='%s' {$onkeyup} {$onchange} value='%s' $first_tabindex %s/><label for='%s'>" . apply_filters("gform_password_{$form_id}", apply_filters("gform_password",__("Enter Password", "gravityforms"), $form_id), $form_id) . "</label></span><span id='" . $field_id . "_2_container' class='ginput_right'><input type='password' name='input_%d_2' id='%s_2' {$onkeyup} {$onchange} value='%s' $last_tabindex %s/><label for='%s_2'>" . apply_filters("gform_password_confirm_{$form_id}", apply_filters("gform_password_confirm",__("Confirm Password", "gravityforms"), $form_id), $form_id) . "</label></span>{$script}</div>{$strength}", $id, $field_id, $value, $disabled_text, $field_id, $id, $field_id, $pass, $disabled_text, $field_id);
 
@@ -2077,7 +2077,7 @@ class GFCommon{
                     $style = (IS_ADMIN && rgget("hideState", $field)) ? "style='display:none;'" : "";
                     if(IS_ADMIN || !rgget("hideState", $field)){
                         $state_field = self::get_state_field($field, $id, $field_id, $state_value, $disabled_text, $form_id);
-                        $state = sprintf("<span class='ginput_{$state_location}$class_suffix' id='" . $field_id . "_4_container' $style>$state_field<label for='%s.4' id='" . $field_id . "_4_label'>" . apply_filters("gform_address_state_{$form_id}", apply_filters("gform_address_state", $state_label, $form_id), $form_id) . "</label></span>", $field_id);
+                        $state = sprintf("<span class='ginput_{$state_location}$class_suffix' id='" . $field_id . "_4_container' $style>$state_field<label for='%s_4' id='" . $field_id . "_4_label'>" . apply_filters("gform_address_state_{$form_id}", apply_filters("gform_address_state", $state_label, $form_id), $form_id) . "</label></span>", $field_id);
                     }
                     else{
                         $state = sprintf("<input type='hidden' class='gform_hidden' name='input_%d.4' id='%s_4' value='%s'/>", $id, $field_id, $state_value);
@@ -2093,7 +2093,7 @@ class GFCommon{
                     $style = (IS_ADMIN && rgget("hideState", $field)) ? "style='display:none;'" : "";
                     if(IS_ADMIN || !rgget("hideState", $field)){
                         $state_field = self::get_state_field($field, $id, $field_id, $state_value, $disabled_text, $form_id);
-                        $state = sprintf("<span class='ginput_{$state_location}$class_suffix' id='" . $field_id . "_4_container' $style>$state_field<label for='%s.4' id='" . $field_id . "_4_label'>" . apply_filters("gform_address_state_{$form_id}", apply_filters("gform_address_state", $state_label, $form_id), $form_id) . "</label></span>", $field_id);
+                        $state = sprintf("<span class='ginput_{$state_location}$class_suffix' id='" . $field_id . "_4_container' $style>$state_field<label for='%s_4' id='" . $field_id . "_4_label'>" . apply_filters("gform_address_state_{$form_id}", apply_filters("gform_address_state", $state_label, $form_id), $form_id) . "</label></span>", $field_id);
                     }
                     else{
                         $state = sprintf("<input type='hidden' class='gform_hidden' name='input_%d.4' id='%s_4' value='%s'/>", $id, $field_id, $state_value);
@@ -2145,10 +2145,10 @@ class GFCommon{
                     {
                         if($format == "mdy"){
                             $tabindex = self::get_tabindex();
-                            $field_str = sprintf("<div class='clear-multi'><div class='gfield_date_month ginput_container' id='%s'><input type='text' maxlength='2' name='input_%d[]' id='%s.1' value='%s' $tabindex %s/><label for='%s.1'>" . __("MM", "gravityforms") . "</label></div>", $field_id, $id, $field_id, $date_info["month"], $disabled_text, $field_id);
+                            $field_str = sprintf("<div class='clear-multi'><div class='gfield_date_month ginput_container' id='%s'><input type='text' maxlength='2' name='input_%d[]' id='%s.1' value='%s' $tabindex %s/><label for='%s.1'>" . __("MM", "gravityforms") . "</label></div>", $field_id, $id, $field_id, rgar($date_info,"month"), $disabled_text, $field_id);
 
                             $tabindex = self::get_tabindex();
-                            $field_str .= sprintf("<div class='gfield_date_day ginput_container' id='%s'><input type='text' maxlength='2' name='input_%d[]' id='%s.2' value='%s' $tabindex %s/><label for='%s.2'>" . __("DD", "gravityforms") . "</label></div>", $field_id, $id, $field_id, $date_info["day"], $disabled_text, $field_id);
+                            $field_str .= sprintf("<div class='gfield_date_day ginput_container' id='%s'><input type='text' maxlength='2' name='input_%d[]' id='%s.2' value='%s' $tabindex %s/><label for='%s.2'>" . __("DD", "gravityforms") . "</label></div>", $field_id, $id, $field_id, rgar($date_info,"day"), $disabled_text, $field_id);
                         }
                         else{
                             $tabindex = self::get_tabindex();
@@ -2227,8 +2227,8 @@ class GFCommon{
 
                         $tagindex = self::get_tabindex();
 
-                        $dimensions = IS_ADMIN ? "" : "width='{$captcha["width"]}' height='{$captcha["height"]}'";
-                        return "<div class='gfield_captcha_container'><img class='gfield_captcha' src='{$captcha["url"]}' alt='' {$dimensions} /><div class='gfield_captcha_input_container simple_captcha_{$size}'><input type='text' name='input_{$id}' id='input_{$field_id}' /><input type='hidden' name='input_captcha_prefix_{$id}' value='{$captcha["prefix"]}' /></div></div>";
+                        $dimensions = IS_ADMIN ? "" : "width='" . rgar($captcha,"width") . "' height='" . rgar($captcha,"height") . "'";
+                        return "<div class='gfield_captcha_container'><img class='gfield_captcha' src='" . rgar($captcha,"url") . "' alt='' {$dimensions} /><div class='gfield_captcha_input_container simple_captcha_{$size}'><input type='text' name='input_{$id}' id='input_{$field_id}' /><input type='hidden' name='input_captcha_prefix_{$id}' value='" . rgar($captcha,"prefix") . "' /></div></div>";
                     break;
 
                     case "math" :
@@ -2486,7 +2486,7 @@ class GFCommon{
         }
         else{
             //id only displayed on front end
-            $state_field_id = "id='" . $field_id . ".4'";
+            $state_field_id = "id='" . $field_id . "_4'";
         }
 
         $tabindex = self::get_tabindex();
@@ -2677,6 +2677,7 @@ class GFCommon{
         }
     }
 
+
     public static function get_product_fields($form, $lead, $use_choice_text=false){
         $products = array();
 
@@ -2708,7 +2709,7 @@ class GFCommon{
                         if(empty($quantity))
                             continue;
 
-                        if(!$products[$id])
+                        if(!rgar($products,$id))
                             $products[$id] = array();
 
                         if($field["inputType"] == "price"){

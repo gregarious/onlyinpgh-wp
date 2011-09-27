@@ -82,36 +82,50 @@ function JSONToEventInstance(json) {
 	}
 
 	inst.toInfoWindowHTML = function() {
-			var html = '<img src="' + this.image_url + '">';
-			html += '<b>' + this.name + '</b><br/>';
-			html += this.location.address + '<br/>';
-			html += '<a target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions</a><br/>';
-			html +=	this.timespan.start_date + '<br/>';
-			html += this.timespan.start_time + ' - ' + this.timespan.end_time + '<br/><br/>';
-			html += this.description + '...<a target="_blank" href="/events/event/' + this.wp_slug + '/">Get more info</a><br/><br/>';
+			var html = '<div class="infowindow">';
+			html += '<h4 class="event-name">' + this.name + '</h4>';
+			html += '<img src="' + this.image_url + '">';
+			html += '<div class="alignright" id="host-address">';
+			html += '<p class="hostedby">Hosted By</p><h4 class="host">' + this.organization.name + '</h4>';
+			html += '<p class="event-address">' + this.location.address + '<br>';
+			html += '</div>'; // #host-address
+			html += '<div id="time-directions">';
+			html +=	'<p class="event-time">' + this.timespan.start_date + '<br>';
+			html += this.timespan.start_time + ' - ' + this.timespan.end_time;
+			html += '<a class="directions alignright" target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions &rarr;</a></p>';
+			html += '</div>'; // #time-directions
+			html += '<p class="event-desc">' + this.description + '</p>...<a target="_blank" href="/events/event/' + this.wp_slug + '/">More info</a>';
 			if(this.attending) {
-				html += '<input type="button" value="You\'re In!" class="attend-button" id="' + this.id + 'window">';
+				html += '<input class="attend-button-in alignright" type="button" value="You\'re In!" class="attend-button" id="' + this.id + 'window">';
 			}
 			else {
-				html += '<input type="button" value="Count me in!" class="attend-button" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
+				html += '<input class="attend-button alignright" type="button" value="Count me in!" class="attend-button alignright" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
 			}
+			html += '</div>'; // #infowindow
+
 			return html;
 		}
+
 	inst.toSidebarEntryHTML = function() {
-			var html = '<img src="' + this.image_url + '">';
-			html += '<b>' + this.name + '</b><br/>';
-			html += '<p class="hostedby">Hosted By</p><p class="host">' + this.organization.name + '</p>';
-			html += this.location.address + '<br/>';
-			html += '<a target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions</a><br/>';
-			html +=	this.timespan.start_date + '<br/>';
-			html += this.timespan.start_time + ' - ' + this.timespan.end_time + '<br/><br/>';
-			html += this.description + '...<a target="_blank" href="/events/event/' + this.wp_slug + '/">Get more info</a><br/><br/>';
+			var html = '<h4 class="event-name">' + this.name + '</h4>';
+			html += '<img src="' + this.image_url + '">';
+			html += '<div class="alignright" id="host-address">';
+			html += '<p class="hostedby">Hosted By</p><h4 class="host">' + this.organization.name + '</h4>';
+			html += '<p class="event-address">' + this.location.address + '<br>';
+			html += '</div>'; // #host-address
+			html += '<div id="time-directions">';
+			html +=	'<p class="event-time">' + this.timespan.start_date + '<br>';
+			html += this.timespan.start_time + ' - ' + this.timespan.end_time;
+			html += '<a class="directions alignright" target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions &rarr;</a></p>';
+			html += '</div>'; // #time-directions
+			html += '<p class="event-desc">' + this.description + '</p>...<a target="_blank" href="/events/event/' + this.wp_slug + '/">More info</a>';
 			if(this.attending) {
-				html += '<input type="button" value="You\'re In!" class="attend-button" id="' + this.id + 'window">';
+				html += '<input class="attend-button-in alignright" type="button" value="You\'re In!" class="attend-button" id="' + this.id + 'window">';
 			}
 			else {
-				html += '<input type="button" value="Count me in!" class="attend-button" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
+				html += '<input class="attend-button alignright" type="button" value="Count me in!" class="attend-button alignright" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
 			}
+			
 			return html;
 		}
 
@@ -351,7 +365,7 @@ function placeRequestClicked(ltype) {
 }
 
 // Returns a new map marker with the given properties set (this function 
-//	displays the marker on the global map automatically)
+// displays the marker on the global map automatically)
 function createPlaceMarker(place,ltype) {
 	var placeLoc = place.geometry.location;
 	var iconURL = getPlaceMarkerIconURL(ltype);

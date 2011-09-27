@@ -69,31 +69,6 @@ span.activity {
 	border-radius: 3px;
 }
 
-
-
-/* > Buttons
--------------------------------------------------------------- */
-
-input[type=submit], input[type=button] {
-	background: url( ../images/searbarbg.jpg ) top left repeat-x;
-	border: 1px solid #ddd;
-	padding: 3px 10px;
-	-moz-border-radius: 3px;
-	-webkit-border-radius: 3px;
-	border-radius: 3px;
-	text-decoration: none;
-	color: #888;
-	font-size: 12px;
-	font-weight: normal;
-	vertical-align: bottom;
-	cursor: pointer;
-}
-	input[type=submit]:hover, input[type=button]:hover {
-		border-color: #aaa;
-		color: #555;
-		outline: none;
-	}
-
 	
 /* > Data Tables
 -------------------------------------------------------------- */

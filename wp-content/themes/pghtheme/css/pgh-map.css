@@ -54,7 +54,7 @@ float: left;
 #gm-map-1-legend table {
 	color: #0F0F0F;
     font-family: 'Francois One',Impact,san-serif;
-font-weight: normal;
+    font-weight: normal;
     margin: 0;
     padding: 0;
     text-shadow: 0 0 3px #CCCCCC;
@@ -72,10 +72,166 @@ font-weight: normal;
 	display: block;
 }
 
-
 #map { 
 	width: 600px; 
 	height: 480px;
 	float: left;
 	position: relative;
+}
+
+
+
+/* Map info windows and sidebar */
+
+#event-sidebar {
+    float: right;
+    height: 500px;
+    overflow: auto;
+    width: 345px;
+}
+
+.infowindow {
+    padding:20px;
+    overflow-x: hidden;
+    width:300px;
+    height:300px;
+}
+
+.event-listing {
+    cursor:pointer;
+    padding: 20px;
+}
+
+.event-listing:hover {
+    background-color: #FFEC4B;
+}
+
+
+.event-listing img, #infowindow img {
+    margin:0 10px 0 0;
+    padding:2px 2px 2px 0;
+}
+
+#host-address {
+    margin-top:10px;
+    width:170px;
+}
+
+#time-directions{
+    clear:both;
+    margin:10px 0 15px 0;
+    width:290px;
+}
+
+.event-listing h4, .infowindow h4 {
+    font-family: 'Francois One','Impact',Sans-serif;
+    font-weight:normal;
+}
+
+.event-listing p, .infowindow p {
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+    line-height: 130%;
+}
+
+.event-name {
+    font-size:1.2em;
+    line-height:1.2em;
+    text-transform:capitalize;
+    margin:0 10px 20px 0;
+    padding-bottom:3px;
+    border-bottom:1px #999 solid;
+}
+
+.hostedby {
+    font-size:.65em;
+}
+
+.host {
+    margin-left:3px;
+}
+
+.event-address {
+    font-size:.8em;
+    margin-left:3px;
+}
+
+.event-time {
+    font-size:.75em;
+    font-weight:bold;
+    line-height:120%;
+}
+
+.directions {
+    font-size:1.3em;
+    position:relative;
+    bottom:2px;
+    right:10px;
+}
+
+.event-desc {
+    font-size:.75em;
+}
+
+.submit-button {
+    position:relative;
+    bottom:10px;
+}
+
+input.attend-button {
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+    text-transform:none;
+    font-size:.7em;
+    background-color:#000;
+    color:#FFF;
+}
+
+input.attend-button:hover {
+    background-color: #111;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#111), to(#999999)); 
+    background-image: -webkit-linear-gradient(top, #111, #999999); 
+    background-image:    -moz-linear-gradient(top, #111, #999999); 
+    background-image:     -ms-linear-gradient(top, #111, #999999); 
+    background-image:      -o-linear-gradient(top, #111, #999999); 
+    background-image:         linear-gradient(top, #111, #999999);
+            filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#444444', EndColorStr='#999999'); 
+}
+
+input.attend-button:active {
+    background-image:none;
+    background-color:#000;
+    -moz-box-shadow: inset 0 0 4px #fff;
+        -webkit-box-shadow: inset 0 0 4px #fff;
+            box-shadow: inner 0 0 4px #fff;
+}
+
+input.attend-button-in {
+    position:relative;
+    bottom:20px;
+    font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+    text-transform:none;
+    font-size:.7em;
+    background-color:#000;
+    color:#FFF;
+}
+
+.sidebartogglecurrent {
+    color: #ffec4b;
+    text-decoration: none;
+    background-color: #0F0F0F;
+    float: right;
+    font-size: 17px;
+    letter-spacing: 1px;
+    padding: 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+    width: 345px;
+    font-family: 'Francois One', Impact, san-serif;
+    font-weight: normal;
+    background-image:url("../images/searbarbg.jpg");
+    -webkit-box-shadow: 0px 5px 5px #a0a0a0; 
+       -moz-box-shadow: 0px 5px 5px #a0a0a0; 
+            box-shadow: 0px 5px 5px #a0a0a0; 
+    -moz-border-radius: 5px 5px 0 0;
+        -webkit-border-radius: 5px 5px 0 0;
+            border-radius: 5px 5px 0 0;
 }

@@ -2,16 +2,16 @@
 /* All of these will be in one sheet and minified for actual site - usability purposes right now*/
 
 
-@import url('pgh-header.css');
-@import url('pgh-footer.css');
-@import url('pgh-map.css');
-@import url('pgh-typography.css');
 @import url('pgh-main.css');
-@import url('pgh-events.css');
 @import url('pgh-nonbp.css');
 @import url('pgh-bpsame.css');
+@import url('pgh-header.css');
+@import url('pgh-footer.css');
+@import url('pgh-typography.css');
+@import url('pgh-events.css');
 @import url('pgh-photos.css');
 @import url('pgh-calendar.css');
+@import url('pgh-map.css');
 
 
 

@@ -2,9 +2,9 @@
 ----------------------------------------------------------------
 
 Gravity Forms Front End Form Styles
-Version 1.5.2.8
+Version 1.5.2.12
 http://www.gravityforms.com
-updated: May 18, 2011
+updated: July 5, 2011
 
 a Rocketgenius project
 copyright 2011 Rocketgenius Inc.
@@ -35,7 +35,7 @@ to no.
 .gform_wrapper input[type=text],
 .gform_wrapper input[type=url],
 .gform_wrapper input[type=email],
-.gform_wrapper input[type=phone],
+.gform_wrapper input[type=tel],
 .gform_wrapper input[type=number],
 .gform_wrapper input[type=password] {outline-style: none; font-size:11px; font-family:inherit; padding:2px 0 2px 0; letter-spacing:normal}
 .gform_wrapper textarea {outline-style: none; font-size:11px; font-family:inherit; letter-spacing:normal; padding:2px 0 2px 0; resize:none} /* doesn't validate but added for Safari field resizing */
@@ -404,20 +404,20 @@ body .gform_wrapper ul.gform_fields li.gfield.gform_validation_container {displa
 .gform_wrapper .top_label li.gfield.gf_inline input[type=text].large,
 .gform_wrapper .top_label li.gfield.gf_inline input[type=url].large,
 .gform_wrapper .top_label li.gfield.gf_inline input[type=email].large,
-.gform_wrapper .top_label li.gfield.gf_inline input[type=phone].large,
+.gform_wrapper .top_label li.gfield.gf_inline input[type=tel].large,
 .gform_wrapper .top_label li.gfield.gf_inline input[type=number].large,
 .gform_wrapper .top_label li.gfield.gf_inline input[type=password].large {width:25.4em!important}
 .gform_wrapper .top_label li.gfield.gf_inline input[type=text].medium,
 .gform_wrapper .top_label li.gfield.gf_inline input[type=url].medium,
 .gform_wrapper .top_label li.gfield.gf_inline input[type=email].medium,
-.gform_wrapper .top_label li.gfield.gf_inline input[type=phone].medium,
+.gform_wrapper .top_label li.gfield.gf_inline input[type=tel].medium,
 .gform_wrapper .top_label li.gfield.gf_inline input[type=number].medium,
 .gform_wrapper .top_label li.gfield.gf_inline input[type=password].medium {width:18.7em!important}
 .gform_wrapper .top_label li.gfield.gf_inline input[type=text].datepicker.medium {width:6em!important}
 .gform_wrapper .top_label li.gfield.gf_inline input[type=text].small,
 .gform_wrapper .top_label li.gfield.gf_inline input[type=url].small,
 .gform_wrapper .top_label li.gfield.gf_inline input[type=email].small,
-.gform_wrapper .top_label li.gfield.gf_inline input[type=phone].small,
+.gform_wrapper .top_label li.gfield.gf_inline input[type=tel].small,
 .gform_wrapper .top_label li.gfield.gf_inline input[type=number].small,
 .gform_wrapper .top_label li.gfield.gf_inline input[type=password].small {width:5em!important}
 .gform_wrapper .top_label li.gfield.gf_inline select  {width:auto!important}

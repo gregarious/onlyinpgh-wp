@@ -123,8 +123,7 @@ class GFExport{
             );
 
             $serializer = new RGXML($options);
-
-            $xml .= $serializer->serialize("forms", $forms);
+            $xml = $serializer->serialize("forms", $forms);
 
             if ( !seems_utf8( $xml ) )
                 $value = utf8_encode( $xml );

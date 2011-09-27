@@ -4,14 +4,9 @@ $img_dir = get_bloginfo('stylesheet_directory') . '/images';
 get_header(); ?>
 
 <div id="wrapper"> 
-<?php 
-// Removing loop - visual editor messes everything up
-//if (have_posts()) : while (have_posts()) : the_post(); 
-?>
-
 	<div id="eventsearch_bar">
 		<div id="dropdown_search">
-			<p class="searchbar_head" style="float: left;">Find upcoming
+			<p class="searchbar_head">Find upcoming
 events in</p>
 
 			<ul>
@@ -25,7 +20,7 @@ events in</p>
 						<option value="west">West</option> </select></li>
 				<li style="margin: 0px; padding: 0px;">					
 					<div id="bydate" style="display: block;">					
-						<p class="searchbar_header" style="float: left;">Happening</p>
+						<p class="searchbar_header alignleft">Happening</p>
 						<select id="timespanSelect" onkeydown="javascript:return submitonEnter(event);"> 
 							<option value="0">Today</option> 
 							<option value="1">Tomorrow</option> 
@@ -41,7 +36,7 @@ events in</p>
 						<p class="searchbar_header">Start:</p>
 						<input id="startdate" class="datepicker" type="text" />
 						<p class="searchbar_header">End:</p>
-						<input id="enddate" class="datepicker" type="text" />&nbsp;
+						<input id="enddate" class="datepicker" type="text" />
 						<p class="advancesearch" onclick="hideSearch()">Basic Date Search</p>
 					</div>
 				</li>
@@ -50,7 +45,7 @@ events in</p>
 				</li>
 			</ul>
 			
-			<button onclick="newSearchRequested();clearChecks();jqCheckAll('event_types','events',1)">Submit</button>
+			<button class="submit-button alignright" onclick="newSearchRequested();clearChecks();jqCheckAll('event_types','events',1)">Submit</button>
 
 		</div>
 
@@ -138,7 +133,6 @@ events in</p>
 	</div> <!-- #eventsearch_bar -->
 
 	<div id="main-content" style="padding: 0px;">
-		<?php //the_content(); -- not needed without loop ?>
 		<div id="mapcontentholder">
 			<div id="map"></div>
 			<div id="maplocationkey">
@@ -147,7 +141,7 @@ events in</p>
 						<td style="padding-left:5px;"><p class="searchbar_head" style="float: left;font-size: 17px;">Also Show me...</p></td>
 							<td>
 								<input type="checkbox" name="locations" id="food" onclick="placeRequestClicked('food')">
-								<img src="<?php echo $img_dir ?>/place_markers/food.png"><p>Bars & Restaurants</p>
+								<img src="<?php echo $img_dir ?>/place_markers/food.png"><p>Bars &amp; Restaurants</p>
 						</td>
 	
 						<td>
@@ -159,14 +153,14 @@ events in</p>
 						<td>
 							<input type="checkbox" name="locations" id="museum" onclick="placeRequestClicked('museum')">
 							<img src="<?php echo $img_dir ?>/place_markers/museum.png">
-							<p>Museums & Galleries</p>
+							<p>Museums &amp; Galleries</p>
 						</td>						
 					</tr>			
 					<tr>
 						<td>
 							<input type="checkbox" name="locations" id="sports" onclick="placeRequestClicked('sports')">
 							<img src="<?php echo $img_dir ?>/place_markers/sports.png">
-							<p>Sports & Outdoors</p>
+							<p>Sports &amp; Outdoors</p>
 						</td>
 
 						<td>
@@ -187,41 +181,33 @@ events in</p>
 							<p>Attractions</p>
 						</td>
 					</tr>
-				</table>
-			</div> <!-- #maplocation key-->
+				</table> <!-- table#locationtypes -->
+			</div> <!-- #maplocationkey-->
 		</div> <!-- #mapcontentholder -->
 		
-		<div id="sidebar-header">
-				<p class="sidebartogglecurrent">Upcoming Events</p>
-			</div>
-		<div id="event-sidebar">
+		<div id="sidebar-header" class="alignright">
+			<p class="sidebartogglecurrent">Upcoming Events</p>
+		</div>
+		<div id="event-sidebar" class="alignright">
 			<div id="sidebar-content"></div> <!-- Actual event results dynamically loaded into here -->
 			<div id="sidebar-search-status"> <!-- Only visible while waiting for an AJAX response -->
-				Searching... <img src="<?php bloginfo('stylesheet_directory'); ?>/images/loading.gif"/>
+				<img src="<?php bloginfo('stylesheet_directory'); ?>/images/loading.gif"/>
+				<h4>Searching...</h4> 
 			</div>
 			<div id="sidebar-footer"></div>	<!-- Load more events button will be rendered in here if applicable -->
-		</div>
-	</div>
-</div> 
-
-</div>
-<?php //endwhile; else: ?>
-<?php //endif; ?>
-<div id="space">
-<div class="spacecolumn"><?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Ad Space 1') ) : ?>
-<?php endif; ?>
-</div>
-<div class="spacecolumn"><?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Ad Space 2') ) : ?>
-<?php endif; ?></div>
-<div class="spacecolumn"><?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Ad Space 3') ) : ?>
-<?php endif; ?></div>
-<div class="spacecolumnlast"><?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Ad Space 4') ) : ?>
-<?php endif; ?></div>
-</div>
-
+		</div> <!-- #event-sidebar -->
+	</div> <!-- #main-content -->
+	
+	<div id="space">
+		<div class="spacecolumn alignleft"><?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Ad Space 1') ) : endif; ?></div>
+		<div class="spacecolumn alignleft"><?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Ad Space 2') ) : endif; ?></div>
+		<div class="spacecolumn alignleft"><?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Ad Space 3') ) : endif; ?></div>
+		<div class="spacecolumnlast alignleft"><?php if ( !function_exists('dynamic_sidebar') || !dynamic_sidebar('Ad Space 4') ) : endif; ?></div>
+	</div> <!-- #space -->
 
 </div> <!-- #wrapper -->
 
 <script src="<?php bloginfo('stylesheet_directory'); ?>/scripts/map.js"></script>
 <script src="<?php bloginfo('stylesheet_directory'); ?>/scripts/frontpage.js"></script>
+
 <?php get_footer(); ?>

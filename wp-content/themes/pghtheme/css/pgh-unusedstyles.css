@@ -340,23 +340,6 @@ z-index: 1;
 
 /* pgh-main.css */
 
-#sidebar {
-	float: right;
-	margin: 30px 20px 0 0 ;
-	width: 250px;
-}
-
-#sidebar p {
-	font-size: 10px;
-	color: #ffffff;
-}
-
-#sidebar label {
-	font-size: 10px;
-	color: #ffffff;
-	display: inline;
-}
-
 .filter_column {
 	width: 270px;
 	float: left;
@@ -1204,11 +1187,6 @@ font-weight: normal;
 .blog_list h3 {
 font-size: 20px;
 }
-
-#sidebar .widget h5 {
-color: #0f0f0f;
-}
-
 
 
 /* pgh-bpsame.css */

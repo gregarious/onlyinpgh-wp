@@ -33,6 +33,8 @@ http://css-tricks.com/794-elastic-calendar-styling-with-pure-css/
 // Draw the calendar
 function draw_calendar($month,$year) {
 
+      $bloginfo = get_bloginfo('siteurl');
+
       // Open table 
       $calendar = '<ol class="calendar">';
 
@@ -67,28 +69,15 @@ function draw_calendar($month,$year) {
 
       // Add the day cell, highlight current
       for($list_day = 1; $list_day <= $days_in_month; $list_day++):
-      
-            //$calendar.= '<td class="calendar-day"><div class="day-single">';
     
             if ($list_day == date('d') && $month == date('n') && $year == date('Y')):
                   $calendar.= '<li class="calendar-day" id="day-today">'.$list_day.'</li>';               
             elseif ($list_day < date('d') && $month == date('n') && $year == date('Y')):
-                  $calendar.= '<li class="calendar-day" id="day-past">'.$list_day.'</li>';
-                                    
+                  $calendar.= '<li class="calendar-day" id="day-past">'.$list_day.'</li>';     
             else:
-                  $calendar.= '<li class="calendar-day" id="day-future">'.$list_day.'</li>';
+                  $calendar.= '<a href="'.$bloginfo.'/events-new/?month='.$month.'"><li class="calendar-day" id="day-future">'.$list_day.'</li></a>';
             endif;
-                        
-            // Close the day cell
-            //$calendar.= '</div></td>';
-            
-            // Create a new row for new week
-            /*if($running_day == 6):
-                  $calendar.= '</tr>';
-            if(($day_counter+1) != $days_in_month):
-                  $calendar.= '<tr class="calendar-row">';
-            endif;*/
-            
+
             $running_day = -1;
             $days_in_this_week = 0;
     
@@ -169,6 +158,7 @@ $prev_href = '?month=' . $prevMonthVal . '&year=' . $prevYearVal;
 $next_href = '?month=' . $nextMonthVal . '&year=' . $nextYearVal;
 
 
+// Begin WordPress junk 
 
 // Adding the AJAX hooks
 add_action('wp_ajax_nopriv_my_special_action', 'draw_ajax_calendar');
