@@ -183,7 +183,7 @@ class TwoWeekCalendar {
 		while($row = $statement->fetch()) {
 			$events[] = array(
 					'id' 		=> intval($row['event_id']),
-					'name'		=> htmlentities($row['event_name'],ENT_QUOTES,'UTF-8',FALSE),
+					'name'		=> htmlentities($row['event_name'],ENT_QUOTES,'ISO-8859-1',FALSE),
 					'start_dt'	=> new DateTime($row['event_start_date'] . ' ' . $row['event_start_time']),
 					'end_dt'	=> new DateTime($row['event_end_date'] . ' ' . $row['event_end_time'])
 			);

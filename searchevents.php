@@ -216,12 +216,12 @@ while($row = $statement->fetch()) {
 	//		event_start_time, event_end_time, address, organization
 	$all_events[] = 
 		array(	'id'			=> intval($row['event_id']),
-				'name'			=> htmlentities($row['event_name'],ENT_QUOTES,'UTF-8',FALSE),
+				'name'			=> htmlentities($row['event_name'],ENT_QUOTES,'ISO-8859-1',FALSE),
 				'wp_slug'		=> $row['event_slug'],
 				'description'   => ($row['event_notes'] !== NULL) ? 
-										htmlentities($row['event_notes'],ENT_QUOTES,'UTF-8',FALSE) : NULL,
+										htmlentities($row['event_notes'],ENT_QUOTES,'ISO-8859-1',FALSE) : NULL,
 				'categories'	=> ($row['event_type'] !== NULL) ?
-										explode(',',htmlentities($row['event_type'],ENT_QUOTES,'UTF-8',FALSE)) : NULL,
+										explode(',',htmlentities($row['event_type'],ENT_QUOTES,'ISO-8859-1',FALSE)) : NULL,
 				'image_url'		=> $row['event_pic'],
 				'attending'		=> array_key_exists('booking_spaces',$row) ? $row['booking_spaces']==TRUE : FALSE,
 				'timespan'		=> array(
@@ -232,14 +232,14 @@ while($row = $statement->fetch()) {
 					'end_time'		=> date("g:i a", strtotime($row['event_end_time'])), 
 					),
 				'location'		=> array(
-					'address'		=> htmlentities($row['location_address'],ENT_QUOTES,'UTF-8',FALSE),
+					'address'		=> htmlentities($row['location_address'],ENT_QUOTES,'ISO-8859-1',FALSE),
 					'lat'			=> ($row['location_latitude'] !== NULL) ?
 										floatval($row['location_latitude']) : NULL,
 					'long'			=> ($row['location_longitude'] !== NULL) ?
 										floatval($row['location_longitude']) : NULL,
 					),
 				'organization'		=> array(
-					'name'		=> htmlentities ($row['organization_name'],ENT_QUOTES,'UTF-8',FALSE),
+					'name'		=> htmlentities ($row['organization_name'],ENT_QUOTES,'ISO-8859-1',FALSE),
 					'url'		=> $row['organization_link_url'],
 					'fancount' 	=> ($row['organization_fan_count'] !== NULL) ?
 									intval($row['organization_fan_count']) : NULL
