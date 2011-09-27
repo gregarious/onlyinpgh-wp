@@ -1,5 +1,6 @@
 <?php get_header() ?>
 
+<div id="wrapper">
 	<div id="content">
 		<div class="padder">
 
@@ -28,8 +29,7 @@
 				<?php elseif ( bp_is_user_blogs() ) : ?>
 					<?php locate_template( array( 'members/single/blogs.php' ), true ) ?>
 
-				<?php elseif ( bp_is_user_friends() ) : ?>
-					<?php locate_template( array( 'members/single/friends.php' ), true ) ?>
+			
 
 				<?php elseif ( bp_is_user_groups() ) : ?>
 					<?php locate_template( array( 'members/single/groups.php' ), true ) ?>
@@ -55,7 +55,6 @@
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
-
-	<?php //locate_template( array( 'sidebar.php' ), true ) ?>
+</div><!-- #wrapper -->
 
 <?php get_footer() ?>

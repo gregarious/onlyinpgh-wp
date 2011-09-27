@@ -1,9 +1,80 @@
+/* @override http://localhost:8888/onlyinpgh/wp-content/themes/pghtheme/map-style.css?ver=3.2.1 */
+
+
 html,body{height:100%;}
-.meta{font-size:70%;}
-.meta .blogdate{font-style:italic;}
-.locationinfo{font-size:80%;overflow:auto;width:300px;height:150px;font-family:'Francois One', Impact, sans-serif;}
-.user-location-info{font-size:80%;overflow:auto;width:150px;height:80px;}
-.comment-location-info{font-size:80%;overflow:auto;width:200px;height:140px;}
-.info-window-max{font-size:80%;overflow:auto;}
-.locationinfo h2 a,.info-window-max h2 a{text-decoration:none;margin:0;padding:0;color:#0f0f0f;text-transform:uppercase;border-bottom: 1px solid #0f0f0f;}
-.storycontent{font-family:“Trebuchet MS”, “Lucida Sans Unicode”, “Lucida Grande”,” Lucida Sans”, Arial, sans-serif;}
+
+.locationinfo {
+	overflow:auto;
+	width:230px;
+	height:150px;
+	font-weight: normal;
+	position:relative;
+	bottom:10px;
+}
+
+.meta {
+	font-size:70%;
+	font-family: Helvetica;
+	position:relative;
+	bottom:25px;
+	border-top:1px #aaa solid;
+	padding:2px 0 0 0;
+	margin: 5px 10px 0 0;
+}
+
+.meta .blogdate { 
+	font-style:italic;
+}
+
+.meta a {
+	color:#000;
+}
+
+.meta a:hover {
+	color:#999;
+}
+
+.locationinfo .storycontent {
+	font-size:70%;
+}
+
+.locationinfo .attachment-post-thumbnail {
+	
+}
+
+.user-location-info {
+	font-size:80%;
+	overflow:auto;
+	width:150px;
+	height:80px;
+}
+
+.comment-location-info {
+	font-size:80%;
+	overflow:auto;
+	width:200px;
+	height:140px;
+}
+
+.info-window-max {
+	font-size:80%;
+	overflow:auto;
+}
+
+.locationinfo h2 a,.info-window-max h2 a{
+	font-family:'Francois One', Impact, serif;
+	font-size:.7em;
+	text-decoration:none;
+	color:#0f0f0f;
+	text-transform:uppercase;
+	text-shadow: 0 0 0 3px #CCC;
+	letter-spacing:1px;
+}
+
+.locationinfo h2 a:hover,.info-window-max h2 a:hover {
+	color:#999;
+}
+
+.storycontent {
+	font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}           

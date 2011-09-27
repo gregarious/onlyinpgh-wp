@@ -85,22 +85,6 @@
 	margin-bottom: 10px;
 }
 
-.disclaimerheader {
-	font-family: 'Francois One', Impact, serif;
-	font-size: 20px;
-	color: #ffffff;
-	padding-top: 5px;
-	padding-bottom: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
-	background-color: #0F0F0F;
-	margin-bottom: 5px;
-	width: 640px;
-	text-shadow: 1px 1px 0px #000;
-	letter-spacing: 1px;
-font-weight: normal;
-}
-
 .footerlogo {
 	font-family: "helvetica", "sans-serif";
 	font-size: 40px;

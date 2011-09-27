@@ -180,7 +180,7 @@ function performEventSearch(search_opts) {
 			}
 			updateEventResults(event_insts,json_result['more_results']);
 		}
-	jQuery.getJSON('/searchevents.php',search_opts,callback);
+	jQuery.getJSON('/onlyinpgh/searchevents.php',search_opts,callback);
 }
 
 function eventClicked(event_instance) {

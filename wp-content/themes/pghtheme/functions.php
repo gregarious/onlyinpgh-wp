@@ -1,8 +1,18 @@
 <?php
 
-///////////////////////
-// REGISTER SIDEBARS //
-///////////////////////
+require_once('calendar.php');
+
+// Do not enqueue BuddyPress stylesheets and enqueue our's last
+
+function bp_dtheme_enqueue_styles() {
+    wp_enqueue_style( 'pgh-child-theme-css', get_stylesheet_directory_uri() . '/css/pgh-default.css', array(), $version );
+}
+add_action( 'wp_print_styles', 'bp_dtheme_enqueue_styles' );
+
+
+//////////////////////
+// REGISTER WIDGETS //
+//////////////////////
 
 // The first sidebar
  if(function_exists('register_sidebar'))
@@ -92,7 +102,7 @@ if(function_exists('register_sidebar'))
 if(function_exists('register_sidebar'))
       register_sidebar(array(
       'name' => 'Search Photos', // The sidebar name to register
-      'before_widget' => '<div class="widget">',
+      'before_widget' => '<div class="widget" id="search-photos">',
       'after_widget' => '</div>',
       'before_title' => '<h5>',
       'after_title' => '</h5>',
@@ -107,14 +117,72 @@ if(function_exists('register_sidebar'))
       'after_title' => '</h5>',
  ));
 
-if(function_exists('register_sidebar'))
+/*if(function_exists('register_sidebar'))
       register_sidebar(array(
       'name' => 'Photo Sidebar 3', // The sidebar name to register
       'before_widget' => '<div class="widget">',
       'after_widget' => '</div>',
       'before_title' => '<h5>',
       'after_title' => '</h5>',
- ));
+ ));*/
+
+
+
+
+////////////////
+// THUMBNAILS //
+////////////////
+
+
+// Creating thumbnails from attachments: code from theme WPFolio Two http://notlaura.com/wpfolio-two
+
+
+// Add support for post thumbnails of 250px square
+// Add custom image size for cat thumbnails
+if ( function_exists( 'add_theme_support' ) ) {
+	add_theme_support( 'post-thumbnails' );
+	set_post_thumbnail_size( 200, 200, true );
+	add_image_size('wpf-thumb', 200, 200, true);
+}
+
+
+// Get post attachments
+function wpf_get_attachments() {
+	global $post;
+	return get_posts( 
+		array(
+			'post_parent' => get_the_ID(), 
+			'post_type' => 'attachment', 
+			'post_mime_type' => 'image') 
+		);
+}
+
+// Get the URL of the first attachment image - called in wpf-category.php. If no attachments, display default-thumb.png
+function wpf_get_first_thumb_url() {
+
+	$attr = array( 
+		'class'	=> "attachment-post-thumbnail wp-post-image");
+
+	$imgs = wpf_get_attachments();
+	if ($imgs) {
+		$keys = array_reverse($imgs);
+		$num = $keys[0];
+		$url = wp_get_attachment_image($num->ID, 'wpf-thumb', true,$attr);
+		print $url;
+	} else {
+		echo '<img src=http://notlaura.com/default-thumb.png alt="no attachments here!" title="default thumb" class="attachment-post-thumbnail wp-post-image">';
+	}
+}
+
+// END - get attachment function
+
+// Make featured image thumbnail a permalink
+add_filter( 'post_thumbnail_html', 'my_post_image_html', 10, 3 );
+function my_post_image_html( $html, $post_id, $post_image_id ) {
+	$html = '<a href="' . get_permalink( $post_id ) . '" title="' . esc_attr( get_post_field( 'post_title', $post_id ) ) . '">' . $html . '</a>';
+	return $html;
+}
+
 
 
 //////////
@@ -133,11 +201,11 @@ register_nav_menus( array(
 	'primary' => __( 'Primary Navigation' ),
 	) );
 
+// Let WP load jQuery on it's own if we're in the admin panel. 
+// http://digwp.com/2009/06/use-google-hosted-javascript-libraries-still-the-right-way/
+
 function my_init_method() {
       
-      // let WP load jQuery on it's own if we're in the admin panel. if we load 
-      // this in the admin panel, conflicts will arise.
-      // See http://digwp.com/2009/06/use-google-hosted-javascript-libraries-still-the-right-way/
       if( !is_admin()) {      
             wp_deregister_script('jquery'); 
             wp_register_script('jquery', ("http://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js"), false, '1.6.3');
@@ -146,33 +214,18 @@ function my_init_method() {
 }
 add_action('init', 'my_init_method');
 
-add_theme_support( 'post-thumbnails' );
-set_post_thumbnail_size( 9999999, 150); // 100 pixels wide by 100 pixels tall, hand crop
 
 function new_excerpt_more($more) {
 	return '';
 }
 add_filter('excerpt_more', 'new_excerpt_more');
 
+// Changing excerpt length to 30 words
 function new_excerpt_length($length) {
 	return 30;
 }
-add_filter('excerpt_length', 'new_excerpt_length');
+add_filter('excerpt_length', 'new_excerpt_length'); 
 
 
-// Customizing title for BuddyPress Profile page
-// http://buddypress.org/community/groups/how-to-and-troubleshooting/forum/topic/editing-group-and-forum-page-title-tags/
-function my_page_title( $title, $b ) {
-	global $bp;
-
-	if ( $bp->current_action == 'forum' && $bp->action_variables[0] == 'topic' ) {
-		if ( bp_has_topic_posts() ) {
-			$topic_title = bp_get_the_topic_title();
-			$title .= ' | ' . $topic_title;
-		}
-	}
-	return $title;
-}
-add_filter( 'bp_page_title', 'my_page_title', 10, 2 );
 
 ?>

@@ -1,0 +1,109 @@
+
+/* All of these will be in one sheet and minified for actual site - usability purposes right now*/
+
+
+@import url('pgh-header.css');
+@import url('pgh-footer.css');
+@import url('pgh-map.css');
+@import url('pgh-typography.css');
+@import url('pgh-main.css');
+@import url('pgh-events.css');
+@import url('pgh-nonbp.css');
+@import url('pgh-bpsame.css');
+@import url('pgh-photos.css');
+@import url('pgh-calendar.css');
+
+
+
+/* > STYLES CUSTOMIZED FROM BUDDYPRESS
+----------------------------------------------------------------------------------------------- */
+
+
+/* > Item Headers (Profiles, Groups)
+-------------------------------------------------------------- */
+
+div#item-header {
+	overflow: hidden;
+}
+	div#item-header div#item-header-content { margin-left: 170px; }
+
+	div#item-header h2 {
+		font-size: 28px;
+		margin: 0 0 15px 0;
+		line-height: 120%;
+	}
+		div#item-header h2 a {
+			text-decoration: none;
+			color: #777;
+		}
+
+	div#item-header img.avatar {
+		float: left;
+		margin: 0 15px 25px 0;
+	}
+
+	div#item-header h2 { margin-bottom: 5px; }
+
+	div#item-header span.activity {
+		vertical-align: middle;
+		font-size: 11px;
+		font-weight: normal;
+		line-height: 170%;
+		margin-bottom: 7px;
+	}
+
+	
+/* > Item Tabs
+-------------------------------------------------------------- */
+
+#item-nav ul li {
+	list-style: none;
+}
+
+#subnav {
+	overflow: auto;
+}
+
+#subnav ul li {
+	list-style: none;
+}
+
+
+div.item-list-tabs {
+	clear: left;
+	overflow: hidden;
+	margin: 25px -19px 20px -19px;
+	background: #FFEC4B;
+}
+	div.item-list-tabs ul li a {
+		text-decoration: none;
+		color: #0f0f0f;
+		text-transform: uppercase;
+		style-type: none;
+	}
+		
+		div.item-list-tabs ul li.selected a,
+		div.item-list-tabs ul li.current a {
+			background-color: #0f0f0f;
+			color: #FFEC4B;
+			letter-spacing: .25px;
+			-moz-border-radius-topleft: 3px;
+			-webkit-border-top-left-radius: 3px;
+			-moz-border-radius-topright: 3px;
+			-webkit-border-top-right-radius: 3px;
+		}
+		
+span.activity {
+    -moz-border-radius: 3px 3px 3px 3px;
+-webkit-border-radius: 3px 3px 3px 3px;
+    background: none repeat scroll 0 0 #FFEC4B;
+    border-bottom: 1px solid #0F0F0F;
+    border-right: 1px solid #0F0F0F;
+    color: #0F0F0F;
+    display: inline-block;
+    font-size: 11px;
+    font-weight: normal;
+    margin-top: 6px;
+    padding: 1px 8px;
+    text-decoration: none;
+} 

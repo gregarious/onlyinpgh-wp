@@ -1,4 +1,5 @@
 <?php 
+
 $img_dir = get_bloginfo('stylesheet_directory') . '/images';
 get_header(); ?>
 
@@ -54,7 +55,7 @@ events in</p>
 		</div>
 
 		<div id="placesearch">
-				<p class="refinesearch" style="float: left;">Events types</p>
+				<p class="refinesearch">Events types</p>
 				<form id="event_types" name="event_types" action="" method="post">
 				<table id="eventtypes">
 					<tbody>
@@ -190,10 +191,10 @@ events in</p>
 			</div> <!-- #maplocation key-->
 		</div> <!-- #mapcontentholder -->
 		
-		<div id="event-sidebar">
-			<div id="sidebar-header">
+		<div id="sidebar-header">
 				<p class="sidebartogglecurrent">Upcoming Events</p>
 			</div>
+		<div id="event-sidebar">
 			<div id="sidebar-content"></div> <!-- Actual event results dynamically loaded into here -->
 			<div id="sidebar-search-status"> <!-- Only visible while waiting for an AJAX response -->
 				Searching... <img src="<?php bloginfo('stylesheet_directory'); ?>/images/loading.gif"/>
@@ -218,7 +219,9 @@ events in</p>
 <?php endif; ?></div>
 </div>
 
+
 </div> <!-- #wrapper -->
+
 <script src="<?php bloginfo('stylesheet_directory'); ?>/scripts/map.js"></script>
 <script src="<?php bloginfo('stylesheet_directory'); ?>/scripts/frontpage.js"></script>
 <?php get_footer(); ?>

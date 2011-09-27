@@ -1,7 +1,6 @@
 <?php get_header(); ?>
-
+<div id="wrapper">
 	<div id="content">
-		<div class="padder">
 
 		<?php do_action( 'bp_before_404' ) ?>
 
@@ -19,7 +18,6 @@
 
 		<?php do_action( 'bp_after_404' ) ?>
 
-		</div><!-- .padder -->
 	</div><!-- #content -->
-
+</div><!-- #wrapper -->
 <?php get_footer(); ?>

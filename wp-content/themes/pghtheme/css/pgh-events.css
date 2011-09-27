@@ -1,50 +1,37 @@
 
-/* Event */
-
-table.em-calendar td.eventful-pre a, table.em-calendar td.eventful-post a {
-    color: #AAAAAA !important;
-}
-table.em-calendar td.eventful a, table.em-calendar td.eventful-today a {
-    color: #0f0f0f !important;
-	text-shadow: 0px 0px 3px #f0f0f0;
-	font-weight: normal !important;
+#sidebar-content {
+	overflow:auto;
+	padding:10px;
 }
 
-table.em-calendar td.eventful a:hover, table.em-calendar td.eventful-today a:hover {
-    text-decoration: none !important;
-}
-
-table.em-calendar td.eventless-today {
-    background-color: #ffec4b !important;
-}
-
-#event_sidebar div {
-	padding: 6px;
-	margin-bottom: 10px;
-	overflow: auto;
-	min-height: 0px;
-}
-
-#event_sidebar h2, #location_sidebar h2 {
-	width: 340px;
-	padding: 5px 0px;
-	background-color: #0f0f0f;
-	color: #ffec4b;
-	text-shadow: 1px 1px #000;
+#event-sidebar {
 	float: right;
-	overflow: auto;
-	font-family: 'Francois One',Impact,serif;
-	font-size: 25px;
-	text-align: center;
-	display: block;
-	text-transform: uppercase;
-	font-weight: normal;
-	font-weight: normal;
+    height: 500px;
+    overflow: auto;
+    width: 345px;
+}
+
+.sidebartogglecurrent {
+	color: #ffec4b;
+	text-decoration: none;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+    background-color: #0F0F0F;
+    float: right;
+    font-size: 17px;
+    letter-spacing: 1px;
+    padding: 10px 0;
+    text-align: center;
+    text-transform: uppercase;
+    width: 345px;
+	font-family: 'Francois One', Impact, san-serif;
+font-weight: normal;
 }
 
 #eventsearch_bar {
 	height: 115px; 
 	width: 960px;
+	margin-left: 10px;
 	background-color: #0f0f0f;
 	-moz-border-radius: 0 0 10px 10px;
 	-webkit-border-radius: 0 0 10px 10px;
@@ -71,40 +58,6 @@ table.em-calendar td.eventless-today {
 	padding: 0px;
 }
 
-
-#eventsearch_bar a.button, #eventsearch_bar input[type="submit"], #eventsearch_bar input[type="button"], #eventsearch_bar input[type="reset"], #eventsearch_bar ul.button-nav li a, #eventsearch_bar div.generic-button a {
-	     background-color: #FFFFFF;
-    color: #0F0F0F;
-    float: right;
-    font-family: 'Francois One',Impact,san-serif;
-    font-size: 15px;
-font-weight: normal;
-    margin: 4px 10px;
-    padding: 2px 8px;
-    position: relative;
-    text-shadow: 0 0 1px #cccccc;
-    text-transform: uppercase;
-    top: -0.3em;
-}
-
-#event_sidebar {
-	width: 325px;
-}
-
-.addeventsbutton {
-	background-color: #0f0f0f;
-	color: #fff;
-	text-shadow: 0px 0px 3px #ccc;
-	padding: 8px 15px;
-	margin-top: 10px;
-	-moz-border-radius: 3px;
--webkit-border-radius: 3px;
-}
-
-.addeventsbutton:hover {
-	color: #ffec4b;
-}
-
 #eventsearch_bar img {
 	padding: 0 0 0 2px;
     display: inline-block;
@@ -116,19 +69,6 @@ font-weight: normal;
 	padding: 0px !important;
 }	
 
-#eventtypes .multiline p {
-	margin: 5px 15px 0px 0px;
-	padding; 0px;
-}		
-
 #eventtypes input {
 	float: left;
-}
-
-/* Calendar */
-
-table.fullcalendar ul {
-    list-style: none outside none;
-	magin: 0px;
-	padding: 0px;
 }

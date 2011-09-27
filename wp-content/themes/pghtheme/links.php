@@ -1,4 +1,12 @@
-<?php get_header() ?>
+<?php 
+
+/****
+
+Previously used as template for photos page - now page-photos.php is use for that, this is not being used.
+
+****/
+
+get_header() ?>
 
 	<div id="wrapper">
 <div id="main-content" style="padding: 0px;width:955px;">

@@ -1,0 +1,79 @@
+
+/* Thanks: http://www.elated.com/articles/styling-tables-with-css/ */
+
+.padder#cal-page{
+	width:900px;
+}
+
+.calendar-day, .weekday  {
+	
+}
+
+#day-today{
+	background-color: green;
+}
+
+#day-future {
+	position:relative;
+	background-color:gray;
+}
+
+#day-future:hover {
+	background-color:yellow;
+}
+
+#day-past {
+	background-color:#aaa;
+}
+
+#day-prevmonth {
+	border:4px solid blue;
+}
+
+.calendar-nav {
+	display:block;
+	float:right;
+}
+
+.calendar-nav#top {
+	margin:10px 20px 0;
+}
+
+
+/* Thanks: http://css-tricks.com/794-elastic-calendar-styling-with-pure-css/ */
+
+ol.calendar {
+	margin:0 auto;
+	display:block; 
+	/* min-height: 200px; 
+	border:5px red solid; - not wrapping around elements, not sure why */
+	padding: 12px 0 0 20px;
+}
+
+li {
+	list-style:none;
+}
+
+li li {
+	width:6.7em;
+	height:6em;
+	float:left;
+	margin:.2em; 
+	padding:.2em;
+	overflow:auto;
+}
+ 
+li li ol {
+	width:auto;
+}
+
+li li ul li,li li ol li {
+	font-size:.7em;
+	display:block;
+	height:auto;
+	width:auto;
+	background: none;
+    margin:0;
+    padding:.2em 0;
+    float:none;
+}
