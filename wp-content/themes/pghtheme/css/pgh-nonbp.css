@@ -1,3 +1,5 @@
+/* @override http://localhost:8888/onlyinpgh/wp-content/themes/pghtheme/css/pgh-nonbp.css */
+
 
 .entry {
 	margin-top: 10px;
@@ -39,7 +41,7 @@ ul#menu-header-menu li:hover > a {
 	padding: 0px;
 }
 
-.fb_button .fb_button_text, ./*fb_button_rtl .fb_button_text */{
+/*.fb_button .fb_button_text, ./*fb_button_rtl .fb_button_text {
     background: url("http://static.ak.fbcdn.net/rsrc.php/v1/zL/r/FGFbc80dUKj.png") repeat scroll 0 0 #5F78AB;
     border-bottom: 1px solid #1A356E;
     border-top: 1px solid #879AC0;
@@ -51,7 +53,7 @@ ul#menu-header-menu li:hover > a {
     margin: 1px 1px 0 21px;
     padding: 2px 6px 3px;
     text-shadow: none;
-}
+}*/
 
 #photoborder {
 	height: 260px;

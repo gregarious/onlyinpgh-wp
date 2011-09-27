@@ -116,7 +116,7 @@ class TwoWeekCalendar {
 
 		$day_num = date('d',strtotime($day));
 		print "<li id='events-list-$day' class='day-list $relative_class'>";
-		print "<a href='eventlist.php?date=$day'>$day_num</a>";
+		print "<a href='eventlist.php?date=$day' class='day-num'>$day_num</a>";
 		if(array_key_exists($day,$this->single_date_events)) {
 			$events = $this->single_date_events[$day];
 			print '<ul class="single-day-events">';
@@ -148,8 +148,8 @@ class TwoWeekCalendar {
 
 	private function printOngoingEvents() {
 		if( count($this->ongoing_events) ) {
+			print '<h3><a href="#" class="btn-slide">Ongoing Events</a></h3>';
 			print '<ul id="ongoing-list">';
-			print 'Ongoing Events';
 			$this->printEventList($this->ongoing_events);
 			print '</ul>';
 		}
