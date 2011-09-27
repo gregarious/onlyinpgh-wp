@@ -24,8 +24,8 @@ $date_str = $_GET['date'];
 $start_dt = new DateTime($date_str);
 $end_dt = clone $start_dt;
 $end_dt->add(new DateInterval('P1D'));
-$time_cutoff = '04:01';
 
+// Get the info from the database
 $sql = "SELECT event_id, event_name, event_start_date, event_start_time, event_end_date, event_end_time 
 			FROM wp_em_events 
 			WHERE event_start_date < :enddate AND event_end_date >= :startdate
@@ -45,6 +45,14 @@ catch(PDOException $e) {
     die('PDO MySQL error: ' . $e->getMessage());  
 } 
 
+/* Cycle through the returned query and put each result into an array with the
+ *  following keys:
+ *	- id 		: integer event ID
+ *  - name 		: event name
+ *  - start_dt 	: DateTime object
+ *  - end_dt 	:   DateTime object
+ */
+them into 
 $events = array();
 while($row = $statement->fetch()) {
 	$events[] = array(
@@ -54,9 +62,9 @@ while($row = $statement->fetch()) {
 			'end_dt'	=> new DateTime($row['event_end_date'] . ' ' . $row['event_end_time'])
 	);
 }
-?>
-<ul>
-<?php
+
+/* Page rendering */
+print '<ul>';
 foreach($events as $event) {
 	?>
 	<li><a href=events.php?eid=<?php echo $event['id']; ?>><?php echo $event['name']; ?></a>
@@ -68,6 +76,8 @@ foreach($events as $event) {
 	$end_time_str = $event['end_dt']->format('g:ia');
 
 	echo $start_date_str . ' ' . $start_time_str . ' - ';
+	// if the two events are on the same day, don't print the end date
+	//  Note that this function takes the 4AM date cutoff into account
 	if( !onSameDay($event['start_dt'],$event['end_dt']) ) {
 		echo $end_date_str . ' ';
 	}

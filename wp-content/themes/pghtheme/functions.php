@@ -1,6 +1,6 @@
 <?php
 
-require_once('calendar.php');
+//require_once('calendar.php');
 
 // Do not enqueue BuddyPress stylesheets and enqueue our's last
 
