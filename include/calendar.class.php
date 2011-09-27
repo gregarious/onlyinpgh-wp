@@ -30,10 +30,12 @@ class TwoWeekCalendar {
 		$first_date_str = $this->start_dt->format('Y-m-d');
 		$events = $this->findAllEvents($first_date_str,$end_str);
 
+		// Build the three main event arrays
 		$this->single_date_events = array();
 		$this->multi_date_events = array();
 		$this->ongoing_events = array();
-		// cycle thru each event and put each in a bucket
+
+		// cycle thru each event and put each in one or more of the arrays
 		$iter_dt = clone $this->end_dt;
 		$last_date_str = $iter_dt->sub($day_interval)->format('Y-m-d');
 		foreach($events as $event) {
@@ -73,11 +75,14 @@ class TwoWeekCalendar {
 		return $dt->sub(new DateInterval('P1D'));
 	}
 
+	// returns a DateTime object for the "anchor" date
 	public function getAnchorDate() {
 		return clone $this->anchor_dt;
 	}
 
-	// master function for HTML rendering
+	/* 
+	 * All HTML rendering code 
+	 */
 	public function display() {
 		print '<ul id="wk1-list">';
 		$this->printWeek(array_slice($this->date_list,0,7));
@@ -149,10 +154,12 @@ class TwoWeekCalendar {
 			print '</ul>';
 		}
 	}
-	// return an array of events, each event has the following fields:
-	//  - id, name, start_dt, end_dt
-	// Note that the $end day is exclusive (i.e. function will return
-	//  events up to BUT NOT INCLUDING that day).
+
+	/* Returns an array of events, each event has the following fields:
+	 *  - id, name, start_dt, end_dt
+	 * Note that the $end day is exclusive (i.e. function will return
+	 *  events up to BUT NOT INCLUDING that day).
+	 */
 	private function findAllEvents($start,$end) {
 		// TODO: when doing a DB query, keep the whole 4 AM cutoff thing in mind?
 		$sql = "SELECT event_id, event_name, event_start_date, event_start_time, event_end_date, event_end_time 
@@ -183,9 +190,10 @@ class TwoWeekCalendar {
 		return $events;
 	}
 
-	// returns a Y-m-d date string for the date a particular DateTime should be 
-	//  considered to fall under. Any DateTime that happens before 4:01 AM is considered
-	//  part of the previous day
+	/* Returns a Y-m-d date string for the date a particular DateTime should be 
+	 *  considered to fall under. Any DateTime that happens before 4:01 AM is considered
+	 *  part of the previous day
+	 */
 	private function getDateClassification($dt) {
 		if( $dt->format('H:i') < '04:01' ) {
 			return $dt->sub(new DateInterval('P1D'))->format('Y-m-d');

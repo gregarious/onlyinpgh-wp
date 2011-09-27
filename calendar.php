@@ -19,6 +19,7 @@ $twowks = new DateInterval('P14D');
 $prev_anchor = $cal->getAnchorDate()->sub($twowks)->format('Y-m-d');
 $next_anchor = $cal->getAnchorDate()->add($twowks)->format('Y-m-d');
 
+// Don't print the container again if it's an ajax request
 if(!$ajax): ?>
 <div id="cal-container">
 <?php endif; ?>
