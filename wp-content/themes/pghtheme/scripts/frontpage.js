@@ -11,6 +11,6 @@ function initializeEventResults() {
 
 // as soon as DOM is loaded, initialize the map and start the search
 jQuery(document).ready(function() {
-	 initializeMap();
-	 initializeEventResults();
+	initializeMap();
+	initializeEventResults();
 });
