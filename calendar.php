@@ -25,11 +25,12 @@ if(!$ajax): ?>
 <?php endif; ?>
 
 <div id="cal-header">
-	<span id="cal-datespan-text"><?php echo $cal->getFirstDate()->format('M j'); ?> - <?php echo $cal->getLastDate()->format('M j'); ?></span>
+	<h2>Upcoming Events</h2>
 	<span id="cal-buttons">
 		<a href="calendar.php?anchor=<?php echo $prev_anchor; ?>" class="cal-nav-link" id="cal-nav-prev">&lt;</a>
 		<a href="calendar.php?anchor=<?php echo $next_anchor; ?>" class="cal-nav-link" id="cal-nav-next">&gt;</a>
 	</span>
+	<span id="cal-datespan-text"><?php echo $cal->getFirstDate()->format('M j'); ?> - <?php echo $cal->getLastDate()->format('M j'); ?></span>
 </div>
 
 <?php
@@ -67,6 +68,10 @@ $(document).ready(
 			return ajaxClick( 	$('#cal-nav-next'), 
 								function(data) { $('#cal-container').html(data); } ) }
 		);
+		$(".btn-slide").click(function() {
+			$("#ongoing-list").slideToggle("slow");
+			$(this).toggleClass("active"); return false;
+		});
 	}
 );
 </script>

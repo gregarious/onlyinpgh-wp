@@ -15,7 +15,14 @@
 	overflow:visible;
 }
 
-/* styles for photo post thumbnails */
+#photos_sidebar dl dt img {
+	margin:3px 0 0 5px;
+}
+
+.locationinfo, .post-location-info {
+}
+
+/* Styles for photo thumbnails */
 
 .photo-post {	
 	float: right;	
@@ -24,8 +31,6 @@
 	height: 250px;
 	overflow: hidden;
 }
-
-/* @group Thumbnails */
 
 .thumb-list {
 	margin:auto;
@@ -62,7 +67,7 @@ img.attachment-post-thumbnail:hover,.gallery-icon:hover {
 	opacity:0.8;
 }
 
-/* @end */
+/* End photo thumbnails */
 
 
 .prev-next {

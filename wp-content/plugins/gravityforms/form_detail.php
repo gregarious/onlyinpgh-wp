@@ -165,7 +165,7 @@ class GFFormDetail{
                                 ?>
 
                             <?php } ?>
-                            <a href="javascript:void(0);" class="form_edit_icon edit_icon_collapsed" title="<?php _e("Edit Form's properties", "gravityforms"); ?>"><?php _e("Edit", "gravityforms"); ?></a>
+                            <a class="form_edit_icon edit_icon_collapsed" title="<?php _e("Edit Form's properties", "gravityforms"); ?>"><?php _e("Edit", "gravityforms"); ?></a>
 
                             <input type="hidden" value="delete" name="operation"/>
                         </form>

@@ -1,43 +1,22 @@
 
 #sidebar-content {
 	overflow:auto;
-	padding:10px;
-}
-
-#event-sidebar {
-	float: right;
-    height: 500px;
-    overflow: auto;
-    width: 345px;
-}
-
-.sidebartogglecurrent {
-	color: #ffec4b;
-	text-decoration: none;
-	-moz-border-radius: 5px 5px 0 0;
-	-webkit-border-radius: 5px 5px 0 0;
-    background-color: #0F0F0F;
-    float: right;
-    font-size: 17px;
-    letter-spacing: 1px;
-    padding: 10px 0;
-    text-align: center;
-    text-transform: uppercase;
-    width: 345px;
-	font-family: 'Francois One', Impact, san-serif;
-font-weight: normal;
 }
 
 #eventsearch_bar {
 	height: 115px; 
-	width: 960px;
-	margin-left: 10px;
+	width: 950px;
+	padding:10px 0 0 10px;
 	background-color: #0f0f0f;
+	margin-left:10px;
 	-moz-border-radius: 0 0 10px 10px;
 	-webkit-border-radius: 0 0 10px 10px;
 	background-image: url("../images/searbarbg.jpg");
 	background-repeat: repeat-x;
-	-moz-box-shadow: 0px 5px 5px 0px #a0a0a0;
+	-webkit-box-shadow: 0px 5px 5px #a0a0a0; 
+	   -moz-box-shadow: 0px 5px 5px #a0a0a0; 
+	        box-shadow: 0px 5px 5px #a0a0a0; 
+
 }
 
 #eventsearch_bar ul {
@@ -71,4 +50,15 @@ font-weight: normal;
 
 #eventtypes input {
 	float: left;
+}
+
+#sidebar-search-status img {
+	margin: 50px 0 15px 150px;
+}
+
+#sidebar-search-status h4 {
+	text-align:center;
+	font-family: 'Francois One','Impact',Sans-serif;
+	font-weight:normal;
+	margin:0;
 }

@@ -85,7 +85,6 @@ define('WPLANG', '');
 * in their development environments.
 */
 
-// Turn off WP-DEBUG and don't display notices and warnings
 define('WP_DEBUG', true);
 
 /* That's all, stop editing! Happy blogging. */

@@ -196,8 +196,6 @@ class GFEntryList{
                 return true;
             }
 
-
-
             jQuery(document).ready(function(){
                 jQuery("#lead_search").keyup(function(event){
                   if(event.keyCode == 13)

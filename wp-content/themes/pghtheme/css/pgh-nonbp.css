@@ -1,3 +1,5 @@
+/* @override http://localhost:8888/onlyinpgh/wp-content/themes/pghtheme/css/pgh-nonbp.css */
+
 
 .entry {
 	margin-top: 10px;
@@ -39,7 +41,7 @@ ul#menu-header-menu li:hover > a {
 	padding: 0px;
 }
 
-.fb_button .fb_button_text, ./*fb_button_rtl .fb_button_text */{
+/*.fb_button .fb_button_text, ./*fb_button_rtl .fb_button_text {
     background: url("http://static.ak.fbcdn.net/rsrc.php/v1/zL/r/FGFbc80dUKj.png") repeat scroll 0 0 #5F78AB;
     border-bottom: 1px solid #1A356E;
     border-top: 1px solid #879AC0;
@@ -51,7 +53,7 @@ ul#menu-header-menu li:hover > a {
     margin: 1px 1px 0 21px;
     padding: 2px 6px 3px;
     text-shadow: none;
-}
+}*/
 
 #photoborder {
 	height: 260px;
@@ -201,31 +203,6 @@ font-weight: normal;
 	margin-top: 0px;
 }
 
-#space {
-	height: 150px;
-	width: 960px;
-	padding: 0px;
-	margin: auto;
-}
-
-.spacecolumn {
-	height: 230px;
-	width: 230px;
-	margin-right: 10px;
-	background-color: #ccc;
-	float: left;
-	margin-left: 2px;
-}
-
-.spacecolumnlast {
-	height: 230px;
-	width: 230px;
-	margin-right: 0px;
-	background-color: #ccc;
-	float: left;
-	margin-left: 2px;
-}
-
 .refinesearch {
 	    color: #F0F0F0;
     line-height: 16px;
@@ -344,8 +321,8 @@ font-weight: normal;
     -webkit-box-shadow: 0 5px 5px 0 #A0A0A0;
     background-color: #FFEC4B;
     float: right;
-    height: 55px;
-    margin: -78px 0;
+    height: 60px;
+    margin: -85px 0;
     padding: 1px 10px 0;
     text-align: center;
     width: 260px;

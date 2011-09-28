@@ -68,6 +68,10 @@ class GFFormDisplay{
 
                 //handle submission
                 $confirmation = self::handle_submission($form, $lead, $ajax);
+
+                //after submission hook
+                do_action("gform_after_submission", $lead, $form);
+                do_action("gform_after_submission_{$form["id"]}", $lead, $form);
             }
 
             if(is_array($confirmation) && isset($confirmation["redirect"])){
@@ -337,6 +341,7 @@ class GFFormDisplay{
 
             $form_css_class = !empty($form["cssClass"]) ? "class='{$form["cssClass"]}'": "";
 
+            $action = esc_attr($action);
             $form_string .= apply_filters("gform_form_tag_{$form_id}", apply_filters("gform_form_tag", "<form method='post' enctype='multipart/form-data' {$target} id='gform_{$form_id}' {$form_css_class} action='{$action}'>", $form), $form);
 
             if($display_title || $display_description){
@@ -612,14 +617,14 @@ class GFFormDisplay{
         if(is_array($field["inputs"]))
         {
             foreach($field["inputs"] as $input){
-                $value = $_POST["input_" . str_replace('.', '_', $input["id"])];
+                $value = rgpost("input_" . str_replace('.', '_', $input["id"]));
                 if(strlen(trim($value)) > 0)
                     return false;
             }
             return true;
         }
         else{
-            $value = $_POST["input_" . $field["id"]];
+            $value = rgpost("input_" . $field["id"]);
             if(is_array($value)){
                 //empty if any of the inputs are empty (for inputs with the same name)
                 foreach($value as $input){
@@ -692,7 +697,7 @@ class GFFormDisplay{
         if($form["confirmation"]["type"] == "message"){
             $default_anchor = self::has_pages($form) ? 1 : 0;
             $anchor = apply_filters("gform_confirmation_anchor_{$form["id"]}", apply_filters("gform_confirmation_anchor", $default_anchor)) ? "<a name='gf_{$form["id"]}' class='gform_anchor' ></a>" : "";
-            $nl2br = $form["confirmation"]["disableAutoformat"] ? false : true;
+            $nl2br = rgar($form["confirmation"],"disableAutoformat") ? false : true;
             $confirmation = empty($form["confirmation"]["message"]) ? "{$anchor} " : "{$anchor}<div id='gforms_confirmation_message'>" . GFCommon::replace_variables($form["confirmation"]["message"], $form, $lead, false, true, $nl2br) . "</div>";
         }
         else{
@@ -783,7 +788,7 @@ class GFFormDisplay{
                                 $field["validation_message"] = __("Your passwords do not match.", "gravityforms");
                                 $is_valid = false;
                             }
-                            else if($field["passwordStrengthEnabled"] && !empty($field["minPasswordStrength"]) && !empty($password)){
+                            else if(rgar($field,"passwordStrengthEnabled") && !rgempty("minPasswordStrength",$field) && !empty($password)){
                                 $strength = $_POST["input_" . $field["id"] . "_strength"];
 
                                 $levels = array("short" => 1, "bad" => 2, "good" => 3, "strong" => 4);
@@ -1061,7 +1066,10 @@ class GFFormDisplay{
 
         global $_gf_state;
 
-        if(!GFCommon::is_product_field($field["type"] && $field["type"] != "donation"))
+        //if field can be populated dynamically, disable state validation
+        if(rgar($field,"allowsPrepopulate"))
+            return false;
+        else if(!GFCommon::is_product_field($field["type"] && $field["type"] != "donation"))
             return false;
         else if (!in_array($field["inputType"], array("singleshipping", "singleproduct", "checkbox", "radio", "select")))
             return false;
@@ -1115,7 +1123,8 @@ class GFFormDisplay{
         }
     }
 
-    private static function get_embedded_forms($post_content, &$ajax){
+
+    public static function get_embedded_forms($post_content, &$ajax){
 
         $forms = array();
         if(preg_match_all('/\[gravityform.*?id=(\d*).*?\]/is', $post_content, $matches, PREG_SET_ORDER)){
@@ -1284,7 +1293,7 @@ class GFFormDisplay{
         if(!empty($dependents))
             $dependents = substr($dependents, 0, strlen($dependents) - 1); //removing last comma;
 
-        $animation = $form["enableAnimation"] ? "1" : "0";
+        $animation = rgar($form,"enableAnimation") ? "1" : "0";
         $str = "<script type='text/javascript'>" .
                 "if(window['jQuery']){ " .
                     "jQuery(document).ready(function(){" .
@@ -1499,7 +1508,19 @@ class GFFormDisplay{
                 $field_content = sprintf("%s<label class='gfield_label'>%s%s</label>{FIELD}%s%s", $admin_buttons, esc_html($field_label), $required_div , $description, $validation_message);
             break;
             case "name" :
-                $target_input_id = $field_id . ".3";
+                switch(rgar($field, "nameFormat")){
+                    case "simple" :
+                        $target_input_id = $field_id;
+                        break;
+
+                    case "extended" :
+                        $target_input_id = $field_id . "_2";
+                        break;
+
+                    default :
+                        $target_input_id = $field_id . "_3";
+                }
+
             case "address" :
                 if(empty($target_input_id))
                     $target_input_id = $field_id . "_1";

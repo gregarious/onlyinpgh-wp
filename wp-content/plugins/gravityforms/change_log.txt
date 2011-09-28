@@ -1,4 +1,27 @@
 -------------------------------------------------------------------------------------------------------------------
+Version 1.5.3
+    - Resolved XSS vulnerability
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.5.2.12
+    - Added gform_after_submission hook
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.5.2.11
+    - Cleaned up Notice messages
+    - Resolved issue where opening/closing the Form Settings in IE was incorrectly triggering the unsaved data prompt
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.5.2.10
+    - Fixed issue with checkbox variable replacement creating a warning message.
+
+-------------------------------------------------------------------------------------------------------------------
+Version 1.5.2.9
+    - Replaced dot(.) in the state field ID with underscore.
+    - Disabling product state validation if field is configured for dynamic population
+    - Marked build_lead_array() function as public to allow developers to call it when performing custom entry queries.
+
+-------------------------------------------------------------------------------------------------------------------
 Version 1.5.2.8
     - Added product price javascript filter to allow custom total calculation
 
