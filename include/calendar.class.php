@@ -115,8 +115,13 @@ class TwoWeekCalendar {
 		}
 
 		$day_num = date('d',strtotime($day));
+		$daymap = array('S','M','T','W','H','F','S');
+		$weekday = $daymap[intval(date('w',strtotime($day)))];
+		
 		print "<li id='events-list-$day' class='day-list $relative_class'>";
-		print "<a href='eventlist.php?date=$day' class='day-num'>$day_num</a>";
+
+////*** Hard coding a URL! ***///
+		print "<a href='onlyinpgh/event-list/?date=$day' class='day-num'>$day_num <span class='alignright'>$weekday</span></a>";
 		if(array_key_exists($day,$this->single_date_events)) {
 			$events = $this->single_date_events[$day];
 			print '<ul class="single-day-events">';
@@ -142,7 +147,11 @@ class TwoWeekCalendar {
 		foreach($events as $event) {
 			$id = $event['id'];
 			$name = $event['name'];
-			print "<li><a href='events.php?eid=$id'>$name</a></li>";
+			$type = explode(',',htmlentities($row['event_type'],ENT_QUOTES,'ISO-8859-1',FALSE));
+			$single_type = $type[0];
+			$start_time = $event['start_dt']->format('g:i a');
+////*** Hardcoding a URL! ****///
+			print "<li><a href='onlyinpgh/event/?eid=$id'><span>$single_type</span><br>$name</a></li>";
 		}
 	}
 
@@ -162,7 +171,7 @@ class TwoWeekCalendar {
 	 */
 	private function findAllEvents($start,$end) {
 		// TODO: when doing a DB query, keep the whole 4 AM cutoff thing in mind?
-		$sql = "SELECT event_id, event_name, event_start_date, event_start_time, event_end_date, event_end_time 
+		$sql = "SELECT event_id, event_name, event_start_date, event_start_time, event_end_date, event_end_time,event_type
 					FROM wp_em_events 
 					WHERE event_start_date < :enddate AND event_end_date >= :startdate
 					ORDER BY event_end_date ASC";
@@ -185,7 +194,8 @@ class TwoWeekCalendar {
 					'id' 		=> intval($row['event_id']),
 					'name'		=> htmlentities($row['event_name'],ENT_QUOTES,'ISO-8859-1',FALSE),
 					'start_dt'	=> new DateTime($row['event_start_date'] . ' ' . $row['event_start_time']),
-					'end_dt'	=> new DateTime($row['event_end_date'] . ' ' . $row['event_end_time'])
+					'end_dt'	=> new DateTime($row['event_end_date'] . ' ' . $row['event_end_time']),
+					'type'		=> htmlentities($row['event_type'],ENT_QUOTES,'ISO-8859-1',FALSE),
 			);
 		}
 		return $events;

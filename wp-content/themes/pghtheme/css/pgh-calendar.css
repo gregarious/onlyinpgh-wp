@@ -1,7 +1,12 @@
 /* @override http://localhost:8888/onlyinpgh/wp-content/themes/pghtheme/css/pgh-calendar.css */
 
+
+/*****************/
+/* Calendar page */
+/*****************/
+
 .padder#cal-page {
-	width:960px;
+	width:940px;
 	margin:0;
 	padding:20px;
 }
@@ -11,7 +16,9 @@
 }
 
 #cal-container {
+	position: relative;
 	margin:auto;
+	left: 10px;
 }
 
 #cal-container ul {
@@ -49,6 +56,7 @@ ul.single-day-events {
 	width:90%;
 	position:relative;
 	right:34px;
+	padding-bottom: 2px;
 }
 
 ul.single-day-events li a, #ongoing-list li a {
@@ -64,6 +72,11 @@ ul.single-day-events li a, #ongoing-list li a {
 
 ul.single-day-events li a {
 	border-bottom: 1px #ccc solid;
+}
+
+ul.single-day-events li a span {
+	font-weight: bold;
+	margin-bottom: 4px;
 }
 
 ul.single-day-events li a:hover, #ongoing-list li a:hover {
@@ -107,11 +120,11 @@ span#cal-datespan-text {
 	background-color: #f1f1f1;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f1f1), to(#ccc)); /* Saf4+, Chrome */
 	background-image: -webkit-linear-gradient(top, #f1f1f1, #ccc); /* Chrome 10+, Saf5.1+, iOS 5+ */
-	background-image:    -moz-linear-gradient(top, #f1f1f1, #ccc); /* FF3.6 */
-	background-image:     -ms-linear-gradient(top, #f1f1f1, #ccc); /* IE10 */
-	  background-image:      -o-linear-gradient(top, #f1f1f1, #ccc); /* Opera 11.10+ */
-	  background-image:         linear-gradient(top, #f1f1f1, #ccc);
-            filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f1f1f1', EndColorStr='#ccc'); /* IE6–IE9 */
+	background-image: -moz-linear-gradient(top, #f1f1f1, #ccc); /* FF3.6 */
+	background-image: -ms-linear-gradient(top, #f1f1f1, #ccc); /* IE10 */
+	background-image: -o-linear-gradient(top, #f1f1f1, #ccc); /* Opera 11.10+ */
+	background-image: linear-gradient(top, #f1f1f1, #ccc);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f1f1f1', EndColorStr='#ccc'); /* IE6–IE9 */
 }
 
 .day-num:hover {
@@ -121,6 +134,12 @@ span#cal-datespan-text {
 	-moz-box-shadow: inset 2px 0 7px #999;
 	-webkit-box-shadow: inset 2px 0 7px #999;
 	box-shadow: inner 0 2px 7px #999;	
+}
+
+.day-num span {
+	color: #fff;
+	margin-right: 5px;
+	text-shadow: 0px 0	px 1px #000;
 }
 
 .btn-slide {
@@ -139,3 +158,36 @@ span#cal-datespan-text {
 	text-decoration: none;
 }
 
+/*************************/
+/* Single Day Events List */
+/*************************/
+
+ul.eventslist-day {
+	list-style-type:none;
+	clear:both;
+}
+
+ul.eventslist-day li {
+	height: 200px;
+}
+
+#cal-page ul.eventslist-day li {
+	border-bottom: 1px #ccc solid;
+	margin-bottom: 15px;
+}
+
+ul.eventslist-day li img {
+	display: inline;
+}
+
+ul.eventslist-day .el-desc {
+	width: 300px;
+	line-height: 125%;
+	font-family:'Lucida Sans Unicode','Lucida Grande',sans-serif;
+}
+
+.el-time, .el-name {
+	background-color: green;
+	display: inline;
+	float: left;
+}
