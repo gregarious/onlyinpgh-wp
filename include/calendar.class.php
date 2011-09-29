@@ -121,7 +121,7 @@ class TwoWeekCalendar {
 		print "<li id='events-list-$day' class='day-list $relative_class'>";
 
 ////*** Hard coding a URL! ***///
-		print "<a href='onlyinpgh/event-list/?date=$day' class='day-num'>$day_num <span class='alignright'>$weekday</span></a>";
+		print "<a href='onlyinpgh/event-list/?date=$day' class='day-num'>$day_num<span class='alignright'>$weekday</span></a>";
 		if(array_key_exists($day,$this->single_date_events)) {
 			$events = $this->single_date_events[$day];
 			print '<ul class="single-day-events">';

@@ -5,7 +5,7 @@
 /* Calendar page */
 /*****************/
 
-.padder#cal-page {
+.padder#cal-page, .padder#eventlist {
 	width:940px;
 	margin:0;
 	padding:20px;
@@ -162,32 +162,84 @@ span#cal-datespan-text {
 /* Single Day Events List */
 /*************************/
 
+.padder#eventlist {
+	margin-top: 10px;
+}
+
+#eventlist a:hover {
+	text-decoration: none;
+}
+
+#eventlist h2 {
+	margin-left: 20px;
+}
+
+.day-nav-link {
+	font-size: 1.5em;
+}
+
 ul.eventslist-day {
 	list-style-type:none;
 	clear:both;
+	padding: 10px;
+	margin: 20px 20px 10px 20px;
 }
 
 ul.eventslist-day li {
-	height: 200px;
-}
-
-#cal-page ul.eventslist-day li {
+	height: 150px;
 	border-bottom: 1px #ccc solid;
-	margin-bottom: 15px;
+	padding: 20px 10px;
 }
 
-ul.eventslist-day li img {
+ul.eventslist-day li:hover {
+	background-color: #f1f1f1;
+}
+
+#img-container {
+	float: left;
+	height: 150px;
+	width: 100px;
+	margin: 0 20px 10px 0;
 	display: inline;
+	overflow: hidden;
 }
 
-ul.eventslist-day .el-desc {
+.el-name {
+	font-size: 1.2em;
+}
+
+.el-time {
+	margin: 0;
+	line-height: 100%;
+}
+
+#el-host-address {
+	width:150px;
+	font-family:'Lucida Sans Unicode','Lucida Grande',sans-serif;	
+}
+
+.el-desc {
 	width: 300px;
+	position: relative;
+	height: 120px;
+	bottom: 20px;
+	word-wrap: break-word;
 	line-height: 125%;
 	font-family:'Lucida Sans Unicode','Lucida Grande',sans-serif;
 }
 
-.el-time, .el-name {
-	background-color: green;
-	display: inline;
-	float: left;
+#eventlist .hostedby {
+	margin-top: 10px;
+	line-height: 100%;
 }
+
+#eventlist .host {
+	line-height: 120%;	
+	margin-left: 1px;
+}
+
+
+
+
+
+

@@ -27,8 +27,9 @@ if(!$ajax): ?>
 <div id="cal-header">
 	<h2>Upcoming Events</h2>
 	<span id="cal-buttons">
-		<a href="calendar.php?anchor=<?php echo $prev_anchor; ?>" class="cal-nav-link" id="cal-nav-prev">&lt;</a>
-		<a href="calendar.php?anchor=<?php echo $next_anchor; ?>" class="cal-nav-link" id="cal-nav-next">&gt;</a>
+<!-- *** Hardcoding a URL! *** -->
+		<a href="?anchor=<?php echo $prev_anchor; ?>" class="cal-nav-link" id="cal-nav-prev">&lt;</a>
+		<a href="?anchor=<?php echo $next_anchor; ?>" class="cal-nav-link" id="cal-nav-next">&gt;</a>
 	</span>
 	<span id="cal-datespan-text"><?php echo $cal->getFirstDate()->format('M j'); ?> - <?php echo $cal->getLastDate()->format('M j'); ?></span>
 </div>
