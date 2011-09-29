@@ -40,3 +40,5 @@ try {
 catch(PDOException $e) {  
     die('PDO MySQL error: ' . $e->getMessage());  
 } 
+
+$row = statement->fetch();

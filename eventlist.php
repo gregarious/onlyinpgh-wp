@@ -20,6 +20,14 @@ if(!array_key_exists('date',$_GET)) {
 
 $date_str = $_GET['date'];
 
+// Prev/next day navigation
+$date_dt = new DateTime($date_str);
+$iter = clone $date_dt;
+$prev_day_anchor = $iter->sub(new DateInterval('P1D'))->format('Y-m-d');
+$next_day_anchor = $iter->add(new DateInterval('P2D'))->format('Y-m-d');
+
+$date_txt = $date_dt->format('l, F j, Y');
+
 // assert that any event starts after 4 AM
 $start_dt = new DateTime($date_str);
 $end_dt = clone $start_dt;
@@ -60,32 +68,47 @@ while($row = $statement->fetch()) {
 			'start_dt'	=> new DateTime($row['event_start_date'] . ' ' . $row['event_start_time']),
 			'desc'		=> htmlentities($row['event_notes'],ENT_QUOTES,'ISO-8859-1',FALSE),
 			'pic'		=> htmlentities($row['event_pic'],ENT_QUOTES,'ISO-8859-1',FALSE), 
-			'end_dt'	=> new DateTime($row['event_end_date'] . ' ' . $row['event_end_time'])
+			'end_dt'	=> new DateTime($row['event_end_date'] . ' ' . $row['event_end_time']),
+			'host'		=> htmlentities($row['organization_name'],ENT_QUOTES,'ISO-8859-1',FALSE),
+			''			=> 
 	);
 }
 
 ?>
-<h3><?php echo $date_str; ?></h3>
+
+<span id="cal-buttons" class="alignright">
+	<a href="?date=<?php echo $prev_day_anchor; ?>" class="day-nav-link" id="cal-nav-prev">&lt;&lt;</a>
+	<a href="?date=<?php echo $next_day_anchor; ?>" class="day-nav-link" id="cal-nav-next">&gt;&gt;</a>
+</span>
+<h2 class="page-title"><?php echo $date_txt; ?></h2>
 <ul class="eventslist-day">
 <?php
 foreach($events as $event) {
 	?>
 	<!--***** Hardcoding a URL! *****-->
+	<a href="/onlyinpgh/event/?eid=<?php echo $event['id']; ?>">
 	<li>
-		<img src="<?php echo $event['pic']; ?>" class="alignleft">
-		<a href="/onlyinpgh/event/?eid=<?php echo $event['id']; ?>" class="el-name"><?php echo $event['name']; ?></a><br>
-		<?php
-
+		<div id="img-container">
+			<img src="<?php echo $event['pic']; ?>" class="alignleft">
+		</div>
+		<h3 class="el-name">
+			<?php echo $event['name']; ?>
+		</h3>
+	
+		<?php	
 		// Only show 40 words of description
 		$desc =$event['desc'];
-		$array = explode(" ",$desc,41);
-		unset($array[40]);
-		$limited = implode(" ",$array);
-		
-		$eventlist_pic = '<img src="'.$event['pic'].'">';
-		$start_date_str = $event['start_dt']->format('n/j/Y');
+		$array = explode(" ",$desc,31);
+		unset($array[30]);
+		$limited = implode(" ",$array); ?>
+
+		<p class="el-desc alignleft"><?php echo $limited; ?>...</p>
+
+		<?php
+
+		$start_date_str = $event['start_dt']->format('M j');
 		$start_time_str = $event['start_dt']->format('g:ia');
-		$end_date_str = $event['end_dt']->format('n/j/Y');
+		$end_date_str = $event['end_dt']->format('M j');
 		$end_time_str = $event['end_dt']->format('g:ia');
 
 		echo '<p class="el-time">' . $start_date_str . ' ' . $start_time_str . ' - ';
@@ -93,8 +116,14 @@ foreach($events as $event) {
 			echo $end_date_str . ' ';
 		}
 		echo $end_time_str . '</p>' . "\n"; ?>
-		<p class="el-desc alignright"><?php echo $limited; ?>...</p>
-	</li> <?php
+
+		<div id="el-host-address" class="alignleft">
+			<p class="hostedby">Hosted by</h4>
+			<h4 class="host">Host's Name Here</h4>
+			<p class="event-address">2345 Booty Lane</p> 
+		</div> <!-- #el-host-address -->
+
+	</li></a><?php
 }
 ?>
 </ul>
