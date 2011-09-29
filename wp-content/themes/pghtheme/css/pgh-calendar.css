@@ -21,6 +21,27 @@
 	left: 10px;
 }
 
+#cal-header {
+	margin: 10px 0 10px 0;
+}
+
+#cal-header h2 {
+	display:inline;
+	border:none;
+	margin-left: 3px;
+}
+
+span#cal-buttons {
+	margin: 10px 20px 0;
+}
+
+span#cal-buttons a {
+	font-weight:normal;
+	font-size:1.6em;
+	margin:0 10px 0;
+	font-family: 'Francois One',Impact,serif;
+}
+
 #cal-container ul {
 	list-style-type:none;
 	margin:0;	
@@ -41,75 +62,12 @@ ul#wk1-list  {
 	margin-bottom: 6px;
 }
 
-ul#wk2-list li {
-}
-
 li.day-list {
 	width:14.2%;
 	float:left;
 	-moz-box-shadow: inset 0 0 2px #000;
 	-webkit-box-shadow: inset 0 0 2px #000;
 	box-shadow: inner 0 0 2px #000;
-}
-
-ul.single-day-events {
-	width:90%;
-	position:relative;
-	right:34px;
-	padding-bottom: 2px;
-}
-
-ul.single-day-events li a, #ongoing-list li a {
-	padding:2px 2px 5px 2px;
-	display:block;
-	font-size:.8em;
-	font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-}
-
-#ongoing-list li a {
-	display: inline;
-}
-
-ul.single-day-events li a {
-	border-bottom: 1px #ccc solid;
-}
-
-ul.single-day-events li a span {
-	font-weight: bold;
-	margin-bottom: 4px;
-}
-
-ul.single-day-events li a:hover, #ongoing-list li a:hover {
-	background-color: #f1f1f1;
-	text-decoration: none;
-}
-
-#ongoing-list {
-	display:none;
-	clear:both;
-	position:relative;
-	top:20px;
-	right:30px;
-}
-
-#cal-header h2 {
-	display:inline;
-	border:none;
-}
-
-#cal-header span {
-	font-weight:normal;
-	font-size:1.3em;
-}
-
-span#cal-buttons, span#cal-datespan-text {
-	margin:10px 30px 0;
-	float:right;
-	font-family: 'Francois One',Impact,serif;
-}
-
-span#cal-datespan-text {
-	margin-right: 0;
 }
 
 .day-num {
@@ -140,6 +98,52 @@ span#cal-datespan-text {
 	color: #fff;
 	margin-right: 5px;
 	text-shadow: 0px 0	px 1px #000;
+}
+
+ul.single-day-events {
+	width:90%;
+	position:relative;
+	right:34px;
+	padding-bottom: 2px;
+}
+
+ul.single-day-events li a, ul#ongoing-list li a {
+	padding:2px 2px 5px 2px;
+	font-size:.8em;
+	font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+ul.single-day-events li a {
+	display: block;	
+}
+
+ul.single-day-events li:not(:last-of-type) {
+	border-bottom: 1px #ccc solid;
+}
+
+ul.single-day-events li a span {
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+
+ul.single-day-events li a:hover, #ongoing-list li a:hover {
+	background-color: #f1f1f1;
+	text-decoration: none;
+}
+
+#ongoing-list {
+	display:none;
+	clear:both;
+	position:relative;
+	top:10px;
+	right:30px;
+}
+
+ul#ongoing-list li, ul#ongoing-list li a {
+	display: inline;
+	padding: 0;
+	font-size: .95em;
+	line-height: 160%;
 }
 
 .btn-slide {

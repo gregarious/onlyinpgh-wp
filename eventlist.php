@@ -20,10 +20,13 @@ if(!array_key_exists('date',$_GET)) {
 
 $date_str = $_GET['date'];
 
+// Prev/next day navigation
+$date_dt = new DateTime($date_str);
+$iter = clone $date_dt;
+$prev_day_anchor = $iter->sub(new DateInterval('P1D'))->format('Y-m-d');
+$next_day_anchor = $iter->add(new DateInterval('P2D'))->format('Y-m-d');
 
-// Greg!! can you make these navigate prev/next days? Thanks.
-// $prev_day_anchor = $date_str->getAnchorDate()->sub($twowks)->format('Y-m-d');
-// $next_day_anchor = $date_str->getAnchorDate()->add($twowks)->format('Y-m-d');
+$date_txt = $date_dt->format('l, F j, Y');
 
 // assert that any event starts after 4 AM
 $start_dt = new DateTime($date_str);
@@ -59,21 +62,18 @@ while($row = $statement->fetch()) {
 			'desc'		=> htmlentities($row['event_notes'],ENT_QUOTES,'ISO-8859-1',FALSE),
 			'pic'		=> htmlentities($row['event_pic'],ENT_QUOTES,'ISO-8859-1',FALSE), 
 			'end_dt'	=> new DateTime($row['event_end_date'] . ' ' . $row['event_end_time']),
-			'host'		=> htmlentities($row['organization_name'],ENT_QUOTES,'ISO-8859-1',FALSE)
+			'host'		=> htmlentities($row['organization_name'],ENT_QUOTES,'ISO-8859-1',FALSE),
+			''			=> 
 	);
 }
 
-$title_dt = new DateTime($datestr);
-$title_txt = $title_dt->format('F t, Y');
-
 ?>
 
-<!--***** Hardcoding a URL! *****-->
-<span id="cal-buttons">
-	<a href="calendar.php?anchor=<?php echo $prev_anchor; ?>" class="day-nav-link" id="cal-nav-prev">&lt;</a>
-	<a href="calendar.php?anchor=<?php echo $next_anchor; ?>" class="day-nav-link" id="cal-nav-next">&gt;</a>
+<span id="cal-buttons" class="alignright">
+	<a href="?date=<?php echo $prev_day_anchor; ?>" class="day-nav-link" id="cal-nav-prev">&lt;&lt;</a>
+	<a href="?date=<?php echo $next_day_anchor; ?>" class="day-nav-link" id="cal-nav-next">&gt;&gt;</a>
 </span>
-<h2 class="page-title"><?php echo $title_txt; ?></h2>
+<h2 class="page-title"><?php echo $date_txt; ?></h2>
 <ul class="eventslist-day">
 <?php
 foreach($events as $event) {
@@ -89,6 +89,15 @@ foreach($events as $event) {
 		</h3>
 	
 		<?php	
+		// Only show 40 words of description
+		$desc =$event['desc'];
+		$array = explode(" ",$desc,31);
+		unset($array[30]);
+		$limited = implode(" ",$array); ?>
+
+		<p class="el-desc alignleft"><?php echo $limited; ?>...</p>
+
+		<?php
 
 		$start_date_str = $event['start_dt']->format('M j');
 		$start_time_str = $event['start_dt']->format('g:ia');
@@ -106,15 +115,6 @@ foreach($events as $event) {
 			<h4 class="host">Host's Name Here</h4>
 			<p class="event-address">2345 Booty Lane</p> 
 		</div> <!-- #el-host-address -->
-
-		<?php
-		// Only show 40 words of description
-		$desc =$event['desc'];
-		$array = explode(" ",$desc,31);
-		unset($array[30]);
-		$limited = implode(" ",$array); ?>
-
-		<!--<p class="el-desc alignright"><?php echo $limited; ?>...</p>-->
 
 	</li></a><?php
 }

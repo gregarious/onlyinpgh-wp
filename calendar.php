@@ -25,13 +25,12 @@ if(!$ajax): ?>
 <?php endif; ?>
 
 <div id="cal-header">
-	<h2>Upcoming Events</h2>
-	<span id="cal-buttons">
+	<h2><?php echo $cal->getFirstDate()->format('M j'); ?> - <?php echo $cal->getLastDate()->format('M j'); ?></h2>
+	<span id="cal-buttons" class="alignright">
 <!-- *** Hardcoding a URL! *** -->
-		<a href="?anchor=<?php echo $prev_anchor; ?>" class="cal-nav-link" id="cal-nav-prev">&lt;</a>
-		<a href="?anchor=<?php echo $next_anchor; ?>" class="cal-nav-link" id="cal-nav-next">&gt;</a>
+		<a href="?anchor=<?php echo $prev_anchor; ?>" class="cal-nav-link" id="cal-nav-prev">&lt;&lt;</a>
+		<a href="?anchor=<?php echo $next_anchor; ?>" class="cal-nav-link" id="cal-nav-next">&gt;&gt;</a>
 	</span>
-	<span id="cal-datespan-text"><?php echo $cal->getFirstDate()->format('M j'); ?> - <?php echo $cal->getLastDate()->format('M j'); ?></span>
 </div>
 
 <?php
@@ -61,14 +60,14 @@ function ajaxClick(element,callback) {
 // when DOM is loaded, add the click events
 $(document).ready(
 	function() {
-		$('#cal-nav-prev').click( function() { 
+		/*$('#cal-nav-prev').click( function() { 
 			return ajaxClick( 	$('#cal-nav-prev'), 
 								function(data) { $('#cal-container').html(data); } ) } 
 		);
 		$('#cal-nav-next').click( function() { 
 			return ajaxClick( 	$('#cal-nav-next'), 
 								function(data) { $('#cal-container').html(data); } ) }
-		);
+		);*/
 		$(".btn-slide").click(function() {
 			$("#ongoing-list").slideToggle("slow");
 			$(this).toggleClass("active"); return false;
