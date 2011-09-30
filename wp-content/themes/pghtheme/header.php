@@ -143,73 +143,78 @@ for (i = 0; i < field.length; i++)
 
 <body style="margin:0px; padding:0px;">
 <?php do_action( 'bp_before_header' ) ?>
-<div id="header"><div id="photoborder"></div>
-<div class="header_content">
-<div id="topbar">
-	<?php if ( is_user_logged_in() ) : ?>
 
-		<?php do_action( 'bp_before_sidebar_me' ) ?>
-		<input type="hidden" value="y" id="isloggedin">
-		<input type="hidden" value="<?php echo bp_loggedin_user_id() ?>" id="loggedinid">
-		<div id="sidebar-me">
-			<a class="showinmodal" href="<?php echo bp_loggedin_user_domain() ?>">
-				<?php bp_loggedin_user_avatar( 'type=thumb&width=20&height=20' ) ?>
-			</a>
+<div id="header">
+	<div id="photoborder"></div>
+	<div class="header_content">
+	<div id="topbar">
+		<?php if ( is_user_logged_in() ) : ?>
 
-			<?php echo bp_core_get_userlink( bp_loggedin_user_id() ); ?> | 
-<?php wp_loginout($_SERVER['REQUEST_URI']); ?>
+			<?php do_action( 'bp_before_sidebar_me' ) ?>
+			<input type="hidden" value="y" id="isloggedin">
+			<input type="hidden" value="<?php echo bp_loggedin_user_id() ?>" id="loggedinid">
+			<div id="sidebar-me">
+				<a class="showinmodal" href="<?php echo bp_loggedin_user_domain() ?>">
+					<?php bp_loggedin_user_avatar( 'type=thumb&width=20&height=20' ) ?>
+				</a>
 
-			<?php do_action( 'bp_sidebar_me' ) ?>
-		</div>
+				<?php echo bp_core_get_userlink( bp_loggedin_user_id() ); ?> | 
+	<?php wp_loginout($_SERVER['REQUEST_URI']); ?>
 
-		<?php do_action( 'bp_after_sidebar_me' ) ?>
+				<?php do_action( 'bp_sidebar_me' ) ?>
+			</div>
 
-		<?php if ( function_exists( 'bp_message_get_notices' ) ) : ?>
-			<?php bp_message_get_notices(); /* Site wide notices to all users */ ?>
+			<?php do_action( 'bp_after_sidebar_me' ) ?>
+
+			<?php if ( function_exists( 'bp_message_get_notices' ) ) : ?>
+				<?php bp_message_get_notices(); /* Site wide notices to all users */ ?>
+			<?php endif; ?>
+
+		<?php else : ?>
+			<input type="hidden" value="n" id="isloggedin">
+			<input type="hidden" value="0" id="loggedinid">
+			<a href="/register" class="simplemodal">Register</a> | <?php wp_loginout($_SERVER['REQUEST_URI']); ?> | <?php jfb_output_facebook_btn(); jfb_output_facebook_callback(); ?>
 		<?php endif; ?>
+	</div><!--Closes topbar-->
 
-	<?php else : ?>
-		<input type="hidden" value="n" id="isloggedin">
-		<input type="hidden" value="0" id="loggedinid">
-		<a href="/register" class="simplemodal">Register</a> | <?php wp_loginout($_SERVER['REQUEST_URI']); ?> | <?php jfb_output_facebook_btn(); jfb_output_facebook_callback(); ?>
-	<?php endif; ?>
-</div><!--Closes topbar-->
-<div id="header_left">
-<div class="logo">
-<a href="<?php bloginfo('url'); ?>" title="Home">
-<img src="<?php bloginfo('stylesheet_directory'); ?>/images/logoframe2_beta.png">
-</a>
-</div><!--Closes logo-->
-</div><!--Closes headerleft-->
-<?php do_action( 'bp_header' ) ?>
-</div><!--Closes header_content1-->
-<div id="header_below">
-<div class="header_content">
-<div id="header_navigation">
-<ul id="staticheader">
-<?php if( is_front_page()) : ?>
-<li class="current_page_item"><a class="gohomelink" href="<?php bloginfo('url'); ?>/">Home</a></li>
-<?php else : ?>
-<li><a class="gohomelink" href="<?php bloginfo('url'); ?>/">Home</a></li>
-<?php endif; ?>
+	<div id="header_left">
+		<div class="logo">
+			<a href="<?php bloginfo('url'); ?>" title="Home">
+				<img src="<?php bloginfo('stylesheet_directory'); ?>/images/logoframe2_beta.png">
+			</a>
+		</div><!--Closes logo-->
+	</div><!--Closes headerleft-->
 
+	<?php do_action( 'bp_header' ) ?>
+
+	</div><!--Closes header_content-->
+
+	<div id="header_below">
+		<div class="header_content">
+			<div id="header_navigation">
+				<ul id="staticheader">
+
+					<?php if( is_front_page()) : ?>
+						<li class="current_page_item"><a class="gohomelink" href="<?php bloginfo('url'); ?>/">Home</a></li>
+					<?php else : ?>
+						<li><a class="gohomelink" href="<?php bloginfo('url'); ?>/">Home</a></li>
+					<?php endif; ?>
 
 
-<?php if ( is_user_logged_in() ) {
-
-			 if ( bp_is_home()) { ?>
-			<input id="limitvalue" type="hidden" value="0">
-            <li class="current_page_item"><a class="mypghlink" href="<?php echo bp_loggedin_user_domain() ?>">My PGH</a></li>
-            <?php } else { ?>
-            <li><a class="mypghlink" href="<?php echo bp_loggedin_user_domain() ?>">My PGH</a></li>
-
-         <?php }
-} ?>
-
-<?php if ( is_user_logged_in() ) : ?>
-<?php else : ?>
-<li><a class="mypghlink" href="<?php echo bp_loggedin_user_domain() ?>">My PGH</a></li>
-<?php endif; ?>
+					<?php 
+						
+						// If user is logged in, MyPgh goes to their BuddyPress homepage	
+						// Else show the the simplemodal login popup
+						if ( is_user_logged_in() ) {
+							if ( bp_is_home()) { ?>
+								<input id="limitvalue" type="hidden" value="0">
+            					<li class="current_page_item"><a class="mypghlink" href="<?php echo bp_loggedin_user_domain() ?>">My PGH</a></li><?php 
+            				} else { ?>
+            					<li><a class="mypghlink" href="<?php echo bp_loggedin_user_domain() ?>">My PGH</a></li><?php 
+         					}
+						} else { ?>
+							<li><a class="mypghlink simplemodal-login" href="/onlyinpgh">My PGH</a></li>	<?php 
+						} ?>
  
 
 </ul>

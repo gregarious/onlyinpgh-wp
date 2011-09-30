@@ -192,7 +192,7 @@ events in</p>
 			<div id="sidebar-content"></div> <!-- Actual event results dynamically loaded into here -->
 			<div id="sidebar-search-status"> <!-- Only visible while waiting for an AJAX response -->
 				<img src="<?php bloginfo('stylesheet_directory'); ?>/images/loading.gif"/>
-				<h4>Searching...</h4> 
+				<h4>Loading...</h4> 
 			</div>
 			<div id="sidebar-footer"></div>	<!-- Load more events button will be rendered in here if applicable -->
 		</div> <!-- #event-sidebar -->

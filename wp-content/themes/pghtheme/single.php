@@ -48,10 +48,10 @@
 
 		<?php do_action( 'bp_after_blog_single_post' ) ?>
 		</div><!-- .padder -->
+
+		<div id="sidebar"><?php locate_template( array( 'sidebar-blog.php' ), true ) ?></div>
 		
 	</div><!-- #content -->
-
-	<div id="sidebar"><?php locate_template( array( 'sidebar-blog.php' ), true ) ?></div>
 	
 </div><!-- #wrapper -->
 

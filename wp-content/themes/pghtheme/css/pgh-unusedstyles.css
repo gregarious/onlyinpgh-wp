@@ -578,7 +578,7 @@ ul#menu-header-menu .current_menu_item li {
 }
 
 .blog_content {
-	  float: left;
+	float: left;
     margin: 0 20px;
     overflow: visible;
     padding-top: 20px;
@@ -1059,7 +1059,7 @@ color: #ffec4b;
 
 #listing_button a.button, #listing_button input[type="submit"], #listing_button input[type="button"], #listing_button input[type="reset"], #listing_button ul.button-nav li a, #listing_button div.generic-button a {
     -moz-border-radius: 3px 3px 3px 3px;
--webkit-border-radius: 3px 3px 3px 3px;
+	-webkit-border-radius: 3px 3px 3px 3px;
     background: none repeat scroll 0 0 #0F0F0F;
     border: medium none;
     color: #FFFFFF;
@@ -1154,26 +1154,7 @@ font-weight: normal;
     text-decoration: none;
 }
 
-#profile-edit-form .button-nav {
-    display: none;
-    list-style: none outside none;
-}
 
-#profile-edit-form h4 {
-    background-color: #FFEC4B;
-    font-size: 25px;
-    margin: 0;
-    padding: 5px 0 0 10px;
-    text-align: left;
-    color: #0F0F0F;
-    font-family: 'Francois One',Impact,serif;
-font-weight: normal;
-    font-size: 25px;
-    font-weight: normal;
-    text-shadow: 1px 1px 0 #CCCCCC;
-    text-transform: uppercase;
-	width: auto;
-}
 
 .notfound {
 	font-family: 'Francois One', Impact, san-serif;
@@ -1392,141 +1373,6 @@ a.loading {
 	background-repeat: no-repeat !important;
 	padding-right: 25px !important;
 }
-
-/* > Input Forms
--------------------------------------------------------------- */
-
-form.standard-form {
-
-}
-	form.standard-form textarea, form.standard-form input[type=text],
-	form.standard-form select, form.standard-form input[type=password],
-	.dir-search input[type=text] {
-		border: 1px inset #ccc;
-		-moz-border-radius: 3px;
-		-webkit-border-radius: 3px;
-		border-radius: 3px;
-		padding: 6px;
-		font: inherit;
-		font-size: 14px;
-		color: #888;
-	}
-		form.standard-form select {
-			padding: 3px;
-		}
-
-		form.standard-form input[type=password] {
-			margin-bottom: 5px;
-		}
-
-	form.standard-form label, form.standard-form span.label {
-		display: block;
-		font-weight: bold;
-		margin: 15px 0 5px 0;
-	}
-		form.standard-form div.checkbox label,
-		form.standard-form div.radio label {
-			font-weight: normal;
-			margin: 5px 0 0 0;
-			font-size: 14px;
-			color: #888;
-		}
-
-		form.standard-form#sidebar-login-form label {
-			margin-top: 5px;
-		}
-
-	form.standard-form input[type=text] {
-		width: 75%;
-	}
-		form.standard-form#sidebar-login-form input[type=text],
-		form.standard-form#sidebar-login-form input[type=password] {
-			padding: 4px;
-			width: 95%;
-		}
-
-		form.standard-form #basic-details-section input[type=password],
-		form.standard-form #blog-details-section input#signup_blog_url {
-			width: 35%;
-		}
-
-		form.standard-form#signup_form input[type=text],
-		form.standard-form#signup_form textarea {
-			width: 90%;
-		}
-			form.standard-form#signup_form div.submit { float: right; }
-			div#signup-avatar img { margin: 0 15px 10px 0; }
-
-	form.standard-form textarea {
-		width: 75%;
-		height: 120px;
-	}
-		form.standard-form textarea#message_content {
-			height: 200px;
-		}
-
-		form.standard-form#send-reply textarea {
-			width: 97.5%;
-		}
-
-	form.standard-form p.description {
-		font-size: 11px;
-		color: #888;
-		margin: 5px 0;
-	}
-
-	form.standard-form div.submit {
-		padding: 15px 0;
-		clear: both;
-	}
-		form.standard-form div.submit input {
-			margin-right: 15px;
-		}
-
-	form.standard-form div.radio ul {
-		margin: 10px 0 15px 38px;
-		list-style: disc;
-	}
-		form.standard-form div.radio ul li {
-			margin-bottom: 5px;
-		}
-
-	form.standard-form a.clear-value {
-		display: block;
-		margin-top: 5px;
-		outline: none;
-	}
-
-form.standard-form #basic-details-section, form.standard-form #blog-details-section,
-form.standard-form #profile-details-section {
-	float: left;
-	width: 48%;
-}
-	form.standard-form #profile-details-section { float: right; }
-	form.standard-form #blog-details-section {
-		clear: left;
-	}
-
-form.standard-form input:focus, form.standard-form textarea:focus, form.standard-form select:focus {
-	background: #fafafa;
-	color: #555;
-}
-
-form#send-invite-form {
-	margin-top: 20px;
-}
-	div#invite-list {
-		height: 400px;
-		overflow: scroll;
-		-moz-border-radius: 3px;
-		-webkit-border-radius: 3px;
-		border-radius: 3px;
-		padding: 5px;
-		background: #f5f5f5;
-		width: 160px;
-		border: 1px solid #e4e4e4;
-		margin: 10px 0;
-	}
 
 
 
@@ -1839,7 +1685,7 @@ ul.activity-list li {
 
 /* > Private Message Threads
 -------------------------------------------------------------- */
-/*
+
 table#message-threads tr.unread td {
 	background: #FFF9DB;
 	border-top: 1px solid #FFE8C4;
@@ -1916,7 +1762,7 @@ div#message-thread div.message-box {
 
 /* > Group Forum Topics
 -------------------------------------------------------------- */
-/*
+
  ul#topic-post-list {
 	margin: 15px -20px;
 	width: auto;
@@ -1969,7 +1815,7 @@ div#new-topic-post {
 /* > Activity Stream Listing
 -------------------------------------------------------------- */
 
-	/*	.activity-list .activity-content a:first-child:focus { outline: none; }
+		.activity-list .activity-content a:first-child:focus { outline: none; }
 
 		.activity-list .activity-content span.time-since {
 			color: #bbb;
@@ -2000,7 +1846,7 @@ div#new-topic-post {
 		}
 
 		/* Backwards compatibility. */
-/*		.activity-inner > .activity-inner { margin: 0 !important; }
+		.activity-inner > .activity-inner { margin: 0 !important; }
 		.activity-inner > blockquote { margin: 0 !important; }
 
 	.activity-list .activity-content img.thumbnail {
@@ -2029,7 +1875,7 @@ div#new-topic-post {
 
 /* > Activity Stream Comments
 -------------------------------------------------------------- */
-/*
+
 div.activity-meta {
 	margin: 0 0 20px 3px;
 	clear: left;
@@ -2073,7 +1919,7 @@ div.activity-comments {
 	width: auto;
 	overflow: hidden; /* IE fix */
 }
-/*
+
 	body.activity-permalink div.activity-comments {
 		width: auto;
 		margin-left: 135px;

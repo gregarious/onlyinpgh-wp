@@ -86,11 +86,11 @@ class TwoWeekCalendar {
 	public function display() {
 		print '<ul id="wk1-list">';
 		$this->printWeek(array_slice($this->date_list,0,7));
-		print '</ul>';
+		print "</ul>\n";
 
 		print '<ul id="wk2-list">';
 		$this->printWeek(array_slice($this->date_list,7,7));
-		print '</ul>';
+		print "</ul>\n";
 
 		$this->printOngoingEvents();
 	}
@@ -115,7 +115,7 @@ class TwoWeekCalendar {
 		}
 
 		$day_num = date('d',strtotime($day));
-		$daymap = array('S','M','T','W','H','F','S');
+		$daymap = array('S','M','T','W','T','F','S');
 		$weekday = $daymap[intval(date('w',strtotime($day)))];
 		
 		print "<li id='events-list-$day' class='day-list $relative_class'>";
@@ -126,7 +126,7 @@ class TwoWeekCalendar {
 			$events = $this->single_date_events[$day];
 			print '<ul class="single-day-events">';
 			$this->printEventList($events);
-			print '</ul>';
+			print "</ul>\n";
 		}
 		if(array_key_exists($day,$this->multi_date_events)) {
 			if($omit_ongoing) {
@@ -138,7 +138,7 @@ class TwoWeekCalendar {
 
 			print '<ul class="multi-day-events">';
 			$this->printEventList($events);
-			print '</ul>';
+			print "</ul>\n";
 		}
 		print "</li>\n";
 	}
@@ -151,7 +151,7 @@ class TwoWeekCalendar {
 			$single_type = $type[0];
 			$start_time = $event['start_dt']->format('g:i a');
 ////*** Hardcoding a URL! ****///
-			print "<li><a href='onlyinpgh/event/?eid=$id'><span>$single_type</span><br>$name</a></li>";
+			print "<li><a href='onlyinpgh/event/?eid=$id'><span>$single_type</span><br>$name</a></li>\n";
 		}
 	}
 
@@ -160,7 +160,7 @@ class TwoWeekCalendar {
 			print '<h3><a href="#" class="btn-slide">Ongoing Events</a></h3>';
 			print '<ul id="ongoing-list">';
 			$this->printEventList($this->ongoing_events);
-			print '</ul>';
+			print "</ul>\n";
 		}
 	}
 

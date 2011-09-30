@@ -188,7 +188,7 @@ function my_post_image_html( $html, $post_id, $post_image_id ) {
 // MISC //
 //////////
 
-// Hide admin bar
+// Hide admin bar from all users
 remove_action('wp_footer', 'bp_core_admin_bar', 8);
 remove_action('admin_footer', 'bp_core_amdin_bar');
 
@@ -224,7 +224,6 @@ function new_excerpt_length($length) {
 	return 30;
 }
 add_filter('excerpt_length', 'new_excerpt_length'); 
-
 
 
 ?>
