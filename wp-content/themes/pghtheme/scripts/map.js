@@ -120,10 +120,10 @@ function JSONToEventInstance(json) {
 			html += '</div>'; // #time-directions
 			html += '<p class="event-desc">' + this.description + '</p>...<a target="_blank" href="/events/event/' + this.wp_slug + '/">More info</a>';
 			if(this.attending) {
-				html += '<input class="attend-button-in alignright" type="button" value="You\'re In!" class="attend-button" id="' + this.id + 'window">';
+				html += '<input class="attend-button-in alignright" type="button" value="Added" class="attend-button" id="' + this.id + 'window">';
 			}
 			else {
-				html += '<input class="attend-button alignright" type="button" value="Count me in!" class="attend-button alignright" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
+				html += '<input class="attend-button alignright" type="button" value="Add to MyPgh" class="attend-button alignright" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
 			}
 			
 			return html;

@@ -60,10 +60,22 @@ td {
 }
 
 .padder {
-	padding: 40px 0 0 40px;
-	width: 600px;
+	padding: 20px 0 0 20px;
+	width: 940px;
 	float: left;
 	overflow: visible;
+}
+
+.padder#sidebar-page {
+	width: 600px;
+}
+
+.blog_content {
+	float: left;
+    margin: 0 20px;
+    overflow: visible;
+    padding-top: 20px;
+    width: 640px;
 }
 
 /* Sidebar, Widgets, and vSlider Spaces */
@@ -117,7 +129,6 @@ td {
 	margin-right:0;
 }
 
-
 /* Posts and pages */
 
 .entry ul li {
@@ -155,12 +166,11 @@ td {
 
 /* Inputs, Buttons, and such */
 
-button, input[type=button] {
+button, input[type=button], #profile-group-edit-submit {
     background-color: #ffec4b;
     cursor:pointer;
     border: medium;
     padding:3px;
-    margin: 0 25px;
     font-family: 'Francois One','Impact',Sans-serif;
     font-weight: normal;
     font-size: 15px;
@@ -170,8 +180,15 @@ button, input[type=button] {
             border-radius: 3px;
 }
 
-button:hover, input[type=button]:hover {
+button:hover, input[type=button]:hover, #profile-group-edit-submit:hover {
 	background-color:#fefefe;
+}
+
+#profile-group-edit-submit:hover {
+	background-color: #ffec4b;
+	-moz-box-shadow: inset 0 0 5px #888;
+		-webkit-box-shadow: inset 0 0 5px#888;
+			box-shadow: inner 0 0 5px #888;
 }
 
 button:active, input[type=button]:active {
@@ -179,6 +196,32 @@ button:active, input[type=button]:active {
 		-webkit-box-shadow: inset 0 0 5px#888;
 			box-shadow: inner 0 0 5px #888;
 }
+
+
+/* Form styles */
+
+#profile-edit-form .button-nav {
+    display: none;
+    list-style: none outside none;
+}
+
+#profile-edit-form h4 {
+    background-color: #FFEC4B;
+    font-size: 25px;
+    margin: 0;
+    padding: 5px 0 0 10px;
+    text-align: left;
+    color: #0F0F0F;
+    font-family: 'Francois One',Impact,serif;
+	font-weight: normal;
+    font-size: 25px;
+    font-weight: normal;
+    text-shadow: 1px 1px 0 #CCCCCC;
+    text-transform: uppercase;
+	width: auto;
+}
+
+
 
 /* Utilites */
 

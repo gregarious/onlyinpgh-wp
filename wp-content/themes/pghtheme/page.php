@@ -2,7 +2,7 @@
 
 <div id="wrapper">
 	<div id="content">
-		<div class="padder">
+		<div class="padder" id="sidebar-page">
 
 		<?php do_action( 'bp_before_blog_page' ) ?>
 

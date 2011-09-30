@@ -58,6 +58,7 @@ function ajaxClick(element,callback) {
 }
 
 // when DOM is loaded, add the click events
+// removing AJAX functionaity
 $(document).ready(
 	function() {
 		/*$('#cal-nav-prev').click( function() { 

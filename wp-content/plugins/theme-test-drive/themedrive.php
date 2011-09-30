@@ -4,7 +4,7 @@
    Plugin URI: http://www.prelovac.com/vladimir/wordpress-plugins/theme-test-drive
    Description: Safely test drive any theme while visitors are using the default one. Includes instant theme preview via thumbnail.
    Author: Vladimir Prelovac
-   Version: 2.8.1
+   Version: 2.8.2
    Author URI: http://www.prelovac.com/vladimir/
    
    To-Do:
@@ -15,7 +15,7 @@
   
   // // //  PLUGIN CODE // // //
   
-  $themedrive_localversion = "2.8";
+  $themedrive_localversion = "2.8.2";
   
   $wp_themedrive_plugin_url = trailingslashit(get_bloginfo('wpurl')) . PLUGINDIR . '/' . dirname(plugin_basename(__FILE__));
   

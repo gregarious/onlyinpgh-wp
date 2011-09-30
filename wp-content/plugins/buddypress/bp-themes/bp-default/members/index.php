@@ -14,7 +14,7 @@
 	<?php do_action( 'bp_before_directory_members_page' ); ?>
 
 	<div id="content">
-		<div class="padder">
+		<div class="padder" id="page">
 
 		<?php do_action( 'bp_before_directory_members' ); ?>
 
