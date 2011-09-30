@@ -47,17 +47,16 @@
 require_once 'etc/config.php';
 require_once 'include/eventsearcher.class.php';
 
-// if key is in the $_GET array, returns the correspondingvalue
+// if key is in the array, returns the correspondingvalue
 // if it doesn't exist, returns NULL without a warning
-function extract_get($key) {
-  return array_key_exists($key,$_GET) ? $_GET[$key] : NULL;
+function safeLookup($key,$ar) {
+	return array_key_exists($key,$ar) ? $ar[$key] : NULL;
 }
 
 $searcher = new EventSearcher();
 
 $searcher->queryLocation();
 $searcher->queryOrganization();
-
 if(array_key_exists('userid',$_GET)){
 	$searcher->queryAttendance($_GET['userid']);
 }
@@ -96,10 +95,6 @@ if(array_key_exists('limit',$_GET)) {
 }
 
 $results = $searcher->runQuery($offset,$limit);
-
-function safeLookup($key,$ar) {
-	return array_key_exists($key,$ar) ? $ar[$key] : NULL;
-}
 
 $json_events = array();
 foreach($results as $result) {

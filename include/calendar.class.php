@@ -1,6 +1,7 @@
 <?php
 
 require_once('etc/config.php');
+require_once('include/eventsearcher.class.php');
 
 class TwoWeekCalendar {
 	public function __construct($anchor_date_str) {
@@ -147,8 +148,7 @@ class TwoWeekCalendar {
 		foreach($events as $event) {
 			$id = $event['id'];
 			$name = $event['name'];
-			$type = explode(',',htmlentities($row['event_type'],ENT_QUOTES,'ISO-8859-1',FALSE));
-			$single_type = $type[0];
+			$single_type = $event['categories'][0];
 			$start_time = $event['start_dt']->format('g:i a');
 ////*** Hardcoding a URL! ****///
 			print "<li><a href='onlyinpgh/event/?eid=$id'><span>$single_type</span><br>$name</a></li>";
@@ -170,34 +170,11 @@ class TwoWeekCalendar {
 	 *  events up to BUT NOT INCLUDING that day).
 	 */
 	private function findAllEvents($start,$end) {
-		// TODO: when doing a DB query, keep the whole 4 AM cutoff thing in mind?
-		$sql = "SELECT event_id, event_name, event_start_date, event_start_time, event_end_date, event_end_time,event_type
-					FROM wp_em_events 
-					WHERE event_start_date < :enddate AND event_end_date >= :startdate
-					ORDER BY event_end_date ASC";
+		$searcher = new EventSearcher();
+		$searcher->filterByStartDate($start);
+		$searcher->filterByEndDate($end);
 
-		try {
-			$pdo = new PDO('mysql:host='.OIP_DB_HOST.';dbname='.OIP_DB_NAME, 
-							OIP_DB_USER, OIP_DB_PASSWORD);
-			$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-			$statement = $pdo->prepare($sql);
-			$statement->execute(array('startdate'=>$start,'enddate'=>$end));
-			$statement->setFetchMode(PDO::FETCH_ASSOC);
-		}
-		catch(PDOException $e) {  
-		    die('PDO MySQL error: ' . $e->getMessage());  
-		} 
-
-		$events = array();
-		while($row = $statement->fetch()) {
-			$events[] = array(
-					'id' 		=> intval($row['event_id']),
-					'name'		=> htmlentities($row['event_name'],ENT_QUOTES,'ISO-8859-1',FALSE),
-					'start_dt'	=> new DateTime($row['event_start_date'] . ' ' . $row['event_start_time']),
-					'end_dt'	=> new DateTime($row['event_end_date'] . ' ' . $row['event_end_time']),
-					'type'		=> htmlentities($row['event_type'],ENT_QUOTES,'ISO-8859-1',FALSE),
-			);
-		}
+		$events = $searcher->runQuery(0,10000);
 		return $events;
 	}
 

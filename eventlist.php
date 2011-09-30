@@ -1,6 +1,7 @@
 <?php
 
 require_once 'etc/config.php';
+require_once 'include/eventsearcher.class.php';
 
 // Returns TRUE if the two DateTimes are on the same day (after taking the 4AM end time cutoff into account)
 function onSameDay($dt1,$dt2) {
@@ -28,51 +29,20 @@ $next_day_anchor = $iter->add(new DateInterval('P2D'))->format('Y-m-d');
 
 $date_txt = $date_dt->format('l, F j, Y');
 
-// assert that any event starts after 4 AM
-$start_dt = new DateTime($date_str);
-$end_dt = clone $start_dt;
-$end_dt->add(new DateInterval('P1D'));
+$searcher = new EventSearcher();
+$searcher->queryLocation();
+$searcher->queryOrganization();
+// WP/BP functions -- this means this PHP script won't work without WP calling it
+/*if( is_user_logged_in() ) {
+	$searcher->queryAttendance(bp_loggedin_user_id());
+}*/
+$searcher->queryAttendance('1');
 
-$sql = "SELECT event_id, event_name, event_start_date, event_start_time, event_end_date, event_end_time, event_notes, event_pic
-			FROM wp_em_events 
-			WHERE event_start_date < :enddate AND event_end_date >= :startdate
-			ORDER BY event_end_date ASC
-			";
+$searcher->filterByStartDate($date_str);
+$searcher->filterByEndDate($date_str);
 
-try {
-	$pdo = new PDO('mysql:host='.OIP_DB_HOST.';dbname='.OIP_DB_NAME, 
-					OIP_DB_USER, OIP_DB_PASSWORD);
-	$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-	$statement = $pdo->prepare($sql);
-	$statement->execute(array(	'startdate'=>$start_dt->format('Y-m-d H:i'),
-								'enddate'=>$end_dt->format('Y-m-d H:i')));
-	$statement->setFetchMode(PDO::FETCH_ASSOC);
-}
-catch(PDOException $e) {  
-    die('PDO MySQL error: ' . $e->getMessage());  
-} 
+$events = $searcher->runQuery(0,10000);
 
-/* Cycle through the returned query and put each result into an array with the
- *  following keys:
- *	- id 		: integer event ID
- *  - name 		: event name
- *  - start_dt 	: DateTime object
- *  - end_dt 	:   DateTime object
- */
-them into 
-$events = array();
-while($row = $statement->fetch()) {
-	$events[] = array(
-			'id' 		=> intval($row['event_id']),
-			'name'		=> htmlentities($row['event_name'],ENT_QUOTES,'ISO-8859-1',FALSE),
-			'start_dt'	=> new DateTime($row['event_start_date'] . ' ' . $row['event_start_time']),
-			'desc'		=> htmlentities($row['event_notes'],ENT_QUOTES,'ISO-8859-1',FALSE),
-			'pic'		=> htmlentities($row['event_pic'],ENT_QUOTES,'ISO-8859-1',FALSE), 
-			'end_dt'	=> new DateTime($row['event_end_date'] . ' ' . $row['event_end_time']),
-			'host'		=> htmlentities($row['organization_name'],ENT_QUOTES,'ISO-8859-1',FALSE),
-			''			=> 
-	);
-}
 
 ?>
 
