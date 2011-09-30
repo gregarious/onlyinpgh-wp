@@ -1076,7 +1076,7 @@ color: #ffec4b;
 
 #listing_button a.button:hover, #listing_button a.button:focus, #listing_button input[type="submit"]:hover, #listing_button input[type="button"]:hover, #listing_button input[type="reset"]:hover, #listing_button ul.button-nav li a:hover, #listing_button div.generic-button a:hover {
     color: #FFEC4B;
-text-shadow: 0px 0px 5px #000;
+	text-shadow: 0px 0px 5px #000;
 }
 
 #listing_button {
