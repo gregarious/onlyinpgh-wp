@@ -148,7 +148,7 @@ ul.single-day-events li a:hover, #ongoing-list li a:hover {
 	display:none;
 	clear:both;
 	position:relative;
-	top:10px;
+	top:27px;
 	right:30px;
 }
 
@@ -255,6 +255,10 @@ ul.eventslist-day li:hover {
 /* Single Event */
 /****************/
 
+.content#single-event {
+	margin:30px;
+}
+
 #single-event h2 {
 	margin:0;
 }
@@ -271,6 +275,7 @@ ul.eventslist-day li:hover {
 #details-container {
 	margin-top: 20px;
 	width:450px;
+	float:left;
 }
 
 #details-container img {
@@ -304,7 +309,11 @@ ul.eventslist-day li:hover {
 
 #single-event .desc {
 	margin-top:20px;
-	width:440px;
+	width:480px;
+}
+
+.event-single-map-holder {
+	margin-right:20px;
 }
 
 #single-event #map_canvas {

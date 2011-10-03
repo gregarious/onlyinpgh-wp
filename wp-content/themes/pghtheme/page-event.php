@@ -22,10 +22,14 @@ $long = $results[0]['long'];
 	
 // Reformattng start and end dates
 $start_dt = $results[0]['start_dt'];
-$start_date = $start_dt->format('l, F j, Y');
-
+$start_date = $start_dt->format('F j, g:00 a');
 $end_dt = $results[0]['end_dt'];
-$end_date = $end_dt->format('l, F j, Y');
+
+if (onSameDay($start_dt,$end_dt) == true) {
+	$end_date = $end_dt->format('g:00 a');
+} else {
+	$end_date = $end_dt->format('F j, g:00 a');
+}
 
 ?>
 
@@ -39,16 +43,9 @@ $end_date = $end_dt->format('l, F j, Y');
         var map = new GMap2(document.getElementById("map_canvas"));
         map.setCenter(new GLatLng("<?php echo $lat; ?>", "<?php echo $long; ?>"), 15);
         map.openInfoWindow(map.getCenter(),
-                           document.createTextNode("<?php echo $name ?>"));
+       	document.createTextNode("<?php echo $name ?>"));
       } 
     }
-
-    /*function eventInfoWindow() {
-    	var html = "<div id='event-infowindow'>";
-    	var html += 
-    }
-
-    initialize();*/
 
 </script>
 
@@ -59,7 +56,10 @@ $end_date = $end_dt->format('l, F j, Y');
 			<div class="content" id="single-event">
 
 				<h2><?php echo $name; ?></h2>
-				<h4 class="time">Sept 5 10:00pm<?php echo $start_date; ?> - Sept 10, 10:00pm</h4>
+				
+				<h4 class="time"><?php 
+					echo $start_date; ?> - <?php echo $end_date; ?>
+				</h4>
 				
 				<div id="details-container">
 					<img src="<?php echo $img ?>" class="alignleft">
