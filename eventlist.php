@@ -70,7 +70,7 @@ foreach($events as $event) {
 		
 			<?php	
 			// Only show 40 words of description
-			$desc =$event['description'];
+			$desc =$event['description_short'];
 			$array = explode(" ",$desc,31);
 			unset($array[30]);
 			$limited = implode(" ",$array); ?>
