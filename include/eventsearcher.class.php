@@ -162,6 +162,7 @@ class EventSearcher {
 			if($this->q_org) {
 				$new_event['org_name'] = htmlentities ($row['organization_name'],ENT_QUOTES,'ISO-8859-1',FALSE);
 				$new_event['org_url'] = $row['organization_link_url'];
+				$new_event['org_fancount'] = $row['organization_fan_count'];
 			}
 
 			$all_events[] = $new_event;
@@ -190,7 +191,8 @@ class EventSearcher {
 							e.event_type";
 		if($this->q_org||$this->f_kw!==NULL) {
 			$select .= ", o.name AS organization_name, 
-							o.link_url AS organization_link_url";
+							o.link_url AS organization_link_url,
+							o.fan_count AS organization_fan_count";
 		}
 		if($this->q_loc||$this->f_loc!==NULL) {
 			$select .= ", l.location_address, 
@@ -257,12 +259,12 @@ class EventSearcher {
 		$having_clauses = array();
 		if($this->f_sdate!==NULL) {
 			# this is not a typo: we want all events that end after our query's start date
-			$having_clauses[] = '(e.event_end_date >= :startdate)';
+			$having_clauses[] = 'e.event_end_date >= :startdate';
 			$this->query_args['startdate'] = $this->f_sdate;
 		}
 		if($this->f_edate!==NULL) {
 			# this is not a typo: we want all events that start before our end date
-			$having_clauses[] = '(e.event_start_date <= :enddate)';
+			$having_clauses[] = 'e.event_start_date <= :enddate';
 			$this->query_args['enddate'] = $this->f_edate;
 		}
 		if($this->f_loc!==NULL) {

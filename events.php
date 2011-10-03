@@ -19,10 +19,7 @@ if( is_user_logged_in() ) {
 }
 
 $searcher->filterByEventId($eid);
-$results = $searcher->runQuery($offset,$limit);
-$results = $searcher->runQuery($offset,$limit);
-
-
+$results = $searcher->runQuery(0,1);
 
 echo '<pre>';
 echo print_r($results);

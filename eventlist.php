@@ -41,9 +41,11 @@ $searcher->queryAttendance('1');
 $searcher->filterByStartDate($date_str);
 $searcher->filterByEndDate($date_str);
 
-$events = $searcher->runQuery(0,10000);
+$events = $searcher->runQuery(0,10000);		// runQuery needs a result limit, use something huge
 
-
+echo '<pre>';
+echo print_r($events);
+echo '</pre>';
 ?>
 
 <span id="cal-buttons" class="alignright">

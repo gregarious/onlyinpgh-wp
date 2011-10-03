@@ -172,7 +172,7 @@ class TwoWeekCalendar {
 		$searcher->filterByStartDate($start);
 		$searcher->filterByEndDate($end);
 
-		$events = $searcher->runQuery(0,10000);
+		$events = $searcher->runQuery(0,10000);		// runQuery needs a result limit, use something huge
 		return $events;
 	}
 

@@ -113,7 +113,8 @@ foreach($results as $result) {
 					'long'			=> safeLookup('long',$result) ),
 				'organization' => array(
 					'name'			=> safeLookup('org_name',$result),
-					'url'			=> safeLookup('org_url',$result) ),
+					'url'			=> safeLookup('org_url',$result),
+					'fancount'		=> safeLookup('org_fancount',$result) ),
 				'timespan'	=> array(
 					'start_date' 	=> ($result['start_dt']) ? $result['start_dt']->format('Y-m-d') : NULL,
 					'start_time' 	=> ($result['start_dt']) ? $result['start_dt']->format('H:i') : NULL,
