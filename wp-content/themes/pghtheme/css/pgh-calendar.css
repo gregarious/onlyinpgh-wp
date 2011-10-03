@@ -1,3 +1,4 @@
+/* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-calendar.css */
 
 /*****************/
 /* Calendar page */
@@ -174,16 +175,12 @@ ul#ongoing-list li, ul#ongoing-list li a {
 	text-decoration: none;
 }
 
-/*************************/
-/* Single Day Events List */
-/*************************/
+/***************/
+/* Events List */
+/***************/
 
 .padder#eventlist {
 	margin-top: 10px;
-}
-
-#eventlist a:hover {
-	text-decoration: none;
 }
 
 #eventlist h2 {
@@ -202,7 +199,7 @@ ul.eventslist-day {
 }
 
 ul.eventslist-day li {
-	height: 150px;
+	height: 170px;
 	border-bottom: 1px #ccc solid;
 	padding: 20px 10px;
 }
@@ -225,7 +222,7 @@ ul.eventslist-day li:hover {
 }
 
 .el-time {
-	margin: 0;
+	margin: 5px 0;
 	line-height: 100%;
 }
 
@@ -235,11 +232,10 @@ ul.eventslist-day li:hover {
 }
 
 .el-desc {
-	width: 300px;
-	height: 120px;
+	width: 400px;
 	position: relative;
 	left: 20px;
-	bottom: 10px;
+	top: 10px;
 	word-wrap: break-word;
 	line-height: 125%;
 	font-family:'Lucida Sans Unicode','Lucida Grande',sans-serif;
@@ -255,8 +251,63 @@ ul.eventslist-day li:hover {
 	margin-left: 1px;
 }
 
+/****************/
+/* Single Event */
+/****************/
 
+#single-event h2 {
+	margin:0;
+}
 
+#single-event h4 {
+	font-weight:normal;
+	font-size:1.2em;
+}
 
+#single-event h4.time {
+	margin:10px 0;
+}
 
+#details-container {
+	margin-top: 20px;
+	width:450px;
+}
 
+#details-container img {
+	margin: 15px 15px 10px 0;
+}
+
+#single-event .hostedby {
+	font-size:.85em;
+	margin-top:0;
+	font-family:'Lucida Sans Unicode','Lucida Grande',sans-serif;
+}
+
+#single-event #host-address {
+	width:300px;
+}
+
+#single-event .host {
+	font-size:1.2em;
+	margin:5px 0 0 0;
+}
+
+#single-event .address {
+	font-family:'Lucida Sans Unicode','Lucida Grande',sans-serif;
+	font-size:1em;	
+}
+
+#single-event .directions {
+	font-size:1em;
+	margin:10px 0 0 10px;
+}
+
+#single-event .desc {
+	margin-top:20px;
+	width:440px;
+}
+
+#single-event #map_canvas {
+	width:400px;
+	height:400px;
+}

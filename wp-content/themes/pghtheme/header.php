@@ -141,7 +141,7 @@ for (i = 0; i < field.length; i++)
 </head>
 
 
-<body style="margin:0px; padding:0px;">
+<body style="margin:0px; padding:0px;" onload="initialize()" onunload="GUnload()">
 <?php do_action( 'bp_before_header' ) ?>
 
 <div id="header">
@@ -217,6 +217,7 @@ for (i = 0; i < field.length; i++)
 								<input id="limitvalue" type="hidden" value="0">
 								<li><a class="mypghlink simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>">My PGH</a></li><?php
 							} else { ?>
+								<input id="limitvalue" type="hidden" value="0">
 								<li><a class="mypghlink simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>">My PGH</a></li><?php
 							} 
 						} ?>

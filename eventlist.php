@@ -54,48 +54,52 @@ echo '</pre>';
 </span>
 <h2 class="page-title"><?php echo $date_txt; ?></h2>
 <ul class="eventslist-day">
+
 <?php
 foreach($events as $event) {
 	?>
-
-	<a href="/event/?eid=<?php echo $event['id']; ?>">
-	<li>
-		<div id="img-container">
-			<img src="<?php echo $event['pic']; ?>" class="alignleft">
-		</div>
-		<h3 class="el-name">
-			<?php echo $event['name']; ?>
-		</h3>
 	
-		<?php	
-		// Only show 40 words of description
-		$desc =$event['desc'];
-		$array = explode(" ",$desc,31);
-		unset($array[30]);
-		$limited = implode(" ",$array); ?>
+	<a href="/event/?eid=<?php echo $event['id']; ?>" target="_blank">
+		<li>
+			<div id="img-container">
+				<img src="<?php echo $event['image_url']; ?>" class="alignleft">
+			</div>
+			<h3 class="el-name">
+				<?php echo $event['name']; ?>
+			</h3>
+		
+			<?php	
+			// Only show 40 words of description
+			$desc =$event['description'];
+			$array = explode(" ",$desc,31);
+			unset($array[30]);
+			$limited = implode(" ",$array); ?>
 
-		<p class="el-desc alignleft"><?php echo $limited; ?>...</p>
+			<?php
 
-		<?php
+			$start_date_str = $event['start_dt']->format('M j');
+			$start_time_str = $event['start_dt']->format('g:ia');
+			$end_date_str = $event['end_dt']->format('M j');
+			$end_time_str = $event['end_dt']->format('g:ia');
 
-		$start_date_str = $event['start_dt']->format('M j');
-		$start_time_str = $event['start_dt']->format('g:ia');
-		$end_date_str = $event['end_dt']->format('M j');
-		$end_time_str = $event['end_dt']->format('g:ia');
+			echo '<p class="el-time">' . $start_date_str . ' ' . $start_time_str . ' - ';
+			if( !onSameDay($event['start_dt'],$event['end_dt']) ) {
+				echo $end_date_str . ' ';
+			}
+			echo $end_time_str . '</p>' . "\n"; ?>
 
-		echo '<p class="el-time">' . $start_date_str . ' ' . $start_time_str . ' - ';
-		if( !onSameDay($event['start_dt'],$event['end_dt']) ) {
-			echo $end_date_str . ' ';
-		}
-		echo $end_time_str . '</p>' . "\n"; ?>
+			<div id="el-host-address" class="alignleft">
+				<p class="hostedby">Hosted by</h4>
+				<h4 class="host"><?php echo $event['org_name']; ?></h4>
+				<p class="event-address"><?php echo $event['address'];?></p> 
+			</div> <!-- #el-host-address -->
 
-		<div id="el-host-address" class="alignleft">
-			<p class="hostedby">Hosted by</h4>
-			<h4 class="host">Host's Name Here</h4>
-			<p class="event-address">2345 Booty Lane</p> 
-		</div> <!-- #el-host-address -->
+			<p class="el-desc alignleft"><?php echo $limited; ?>...</p>
 
-	</li></a><?php
+		</li>
+	</a>
+		
+<?php
 }
 ?>
 </ul>

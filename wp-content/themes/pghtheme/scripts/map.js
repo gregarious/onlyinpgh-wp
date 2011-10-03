@@ -94,7 +94,9 @@ function JSONToEventInstance(json) {
 			html += this.timespan.start_time + ' - ' + this.timespan.end_time;
 			html += '<a class="directions alignright" target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions &rarr;</a></p>';
 			html += '</div>'; // #time-directions
-			html += '<p class="event-desc">' + this.description + '</p>...<a target="_blank" href="/events/event/' + this.wp_slug + '/">More info</a>';
+		
+			//** TODO: Add Date Object instead of wp_slug here **//
+			html += '<p class="event-desc">' + this.description + '</p>...<a target="_blank" href="/event' + this.wp_slug + '/">More info</a>';
 			if(this.attending) {
 				html += '<input class="attend-button-in alignright" type="button" value="Added" class="attend-button" id="' + this.id + 'window">';
 			}

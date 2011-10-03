@@ -166,7 +166,7 @@ td {
 
 /* Inputs, Buttons, and such */
 
-button, input[type=button], #profile-group-edit-submit {
+button, input[type=button], #profile-group-edit-submit, #geomashupsearchwidget-4-submit {
     background-color: #ffec4b;
     cursor:pointer;
     border: medium;
@@ -180,7 +180,7 @@ button, input[type=button], #profile-group-edit-submit {
             border-radius: 3px;
 }
 
-button:hover, input[type=button]:hover, #profile-group-edit-submit:hover {
+#profile-group-edit-submit:hover {
 	background-color:#fefefe;
 }
 
