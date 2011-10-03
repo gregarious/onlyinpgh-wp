@@ -126,8 +126,10 @@ class EventSearcher {
 				array(	'id'			=> intval($row['event_id']),
 						'name'			=> htmlentities($row['event_name'],ENT_QUOTES,'ISO-8859-1',FALSE),
 						'wp_slug'		=> $row['event_slug'],
-						'description'   => ($row['event_notes'] !== NULL) ? 
+						'description_short' => ($row['event_notes'] !== NULL) ? 
 												htmlentities($row['event_notes'],ENT_QUOTES,'ISO-8859-1',FALSE) : NULL,
+						'description'   => ($row['event_notes'] !== NULL) ? 
+												htmlentities($row['event_notes_full'],ENT_QUOTES,'ISO-8859-1',FALSE) : NULL,
 						'categories'	=> ($row['event_type'] !== NULL) ?
 												explode(',',htmlentities($row['event_type'],ENT_QUOTES,'ISO-8859-1',FALSE)) : NULL,
 						'image_url'		=> $row['event_pic'],

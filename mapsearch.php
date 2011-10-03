@@ -25,6 +25,7 @@
 			 	name 		: string,
 				wp_slug  	: string,
 				description : string,
+				description_short: string,
 				categories 	: [string],
 				image_url 	: string,
 				timespan 	: {
@@ -103,6 +104,7 @@ foreach($results as $result) {
 		array(	'id'		=> safeLookup('id',$result),
 				'name'		=> safeLookup('name',$result),
 				'wp_slug'		=> safeLookup('wp_slug',$result),
+				'description_short'   => safeLookup('description_short',$result),
 				'description'   => safeLookup('description',$result),
 				'categories'	=> safeLookup('categories',$result),
 				'image_url'		=> safeLookup('image_url',$result),
