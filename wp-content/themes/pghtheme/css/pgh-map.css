@@ -1,5 +1,7 @@
 /* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-map.css */
 
+/* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-map.css */
+
 
 #maplocationkey table p {
     color: #F0F0F0;
@@ -102,11 +104,11 @@ float: left;
 }
 
 .profile-map #maplocationkey {
-    width: 580px;
+    width: 590px;
 }
 
 .profile-map .sidebartogglecurrent {
-	width: 335px;
+	width: 340px;
 }
 
 .profile-map .event-lising {
@@ -118,7 +120,7 @@ float: left;
 }
 
 .profile-map #map {
-	width: 580px;
+	width: 590px;
 }
 
 .infowindow {

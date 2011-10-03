@@ -7,8 +7,12 @@ Template Name: Single Event
 
 get_header(); 
 
-require_once('events.php'); 
 
+/* events.php has already been called in the header, but for whatever
+	Wordpressy reason its ouput $results var isn't available here. */
+require(ABSPATH . 'events.php'); 
+
+$eid = $results[0]['id'];
 $name =  $results[0]['name'];
 $desc = $results[0]['description'];
 $categories = $results[0]['categories'];
@@ -72,6 +76,20 @@ if (onSameDay($start_dt,$end_dt) == true) {
 							<h4 class="directions"><a href="http://maps.google.com/maps?saddr=&daddr=<?php echo $address ?>" target="_blank">Get Directions...</a></h4> <?php
 						} ?>
 					</div> <!-- #host-address -->
+
+					<!-- Facebook "like" button infrastructure -->
+					<div id="fb-root"></div>
+					<script>(function(d, s, id) {
+  						var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) {return;}
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+						  fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+					</script>
+
+					<div class="fb-like" data-href="<?php echo getCanonicalEventURL($eid); ?>" data-send="true" data-width="450" data-show-faces="true" data-font="lucida grande"></div>
+					<!-- end of Facebook stuff -->
 
 				<p class="desc alignleft"><?php echo $desc ?></p>
 				</div> <!-- #details-container -->
