@@ -9,7 +9,7 @@
 ?>
 
 <?php get_header( 'buddypress' ) ?>
-
+<div id="wrapper">
 	<div id="content">
 		<div class="padder">
 
@@ -76,7 +76,7 @@
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
-
+</div><!-- #wrapper -->
 <?php get_sidebar( 'buddypress' ) ?>
 
 <?php get_footer( 'buddypress' ) ?>

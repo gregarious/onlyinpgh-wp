@@ -4,7 +4,7 @@ $img_dir = get_bloginfo('stylesheet_directory') . '/images';
 ?>
 
 <div id="wrapper">
-<div id="content">
+<div id="content" class="profile-map">
 	<div class="padder">
 
 		<div id="item-header">
@@ -77,13 +77,14 @@ $img_dir = get_bloginfo('stylesheet_directory') . '/images';
 					</table>
 				</div>
 			</div>
-			<div id="event-sidebar">
-				<div id="sidebar-header">
-					<p class="sidebartogglecurrent">Upcoming Events</p>
-				</div>
+			<div id="sidebar-header" class="alignright">
+				<p class="sidebartogglecurrent">Your Upcoming Events</p>
+			</div>
+			<div id="event-sidebar" class="alignright">
+
 				<div id="sidebar-content"></div> <!-- Actual event results dynamically loaded into here -->
 				<div id="sidebar-search-status"> <!-- Only visible while waiting for an AJAX response -->
-					Searching... <img src="<?php bloginfo('stylesheet_directory'); ?>/images/loading.gif"/>
+					Loading... <img src="<?php bloginfo('stylesheet_directory'); ?>/images/loading.gif"/>
 				</div>
 				<div id="sidebar-footer"></div>	<!-- Load more events button will be rendered in here if applicable -->
 			</div>

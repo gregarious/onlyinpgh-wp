@@ -6,7 +6,7 @@
 @import url('pgh-main.css');
 @import url('pgh-nonbp.css');
 @import url('pgh-typography.css');
-@import url('pgh-bpsame.css');
+@import url('pgh-bp.css');
 @import url('pgh-header.css');
 @import url('pgh-footer.css');
 @import url('pgh-events.css');
@@ -62,7 +62,9 @@ div#item-header {
 }
 
 #subnav {
-	overflow: auto;
+	overflow: hidden;
+	margin:0 -20px 0 -20px;
+	border-bottom:1px #f2f2f2 solid;
 }
 
 #subnav ul li {
@@ -70,10 +72,48 @@ div#item-header {
 }
 
 
+/* Lara customized */
+
+.bp-widget.base h4{
+	display:none;
+}
+
+#object-nav {
+	background-color: #FFEC4B;
+	margin:0 -20px 0 -20px;
+}
+
+#item-body h3 {
+	margin-top:16px;
+	font-size:1.4em;
+}
+
+span.user-nicename {
+	background-color: #111;
+	display:inline;
+	color:#ffec4b;
+	font-family: 'Francois One',Impact,serif;
+	font-weight:normal;
+	text-transform:uppercase;
+	letter-spacing:2px;
+	padding:2px;
+	-moz-border-radius: 3px 3px 3px 3px;
+	-webkit-border-radius: 3px 3px 3px 3px;
+	border-radius: 3px 3px 3px 3px;
+}
+
+.button.edit:hover {
+	text-decoration:underline;
+}
+
+#profile-edit-form h4 {
+	display:none;
+}
+
 div.item-list-tabs {
 	clear: left;
 	overflow: hidden;
-	margin: 25px -19px 20px -19px;
+	margin:0px;
 	background: none;
 }
 	div.item-list-tabs ul li a {
@@ -95,18 +135,7 @@ div.item-list-tabs {
 		}
 		
 span.activity {
-    -moz-border-radius: 3px 3px 3px 3px;
--webkit-border-radius: 3px 3px 3px 3px;
-    background: none repeat scroll 0 0 #FFEC4B;
-    border-bottom: 1px solid #0F0F0F;
-    border-right: 1px solid #0F0F0F;
-    color: #0F0F0F;
-    display: inline-block;
-    font-size: 11px;
-    font-weight: normal;
-    margin-top: 6px;
-    padding: 1px 8px;
-    text-decoration: none;
+	display:none;
 } 
 
 /* > Input Forms

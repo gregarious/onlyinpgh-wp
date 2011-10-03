@@ -1,3 +1,5 @@
+/* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-map.css */
+
 
 #maplocationkey table p {
     color: #F0F0F0;
@@ -86,8 +88,37 @@ float: left;
 #event-sidebar {
     float: right;
     height: 500px;
-    overflow: auto;
+    overflow-x:hidden;
     width: 345px;
+}
+
+#sidebar-content {
+    overflow: auto;	
+    width: 345px;
+}
+
+.profile-map #event-sidebar, .profile-map #sidebar-content{
+	width: 340px;
+}
+
+.profile-map #maplocationkey {
+    width: 580px;
+}
+
+.profile-map .sidebartogglecurrent {
+	width: 335px;
+}
+
+.profile-map .event-lising {
+	margin-left: 0;
+}
+
+.profile-map #item-body {
+	margin-top: 30px;
+}
+
+.profile-map #map {
+	width: 580px;
 }
 
 .infowindow {
@@ -105,7 +136,6 @@ float: left;
 .event-listing:hover {
     background-color: #FFEC4B;
 }
-
 
 .event-listing img, #infowindow img {
     margin:0 10px 0 0;
