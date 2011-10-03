@@ -225,4 +225,8 @@ function new_excerpt_length($length) {
 add_filter('excerpt_length', 'new_excerpt_length'); 
 
 
+function getCanonicalEventURL($eid) {
+      return "http://www.onlyinpgh.com/event/".$eid;
+}
+
 ?>

@@ -7,8 +7,12 @@ Template Name: Single Event
 
 get_header(); 
 
-require_once('events.php'); 
 
+/* events.php has already been called in the header, but for whatever
+	Wordpressy reason its ouput $results var isn't available here. */
+require(ABSPATH . 'events.php'); 
+
+$eid = $results[0]['id'];
 $name =  $results[0]['name'];
 $desc = $results[0]['description'];
 $categories = $results[0]['categories'];
@@ -26,7 +30,6 @@ $start_date = $start_dt->format('l, F j, Y');
 
 $end_dt = $results[0]['end_dt'];
 $end_date = $end_dt->format('l, F j, Y');
-
 ?>
 
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAIAxlYmeYiqMAw_4FlxKuAxSJeLfqeCfYhfLsvdVofOLeDmN8-RSBM0x9k_TkSngZ5_R9YOO_GyNARw" type="text/javascript"></script>
@@ -72,6 +75,20 @@ $end_date = $end_dt->format('l, F j, Y');
 							<h4 class="directions"><a href="http://maps.google.com/maps?saddr=&daddr=<?php echo $address ?>" target="_blank">Get Directions...</a></h4> <?php
 						} ?>
 					</div> <!-- #host-address -->
+
+					<!-- Facebook "like" button infrastructure -->
+					<div id="fb-root"></div>
+					<script>(function(d, s, id) {
+  						var js, fjs = d.getElementsByTagName(s)[0];
+						  if (d.getElementById(id)) {return;}
+						  js = d.createElement(s); js.id = id;
+						  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+						  fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));
+					</script>
+
+					<div class="fb-like" data-href="<?php echo getCanonicalEventURL($eid); ?>" data-send="true" data-width="450" data-show-faces="true" data-font="lucida grande"></div>
+					<!-- end of Facebook stuff -->
 
 				<p class="desc alignleft"><?php echo $desc ?></p>
 				</div> <!-- #details-container -->
