@@ -149,7 +149,7 @@ class TwoWeekCalendar {
 			$name = $event['name'];
 			$single_type = $event['categories'][0];
 			$start_time = $event['start_dt']->format('g:i a');
-			print "<li><a href='/event/?eid=$id'><span>$single_type</span><br>$name</a></li>\n";
+			print "<li><a href='/event/$id'><span>$single_type</span><br>$name</a></li>\n";
 		}
 	}
 
