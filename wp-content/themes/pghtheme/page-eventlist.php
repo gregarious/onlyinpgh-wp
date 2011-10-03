@@ -2,7 +2,7 @@
 
 
 /*
-Template Name: Single Day Events
+Template Name: Event List
 */
 
 

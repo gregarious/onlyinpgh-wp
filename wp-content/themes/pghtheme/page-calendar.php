@@ -19,9 +19,6 @@ get_header();
 
 			<?php require_once('calendar.php') ?>
 
-			<!--<br>	
-			<a href="http://localhost:8888/onlyinpgh/http://localhost:8888/onlyinpgh/event-list/?date=<?php echo $day ?>">asd</a>-->
-
 	</div><!-- .padder#cal-page -->
 
 </div><!-- #wrapper -->

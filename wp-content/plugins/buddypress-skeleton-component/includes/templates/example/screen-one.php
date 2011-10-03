@@ -3,6 +3,7 @@ get_header();
 $img_dir = get_bloginfo('stylesheet_directory') . '/images';
 ?>
 
+<div id="wrapper">
 <div id="content">
 	<div class="padder">
 
@@ -19,8 +20,8 @@ $img_dir = get_bloginfo('stylesheet_directory') . '/images';
 		</div>
 
 		<div id="item-body">
-			<div id="profilemapcontentholder">
-				<div id="map" class="profilemap"></div>
+			<div id="mapcontentholder">
+				<div id="map"></div>
 				<div id="maplocationkey">
 					<table id="locationtypes">
 					<tbody>
@@ -89,6 +90,7 @@ $img_dir = get_bloginfo('stylesheet_directory') . '/images';
 		</div> <!-- #item-body -->
 	</div><!-- .padder -->
 </div><!-- #content -->
+</div> <!-- #wrapper -->
 
 <script src="<?php bloginfo('stylesheet_directory'); ?>/scripts/map.js"></script>
 <script src="<?php bloginfo('stylesheet_directory'); ?>/scripts/profilepage.js"></script>

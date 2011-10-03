@@ -212,8 +212,13 @@ for (i = 0; i < field.length; i++)
             				} else { ?>
             					<li><a class="mypghlink" href="<?php echo bp_loggedin_user_domain() ?>">My PGH</a></li><?php 
          					}
-						} else { ?>
-							<li><a class="mypghlink simplemodal-login" href="/onlyinpgh">My PGH</a></li>	<?php 
+						} else {
+							if ( bp_is_home()) { ?>
+								<input id="limitvalue" type="hidden" value="0">
+								<li><a class="mypghlink simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>">My PGH</a></li><?php
+							} else { ?>
+								<li><a class="mypghlink simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>">My PGH</a></li><?php
+							} 
 						} ?>
  
 

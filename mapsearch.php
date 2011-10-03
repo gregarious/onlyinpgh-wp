@@ -1,4 +1,5 @@
 <?php  
+
 /**
  	mapsearch.php: Script called by map.js to search events. The script
  	outputs JSON data as described below.

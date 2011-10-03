@@ -27,7 +27,6 @@ if(!$ajax): ?>
 <div id="cal-header">
 	<h2><?php echo $cal->getFirstDate()->format('M j'); ?> - <?php echo $cal->getLastDate()->format('M j'); ?></h2>
 	<span id="cal-buttons" class="alignright">
-<!-- *** Hardcoding a URL! *** -->
 		<a href="?anchor=<?php echo $prev_anchor; ?>" class="cal-nav-link" id="cal-nav-prev">&lt;&lt;</a>
 		<a href="?anchor=<?php echo $next_anchor; ?>" class="cal-nav-link" id="cal-nav-next">&gt;&gt;</a>
 	</span>

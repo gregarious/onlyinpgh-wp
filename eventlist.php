@@ -55,8 +55,8 @@ $events = $searcher->runQuery(0,10000);
 <?php
 foreach($events as $event) {
 	?>
-	<!--***** Hardcoding a URL! *****-->
-	<a href="/onlyinpgh/event/?eid=<?php echo $event['id']; ?>">
+
+	<a href="/event/?eid=<?php echo $event['id']; ?>">
 	<li>
 		<div id="img-container">
 			<img src="<?php echo $event['pic']; ?>" class="alignleft">
