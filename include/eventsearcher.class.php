@@ -128,7 +128,7 @@ class EventSearcher {
 						'wp_slug'		=> $row['event_slug'],
 						'description_short' => ($row['event_notes'] !== NULL) ? 
 												htmlentities($row['event_notes'],ENT_QUOTES,'ISO-8859-1',FALSE) : NULL,
-						'description'   => ($row['event_notes'] !== NULL) ? 
+						'description'   => ($row['event_notes_full'] !== NULL) ? 
 												htmlentities($row['event_notes_full'],ENT_QUOTES,'ISO-8859-1',FALSE) : NULL,
 						'categories'	=> ($row['event_type'] !== NULL) ?
 												explode(',',htmlentities($row['event_type'],ENT_QUOTES,'ISO-8859-1',FALSE)) : NULL,
