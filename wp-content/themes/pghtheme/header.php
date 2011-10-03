@@ -25,13 +25,6 @@
 <link href="<?php includes_url() ?>/js/jquery/ui.datepicker.js" type="text/javascript" />
 <script src="http://maps.google.com/maps/api/js?libraries=places&sensor=false" type="text/javascript"></script>
 
-<?php if( is_front_page()) : ?>
-
-<?php else : ?>
-<script src="<?php bloginfo('stylesheet_directory'); ?>/scripts/profilepage.js" type="text/javascript"></script>
-<?php endif; ?>
-
-
 <script type="text/javascript">
 
     function toggle_visibility(id) {
