@@ -111,7 +111,9 @@ jQuery(document).ready(function() {
 					if ($results[0]['attending'] === true && is_user_logged_in()) { ?>
 						<input class="attend-button-in alignright" type="button" value="Added!" id="<?php echo $results[0]['id']; ?>window"> <?php
 					} else if (!is_user_logged_in()) { ?>
-						<input class="attend-button alignright simplemodal-login" id="simplemodal-login-redirect" type="button" value="Add to MyPgh"> <?php
+						<a class="simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER["REQUEST_URI"]; ?>">
+							<input class="attend-button alignright" type="button" value="Login to Add">
+						</a><?php
 					} else { ?>
 						<input class="attend-button alignright" type="button" value="Add to MyPgh" id="<?php echo $results[0]['id']; ?>window" onclick="attendEvent(<?php echo $results[0]['id']; ?>)"> <?php
 					}

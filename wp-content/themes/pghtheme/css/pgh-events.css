@@ -3,8 +3,7 @@
 	overflow:auto;
 }
 
-#eventsearch_bar {
-	height: 115px; 
+#eventsearch_bar { 
 	width: 950px;
 	padding:10px 0 0 10px;
 	background-color: #0f0f0f;
