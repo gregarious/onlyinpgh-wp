@@ -1,6 +1,4 @@
 <?php
-//TODO: !!!!! REMOVE BEFORE COMMIT 
-define('ABSPATH','/Users/gdn/Sites/public/onlyinpgh/');
 
 require_once(ABSPATH . "include/eventsearcher.class.php");
 require_once(ABSPATH . "include/iCalcreator.class.php");
