@@ -94,3 +94,35 @@ table tr td.label {
 table tr.alt {
 	background: #f4f4f4;
 }
+
+
+/* Export Calendar page styles */
+
+#export-cal-container p {
+	margin-top:10px;
+	font-family: 'Trebuchet MS','Lucida Sans Unicode','Lucida Grande','Lucida Sans',Arial,sans-serif;
+}
+
+.attend-button.cal-url {
+	font-size:.8em;
+	padding:5px;
+}
+
+input.cal-feed-field {
+	font-size:1em;
+	border: 1px inset #ccc;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+	padding: 6px;
+	font: inherit;
+	font-size: 14px;
+	color: #888;
+	width:300px;
+}
+
+.cal-feed-field:focus {
+	background: #fafafa;
+	color: #555;
+	border-color:green;
+}

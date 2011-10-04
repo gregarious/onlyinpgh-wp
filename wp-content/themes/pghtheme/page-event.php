@@ -61,13 +61,6 @@ function initializeMap() {
   		title: '<?php echo $address; ?>',
   	});
 
-  	infowindow = new google.maps.InfoWindow({  
-  		content: '<h4 class="host"><?php echo $address; ?></h4>',
-  		maxWidth: 200,
-	});  
-	
-	infowindow.open(map, marker); 
-
 }  
 
 jQuery(document).ready(function() {
@@ -107,7 +100,7 @@ jQuery(document).ready(function() {
 						  if (d.getElementById(id)) {return;}
 						  js = d.createElement(s); js.id = id;
 						  js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-						  fjs.parentNode.insertBefore(js, fjs);
+						  fjs.parentNode.insertBefore(js, fjs); 
 					}(document, 'script', 'facebook-jssdk'));
 					</script>
 
@@ -118,7 +111,7 @@ jQuery(document).ready(function() {
 					if ($results[0]['attending'] === true && is_user_logged_in()) { ?>
 						<input class="attend-button-in alignright" type="button" value="Added!" id="<?php echo $results[0]['id']; ?>window"> <?php
 					} else if (!is_user_logged_in()) { ?>
-						<input class="attend-button alignright simplemodal-login" type="button" value="Add to MyPgh"> <?php
+						<input class="attend-button alignright simplemodal-login" id="simplemodal-login-redirect" type="button" value="Add to MyPgh"> <?php
 					} else { ?>
 						<input class="attend-button alignright" type="button" value="Add to MyPgh" id="<?php echo $results[0]['id']; ?>window" onclick="attendEvent(<?php echo $results[0]['id']; ?>)"> <?php
 					}
