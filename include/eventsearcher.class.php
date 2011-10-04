@@ -3,7 +3,7 @@
 #require_once '../etc/config.php';
 
 class EventSearcher {
-	public function __construct() {
+	public function __construct($process_output=TRUE) {
 		$this->q_loc = FALSE;
 		$this->q_org = FALSE;
 		$this->q_att = FALSE;	
@@ -20,6 +20,8 @@ class EventSearcher {
 		$this->more_results_exist = FALSE;
 
 		$this->query_args = array();
+
+		$this->process_output = $process_output == TRUE;
 	}
 
 	public function queryLocation() {
@@ -124,14 +126,14 @@ class EventSearcher {
 			
 			$new_event =
 				array(	'id'			=> intval($row['event_id']),
-						'name'			=> htmlentities($row['event_name'],ENT_QUOTES,'ISO-8859-1',FALSE),
+						'name'			=> $this->processText($row['event_name']),
 						'wp_slug'		=> $row['event_slug'],
 						'description_short' => ($row['event_notes'] !== NULL) ? 
-												htmlentities($row['event_notes'],ENT_QUOTES,'ISO-8859-1',FALSE) : NULL,
+												$this->processText($row['event_notes']) : NULL,
 						'description'   => ($row['event_notes'] !== NULL) ? 
-												htmlentities($row['event_notes_full'],ENT_QUOTES,'ISO-8859-1',FALSE) : NULL,
+												$this->processText($row['event_notes_full']) : NULL,
 						'categories'	=> ($row['event_type'] !== NULL) ?
-												explode(',',htmlentities($row['event_type'],ENT_QUOTES,'ISO-8859-1',FALSE)) : NULL,
+												explode(',',$this->processText($row['event_type'])) : NULL,
 						'image_url'		=> $row['event_pic'],
 						'start_dt'	=> NULL,
 						'end_dt'		=> NULL );
@@ -154,7 +156,7 @@ class EventSearcher {
 			}
 
 			if($this->q_loc) {
-				$new_event['address'] = htmlentities($row['location_address'],ENT_QUOTES,'ISO-8859-1',FALSE);
+				$new_event['address'] = $this->processText($row['location_address']);
 				$new_event['lat'] = ($row['location_latitude'] !== NULL) ?
 												floatval($row['location_latitude']) : NULL;
 				$new_event['long'] = ($row['location_longitude'] !== NULL) ?
@@ -162,7 +164,7 @@ class EventSearcher {
 			}
 
 			if($this->q_org) {
-				$new_event['org_name'] = htmlentities ($row['organization_name'],ENT_QUOTES,'ISO-8859-1',FALSE);
+				$new_event['org_name'] = $this->processText($row['organization_name']);
 				$new_event['org_url'] = $row['organization_link_url'];
 				$new_event['org_fancount'] = $row['organization_fan_count'];
 			}
@@ -172,6 +174,10 @@ class EventSearcher {
 
 		$this->more_results_exist = ($counter>$limit);
 		return $all_events;
+	}
+
+	private function processText($text) {
+		return $this->process_output ? htmlentities($text,ENT_QUOTES,'ISO-8859-1',FALSE) : $text;
 	}
 
 	// returns TRUE if more results were available than the current query returned
