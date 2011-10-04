@@ -290,6 +290,7 @@ ul.eventslist-day li:hover {
 
 #single-event #host-address {
 	width:300px;
+	margin-bottom:20px;
 }
 
 #single-event .host {

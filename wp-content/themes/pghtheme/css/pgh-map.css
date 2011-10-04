@@ -239,7 +239,6 @@ input.attend-button:active {
 
 input.attend-button-in {
     position:relative;
-    bottom:20px;
     font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
     text-transform:none;
     font-size:.7em;

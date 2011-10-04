@@ -14,7 +14,7 @@ require(ABSPATH . 'events.php');
 
 $eid = $results[0]['id'];
 $name =  $results[0]['name'];
-$desc = $results[0]['description'];
+$desc = nl2br($results[0]['description']);
 $categories = $results[0]['categories'];
 $img = $results[0]['image_url'];
 $address = $results[0]['address'];
@@ -23,7 +23,7 @@ $org_url = $results[0]['org_url'];
 $lat = $results[0]['lat'];
 $long = $results[0]['long'];
 	
-	
+
 // Reformattng start and end dates
 $start_dt = $results[0]['start_dt'];
 $start_date = $start_dt->format('F j, g:00 a');
@@ -37,19 +37,42 @@ if (onSameDay($start_dt,$end_dt) == true) {
 
 ?>
 
-<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;sensor=false&amp;key=ABQIAAAAIAxlYmeYiqMAw_4FlxKuAxSJeLfqeCfYhfLsvdVofOLeDmN8-RSBM0x9k_TkSngZ5_R9YOO_GyNARw" type="text/javascript"></script>
-
+<script src="<?php get_bloginfo('url');?>scripts/map.js" type="text/javascript"></script>
 
 <script type="text/javascript">
 
-    function initialize() {
-      if (GBrowserIsCompatible()) {
-        var map = new GMap2(document.getElementById("map_canvas"));
-        map.setCenter(new GLatLng("<?php echo $lat; ?>", "<?php echo $long; ?>"), 15);
-        map.openInfoWindow(map.getCenter(),
-       	document.createTextNode("<?php echo $name ?>"));
-      } 
-    }
+function initializeMap() {
+
+	map = new google.maps.Map(document.getElementById("map_canvas"), {
+		center: new google.maps.LatLng(<?php echo $lat . ', ' . $long; ?>),
+		zoom: 15,
+		maxZoom: 18,
+		minZoom: 11,
+		mapTypeId: 'roadmap',
+		scrollwheel: false,
+		mapTypeControl: false,
+		zoomControl: true,
+		zoomControlOptions: {style: google.maps.ZoomControlStyle.LARGE},
+	});
+
+	marker = new google.maps.Marker({  
+  		position: new google.maps.LatLng(<?php echo $lat . ', ' . $long;  ?>),  
+  		map: map,  
+  		title: '<?php echo $address; ?>',
+  	});
+
+  	infowindow = new google.maps.InfoWindow({  
+  		content: '<h4 class="host"><?php echo $address; ?></h4>',
+  		maxWidth: 200,
+	});  
+	
+	infowindow.open(map, marker); 
+
+}  
+
+jQuery(document).ready(function() {
+	initializeMap();
+});
 
 </script>
 
@@ -73,7 +96,7 @@ if (onSameDay($start_dt,$end_dt) == true) {
 						<p class="address"><?php echo $address; ?></p>
 						<?php
 						if ($address != "") { ?>
-							<h4 class="directions"><a href="http://maps.google.com/maps?saddr=&daddr=<?php echo $address ?>" target="_blank">Get Directions...</a></h4> <?php
+							<h4 class="directions"><a href="http://maps.google.com/maps?saddr=&amp;daddr=<?php echo $address ?>" target="_blank">Get Directions...</a></h4> <?php
 						} ?>
 					</div> <!-- #host-address -->
 
@@ -90,18 +113,19 @@ if (onSameDay($start_dt,$end_dt) == true) {
 
 					<div class="fb-like" data-href="<?php echo getCanonicalEventURL($eid); ?>" data-send="true" data-width="450" data-show-faces="true" data-font="lucida grande"></div>
 					<!-- end of Facebook stuff -->
-
+				
+				<?php
+					if ($results[0]['attending'] === true && is_user_logged_in()) { ?>
+						<input class="attend-button-in alignright" type="button" value="Added!" class="attend-button" id="<?php echo $results[0]['id']; ?>window"> <?php
+					} else if (!is_user_logged_in()) { ?>
+						<input class="attend-button alignright simplemodal-login" type="button" value="Add to MyPgh"> <?php
+					} else { ?>
+						<input class="attend-button alignright" type="button" value="Add to MyPgh" id="<?php echo $results[0]['id']; ?>window" onclick="attendEvent(<?php echo $results[0]['id']; ?>)"> <?php
+					}
+				?>
+				
 				<p class="desc alignleft"><?php echo $desc ?></p>
 				</div> <!-- #details-container -->
-			<?php
-
-			// Need to ask about this more?
-
-			/*if ($results[0]['attending'] == 1) { ?>
-				<input class="attend-button alignright" type="button" value="Add to MyPgh" class="attend-button alignright" id="<?php echo $results[0]['id']; ?>window" onclick="attendEvent(<?php echo $results[0]['id']; ?>')"> <?php 
-			} else { ?>
-				<input class="attend-button-in alignright" type="button" value="Added" class="attend-button" id="<?php echo $results[0]['id']; ?>window"> <?php
-			} */?>
 
 			<div id="event-single-map-holder" class="alignright">
 				<div id="map_canvas"></div>

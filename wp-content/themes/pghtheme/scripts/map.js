@@ -82,6 +82,7 @@ function JSONToEventInstance(json) {
 	}
 
 	inst.toInfoWindowHTML = function() {
+			var isloggedin = document.getElementById("isloggedin").value;
 			var html = '<div class="infowindow">';
 			html += '<h4 class="event-name">' + this.name + '</h4>';
 			html += '<img src="' + this.image_url + '">';
@@ -95,13 +96,14 @@ function JSONToEventInstance(json) {
 			html += '<a class="directions alignright" target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions &rarr;</a></p>';
 			html += '</div>'; // #time-directions
 		
-			//** TODO: Add Date Object instead of wp_slug here **//
-			html += '<p class="event-desc">' + this.description_short + '</p>...<a target="_blank" href="/event' + this.wp_slug + '/">More info</a>';
-			if(this.attending) {
-				html += '<input class="attend-button-in alignright" type="button" value="Added" class="attend-button" id="' + this.id + 'window">';
+			html += '<p class="event-desc">' + this.description_short + '</p>...<a target="_blank" href="event/' + this.id + '/">More info</a>';
+			if(this.attending && isloggedin=='y') {
+				html += '<input class="attend-button-in alignright" type="button" value="Added!" id="' + this.id + 'window">';
 			}
-			else {
-				html += '<input class="attend-button alignright" type="button" value="Add to MyPgh" class="attend-button alignright" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
+			else if (isloggedin=='n'){
+				html += '<input class="attend-button alignright simplemodal-login" type="button" value="Add to MyPgh">';	
+			} else {
+				html += '<input class="attend-button alignright" type="button" value="Add to MyPgh" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
 			}
 			html += '</div>'; // #infowindow
 
@@ -109,6 +111,7 @@ function JSONToEventInstance(json) {
 		}
 
 	inst.toSidebarEntryHTML = function() {
+			var isloggedin = document.getElementById("isloggedin").value;
 			var html = '<h4 class="event-name">' + this.name + '</h4>';
 			html += '<img src="' + this.image_url + '">';
 			html += '<div class="alignright" id="host-address">';
@@ -120,12 +123,14 @@ function JSONToEventInstance(json) {
 			html += this.timespan.start_time + ' - ' + this.timespan.end_time;
 			html += '<a class="directions alignright" target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions &rarr;</a></p>';
 			html += '</div>'; // #time-directions
-			html += '<p class="event-desc">' + this.description_short + '</p>...<a target="_blank" href="/events/event/' + this.wp_slug + '/">More info</a>';
-			if(this.attending) {
-				html += '<input class="attend-button-in alignright" type="button" value="Added" class="attend-button" id="' + this.id + 'window">';
+			html += '<p class="event-desc">' + this.description_short + '</p>...<a target="_blank" href="/event/' + this.id + '/">More info</a>';
+			if(this.attending && isloggedin=='y') {
+				html += '<input class="attend-button-in alignright" type="button" value="Added!" id="' + this.id + 'window">';
 			}
-			else {
-				html += '<input class="attend-button alignright" type="button" value="Add to MyPgh" class="attend-button alignright" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
+			else if (isloggedin=='n'){
+				html += '<input class="attend-button alignright simplemodal-login" type="button" value="Add to MyPgh">';	
+			} else {
+				html += '<input class="attend-button alignright" type="button" value="Add to MyPgh" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
 			}
 			
 			return html;
@@ -137,15 +142,21 @@ function JSONToEventInstance(json) {
 // hacky little thing put together to make sure the Count me in buttons are always in sync.
 // There are MUCH better solutions, but it would be obsolete in a month.
 function updateEventAttendance(eid) {
-	for(var i = 0; i < event_instances.length; i++) {
-		if(eid == event_instances[i].id) {
-			event_instances[i].attending = 1;
-			event_instances[i] = JSONToEventInstance(event_instances[i]);
-			eventClicked(event_instances[i]);
-			document.getElementById(eid + 'window').value = "Added!";
-       		document.getElementById(eid + 'window').onclick = '';
-			break;
+	if(event_instances!==undefined) {
+		for(var i = 0; i < event_instances.length; i++) {
+			if(eid == event_instances[i].id) {
+				event_instances[i].attending = 1;
+				event_instances[i] = JSONToEventInstance(event_instances[i]);
+				eventClicked(event_instances[i]);
+				document.getElementById(eid + 'window').value = "Added!";
+	       		document.getElementById(eid + 'window').onclick = '';
+				break;
+			}
 		}
+	}
+	else {
+		document.getElementById(eid + 'window').value = "Added!";
+   		document.getElementById(eid + 'window').onclick = '';		
 	}
 }
 

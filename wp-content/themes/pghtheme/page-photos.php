@@ -28,13 +28,13 @@ get_header() ?>
 		<div id="photos_sidebar">
 			<dl>
 				<dt>
-					<a href="/">Photos Key</a><img src="<?php bloginfo('stylesheet_directory'); ?>/images/expandarrow.png"/>
+					<a class="photos-widget" href="/">Photos Key</a>
 				</dt>
 				<dd>
 					<?php echo GeoMashup::category_legend() ?>
 				</dd>
 				<dt>
-					<a href="/">Submit a Photo</a><img src="<?php bloginfo('stylesheet_directory'); ?>/images/expandarrow.png"/>
+					<a class="photos-widget" href="/">Submit a Photo</a>
 				</dt>
 				<dd>
 					<div id="submitwidget">

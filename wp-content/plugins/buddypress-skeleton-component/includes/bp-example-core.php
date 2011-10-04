@@ -118,14 +118,37 @@ add_action( is_multisite() ? 'network_admin_menu' : 'admin_menu', 'bp_example_ad
  * item and all the sub level nav items to the navigation array. This is then
  * rendered in the template.
  */
+
+//----------------------//
+// Add 'Export Calendar to MyPgh nav //
+//----------------------//
+function pgh_cal_setup_nav() {
+	global $bp;
+	$profile_link = $bp->loggedin_user->domain . $bp->profile->slug . '/';
+
+	/* Add the subnav items to the profile nav item */
+	bp_core_new_nav_item( array( 'name' => __( 'Export Calendar', 'buddypress' ), 
+			'slug' => 'calendar', 
+			'parent_url' => $profile_link, 
+			'parent_slug' => $bp->profile->slug, 
+			'screen_function' => 'bp_example_screen_two', 
+			'position' => 30 ) );
+
+	$bp->bp_nav['messages']['position'] = 100;
+}
+
+add_action( 'bp_setup_nav', 'pgh_cal_setup_nav' );
+
+
 function bp_example_setup_nav() {
 	global $bp;
-
-	/* Add 'Example' to the main user profile navigation */
+//----------------------//
+// Add 'My Events Map' to the main user profile navigation //
+//----------------------//
 	bp_core_new_nav_item( array(
 		'name' => __( 'My Events Map', 'bp-example' ),
 		'slug' => $bp->example->slug,
-		'position' => 80,
+		'position' => 20,
 		'screen_function' => 'bp_example_screen_one',
 		'default_subnav_slug' => 'screen-one'
 	) );
@@ -153,6 +176,18 @@ function bp_example_setup_nav() {
 	) );
 
 	/* Add a nav item for this component under the settings nav item. See bp_example_screen_settings_menu() for more info */
+}
+add_action( 'bp_setup_nav', 'bp_example_setup_nav' );
+
+function bp_second_nav_setup() {
+		/* Add 'Example' to the main user profile navigation */
+	bp_core_new_nav_item( array(
+		'name' => __( 'My Events Map', 'bp-example' ),
+		'slug' => $bp->example->slug,
+		'position' => 80,
+		'screen_function' => 'bp_example_screen_one',
+		'default_subnav_slug' => 'screen-one'
+	) );
 }
 add_action( 'bp_setup_nav', 'bp_example_setup_nav' );
 
@@ -401,20 +436,27 @@ function bp_example_screen_two() {
 }
 
 	function bp_example_screen_two_title() {
-		_e( 'Screen Two', 'bp-example' );
+		_e( 'Export Calendar', 'bp-example' );
 	}
 
+
+
+	//----------------------//
+	// Changing to MyPgh 'Export Calendar' content //
+	//----------------------//
 	function bp_example_screen_two_content() {
 		global $bp; ?>
 
-		<h4><?php _e( 'Welcome to Screen Two', 'bp-example' ) ?></h4>
+		<p>Send your MyPgh Events calendar to your personal calendar, here's how:</p>
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
 
-		<?php
-			$accept_link = '<a href="' . wp_nonce_url( $bp->loggedin_user->domain . $bp->example->slug . '/screen-two/accept', 'bp_example_accept_terms' ) . '">' . __( 'Accept', 'bp-example' ) . '</a>';
-			$reject_link = '<a href="' . wp_nonce_url( $bp->loggedin_user->domain . $bp->example->slug . '/screen-two/reject', 'bp_example_reject_terms' ) . '">' . __( 'Reject', 'bp-example' ) . '</a>';
-		?>
+		
 
-		<p><?php printf( __( 'You must %s or %s the terms of use policy.', 'bp-example' ), $accept_link, $reject_link ) ?></p>
 	<?php
 	}
 

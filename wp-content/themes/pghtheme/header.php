@@ -23,14 +23,7 @@
 <link href="<?php includes_url() ?>/js/jquery/ui.tabs.js" type="text/javascript" />
 <link href="<?php includes_url() ?>/js/jquery/ui.widget.js" type="text/javascript" />
 <link href="<?php includes_url() ?>/js/jquery/ui.datepicker.js" type="text/javascript" />
-<script src="http://maps.google.com/maps/api/js?libraries=places&sensor=false" type="text/javascript"></script>
-
-<?php if( is_front_page()) : ?>
-
-<?php else : ?>
-<script src="<?php bloginfo('stylesheet_directory'); ?>/scripts/profilepage.js" type="text/javascript"></script>
-<?php endif; ?>
-
+<script src="http://maps.google.com/maps/api/js?libraries=places&amp;sensor=false" type="text/javascript"></script>
 
 <script type="text/javascript">
 
@@ -173,7 +166,7 @@ for (i = 0; i < field.length; i++)
 </head>
 
 
-<body style="margin:0px; padding:0px;" onload="initialize()" onunload="GUnload()">
+<body style="margin:0px; padding:0px;">
 <?php do_action( 'bp_before_header' ) ?>
 
 <div id="header">
@@ -239,19 +232,12 @@ for (i = 0; i < field.length; i++)
 						// Else show the the simplemodal login popup
 						if ( is_user_logged_in() ) {
 							if ( bp_is_home()) { ?>
-								<input id="limitvalue" type="hidden" value="0">
             					<li class="current_page_item"><a class="mypghlink" href="<?php echo bp_loggedin_user_domain() ?>">My PGH</a></li><?php 
             				} else { ?>
             					<li><a class="mypghlink" href="<?php echo bp_loggedin_user_domain() ?>">My PGH</a></li><?php 
          					}
-						} else {
-							if ( bp_is_home()) { ?>
-								<input id="limitvalue" type="hidden" value="0">
-								<li><a class="mypghlink simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>">My PGH</a></li><?php
-							} else { ?>
-								<input id="limitvalue" type="hidden" value="0">
-								<li><a class="mypghlink simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>">My PGH</a></li><?php
-							} 
+						} else { ?>
+								<li><a class="mypghlink simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>">My PGH</a></li> <?php
 						} ?>
  
 

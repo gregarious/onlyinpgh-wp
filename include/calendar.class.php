@@ -149,6 +149,7 @@ class TwoWeekCalendar {
 			$name = $event['name'];
 			$single_type = $event['categories'][0];
 			$start_time = $event['start_dt']->format('g:i a');
+
 			print "<li><a href='/event/?eid=$id'>";
 
 			if ($single_type != "oip_feeds") {

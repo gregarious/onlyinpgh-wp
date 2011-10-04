@@ -22,6 +22,11 @@
 .locationinfo, .post-location-info {
 }
 
+.photos-widget:hover {
+	color:yellow;
+}
+
+
 /* Styles for photo thumbnails */
 
 .photo-post {	
@@ -49,7 +54,6 @@ h5.thumb-title,h5.thumb-title a,h5.thumb-title a:hover {
 }
 
 img.attachment-post-thumbnail, img.attachment-post-thumbnail wp-post-image {
-	border:1px solid #ccc;
 	-ms-filter:progid:DXImageTransform.Microsoft.Alpha(Opacity=100);
 	filter:alpha(opacity=100);
 	-moz-opacity:1;
