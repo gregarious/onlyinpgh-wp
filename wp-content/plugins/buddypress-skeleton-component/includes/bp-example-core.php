@@ -122,15 +122,13 @@ add_action( is_multisite() ? 'network_admin_menu' : 'admin_menu', 'bp_example_ad
 //----------------------//
 // Add 'Export Calendar to MyPgh nav //
 //----------------------//
+
 function pgh_cal_setup_nav() {
 	global $bp;
-	$profile_link = $bp->loggedin_user->domain . $bp->profile->slug . '/';
 
 	/* Add the subnav items to the profile nav item */
 	bp_core_new_nav_item( array( 'name' => __( 'Export Calendar', 'buddypress' ), 
 			'slug' => 'calendar', 
-			'parent_url' => $profile_link, 
-			'parent_slug' => $bp->profile->slug, 
 			'screen_function' => 'bp_example_screen_two', 
 			'position' => 30 ) );
 
@@ -441,21 +439,23 @@ function bp_example_screen_two() {
 
 
 
-	//----------------------//
-	// Changing to MyPgh 'Export Calendar' content //
-	//----------------------//
+//----------------------////----------------------////----------------------////----------------------////----------------------////----------------------//
+//----------------------////----------------------////----------------------////----------------------////----------------------////----------------------//
+// Changing to MyPgh 'Export Calendar' content.
+//----------------------////----------------------////----------------------////----------------------////----------------------////----------------------//
+//----------------------////----------------------////----------------------////----------------------////----------------------////----------------------//
+
 	function bp_example_screen_two_content() {
 		global $bp; ?>
 
 		<p>Send your MyPgh Events calendar to your personal calendar, here's how:</p>
+		<input class="export-cal" type="button" value="Export Calendar" id="">
 		<ul>
 			<li></li>
 			<li></li>
 			<li></li>
 			<li></li>
 		</ul>
-
-		
 
 	<?php
 	}

@@ -116,7 +116,7 @@ jQuery(document).ready(function() {
 				
 				<?php
 					if ($results[0]['attending'] === true && is_user_logged_in()) { ?>
-						<input class="attend-button-in alignright" type="button" value="Added!" class="attend-button" id="<?php echo $results[0]['id']; ?>window"> <?php
+						<input class="attend-button-in alignright" type="button" value="Added!" id="<?php echo $results[0]['id']; ?>window"> <?php
 					} else if (!is_user_logged_in()) { ?>
 						<input class="attend-button alignright simplemodal-login" type="button" value="Add to MyPgh"> <?php
 					} else { ?>
