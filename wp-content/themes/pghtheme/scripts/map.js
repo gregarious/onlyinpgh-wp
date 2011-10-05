@@ -58,6 +58,47 @@ function getEventMarkerIconURL(marker_cat,is_popular) {
 	return img_dir + '/' + base + (is_popular ? '_attraction' : '') + '.png';
 }
 
+// converts a date string in YYYY-MM-DD and optional time string in HH:MM format to 
+//  a JS Date object (Firefox-friendly)
+function JSONDateTimeToDate(date_str,time_str) {
+	var d = date_str.split('-');
+	if( time_str ) {
+		var t = time_str.split(':');
+		return new Date( parseInt(d[0],10), parseInt(d[1],10)-1, parseInt(d[2],10),
+							parseInt(t[0],10), parseInt(t[1],10) );
+	}
+	else {
+		return new Date( parseInt(d[0],10), parseInt(d[1],10)-1, parseInt(d[2],10) );
+	}
+
+}
+
+function JSONTimespanToStartEnd(json_timespan) {
+	var start, end;
+	if( json_timespan.start_date ) {
+		var start_dt = JSONDateTimeToDate( json_timespan.start_date, json_timespan.start_time );
+		start = start_dt.format('F j, g:ia');
+		if( json_timespan.end_date ) {
+			var end_dt = JSONDateTimeToDate( json_timespan.end_date, json_timespan.end_time );
+			// figure out if the event ends on the same day (before 4 AM on the same day counts as same day)
+			var day_before_end = new Date();
+			day_before_end.setDate(end_dt.getDate()-1);
+			var only_display_endtime = (json_timespan.end_date === json_timespan.start_date) ||
+										(json_timespan.end_time && 
+											json_timespan.end_time <= '04:00' && 
+											day_before_end.format('Y-m-d') == start_dt.format('Y-m-d'));
+
+			// if the start and end date are different, display the whole end date. otherwise just the end time
+			if(only_display_endtime) {
+				end = ' - ' + end_dt.format('g:ia');
+			}
+			else {
+				end = ' - ' + end_dt.format('F j, g:ia');
+			}
+		}
+	}
+	return [start,end];
+}
 
 // converts a bare JSON object to an EventInstance (note: method changes input object!)
 function JSONToEventInstance(json) {
@@ -95,33 +136,12 @@ function JSONToEventInstance(json) {
 	}
 
 	inst.toInfoWindowHTML = function() {
-		var start, end;
-		if( this.timespan.start_date ) {
-			start_dt_str = this.timespan.start_date + this.timespan.start_time ? (' ' + this.timespan.start_time) : '';
-			var start_dt = new Date(this.timespan.start_date + (this.timespan.start_time ? (' ' + this.timespan.start_time) : ''));
-			start = start_dt.format('F j, g:ia');
-			if( this.timespan.end_date ) {
-				var end_dt = new Date(this.timespan.end_date + (this.timespan.end_time ? (' ' + this.timespan.end_time) : ''));
-				// figure out if the event ends on the same day (before 4 AM on the same day counts as same day)
-				var day_before_end = new Date();
-				day_before_end.setDate(end_dt.getDate()-1);
-				var only_display_endtime = (this.timespan.end_date === this.timespan.start_date) ||
-											(this.timespan.end_time && 
-												this.timespan.end_time <= '04:00' && 
-												day_before_end.format('Y-m-d') == start_dt.format('Y-m-d'));
-
-				// if the start and end date are different, display the whole end date. otherwise just the end time
-				if(only_display_endtime) {
-					end = ' - ' + end_dt.format('g:ia');
-				}
-				else {
-					end = ' - ' + end_dt.format('F j, g:ia');
-				}
-			}
-		}
+		var time_strs = JSONTimespanToStartEnd(this.timespan);		
+		var start = time_strs[0], 
+			end = time_strs[1];
 		
 		var	isloggedin = document.getElementById("isloggedin").value;
-			html = '<div class="infowindow">';
+		var html = '<div class="infowindow">';
 			html += '<h4 class="event-name">' + this.name + '</h4>';
 			html += '<img src="' + this.image_url + '">';
 			html += '<div class="alignright" id="host-address">';
@@ -150,33 +170,12 @@ function JSONToEventInstance(json) {
 		}
 
 	inst.toSidebarEntryHTML = function() {
-		var start, end;
-		if( this.timespan.start_date ) {
-			start_dt_str = this.timespan.start_date + this.timespan.start_time ? (' ' + this.timespan.start_time) : '';
-			var start_dt = new Date(this.timespan.start_date + (this.timespan.start_time ? (' ' + this.timespan.start_time) : ''));
-			start = start_dt.format('F j, g:ia');
-			if( this.timespan.end_date ) {
-				var end_dt = new Date(this.timespan.end_date + (this.timespan.end_time ? (' ' + this.timespan.end_time) : ''));
-				// figure out if the event ends on the same day (before 4 AM on the same day counts as same day)
-				var day_before_end = new Date();
-				day_before_end.setDate(end_dt.getDate()-1);
-				var only_display_endtime = (this.timespan.end_date === this.timespan.start_date) ||
-											(this.timespan.end_time && 
-												this.timespan.end_time <= '04:00' && 
-												day_before_end.format('Y-m-d') == start_dt.format('Y-m-d'));
-
-				// if the start and end date are different, display the whole end date. otherwise just the end time
-				if(only_display_endtime) {
-					end = ' - ' + end_dt.format('g:ia');
-				}
-				else {
-					end = ' - ' + end_dt.format('F j, g:ia');
-				}
-			}
-		}
+		var time_strs = JSONTimespanToStartEnd(this.timespan);		
+		var start = time_strs[0], 
+			end = time_strs[1];
 
 		var	isloggedin = document.getElementById("isloggedin").value;
-			html = '<h4 class="event-name">' + this.name + '</h4>';
+		var html = '<h4 class="event-name">' + this.name + '</h4>';
 			html += '<img src="' + this.image_url + '">';
 			html += '<div class="alignright" id="host-address">';
 			html += '<p class="hostedby">Hosted By</p><h4 class="host">' + this.organization.name + '</h4>';
