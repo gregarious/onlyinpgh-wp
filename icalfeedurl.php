@@ -24,8 +24,7 @@ function hash_to_icalid($uid) {
 
 	// if we get here, the user id doesn't have a mapped icalid yet. let's add one.
 	$hid = sha1('kosher'.$uid.'salt');
-	$sql = 'INSERT INTO  `onlyinpgh_dev`.`oip_icalid_mapping` 
-				(`uid`,`hid`)
+	$sql = 'INSERT INTO  `oip_icalid_mapping` (`uid`,`hid`)
 			VALUES ( :uid, :hid )';
 	try {
 		$statement = $pdo->prepare($sql);
