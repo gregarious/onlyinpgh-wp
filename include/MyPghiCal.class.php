@@ -1,7 +1,7 @@
 <?php
 
 require_once("include/eventsearcher.class.php");
-require_once("include/iCalcreator.class.php");
+require_once("include/phpicalendar/iCalcreator.class.php");
 
 function dt_to_array($dt) {
 	return array(

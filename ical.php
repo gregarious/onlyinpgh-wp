@@ -42,6 +42,6 @@ if($uid===NULL) {
 }
 
 $ical = new MyPghiCal($uid,$hid.'.ics');
-$ical->generate('Test calendar');
+$ical->generate('MyPgh Calendar','My personal events calendar from OnlyinPgh.com');
 
 ?>
