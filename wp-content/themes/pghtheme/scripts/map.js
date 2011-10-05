@@ -95,11 +95,11 @@ function JSONToEventInstance(json) {
 	}
 
 	inst.toInfoWindowHTML = function() {
-		var start_dt = new Date(this.timespan.start_date);
-		var	start = start_dt.format('F j, Y');
-		var	start_time = start_dt.format('g:00a');
-		var	end_dt = new Date(this.timespan.end_time);
-		var	end = end_dt.format('g:00a');
+		var start_dt = new Date(this.timespan.start_date + ' ' + this.timespan.start_time),
+			end_dt = new Date(this.timespan.end_date + ' ' + this.timespan.end_time),
+			start = start_dt.format('F j, f:ia'),
+			end = end_dt.format('F j, f:ia');
+
 		var	isloggedin = document.getElementById("isloggedin").value;
 			html = '<div class="infowindow">';
 			html += '<h4 class="event-name">' + this.name + '</h4>';
@@ -110,7 +110,7 @@ function JSONToEventInstance(json) {
 			html += '</div>'; // #host-address
 			html += '<div id="time-directions">';
 			html +=	'<p class="event-time">' + start + '<br>';
-			html += start_time + ' - ' + end;
+			html += end;
 			html += '<a class="directions alignright" target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions &rarr;</a></p>';
 			html += '</div>'; // #time-directions
 		
@@ -130,11 +130,13 @@ function JSONToEventInstance(json) {
 		}
 
 	inst.toSidebarEntryHTML = function() {
-		var start_dt = new Date(this.timespan.start_date);
-		var	start = start_dt.format('F j, Y');
-		var	start_time = start_dt.format('g:00a');
-		var	end_dt = new Date(this.timespan.end_time);
-		var	end = end_dt.format('g:00a');
+		var start_dt = new Date(this.timespan.start_date),
+			start = start_dt.format('F j, g:00a'),
+			end_dt = new Date (this.timespan.end_date),
+			end_tm = new Date(this.timespan.end_time);
+			end_time = end_tm.format('g:00a');
+			end_date = end_dt.format('F j');
+
 		var	isloggedin = document.getElementById("isloggedin").value;
 			html = '<h4 class="event-name">' + this.name + '</h4>';
 			html += '<img src="' + this.image_url + '">';
@@ -143,8 +145,8 @@ function JSONToEventInstance(json) {
 			html += '<p class="event-address">' + this.location.address + '<br>';
 			html += '</div>'; // #host-address
 			html += '<div id="time-directions">';
-			html +=	'<p class="event-time">' + start + '<br>';
-			html += start_time + ' - ' + end;
+			html +=	'<p class="event-time">' + start + ' - <br>';
+			html +=  end_date + end_time;
 			html += '<a class="directions alignright" target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions &rarr;</a></p>';
 			html += '</div>'; // #time-directions
 			html += '<p class="event-desc">' + this.description_short + '</p>...<a target="_blank" href="/event/' + this.id + '/">More info</a>';
