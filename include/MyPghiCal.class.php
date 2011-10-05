@@ -39,9 +39,12 @@ class MyPghiCal {
 
 		foreach($results as $event) {
 			$vevent = & $vcal->newComponent( 'vevent' );
-			$vevent->setProperty('dtstart', dt_to_array($event['start_dt']));
-			$vevent->setProperty('dtend', dt_to_array($event['end_dt']));
-			$vevent->setProperty('summary',$event['name']);
+			if($event['start_dt']) {
+				$vevent->setProperty('dtstart', dt_to_array($event['start_dt']));
+			}
+			if($event['end_dt']) {
+				$vevent->setProperty('dtend', dt_to_array($event['end_dt']));
+			}			$vevent->setProperty('summary',$event['name']);
 			$vevent->setProperty('description',$event['description']);
 			$vevent->setProperty('location',$event['address']);
 			$vevent->setProperty('url','http://www.onlyinpgh.com/event/' . $event['id'] . '/');

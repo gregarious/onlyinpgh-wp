@@ -2,6 +2,7 @@
 
 if(!array_key_exists('hid',$_GET)) {
 	header("Content-type: text/calendar");
+	header( 'Content-Disposition: attachment; filename="null.ics"' );
 	die();
 }
 
@@ -36,6 +37,7 @@ $uid = unhash_from_icalid($hid);
 
 if($uid===NULL) {
 	header("Content-type: text/calendar");
+	header( 'Content-Disposition: attachment; filename="' . $hid . '.ics"' );
 	die();
 }
 
