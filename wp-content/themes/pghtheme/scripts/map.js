@@ -309,7 +309,7 @@ function extractSearchOptions() {
 						"long" : latlng[1],
 						"startdate" : startdate,
 						"enddate" : enddate,
-						"rad" : (region=='all') ? 7 : 30,	// TODO: revisit this radius hack
+						"rad" : (region=='all') ? 30 : 7,
 						"limit" : limitval };
 	if( search !== 'Keyword search (optional)' && search != '' ) {
 		search_opts['search_terms'] = search;

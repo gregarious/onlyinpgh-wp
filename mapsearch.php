@@ -74,7 +74,7 @@ if(array_key_exists('startdate', $_GET)) {
 }
 
 if(array_key_exists('enddate', $_GET)) {
-	$searcher->filterByStartDate($_GET['enddate']);
+	$searcher->filterByEndDate($_GET['enddate']);
 }
 
 if(array_key_exists('search_terms', $_GET)) {
