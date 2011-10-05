@@ -14,6 +14,10 @@ function initializeUserEventResults(uid) {
 		);
 }
 
+function displayNoResultsMessage(jquery_obj) {
+	jquery_obj.html( '<div id="noresult"><b>No upcoming events! Add some more to MyPgh!</b></div>' );
+}
+
 // as soon as DOM is loaded, initialize the map and start the search
 jQuery(document).ready(function() {
 	 initializeMap();	

@@ -287,40 +287,53 @@ function eventClicked(event_instance) {
 	}
 }
 
+// override this function in other scripts!
+function displayNoResultsMessage(sidebar) {
+	sidebar.html('');
+}
+
 function updateEventResults(new_events,more_results) {
 	var bounds = new google.maps.LatLngBounds();
-	var sidebar = jQuery('#sidebar-content');
 
-	var index0 = event_instances.length;
-	for( var i = 0; i < new_events.length; i++ ) {
-		var event_inst = new_events[i];
-		// For now we're just not displaying events without markers
-		if(!event_inst.marker) {
-			continue;
-		}
-		var new_ediv = jQuery('<div class="event-listing" id="listing-' + (index0+i) + '">');
-		var bound_click_callback = (function(inst) {
-					return function() { eventClicked(inst); }
-				})(event_inst);
-		// click callback function with this event instance bound to it
-		new_ediv.click(bound_click_callback);
+	// add to the sidebar content
+	var sidebar = jQuery('#sidebar-content');
+	// display a message if no events in sidebar
+	if(event_instances.length+new_events.length===0) {
+		displayNoResultsMessage(sidebar);		
+	}
+	// otherwise, add each event to the sidebar
+	else {
+		var index0 = event_instances.length;
+		for( var i = 0; i < new_events.length; i++ ) {
+			var event_inst = new_events[i];
+			// For now we're just not displaying events without markers
+			if(!event_inst.marker) {
+				continue;
+			}
+			var new_ediv = jQuery('<div class="event-listing" id="listing-' + (index0+i) + '">');
+			var bound_click_callback = (function(inst) {
+						return function() { eventClicked(inst); }
+					})(event_inst);
+			// click callback function with this event instance bound to it
+			new_ediv.click(bound_click_callback);
+			
+			// if the event has a marker associated with it, display it and add click events
+			if(event_inst.marker) {
+				new_ediv.addClass('has-marker');
+				// add the click listener to the marker (for info window) and add it to the map 
+				event_inst.marker.setMap(map);
+				google.maps.event.addListener(event_inst.marker, 'click', bound_click_callback);
+				bounds.extend(event_inst.marker.getPosition());
+			}
+			else {
+				new_ediv.addClass('no-marker');
+			}
+			new_ediv.html(event_inst.toSidebarEntryHTML());
+			sidebar.append(new_ediv);
 		
-		// if the event has a marker associated with it, display it and add click events
-		if(event_inst.marker) {
-			new_ediv.addClass('has-marker');
-			// add the click listener to the marker (for info window) and add it to the map 
-			event_inst.marker.setMap(map);
-			google.maps.event.addListener(event_inst.marker, 'click', bound_click_callback);
-			bounds.extend(event_inst.marker.getPosition());
+			event_instances.push(event_inst);
+			event_inst = null;
 		}
-		else {
-			new_ediv.addClass('no-marker');
-		}
-		new_ediv.html(event_inst.toSidebarEntryHTML());
-		sidebar.append(new_ediv);
-	
-		event_instances.push(event_inst);
-		event_inst = null;
 	}
 
 	var footer = jQuery('#sidebar-footer');
