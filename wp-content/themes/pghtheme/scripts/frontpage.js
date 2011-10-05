@@ -11,6 +11,12 @@ function initializeEventResults() {
 
 // as soon as DOM is loaded, initialize the map and start the search
 jQuery(document).ready(function() {
+	
+	jQuery('#top').click(function(){
+		jQuery('body').animate({scrollTop:0},1000);
+	});
+	
 	initializeMap();
 	initializeEventResults();
+
 });

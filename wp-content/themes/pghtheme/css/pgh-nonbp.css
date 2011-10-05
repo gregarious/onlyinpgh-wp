@@ -237,27 +237,6 @@ font-weight: normal;
 	float: right;
 }
 
-.gohomelink {
-	background-image: url("../images/homenav.png");
-    background-position: center top !important;
-    background-repeat: no-repeat;
-    font-size: 16px;
-    padding: 45px 5px 0 !important;
-}
-
-.mypghlink {
-	background-image: url("../images/mypghnav.png");
-    background-position: center top !important;
-    background-repeat: no-repeat;
-    font-size: 16px;
-    padding: 45px 5px 0 !important;
-}
-
-#staticheader {
-	margin: 0px;
-	padding: 0px;
-}
-
 @-moz-document url-prefix() {
     .multiline{
 		color: #F0F0F0;

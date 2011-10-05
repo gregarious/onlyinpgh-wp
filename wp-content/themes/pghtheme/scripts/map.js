@@ -1,3 +1,4 @@
+
 var map;
 var infoWindow;
 var infoWindowFocus;	// will either be a marker type or 'event'
@@ -119,8 +120,7 @@ function JSONToEventInstance(json) {
 				html += '<input class="attend-button-in alignright" type="button" value="Added!" id="' + this.id + 'window">';
 			}
 			else if (isloggedin=='n'){
-				html += '<a class="simplemodal-login" href="' + document.URL + '">';
-				html += '"><input class="attend-button alignright" type="button" value="Login to Add"></a>';
+				html += '<input id="top" class="attend-button alignright" type="button" value="Login to Add">';
 			} else {
 				html += '<input class="attend-button alignright" type="button" value="Add to MyPgh" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
 			}
@@ -152,8 +152,7 @@ function JSONToEventInstance(json) {
 				html += '<input class="attend-button-in alignright" type="button" value="Added!" id="' + this.id + 'window">';
 			}
 			else if (isloggedin=='n'){
-				html += '<a class="simplemodal-login" href="' + document.URL + '">';
-				html += '<input class="attend-button alignright" type="button" value="Login to Add"></a>';
+				html += '<input id="top" class="attend-button alignright" type="button" value="Login to Add">';
 			} else {
 				html += '<input class="attend-button alignright" type="button" value="Add to MyPgh" id="' + this.id + 'window" onclick="attendEvent(' + this.id + ')">';	
 			}

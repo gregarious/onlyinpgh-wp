@@ -69,13 +69,13 @@ get_header() ?>
 			<?php						
 			while ($new_query->have_posts()) : $new_query->the_post(); ?>			
 			
-			<div class="photo-post"><a href="<?php the_permalink() ?>" rel="bookmark"> <?php
+			<div class="photo-post"><div class="photo-container"><a href="<?php the_permalink() ?>" rel="bookmark"> <?php
 				
 				if ( (function_exists('has_post_thumbnail')) && (has_post_thumbnail()) ) {
 					the_post_thumbnail();
 				} else { ?>
 					<a href="<?php the_permalink();?>"><?php wpf_get_first_thumb_url(); ?></a> 
-				<?php } ?></a>
+				<?php } ?></a></div>
 				
 				<h5 class="thumb-title"><?php the_title(); ?></h5>
 				

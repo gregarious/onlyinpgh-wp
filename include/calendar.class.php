@@ -143,7 +143,7 @@ class TwoWeekCalendar {
 		print "</li>\n";
 	}
 
-	private function printEventList($events) {		
+	private function printEventList($events, $print_type = TRUE) {		
 		foreach($events as $event) {
 			$id = $event['id'];
 			$name = $event['name'];
@@ -152,11 +152,14 @@ class TwoWeekCalendar {
 
 			print "<li><a href='/event/$id'>";
 
-			if ($single_type != "oip_feeds") {
+			if ($single_type != "oip_feeds" && $print_type === TRUE) {
 				print "<span>$single_type</span><br>";
 			}
-
-			print "$name</a></li>\n";
+			print "$name</a>";
+			if ($print_type === FALSE) {
+				print "<br>";
+			}
+			print "</li>\n";
 		}
 	}
 
@@ -164,7 +167,7 @@ class TwoWeekCalendar {
 		if( count($this->ongoing_events) ) {
 			print '<h3><a href="#" class="btn-slide">Ongoing Events</a></h3>';
 			print '<ul id="ongoing-list">';
-			$this->printEventList($this->ongoing_events);
+			$this->printEventList($this->ongoing_events, FALSE);
 			print "</ul>\n";
 		}
 	}

@@ -232,9 +232,9 @@ for (i = 0; i < field.length; i++)
 						// Else show the the simplemodal login popup
 						if ( is_user_logged_in() ) {
 							if ( bp_is_home()) { ?>
-            					<li class="current_page_item"><a class="mypghlink" href="<?php echo bp_loggedin_user_domain() ?>">My PGH</a></li><?php 
+            					<li class="current_page_item"><a class="mypghlink" href="<?php echo bp_loggedin_user_domain() ?>example/">My PGH</a></li><?php 
             				} else { ?>
-            					<li><a class="mypghlink" href="<?php echo bp_loggedin_user_domain() ?>">My PGH</a></li><?php 
+            					<li><a class="mypghlink" href="<?php echo bp_loggedin_user_domain() ?>example/">My PGH</a></li><?php 
          					}
 						} else { ?>
 								<li><a class="mypghlink simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>">My PGH</a></li> <?php

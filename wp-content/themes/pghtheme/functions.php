@@ -1,5 +1,62 @@
 <?php
 
+////////////////
+// THUMBNAILS //
+////////////////
+
+
+// Creating thumbnails from attachments: code from theme WPFolio Two http://notlaura.com/wpfolio-two
+
+
+// Add support for post thumbnails of 250px square
+// Add custom image size for cat thumbnails
+if ( function_exists( 'add_theme_support' ) ) {
+      add_theme_support( 'post-thumbnails' );
+      set_post_thumbnail_size( 200, 200, true );
+      add_image_size('wpf-thumb', 200, 200, true);
+}
+
+
+// Get post attachments
+function wpf_get_attachments() {
+      global $post;
+      return get_posts( 
+            array(
+                  'post_parent' => get_the_ID(), 
+                  'post_type' => 'attachment', 
+                  'post_mime_type' => 'image') 
+            );
+}
+
+// Get the URL of the first attachment image - called in wpf-category.php. If no attachments, display default-thumb.png
+function wpf_get_first_thumb_url() {
+
+      $attr = array( 
+            'class'     => "attachment-post-thumbnail wp-post-image");
+
+      $imgs = wpf_get_attachments();
+      if ($imgs) {
+            $keys = array_reverse($imgs);
+            $num = $keys[0];
+            $url = wp_get_attachment_image($num->ID, 'wpf-thumb', true,$attr);
+            print $url;
+      } else {
+            echo '<img src=http://notlaura.com/default-thumb.png alt="no attachments here!" title="default thumb" class="attachment-post-thumbnail wp-post-image">';
+      }
+}
+
+// END - get attachment function
+
+// Make featured image thumbnail a permalink
+add_filter( 'post_thumbnail_html', 'my_post_image_html', 10, 3 );
+function my_post_image_html( $html, $post_id, $post_image_id ) {
+      $html = '<a href="' . get_permalink( $post_id ) . '" title="' . esc_attr( get_post_field( 'post_title', $post_id ) ) . '">' . $html . '</a>';
+      return $html;
+}
+
+
+
+
 // Do not enqueue BuddyPress stylesheets and enqueue our's last
 
 function bp_dtheme_enqueue_styles() {
@@ -123,63 +180,6 @@ if(function_exists('register_sidebar'))
       'before_title' => '<h5>',
       'after_title' => '</h5>',
  ));*/
-
-
-
-
-////////////////
-// THUMBNAILS //
-////////////////
-
-
-// Creating thumbnails from attachments: code from theme WPFolio Two http://notlaura.com/wpfolio-two
-
-
-// Add support for post thumbnails of 250px square
-// Add custom image size for cat thumbnails
-if ( function_exists( 'add_theme_support' ) ) {
-	add_theme_support( 'post-thumbnails' );
-	set_post_thumbnail_size( 200, 200, true );
-	add_image_size('wpf-thumb', 200, 200, true);
-}
-
-
-// Get post attachments
-function wpf_get_attachments() {
-	global $post;
-	return get_posts( 
-		array(
-			'post_parent' => get_the_ID(), 
-			'post_type' => 'attachment', 
-			'post_mime_type' => 'image') 
-		);
-}
-
-// Get the URL of the first attachment image - called in wpf-category.php. If no attachments, display default-thumb.png
-function wpf_get_first_thumb_url() {
-
-	$attr = array( 
-		'class'	=> "attachment-post-thumbnail wp-post-image");
-
-	$imgs = wpf_get_attachments();
-	if ($imgs) {
-		$keys = array_reverse($imgs);
-		$num = $keys[0];
-		$url = wp_get_attachment_image($num->ID, 'wpf-thumb', true,$attr);
-		print $url;
-	} else {
-		echo '<img src=http://notlaura.com/default-thumb.png alt="no attachments here!" title="default thumb" class="attachment-post-thumbnail wp-post-image">';
-	}
-}
-
-// END - get attachment function
-
-// Make featured image thumbnail a permalink
-add_filter( 'post_thumbnail_html', 'my_post_image_html', 10, 3 );
-function my_post_image_html( $html, $post_id, $post_image_id ) {
-	$html = '<a href="' . get_permalink( $post_id ) . '" title="' . esc_attr( get_post_field( 'post_title', $post_id ) ) . '">' . $html . '</a>';
-	return $html;
-}
 
 
 

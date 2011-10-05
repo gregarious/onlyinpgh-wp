@@ -37,6 +37,12 @@
 	overflow: hidden;
 }
 
+.photo-container {
+	width:200px;
+	height:200px;
+	overflow:hidden;
+}
+
 .thumb-list {
 	margin:auto;
 	float: left;
@@ -45,6 +51,7 @@
 }
 
 h5.thumb-title,h5.thumb-title a,h5.thumb-title a:hover {
+	margin-top:10px;
 	font-size:.8em;
 	line-height:1.1em;
 	line-height: 100%;
@@ -61,6 +68,7 @@ img.attachment-post-thumbnail, img.attachment-post-thumbnail wp-post-image {
 	opacity:1;
 	margin:0 10px;
 	padding:3px;
+	overflow:hidden;
 }
 
 img.attachment-post-thumbnail:hover,.gallery-icon:hover {
