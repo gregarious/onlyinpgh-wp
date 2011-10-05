@@ -90,10 +90,10 @@ function JSONTimespanToStartEnd(json_timespan) {
 
 			// if the start and end date are different, display the whole end date. otherwise just the end time
 			if(only_display_endtime) {
-				end = ' - ' + end_dt.format('g:ia');
+				end = end_dt.format('g:ia');
 			}
 			else {
-				end = ' - ' + end_dt.format('F j, g:ia');
+				end = end_dt.format('F j, g:ia');
 			}
 		}
 	}
@@ -150,7 +150,9 @@ function JSONToEventInstance(json) {
 			html += '</div>'; // #host-address
 			html += '<div id="time-directions">';
 			html +=	'<p class="event-time">' + start + '<br>';
-			html += end;
+			if(end) {
+				html += '- ' + end;	
+			}
 			html += '<a class="directions alignright" target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions &rarr;</a></p>';
 			html += '</div>'; // #time-directions
 		
@@ -183,7 +185,9 @@ function JSONToEventInstance(json) {
 			html += '</div>'; // #host-address
 			html += '<div id="time-directions">';
 			html +=	'<p class="event-time">' + start + '<br>';
-			html += end;
+			if(end) {
+				html += '- ' + end;	
+			}
 			html += '<a class="directions alignright" target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions &rarr;</a></p>';
 			html += '</div>'; // #time-directions
 			html += '<p class="event-desc">' + this.description_short + '</p>...<a target="_blank" href="/event/' + this.id + '/">More info</a>';
