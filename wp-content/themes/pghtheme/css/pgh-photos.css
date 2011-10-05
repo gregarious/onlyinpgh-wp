@@ -37,6 +37,12 @@
 	overflow: hidden;
 }
 
+.photo-container {
+	width:200px;
+	height:200px;
+	overflow:hidden;
+}
+
 .thumb-list {
 	margin:auto;
 	float: left;
@@ -61,6 +67,7 @@ img.attachment-post-thumbnail, img.attachment-post-thumbnail wp-post-image {
 	opacity:1;
 	margin:0 10px;
 	padding:3px;
+	overflow:hidden;
 }
 
 img.attachment-post-thumbnail:hover,.gallery-icon:hover {
