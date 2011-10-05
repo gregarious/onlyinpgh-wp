@@ -13,7 +13,7 @@ function initializeEventResults() {
 jQuery(document).ready(function() {
 	
 	jQuery('#top').click(function(){
-		jQuery('body').animate({color:'green'},1000);
+		jQuery('body').animate({scrollTop:0},1000);
 	});
 	
 	initializeMap();
