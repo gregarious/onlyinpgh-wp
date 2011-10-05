@@ -448,21 +448,19 @@ function submitonEnter(evt){
 //The script for the Count Me in button in the sidebar
 function attendEvent(eid) {
 	var isloggedin = document.getElementById("isloggedin").value;
-	if(!isloggedin=='y') {
-		textLoginChange(eid);
-		return;
+	if(isloggedin=='y') {
+		//Uses event_id and the id of the logged in user
+	   	var user = document.getElementById("loggedinid").value;
+	   	var eventid = eid;
+	   	jQuery.getJSON('/insertattend.php',
+	   					{ 'eventid':eventid,
+	   					  'userid':user },
+	   					  function(json_data) {
+	   					  		if(json_data['status'] == 'success') {
+	   					  			updateEventAttendance(eventid);							
+	   					  		}
+							});
 	}
-	//Uses event_id and the id of the logged in user
-   	var user = document.getElementById("loggedinid").value;
-   	var eventid = eid;
-   	jQuery.getJSON('/insertattend.php',
-   					{ 'eventid':eventid,
-   					  'userid':user },
-   					  function(json_data) {
-   					  		if(json_data['status'] == 'success') {
-   					  			updateEventAttendance(eventid);							
-   					  		}
-						});
 }
 
 function textLoginChange(eid) {

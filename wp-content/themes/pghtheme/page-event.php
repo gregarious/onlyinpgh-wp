@@ -37,8 +37,6 @@ if (onSameDay($start_dt,$end_dt) == true) {
 
 ?>
 
-<script src="<?php get_bloginfo('url');?>scripts/map.js" type="text/javascript"></script>
-
 <script type="text/javascript">
 
 function initializeMap() {
@@ -61,6 +59,31 @@ function initializeMap() {
   		title: '<?php echo $address; ?>',
   	});
 
+}
+
+//The script for the Count Me in button in the sidebar
+function attendEvent(eid) {
+	var isloggedin = document.getElementById("isloggedin").value;
+	if(isloggedin=='y') {
+		//Uses event_id and the id of the logged in user
+	   	var user = document.getElementById("loggedinid").value;
+	   	var eventid = eid;
+	   	jQuery.getJSON('/insertattend.php',
+	   					{ 'eventid':eventid,
+	   					  'userid':user },
+	   					  function(json_data) {
+	   					  		if(json_data['status'] == 'success') {
+	   					  			updateEventAttendance(eventid);							
+	   					  		}
+							});
+	}
+}
+
+// hacky little thing put together to make sure the Count me in buttons are always in sync.
+// There are MUCH better solutions, but it would be obsolete in a month.
+function updateEventAttendance(eid) {
+	document.getElementById(eid + 'window').value = "Added!";
+   	document.getElementById(eid + 'window').onclick = '';		
 }  
 
 jQuery(document).ready(function() {
