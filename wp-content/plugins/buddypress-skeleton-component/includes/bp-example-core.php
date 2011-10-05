@@ -448,10 +448,12 @@ function bp_example_screen_two() {
 	function bp_example_screen_two_content() {
 		global $bp; ?>
 
+		<?php require_once(ABSPATH . '/icalfeedurl.php');?>
+
 		<div id="export-cal-container">
-			<p>Click to export a URL for your MyPgh Events Calendar. If you are unsure what to do next, follow the instructions below.</p>
-			<input class="attend-button cal-url" type="button" value="Export Calendar" id="">
-			<input type"text" class="cal-feed-field">
+			<p>Copy the following URL to import your MyPgh calendar into the calendar application of your choosing. If you are unsure what to do next, follow the instructions below.</p>
+			<input type"text" class="cal-feed-field" value="<?php echo get_ical_url(bp_loggedin_user_id()); ?>" style="width:540px" id="ical-link-text">
+			<!--<input class="attend-button cal-url" type="button" value="Copy to Clipboard">-->
 			<h4>Google Calendar</h4>
 			<ol>
 				<li>Click the down arrow nest to <strong>Other Calendars</strong></li>
@@ -490,6 +492,11 @@ function bp_example_screen_two() {
 				<li><a href="http://www.rackspace.com/apps/support/portal/6008">Read more here.</a></li>
 			</ol>
 		</div>
+
+		<script type="text/javascript">
+			jQuery('#ical-link-text').click(function(){this.focus();this.select()});
+		</script>
+
 	<?php
 	}
 
