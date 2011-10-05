@@ -5,7 +5,7 @@ function initializeEventResults() {
 	var today = new Date();
 	var startdate = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
 	clearEventResults( function(){ 
-		return performEventSearch( {"startdate":startdate,"limit":40} ); }
+		return performEventSearch( {"startdate":startdate,"limit":50} ); }
 		);
 }
 

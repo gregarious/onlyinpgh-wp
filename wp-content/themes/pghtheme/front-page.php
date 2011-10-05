@@ -56,7 +56,7 @@ events in</p>
 					<tbody>
 						<tr>
 							<td>
-								<input onclick="toggleMarkers('category', 'oip_feeds')" checked="checked" name="events" type="checkbox" value="locations" />
+								<input onclick="toggleEventMarkers('Featured')" checked="checked" name="events" type="checkbox" value="locations" id="Featured-toggle"/>
 								<img src="<?php echo $img_dir ?>/event_markers/featured_icon.png" alt="" />
 								<div class="typeholder">
 									<p>Featured</p>
@@ -64,7 +64,7 @@ events in</p>
 							</td>
 
 							<td>
-								<input onclick="toggleMarkers('category', 'Food &amp; Drink')" checked="checked" name="events" type="checkbox" value="locations" />
+								<input onclick="toggleEventMarkers('Food')" checked="checked" name="events" type="checkbox" value="locations" id="Food-toggle"/>
 								<img src="<?php echo $img_dir ?>/event_markers/food.png" alt="" />
 								<div class="typeholder">
 									<p>Food &amp; Drink</p>
@@ -72,7 +72,7 @@ events in</p>
 							</td>
 
 							<td>
-								<input onclick="toggleMarkers('category', 'Shopping')" checked="checked" name="events" type="checkbox" value="locations" />
+								<input onclick="toggleEventMarkers('Shopping')" checked="checked" name="events" type="checkbox" value="locations" id="Shopping-toggle"/>
 								<img src="<?php echo $img_dir ?>/event_markers/retail.png" alt="" />
 								<div class="typeholder">
 									<p>Shopping</p>
@@ -80,14 +80,14 @@ events in</p>
 							</td>
 
 							<td>
-								<input onclick="toggleMarkers('category', 'Music')" checked="checked" name="events" type="checkbox" value="locations" /><img src="<?php echo $img_dir ?>/event_markers/music.png" alt="" />
+								<input onclick="toggleEventMarkers('Music')" checked="checked" name="events" type="checkbox" value="locations" id="Music-toggle"/><img src="<?php echo $img_dir ?>/event_markers/music.png" alt="" />
 								<div class="typeholder">
 									<p>Music</p>
 								</div>
 							</td>
 
 							<td>
-								<input onclick="toggleMarkers('category', 'Theater')" checked="checked" name="events" type="checkbox" value="locations" />
+								<input onclick="toggleEventMarkers('Theater')" checked="checked" name="events" type="checkbox" value="locations" id="Theater-toggle"/>
 								<img src="<?php echo $img_dir ?>/event_markers/theaterfilm.png" alt="" />
 								<div class="typeholder">
 									<p>Theater &amp; Film</p>
@@ -95,7 +95,7 @@ events in</p>
 							</td>
 							
 							<td>
-								<input onclick="toggleMarkers('category', 'Educational')" checked="checked" name="events" type="checkbox" value="locations" />
+								<input onclick="toggleEventMarkers('Educational')" checked="checked" name="events" type="checkbox" value="locations" id="Educational-toggle"/>
 								<img src="<?php echo $img_dir ?>/event_markers/education.png" alt="" />
 								<div class="typeholder">
 									<p>Education</p>
@@ -103,7 +103,7 @@ events in</p>
 							</td>
 	
 							<td>
-								<input onclick="toggleMarkers('category', 'Arts')" checked="checked" name="events" type="checkbox" value="locations" />
+								<input onclick="toggleEventMarkers('Arts')" checked="checked" name="events" type="checkbox" value="locations" id="Arts-toggle"/>
 								<img src="<?php echo $img_dir ?>/event_markers/arts.png" alt="" />
 								<div class="typeholder">
 									<p>Arts</p>
@@ -111,7 +111,7 @@ events in</p>
 							</td>
 
 							<td>
-								<input onclick="toggleMarkers('category','General Fun')" checked="checked" name="events" type="checkbox" value="locations" />
+								<input onclick="toggleEventMarkers('General')" checked="checked" name="events" type="checkbox" value="locations" id="General-toggle"/>
 								<img src="<?php echo $img_dir ?>/event_markers/genfun.png" alt="" />
 								<div class="typeholder">
 									<p>General Fun</p>
@@ -119,7 +119,7 @@ events in</p>
 							</td>
 							
 							<td>
-								<input onclick="toggleMarkers('category', 'Sports &amp; Outdoors')" checked="checked" name="events" type="checkbox" value="locations" />
+								<input onclick="toggleEventMarkers('Sports')" checked="checked" name="events" type="checkbox" value="locations" id="Sports-toggle"/>
 								<img src="<?php echo $img_dir ?>/event_markers/outdoors.png" alt="" />
 								<div class="typeholder">
 									<p>Sports &amp; Outdoors</p>
