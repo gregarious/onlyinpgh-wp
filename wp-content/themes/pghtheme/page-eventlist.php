@@ -26,7 +26,7 @@ require_once('eventlist.php');
 		foreach($events as $event) {
 			?>
 			
-			<a href="/event/?eid=<?php echo $event['id']; ?>" target="_blank">
+			<a href="/event/<?php echo $event['id']; ?>" target="_blank">
 				<li>
 					<div id="img-container">
 						<img src="<?php echo $event['image_url']; ?>" class="alignleft">
