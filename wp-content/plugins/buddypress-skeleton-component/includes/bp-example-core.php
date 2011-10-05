@@ -452,7 +452,7 @@ function bp_example_screen_two() {
 
 		<div id="export-cal-container">
 			<p>Copy the following URL to import your MyPgh calendar into the calendar application of your choosing. If you are unsure what to do next, follow the instructions below.</p>
-			<input type"text" class="cal-feed-field" value="<?php echo get_ical_url(bp_loggedin_user_id()); ?>" style="width:540px" id="ical-link-text">
+			<input type"text" class="cal-feed-field" value="<?php echo get_ical_url(bp_loggedin_user_id()); ?>" style="width:540px" name="ical-link-text" id="ical-link-text" readonly="readonly">
 			<!--<input class="attend-button cal-url" type="button" value="Copy to Clipboard">-->
 			<h4>Google Calendar</h4>
 			<ol>
