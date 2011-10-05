@@ -40,7 +40,7 @@ function hash_to_icalid($uid) {
 function get_ical_url($userid) {
 	$hid = hash_to_icalid($userid);
 	if($hid!==NULL) {
-		return 'webcal://www.onlyinpgh.com/ical?hid=' . $hid;
+		return 'webcal://www.onlyinpgh.com/ical.php?hid=' . $hid;
 	}
 	else {
 		return NULL;
