@@ -20,7 +20,7 @@ define ( 'BP_EXAMPLE_DB_VERSION', '1' );
 
 /* Define a slug constant that will be used to view this components pages (http://example.org/SLUG) */
 if ( !defined( 'BP_EXAMPLE_SLUG' ) )
-	define ( 'BP_EXAMPLE_SLUG', 'example' );
+	define ( 'BP_EXAMPLE_SLUG', 'map' );
 
 /*
  * If you want the users of your component to be able to change the values of your other custom constants,

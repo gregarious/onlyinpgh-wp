@@ -3,11 +3,24 @@
 /* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-map.css */
 
 
+div#noresult {
+	margin: 20px;
+}
+
+div#noresult p {
+	margin: 10px;	
+}
+
+div#noresult b {
+	font-family: 'Francois One','Impact',san-serif;
+	font-weight: normal;
+}
+
 #maplocationkey table p {
     color: #F0F0F0;
     display: inline;
     font-family: 'Francois One','Impact',san-serif;
-font-weight: normal;
+	font-weight: normal;
     font-size: 12px;
     line-height: 14px;
     padding: 0;
