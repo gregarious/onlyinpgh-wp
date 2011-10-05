@@ -2,6 +2,7 @@
 
 if(!array_key_exists('hid',$_GET)) {
 	header("Content-type: text/calendar");
+	header( 'Content-Disposition: attachment; filename="null.ics"' );
 	die();
 }
 
@@ -36,10 +37,11 @@ $uid = unhash_from_icalid($hid);
 
 if($uid===NULL) {
 	header("Content-type: text/calendar");
+	header( 'Content-Disposition: attachment; filename="' . $hid . '.ics"' );
 	die();
 }
 
 $ical = new MyPghiCal($uid,$hid.'.ics');
-$ical->generate('Test calendar');
+$ical->generate('MyPgh Calendar','My personal events calendar from OnlyinPgh.com');
 
 ?>
