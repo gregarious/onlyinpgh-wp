@@ -70,7 +70,7 @@ function JSONToEventInstance(json) {
 	inst.marker = null;
 	// if we have a lat and long, create a maps marker
 	if( inst.location.lat && inst.location.long ) {
-		var iconURL = getEventMarkerIconURL(inst.main_category,inst.organization.fancount>=100);
+		var iconURL = getEventMarkerIconURL(inst.main_category,false);
 		var icon =  new google.maps.MarkerImage( iconURL,
 			new google.maps.Size(20, 20),
 			new google.maps.Point(0,0),
@@ -337,6 +337,28 @@ function clearEventResults(callback) {
 		if(event_instances[i].marker) event_instances[i].marker.setMap(null);
 	}
 	event_instances.length = 0;
+}
+
+// Toggles event markers of a certain type
+function toggleEventMarkers(etype) {
+	// holy hack Batman. etype is the unique "enum" identifier of an event type, but 
+	// some of them have spaces in them. That means they can't be used in ids. But
+	// to get the status of the checkbox, we need an id. So we chop off all but the
+	// first word to get the checkbox id.
+
+	var idstr = etype.split(' ')[0] + '-toggle';
+	var show = document.getElementById(idstr).checked;
+
+	for(var i = 0; i < event_instances.length; i++) {
+		if(event_instances[i].marker && event_instances[i].main_category == etype) {
+			if(show) {
+				event_instances[i].marker.setMap(map);	
+			}
+			else {
+				event_instances[i].marker.setMap(null);
+			}
+		}
+	}
 }
 
 // Clears all Google place markers from the map of a specific type
