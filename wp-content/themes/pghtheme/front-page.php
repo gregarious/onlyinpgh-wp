@@ -56,7 +56,7 @@ events in</p>
 					<tbody>
 						<tr>
 							<td>
-								<input onclick="toggleEventMarkers('oip_feeds')" checked="checked" name="events" type="checkbox" value="locations" id="oip_feeds-toggle"/>
+								<input onclick="toggleEventMarkers('Featured')" checked="checked" name="events" type="checkbox" value="locations" id="Featured-toggle"/>
 								<img src="<?php echo $img_dir ?>/event_markers/featured_icon.png" alt="" />
 								<div class="typeholder">
 									<p>Featured</p>
@@ -64,7 +64,7 @@ events in</p>
 							</td>
 
 							<td>
-								<input onclick="toggleEventMarkers('Food &amp; Drink')" checked="checked" name="events" type="checkbox" value="locations" id="Food-toggle"/>
+								<input onclick="toggleEventMarkers('Food')" checked="checked" name="events" type="checkbox" value="locations" id="Food-toggle"/>
 								<img src="<?php echo $img_dir ?>/event_markers/food.png" alt="" />
 								<div class="typeholder">
 									<p>Food &amp; Drink</p>
@@ -111,7 +111,7 @@ events in</p>
 							</td>
 
 							<td>
-								<input onclick="toggleEventMarkers('General Fun')" checked="checked" name="events" type="checkbox" value="locations" id="General-toggle"/>
+								<input onclick="toggleEventMarkers('General')" checked="checked" name="events" type="checkbox" value="locations" id="General-toggle"/>
 								<img src="<?php echo $img_dir ?>/event_markers/genfun.png" alt="" />
 								<div class="typeholder">
 									<p>General Fun</p>
@@ -119,7 +119,7 @@ events in</p>
 							</td>
 							
 							<td>
-								<input onclick="toggleEventMarkers('Sports &amp; Outdoors')" checked="checked" name="events" type="checkbox" value="locations" id="Sports-toggle"/>
+								<input onclick="toggleEventMarkers('Sports')" checked="checked" name="events" type="checkbox" value="locations" id="Sports-toggle"/>
 								<img src="<?php echo $img_dir ?>/event_markers/outdoors.png" alt="" />
 								<div class="typeholder">
 									<p>Sports &amp; Outdoors</p>

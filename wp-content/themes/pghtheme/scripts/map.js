@@ -40,13 +40,14 @@ function getPlaceMarkerIconURL(marker_type) {
 }
 
 // maps an event category to an image filename (excluding the extension) in the images/place_dots folder 
-eventcat_imagebase_map = {	'Food &amp; Drink' : 'food',
+eventcat_imagebase_map = {	'Food' : 'food',
 						  	'Theater' : 'theaterfilm',
 						  	'Shopping' : 'retail',
-						  	'Sports &amp; Outdoors' : 'outdoors',
+						  	'Sports' : 'outdoors',
 						  	'Educational' : 'education',
 						  	'Arts' : 'arts',
-						  	'Music' : 'music' };
+						  	'Music' : 'music',
+						  	'General' : 'genfun' };
 function getEventMarkerIconURL(marker_cat,is_popular) {
 	var img_dir = '/wp-content/themes/pghtheme/images/event_markers';
 	var base = eventcat_imagebase_map[marker_cat]; 
@@ -59,12 +60,24 @@ function getEventMarkerIconURL(marker_cat,is_popular) {
 
 // converts a bare JSON object to an EventInstance (note: method changes input object!)
 function JSONToEventInstance(json) {
-	inst = json;
+	var inst = json;
 
+	// determine the main category from the list of possible categories
 	inst.main_category = null;
-	// if at least one categories exists, choose the first to be the main one
-	if(inst.categories && inst.categories.length) {
-		inst.main_category = inst.categories[0];
+	if(inst.categories) {
+		/* holy hack Batman. etype is the unique "enum" identifier of an event type, but 
+		   some of them have spaces and html codes in them. Besides the problems inherent
+		   in character codes in what are supposed to be simple enum tokens, this also 
+		   doesn't facilitate using them as DOM ids. So as a result, we just chop off all
+		   but the first word and use it as the main category token.
+		   
+		   Also, oip_feeds isn't really an event type. Let's ignore it. */
+		for(var i = 0; i < inst.categories.length; i++) {
+			if(inst.categories[i] !== 'oip_feeds') {
+				inst.main_category = inst.categories[i].split(' ')[0];
+				break;
+			}
+		}
 	} 
 
 	inst.marker = null;
@@ -82,11 +95,11 @@ function JSONToEventInstance(json) {
 
 	inst.toInfoWindowHTML = function() {
 		var start_dt = new Date(this.timespan.start_date);
-			start = start_dt.format('F j, Y');
-			start_time = start_dt.format('g:00a');
-			end_dt = new Date(this.timespan.end_time);
-			end = end_dt.format('g:00a');
-			isloggedin = document.getElementById("isloggedin").value;
+		var	start = start_dt.format('F j, Y');
+		var	start_time = start_dt.format('g:00a');
+		var	end_dt = new Date(this.timespan.end_time);
+		var	end = end_dt.format('g:00a');
+		var	isloggedin = document.getElementById("isloggedin").value;
 			html = '<div class="infowindow">';
 			html += '<h4 class="event-name">' + this.name + '</h4>';
 			html += '<img src="' + this.image_url + '">';
@@ -118,11 +131,11 @@ function JSONToEventInstance(json) {
 
 	inst.toSidebarEntryHTML = function() {
 		var start_dt = new Date(this.timespan.start_date);
-			start = start_dt.format('F j, Y');
-			start_time = start_dt.format('g:00a');
-			end_dt = new Date(this.timespan.end_time);
-			end = end_dt.format('g:00a');
-			isloggedin = document.getElementById("isloggedin").value;
+		var	start = start_dt.format('F j, Y');
+		var	start_time = start_dt.format('g:00a');
+		var	end_dt = new Date(this.timespan.end_time);
+		var	end = end_dt.format('g:00a');
+		var	isloggedin = document.getElementById("isloggedin").value;
 			html = '<h4 class="event-name">' + this.name + '</h4>';
 			html += '<img src="' + this.image_url + '">';
 			html += '<div class="alignright" id="host-address">';
@@ -341,13 +354,7 @@ function clearEventResults(callback) {
 
 // Toggles event markers of a certain type
 function toggleEventMarkers(etype) {
-	// holy hack Batman. etype is the unique "enum" identifier of an event type, but 
-	// some of them have spaces in them. That means they can't be used in ids. But
-	// to get the status of the checkbox, we need an id. So we chop off all but the
-	// first word to get the checkbox id.
-
-	var idstr = etype.split(' ')[0] + '-toggle';
-	var show = document.getElementById(idstr).checked;
+	var show = document.getElementById(etype+'-toggle').checked;
 
 	for(var i = 0; i < event_instances.length; i++) {
 		if(event_instances[i].marker && event_instances[i].main_category == etype) {
@@ -363,7 +370,7 @@ function toggleEventMarkers(etype) {
 
 // Clears all Google place markers from the map of a specific type
 function clearPlaceMarkers(ltype) {
-	marker_list = visible_place_markers[ltype];
+	var marker_list = visible_place_markers[ltype];
 	for (var i = 0; i < marker_list.length; i++) {
 		marker_list[i].setMap(null);
 	}
