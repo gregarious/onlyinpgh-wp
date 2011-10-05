@@ -51,6 +51,7 @@
 }
 
 h5.thumb-title,h5.thumb-title a,h5.thumb-title a:hover {
+	margin-top:10px;
 	font-size:.8em;
 	line-height:1.1em;
 	line-height: 100%;
