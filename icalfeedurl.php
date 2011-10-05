@@ -20,7 +20,7 @@ function hash_to_icalid($uid) {
 	$row = $statement->fetch();
 	if($row) {
 		return $row['hid'];
-	} 
+	}
 
 	// if we get here, the user id doesn't have a mapped icalid yet. let's add one.
 	$hid = sha1('kosher'.$uid.'salt');
