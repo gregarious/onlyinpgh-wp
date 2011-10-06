@@ -1,5 +1,7 @@
 <?php
 
+define( 'BP_DTHEME_DISABLE_CUSTOM_HEADER', true );
+
 ////////////////
 // THUMBNAILS //
 ////////////////
@@ -101,12 +103,12 @@ add_action( 'wp_print_styles', 'bp_dtheme_enqueue_styles' );
 
 
 if(function_exists('register_sidebar'))
-	register_sidebar(array(
-		'name' => 'Blog Sidebar Area', // The sidebar name to register
-		'before_widget' => '<div class="widget">',
-		'after_widget' => '</div>',
-		'before_title' => '<h5>',
-		'after_title' => '</h5>',
+      register_sidebar(array(
+            'name' => 'Blog Sidebar Area', // The sidebar name to register
+            'before_widget' => '<div class="widget">',
+            'after_widget' => '</div>',
+            'before_title' => '<h5>',
+            'after_title' => '</h5>',
  ));
 
 if(function_exists('register_sidebar'))
@@ -143,7 +145,7 @@ if(function_exists('register_sidebar'))
       'after_widget' => '</div>',
       'before_title' => '<h5>',
       'after_title' => '</h5>',
- ));	
+ ));  
  
 if(function_exists('register_sidebar'))
       register_sidebar(array(
@@ -152,7 +154,7 @@ if(function_exists('register_sidebar'))
       'after_widget' => '</div>',
       'before_title' => '<h5>',
       'after_title' => '</h5>',
- ));	
+ ));  
  
 if(function_exists('register_sidebar'))
       register_sidebar(array(
@@ -161,7 +163,7 @@ if(function_exists('register_sidebar'))
       'after_widget' => '</div>',
       'before_title' => '<h5>',
       'after_title' => '</h5>',
- ));	
+ ));  
  
 if(function_exists('register_sidebar'))
       register_sidebar(array(
@@ -191,13 +193,10 @@ if(function_exists('register_sidebar'))
 remove_action('wp_footer', 'bp_core_admin_bar', 8);
 remove_action('admin_footer', 'bp_core_amdin_bar');
 
-// Defining header image size
-define( 'HEADER_IMAGE_HEIGHT', 260 );
-
 // This theme uses wp_nav_menu() in one location.
 register_nav_menus( array(
-	'primary' => __( 'Primary Navigation' ),
-	) );
+      'primary' => __( 'Primary Navigation' ),
+      ) );
 
 // Let WP load jQuery on it's own if we're in the admin panel. 
 // http://digwp.com/2009/06/use-google-hosted-javascript-libraries-still-the-right-way/
@@ -214,13 +213,13 @@ add_action('init', 'my_init_method');
 
 
 function new_excerpt_more($more) {
-	return '';
+      return '';
 }
 add_filter('excerpt_more', 'new_excerpt_more');
 
 // Changing excerpt length to 30 words
 function new_excerpt_length($length) {
-	return 30;
+      return 30;
 }
 add_filter('excerpt_length', 'new_excerpt_length'); 
 

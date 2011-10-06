@@ -1,8 +1,7 @@
 function customGeoMashupColorIcon ( properties, color_name ) {
   var icon = null;
 
-        // Make an icon for the color 'lime' from images in the geo-mashup/
-images directory
+        // Make an icon for the color 'lime' from images in the geo-mashup/images directory
 
   if (color_name == 'aqua') {
     icon = new GIcon();
