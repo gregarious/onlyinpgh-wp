@@ -143,7 +143,7 @@ function JSONToEventInstance(json) {
 		var	isloggedin = document.getElementById("isloggedin").value;
 		var html = '<div class="infowindow">';
 			html += '<h4 class="event-name">' + this.name + '</h4>';
-			html += '<img src="' + this.image_url + '">';
+			html += '<img src="' + (this.image_url ? this.image_url : '#') + '">';
 			html += '<div class="alignright" id="host-address">';
 			html += '<p class="hostedby">Hosted By</p><h4 class="host">' + this.organization.name + '</h4>';
 			html += '<p class="event-address">' + this.location.address + '<br>';
@@ -156,7 +156,7 @@ function JSONToEventInstance(json) {
 			html += '<a class="directions alignright" target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions &rarr;</a></p>';
 			html += '</div>'; // #time-directions
 		
-			html += '<p class="event-desc">' + this.description_short + '</p>...<a target="_blank" href="event/' + this.id + '/">More info</a>';
+			html += '<p class="event-desc">' + (this.description_short ? this.description_short : '') + '</p>...<a target="_blank" href="event/' + this.id + '/">More info</a>';
 			
 			if(this.attending && isloggedin=='y') {
 				html += '<input class="attend-button-in alignright" type="button" value="Added!" id="' + this.id + 'window">';
@@ -178,7 +178,7 @@ function JSONToEventInstance(json) {
 
 		var	isloggedin = document.getElementById("isloggedin").value;
 		var html = '<h4 class="event-name">' + this.name + '</h4>';
-			html += '<img src="' + this.image_url + '">';
+			html += '<img src="' + (this.image_url ? this.image_url : '#') + '">';
 			html += '<div class="alignright" id="host-address">';
 			html += '<p class="hostedby">Hosted By</p><h4 class="host">' + this.organization.name + '</h4>';
 			html += '<p class="event-address">' + this.location.address + '<br>';
@@ -190,7 +190,8 @@ function JSONToEventInstance(json) {
 			}
 			html += '<a class="directions alignright" target="_blank" href="http://maps.google.com/maps?saddr=&daddr=' + this.location.address + '">Get Directions &rarr;</a></p>';
 			html += '</div>'; // #time-directions
-			html += '<p class="event-desc">' + this.description_short + '</p>...<a target="_blank" href="/event/' + this.id + '/">More info</a>';
+			html += '<p class="event-desc">' + (this.description_short ? this.description_short : '') + '</p>...<a target="_blank" href="event/' + this.id + '/">More info</a>';
+
 			if(this.attending && isloggedin=='y') {
 				html += '<input class="attend-button-in alignright" type="button" value="Added!" id="' + this.id + 'window">';
 			}
