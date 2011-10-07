@@ -145,12 +145,12 @@ for (i = 0; i < field.length; i++)
 		$long = $results[0]['long'];
 
 		?>
-		<meta property="og:title" content="<?php echo $name; ?>"/>
+		<meta property="og:title" content="<?php echo $name; ?> | OnlyinPgh"/>
     	<meta property="og:type" content="activity"/>
     	<meta property="og:url" content="<?php echo getCanonicalEventURL($eid); ?>"/>
 		<meta property="og:image" content="<?php echo $img; ?>"/>
 		<meta property="og:site_name" content="OnlyinPgh"/>
-		<meta property="fb:admins" content="111815322185853"/>
+		<meta property="fb:app_id" content="203898346321665"/>
 		<meta property="og:description" content="<?php echo $desc; ?>"/>
         <?php
 
