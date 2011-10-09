@@ -4,6 +4,8 @@
 
 class EventSearcher {
 	public function __construct($process_output=TRUE) {
+		$this->DAYTIME_CUTOFF = '04:00';	// anytime before 4am is considered part of the previous day
+
 		$this->q_loc = FALSE;
 		$this->q_org = FALSE;
 		$this->q_att = FALSE;	
@@ -44,10 +46,12 @@ class EventSearcher {
 		$this->f_eid = $eid;
 	}
 
+	// Must be in YYYY-MM-DD format
 	public function filterByStartDate($date) {
 		$this->f_sdate = $date;
 	}
 
+	// Must be in YYYY-MM-DD format
 	public function filterByEndDate($date) {
 		$this->f_edate = $date;	
 	}
@@ -93,12 +97,12 @@ class EventSearcher {
 	public function runQuery($offset=NULL,$limit=20) {
 		$offset = intval($offset);
 		$limit = intval($limit);	
-		
+		 
 		$query = $this->buildSelect() . ' ' .
-				$this->buildFrom() . ' ' .
-				$this->buildWhere() . ' ' .
-				'ORDER BY e.event_end_date ASC, e.event_start_date DESC' . ' ' .
-		 		"LIMIT $offset, " . ($limit+1);
+					$this->buildFrom() . ' ' .
+					$this->buildWhere() . ' ' .
+					'ORDER BY e.event_end_date ASC, e.event_start_date DESC' . ' ' .
+			 		"LIMIT $offset, " . ($limit+1);
 		 
 		 // connect to DB and run query
 		try {
@@ -118,11 +122,6 @@ class EventSearcher {
 		while($row = $statement->fetch()) {
 			$counter++;
 			if($counter > $limit) break;
-			// GDN: this isn't the cleanest way to do this. Other better ways might exist (e.g. PDO 
-			// 	FETCH_CLASS with a constructor), but we'll worry about that after the site overhaul
-
-			// Fill in the NOT NULL entries currently include event_id, event_name, event_slug, event_start_date, 
-			//		event_start_time, event_end_time, address, organization
 			
 			$new_event =
 				array(	'id'			=> intval($row['event_id']),
@@ -206,7 +205,6 @@ class EventSearcher {
 			$select .= ", l.location_address, 
 							l.location_latitude, 
 							l.location_longitude";
-
 			if($this->f_loc!==NULL) {
 				$select .= ", ( 3959 * acos( cos( radians(:lat) ) * cos( radians( l.location_latitude ) ) * cos( radians( l.location_longitude ) - radians(:long) ) + sin( radians(:lat) ) * sin( radians( l.location_latitude ) ) ) ) AS distance";
 				$this->query_args['lat'] = $this->f_loc[0];	
@@ -266,14 +264,26 @@ class EventSearcher {
 		// build HAVING clauses for date/radius/keyword filtering
 		$having_clauses = array();
 		if($this->f_sdate!==NULL) {
-			# this is not a typo: we want all events that end after our query's start date
-			$having_clauses[] = 'e.event_end_date >= :startdate';
-			$this->query_args['startdate'] = $this->f_sdate;
+			// start date condition means the event neither:
+			//	1. ends before our start date NOR
+			//  2. ends before the cutoff time (4am) on our start date
+			$having_clauses[] = '(NOT (e.event_end_date < :startdate OR
+										(e.event_end_date = :startdate AND e.event_end_time < :timecutoff)))';
+			$dt = new DateTime($this->f_sdate);
+			$this->query_args['startdate'] = $dt->format('Y-m-d');;
+			$this->query_args['timecutoff'] = $this->DAYTIME_CUTOFF;	// start time is officially after the cutoff on day
 		}
 		if($this->f_edate!==NULL) {
-			# this is not a typo: we want all events that start before our end date
-			$having_clauses[] = 'e.event_start_date <= :enddate';
-			$this->query_args['enddate'] = $this->f_edate;
+			// start date condition means the event neither:
+			//	1. starts the day after our end date NOR
+			//  2. starts after the cutoff time (4am) the day after our end date
+			$having_clauses[] = '(NOT (e.event_start_date > :enddate OR
+										(e.event_start_date = :enddate AND e.event_start_time > :timecutoff)))';
+			// if end date is D, we actually want to enclude events that start before 4 AM on the next day
+			$dt = new DateTime($this->f_edate);
+			$dt->add(new DateInterval('P1D'));	// end time is officially 4:00 AM on the day after the end date
+			$this->query_args['enddate'] = $dt->format('Y-m-d');
+			$this->query_args['timecutoff'] = $this->DAYTIME_CUTOFF;	// start time is officially after the cutoff on day
 		}
 		if($this->f_loc!==NULL) {
 			$having_clauses[] = "distance < :rad";

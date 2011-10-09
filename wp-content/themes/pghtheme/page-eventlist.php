@@ -10,6 +10,20 @@ get_header();
 
 require_once('eventlist.php');
 
+// Returns TRUE if the two DateTimes are on the same day (after taking the 4AM end time cutoff into account)
+if(!function_exists('onSameDay')) {
+	function onSameDay($dt1,$dt2) {
+		if( $dt1->format('H:i') < '04:01' ) {
+			$dt1->sub(new DateInterval('P1D'));
+		}
+		if( $dt2->format('H:i') < '04:01' ) {
+			$dt2->sub(new DateInterval('P1D'));
+		}
+
+		return $dt1->format('Y-m-d') == $dt2->format('Y-m-d');
+	}
+}
+
 ?>
 <div id="wrapper" class="cal">
 
