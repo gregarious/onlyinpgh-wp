@@ -176,7 +176,20 @@ class EventSearcher {
 	}
 
 	private function processText($text) {
-		return $this->process_output ? htmlentities($text,ENT_QUOTES,'ISO-8859-1',FALSE) : $text;
+		if(!$this->process_output) {
+			return $text;
+		}
+		else {
+			// hilariously hacky way to replace problem characters read in from DB with more friendly ones
+			$tmp = urlencode($text);
+			$tmp = str_replace('%92', '%27', $tmp);
+			$tmp = str_replace('%93', '%22', $tmp);
+			$tmp = str_replace('%94', '%22', $tmp);
+			$tmp = str_replace('%96', '-', $tmp);
+			$tmp = str_replace('%97', '--', $tmp);
+			$text = urldecode($tmp);
+			return htmlentities($text,ENT_QUOTES,'ISO-8859-1',FALSE);
+		}
 	}
 
 	// returns TRUE if more results were available than the current query returned
