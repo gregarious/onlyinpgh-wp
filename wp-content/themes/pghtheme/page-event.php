@@ -18,7 +18,6 @@ if(count($results)===0) {
 
 get_header(); 
 
-
 $eid = $results[0]['id'];
 $name =  $results[0]['name'];
 $desc = nl2br($results[0]['description']);
@@ -30,7 +29,6 @@ $org_url = $results[0]['org_url'];
 $lat = $results[0]['lat'];
 $long = $results[0]['long'];
 	
-
 // Reformattng start and end dates
 $start_dt = $results[0]['start_dt'];
 $start_date = $start_dt->format('F j, g:00 a');
@@ -115,7 +113,7 @@ jQuery(document).ready(function() {
 					<img src="<?php echo $img ?>" class="alignleft">
 					<div id="host-address" class="alignleft">
 						<p class="hostedby">Hosted By</p>
-						<h4 class="host"><a href="<?php $org_url ?>"><?php echo $org_nm; ?></a></h4>
+						<h4 class="host"><a href="<?php echo $org_url ?>"><?php echo $org_nm; ?></a></h4>
 						<p class="address"><?php echo $address; ?></p>
 						<?php
 						if ($address != "") { ?>
