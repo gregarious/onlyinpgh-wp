@@ -321,7 +321,7 @@ function groups_join_group( $group_id, $user_id = 0 ) {
 
 	// Record this in activity streams
 	groups_record_activity( array(
-		'action'  => apply_filters( 'groups_activity_joined_group', sprintf( __( '%1$s joined the group %2$s', 'buddypress'), bp_core_get_userlink( $user_id ), '<a href="' . bp_get_group_permalink( $group ) . '">' . esc_attr( bp_get_group_name( $group ) ) . '</a>' ) ),
+		'action'  => apply_filters( 'groups_activity_joined_group', sprintf( __( '%1$s joined the %2$s', 'buddypress'), bp_core_get_userlink( $user_id ), '<a href="' . bp_get_group_permalink( $group ) . '">' . esc_attr( bp_get_group_name( $group ) ) . '</a>' ) ),
 		'type'    => 'joined_group',
 		'item_id' => $group_id,
 		'user_id' => $user_id
@@ -510,7 +510,7 @@ function groups_post_update( $args = '' ) {
 		return false;
 
 	// Record this in activity streams
-	$activity_action  = sprintf( __( '%1$s posted an update in the group %2$s', 'buddypress'), bp_core_get_userlink( $user_id ), '<a href="' . bp_get_group_permalink( $bp->groups->current_group ) . '">' . esc_attr( $bp->groups->current_group->name ) . '</a>' );
+	$activity_action  = sprintf( __( '%1$s', 'buddypress'), bp_core_get_userlink( $user_id ), '<a href="' . bp_get_group_permalink( $bp->groups->current_group ) . '">' . esc_attr( $bp->groups->current_group->name ) . '</a>' );
 	$activity_content = $content;
 
 	$activity_id = groups_record_activity( array(

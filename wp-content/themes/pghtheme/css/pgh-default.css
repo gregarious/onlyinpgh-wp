@@ -1,3 +1,5 @@
+/* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-default.css */
+
 
 /* All of these will be in one sheet and minified for actual site - usability purposes right now*/
 
@@ -13,7 +15,7 @@
 @import url('pgh-photos.css');
 @import url('pgh-calendar.css');
 @import url('pgh-map.css');
-
+@import url('pgh-scenes.css');
 
 
 /* > STYLES CUSTOMIZED FROM BUDDYPRESS
@@ -26,7 +28,7 @@
 div#item-header {
 	overflow: hidden;
 }
-	div#item-header div#item-header-content { margin-left: 170px; }
+	div#item-header div#item-header-content { float: left;}
 
 	div#item-header h2 {
 		font-size: 28px;
@@ -74,6 +76,10 @@ div#item-header {
 
 /* Lara customized */
 
+#activity-filter-select {
+	display:none;
+}
+
 .bp-widget.base h4{
 	display:none;
 }
@@ -89,17 +95,15 @@ div#item-header {
 }
 
 span.user-nicename {
-	background-color: #111;
-	display:inline;
-	color:#ffec4b;
-	font-family: 'Francois One',Impact,serif;
-	font-weight:normal;
-	text-transform:uppercase;
-	letter-spacing:2px;
-	padding:2px;
-	-moz-border-radius: 3px 3px 3px 3px;
-	-webkit-border-radius: 3px 3px 3px 3px;
-	border-radius: 3px 3px 3px 3px;
+	display:none;
+}
+
+.generic-button a, input#aw-whats-new-submit {
+	color: #fff;
+}
+
+.generic-button a:hover, input#aw-whats-new-submit:hover {
+	color: #FFEC4B;
 }
 
 .button.edit:hover {
@@ -116,11 +120,14 @@ div.item-list-tabs {
 	margin:0px;
 	background: none;
 }
+	
+div.item-list-tabs li {
+	list-style-type: none;
+}
 	div.item-list-tabs ul li a {
 		text-decoration: none;
 		color: #0f0f0f;
 		text-transform: uppercase;
-		style-type: none;
 	}
 		
 		div.item-list-tabs ul li.selected a,
@@ -266,8 +273,7 @@ form#send-invite-form {
 		-moz-border-radius: 3px;
 		-webkit-border-radius: 3px;
 		border-radius: 3px;
-		padding: 5px;
-		background: #f5f5f5;
+		padding: 5px;`		background: #f5f5f5;
 		width: 160px;
 		border: 1px solid #e4e4e4;
 		margin: 10px 0;
