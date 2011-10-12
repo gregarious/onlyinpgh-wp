@@ -34,19 +34,6 @@ do_action( 'bp_before_group_header' );
 
 	</div>
 
-	<div id="item-actions">
-
-		<?php if ( bp_group_is_visible() ) : ?>
-
-			<h3><?php _e( 'Scene Admins', 'buddypress' ); ?></h3>
-
-			<?php bp_group_list_admins();
-
-			do_action( 'bp_after_group_menu_admins' );
-
-		endif; ?>
-
-	</div><!-- #item-actions -->
 </div><!-- #item-header-content -->
 
 <?php

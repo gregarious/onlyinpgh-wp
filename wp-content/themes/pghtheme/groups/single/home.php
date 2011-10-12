@@ -19,6 +19,22 @@
 
 
 			<div class="item-list-tabs" role="navigation">
+
+				<!-- If user is a group admin, show the admin menu -->
+				<?php if ( bp_group_is_admin() ) { ?>		
+					<div id="item-nav" class="scene-admin">
+						<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
+							<ul>
+
+								<?php bp_get_options_nav(); ?>
+
+								<?php do_action( 'bp_group_options_nav' ); ?>
+
+							</ul>
+						</div>
+					</div><!-- #item-nav -->
+				<?php } ?> 
+
 				<ul>
 					<li><a href="http://oip.local/scenes"><?php echo 'About'; ?></a></li>
 					<?php
@@ -37,30 +53,30 @@
 			<?php if ( bp_has_groups() ) : while ( bp_groups() ) : bp_the_group(); ?>
 
 				<?php do_action( 'bp_before_group_home_content' ) ?>
+				
 				<div id="news-container" class="scene-part">
-						<h2>What's happening?</h2>
-						<div class="news-content"> <?php
-							locate_template( array( 'mypgh-templates/scene-news' ), true ); ?>							
-						</div>
+					<div class="news-content"> <?php
+						locate_template( array( 'mypgh-templates/scene-news.php' ), true ); ?>							
 					</div>
+				</div>
+				
 				<div id="item-header" role="complementary" class="scene">
 
 					<?php locate_template( array( 'groups/single/group-header.php' ), true ); ?>
-					
-					<?php if ( bp_group_is_admin() ) { ?>		
-						<div id="item-nav" class="scene-admin">
-							<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
-								<ul>
 
-									<?php bp_get_options_nav(); ?>
+					<div id="item-actions">
 
-									<?php do_action( 'bp_group_options_nav' ); ?>
+						<?php if ( bp_group_is_visible() ) : ?>
 
-								</ul>
-							</div>
-						</div><!-- #item-nav -->
-					<?php } ?> 
+							<h3><?php _e( 'Admins:', 'buddypress' ); ?></h3>
 
+							<?php bp_group_list_admins();
+
+							do_action( 'bp_after_group_menu_admins' );
+
+						endif; ?>
+
+					</div><!-- #item-actions -->
 				</div><!-- #item-header -->
 
 		<!--<pre>
@@ -74,15 +90,11 @@
 		</pre>-->
 
 				<div id="item-body">
-
-	
-
-					<div id="events-container" class="scene-part">
-						<h2>Events</h2>
-						<div class="events-content"> <?php
-							locate_template( array( 'mypgh-templates/scene-events' ), true ); ?>
-						</div>
-					</div>
+						
+							<?php
+							locate_template( array( 'mypgh-templates/scene-events.php' ), true ); ?>							
+						
+					
 
 					<?php do_action( 'bp_before_group_body' );
 
@@ -108,9 +120,13 @@
 							
 							if ( is_user_logged_in() && bp_group_is_member() ) :
 								locate_template( array( 'activity/post-form.php'), true );
-							endif;
+							else: ?>
+								<h4> Sign up or login to post!</p> <?php
+								
 								do_action( 'bp_after_group_activity_post_form' );
-								do_action( 'bp_before_group_activity_content' ); ?>
+								do_action( 'bp_before_group_activity_content' ); 
+							
+							endif;?>
 							
 							<div class="chatter-content"> <?php
 								locate_template( array( 'groups/single/activity.php' ), true ); ?>

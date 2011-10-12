@@ -28,7 +28,7 @@
 div#item-header {
 	overflow: hidden;
 }
-	div#item-header div#item-header-content { float: left;}
+	div#item-header div#item-header-content { float: right;}
 
 	div#item-header h2 {
 		font-size: 28px;
@@ -39,11 +39,6 @@ div#item-header {
 			text-decoration: none;
 			color: #777;
 		}
-
-	div#item-header img.avatar {
-		float: left;
-		margin: 0 15px 25px 0;
-	}
 
 	div#item-header h2 { margin-bottom: 5px; }
 

@@ -5,6 +5,7 @@
 #scene p {
 	line-height: 115%;
 	font-size: 90%;
+	font-family: ;
 }
 
 #scene ul li {
@@ -16,11 +17,32 @@
 	text-decoration: none;
 }
 
+#scene .activity-meta a.acomment-reply:hover {
+	text-decoration: underline;
+	color: #000;
+}
+
+#scene .activity-meta a.acomment-reply:active {
+	border: 1px #999 solid;
+}
+
+#scene textarea#whats-new, #scene div.activity-comments form textarea {
+	width: 100%;
+	font-size: 1.2em;
+	color: #555;
+	height: 60px;
+	border: none;
+	padding: 6px;
+}
+
+#scene textarea#whats-new {
+	font-size: .9em;
+}
+
 /* Header/item headers and nav */
 
 #item-header.scene {
 	margin: 30px 0 0;
-	width:60%;
 }
 
 #scene .item-list-tabs {
@@ -34,6 +56,8 @@
 
 #item-nav.scene-admin {
 	float: right;
+	position: relative;
+	z-index: 999;
 	margin: 0 80px 0 0;
 }
 
@@ -44,8 +68,6 @@
 
 #scene #item-actions {
 	float: left;
-	position: relative;
-	z-index: 2;
 }
 
 #scene #item-actions h3 {
@@ -65,13 +87,25 @@
 }
 
 #scene #item-header h2 a {
-	font-size: 1.7em;
+	font-size: 2em;
+	line-height: 80%;
 	text-decoration: none;
 	color: #777;
 }
 
+#scene #item-header h3 {
+	font-size: 2em;
+	letter-spacing: 2px;
+}
+
 #scene #item-header-content {
-	width: 67%;	
+	width: 65%;
+	margin-right: 20px;
+}
+
+div#item-header img.avatar {
+	float: left;
+	margin: 0 15px 10px 0;
 }
 
 #scene ul.item-list {
@@ -121,9 +155,9 @@ div.acomment-options a {
 	-moz-border-radius: 5px;
 		-webkit-border-radius: 5px;
 			border-radius: 5px;
-	-moz-box-shadow: 1px 1px 4px #ccc;
-		-webkit-box-shadow: 1px 1px 4px #ccc;
-			box-shadow: 1px 1px 4px #ccc;
+	-moz-box-shadow: 1px 1px 4px #999;
+		-webkit-box-shadow: 1px 1px 4px #999;
+			box-shadow: 1px 1px 4px #999;
 }
 
 #scene .activity-comments > ul {
@@ -148,19 +182,20 @@ div.acomment-options a {
 	margin-top: 10px;
 }
 
-.activity-content .activity-inner p {
+#scene .activity-content .activity-inner p {
 	margin-top: 5px;
 }
 
-.activity-comments {
+#scene .activity-comments {
 	position: relative;
 	margin: 0 0 0 15px;
 	width: auto;
 	overflow: hidden; /* IE fix */
 }
 
-.acomment-content p {
+#scene .acomment-content p {
 	font-size: 1.3em;	
+	line-height: 130%;
 }
 
 #scene div.activity-avatar {
@@ -192,14 +227,46 @@ div.acomment-options a {
 	font-size: 1.4em;
 }
 
-#scene .activity-list .activity-content span.time-since {
+#scene span.time-since {
 	display: none;
 }
 	
-.activity-list li.mini .activity-meta {
-
+#scene .activity-meta {
+	margin: 10px 0;
+	clear: left;
 }
 	
+	
+.activity-list div.activity-meta a {
+	font-size: 11px;
+	background: #f4f4f4;
+	border-bottom: 1px solid #ddd;
+	border-right: 1px solid #ddd;
+	color: #999;
+	padding: 4px 8px;
+	text-decoration: none;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	margin-right: 3px;
+}
+
+.activity-list div.activity-meta a.acomment-reply {
+	color: #000;
+}
+
+#scene .activity-meta a:hover {
+	color: #000;
+}
+
+#scene div.acomment-meta a {
+	font-size: 1.2em;
+}
+	
+div.activity-meta a.acomment-reply:hover {
+	color: #fff;
+}
+			
 /* Hide 'Public' */ 	
 #scene .activity-list .activity-header a:first-child, span.highlight {
     display: none;
@@ -210,9 +277,14 @@ div.acomment-options a {
 
 .scene-part h2 {
 	border: none;
+	font-size: 1.4em;
 }
 
 /* EVENTS */
+
+
+
+/* NEWS */
 
 #news-container {
 	background-color: orange;
@@ -222,11 +294,32 @@ div.acomment-options a {
 	width: 40%;
 }
 
+#news-container ul.rss-list {
+	clear: both;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+/* EVENTS */
+
 #events-container {
+	width: 58%;
+	margin: 0;
+}
+
+.events-content {
 	background-color: green;
-	height: 500px;
 	width: 58%;
 }
 
-
-/* NEWS */
+#scene ul.eventslist-day li {
+	clear: both;
+	float: left;
+	display: inline;
+	height: 170px;
+	width: 230px;
+	background-color: yellow;
+	padding: 20px 10px;
+	overflow: auto;
+}
