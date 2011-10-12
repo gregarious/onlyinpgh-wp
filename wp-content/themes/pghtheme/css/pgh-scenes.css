@@ -5,7 +5,6 @@
 #scene p {
 	line-height: 115%;
 	font-size: 90%;
-	font-family: ;
 }
 
 #scene ul li {
@@ -79,22 +78,28 @@
 
 #scene #item-header #item-meta p {
 	font-size: 1.1em;
+	color: #444;
 }
 
 #scene #item-header h2 {
-	border-bottom: 1px #ccc solid;
+	border-bottom: none;
 	padding: 3px 0;
 }
 
 #scene #item-header h2 a {
-	font-size: 2em;
+	font-size: 2.4em;
 	line-height: 80%;
 	text-decoration: none;
-	color: #777;
+	color: #999;
+	text-shadow: 0px 4px 3px rgba(0,0,0,.9),
+             0px 1px 6px rgba(0,0,0,0.1),
+             0px 5px 5px rgba(0,0,0,0.1);
+
+
 }
 
 #scene #item-header h3 {
-	font-size: 2em;
+	font-size: 1,5em;
 	letter-spacing: 2px;
 }
 
@@ -277,6 +282,10 @@ div.activity-meta a.acomment-reply:hover {
 
 .scene-part h2 {
 	border: none;
+	font-family: 'Trebuchet MS','Lucida Sans Unicode','Lucida Grande',' Lucida Sans',Arial,sans-serif;
+	text-transform: none;
+	font-weight: bold;
+	color: #555;
 	font-size: 1.4em;
 }
 
@@ -287,24 +296,56 @@ div.activity-meta a.acomment-reply:hover {
 /* NEWS */
 
 #news-container {
-	background-color: orange;
 	float: right;
-	margin: 20px 0;
+	border-left: 2px #888 dotted;
+	padding-left: 30px;
+	margin: 20px 10px;
 	height: 900px;
-	width: 40%;
+	width: 35%;
 }
 
-#news-container ul.rss-list {
+ul.rss-list {
 	clear: both;
 	width: 100%;
 	margin: 0;
 	padding: 0;
 }
 
+ul.rss-list li {
+	margin: 20px 0;	
+	background-color: #fff;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fefefe)); 
+	background-image: -webkit-linear-gradient(top, #fff, #fefefe); 
+	background-image:    -moz-linear-gradient(top, #fff, #fefefe); 
+	background-image:     -ms-linear-gradient(top, #fff, #fefefe); 
+	background-image:      -o-linear-gradient(top, #fff, #fefefe); 
+	background-image:         linear-gradient(top, #fff, #fefefe);
+	        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#fefefe'); 
+
+}
+
+h3.rss-title {
+	font-size: 1.2em;	
+	text-shadow: 0 1px 0 #999;
+}
+
+.rss-postedon, h4.rss-blog {
+	margin: 0;
+	display: inline
+}
+
+.rss-postedon {
+	color: #555;
+}
+
+.rss-date {
+	margin-top: 5px;
+}
+
 /* EVENTS */
 
 #events-container {
-	width: 58%;
+	width: 55%;
 	margin: 0;
 }
 
