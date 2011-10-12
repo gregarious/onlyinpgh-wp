@@ -53,7 +53,7 @@
 			<?php if ( bp_has_groups() ) : while ( bp_groups() ) : bp_the_group(); ?>
 
 				<?php do_action( 'bp_before_group_home_content' ) ?>
-				
+
 				<div id="news-container" class="scene-part">
 					<div class="news-content"> <?php
 						locate_template( array( 'mypgh-templates/scene-news.php' ), true ); ?>							
@@ -90,11 +90,13 @@
 		</pre>-->
 
 				<div id="item-body">
-						
-							<?php
-							locate_template( array( 'mypgh-templates/scene-events.php' ), true ); ?>							
-						
+					<div id="events-container" class="scene-part">
+						<?php locate_template( array( 'mypgh-templates/scene-events.php' ), true ); ?>							
+					</div>
 					
+					<div id="places-container" class="scene-part">
+						<?php locate_template( array( 'mypgh-templates/scene-places.php' ), true ); ?>							
+					</div>
 
 					<?php do_action( 'bp_before_group_body' );
 

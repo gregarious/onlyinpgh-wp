@@ -1,5 +1,4 @@
-		
-<h2>Scene News</h2> 
+<h2>What's up?</h2> 
 <!--<span id="cal-buttons" class="alignright">
 	<a href="" class="day-nav-link" id="cal-nav-prev">&larr; Previous</a>
 	<a href="" class="day-nav-link" id="cal-nav-next">Next &rarr;</a>
@@ -7,6 +6,7 @@
 
 <ul class="rss-list">
 	
+	<a href="#">
 		<li>
 <!--			<div id="rss-img">
 				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
@@ -21,8 +21,9 @@
 			<p class="rss-desc">Bicycle rights helvetica mlkshk fanny pack +1 leggings, 8-bit artisan freegan stumptown wes anderson butcher cardigan organic gluten-free. Seitan VHS cliche tofu, vice keytar retro you probably haven't heard of them...</p>
 
 		</li>
+	</a>
 		
-
+	<a href="#">
 		<li>
 <!--			<div id="rss-img">
 				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
@@ -37,7 +38,7 @@
 			<p class="rss-desc">Bicycle rights helvetica mlkshk fanny pack +1 leggings, 8-bit artisan freegan stumptown wes anderson butcher cardigan organic gluten-free. Seitan VHS cliche tofu, vice keytar retro you probably haven't heard of them...</p>
 
 		</li>
-
+	</a>
 				<li>
 <!--			<div id="rss-img">
 				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">

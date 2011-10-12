@@ -1,5 +1,23 @@
 /* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-scenes.css */
 
+a.group-button.join-group {
+	background: #000;
+	font-size: 2em;
+	-moz-box-shadow: 1px 2px 4px #999;
+		-webkit-box-shadow: 1px 2px 4px #999;
+			box-shadow: 1px 2px 4px #999;
+}
+
+a.group-button.join-group:hover {
+	font-size: 2em;
+}
+
+a.group-button.join-group:active {
+	font-size: 2em;
+	box-shadow: none;
+}
+
+
 /* Main */
 
 #scene p {
@@ -41,7 +59,7 @@
 /* Header/item headers and nav */
 
 #item-header.scene {
-	margin: 30px 0 0;
+	margin: 40px 0;
 }
 
 #scene .item-list-tabs {
@@ -78,6 +96,7 @@
 
 #scene #item-header #item-meta p {
 	font-size: 1.1em;
+	line-height: 120%;
 	color: #444;
 }
 
@@ -281,17 +300,8 @@ div.activity-meta a.acomment-reply:hover {
 /* SCENE PARTS */
 
 .scene-part h2 {
-	border: none;
-	font-family: 'Trebuchet MS','Lucida Sans Unicode','Lucida Grande',' Lucida Sans',Arial,sans-serif;
-	text-transform: none;
-	font-weight: bold;
-	color: #555;
-	font-size: 1.4em;
+	font-size: 2em;
 }
-
-/* EVENTS */
-
-
 
 /* NEWS */
 
@@ -300,7 +310,6 @@ div.activity-meta a.acomment-reply:hover {
 	border-left: 2px #888 dotted;
 	padding-left: 30px;
 	margin: 20px 10px;
-	height: 900px;
 	width: 35%;
 }
 
@@ -311,22 +320,50 @@ ul.rss-list {
 	padding: 0;
 }
 
+ul.rss-list a:hover {
+	text-decoration: none;
+}
+
 ul.rss-list li {
 	margin: 20px 0;	
-	background-color: #fff;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fefefe)); 
-	background-image: -webkit-linear-gradient(top, #fff, #fefefe); 
+	padding: 17px;
+	background-color: #eee;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+
+/*	background-image: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#fefefe)); 
+	background-image: -webkit-linear-gradient(top, #eee, #ccc); 
 	background-image:    -moz-linear-gradient(top, #fff, #fefefe); 
 	background-image:     -ms-linear-gradient(top, #fff, #fefefe); 
 	background-image:      -o-linear-gradient(top, #fff, #fefefe); 
 	background-image:         linear-gradient(top, #fff, #fefefe);
-	        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#fefefe'); 
+	        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#fff', EndColorStr='#fefefe'); */
 
+}
+
+ul.rss-list li:hover {
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#ccc)); 
+	background-image: -webkit-linear-gradient(top, #eee, #ccc); 
+	background-image:    -moz-linear-gradient(top, #eee, #ccc); 
+	background-image:     -ms-linear-gradient(top, #eee, #ccc); 
+	background-image:      -o-linear-gradient(top, #eee, #ccc); 
+	background-image:         linear-gradient(top, #eee, #ccc);
+	        filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#eee', EndColorStr='#ccc'); 
+}
+
+#news-container div.news-content ul.rss-list li p.rss-desc {
+	font-size: .8em;	
+	line-height: 120%;
 }
 
 h3.rss-title {
 	font-size: 1.2em;	
 	text-shadow: 0 1px 0 #999;
+}
+
+h4.rss-blog {
+	font-weight: normal;
 }
 
 .rss-postedon, h4.rss-blog {
@@ -345,22 +382,61 @@ h3.rss-title {
 /* EVENTS */
 
 #events-container {
-	width: 55%;
-	margin: 0;
-}
-
-.events-content {
-	background-color: green;
 	width: 58%;
+	margin: 0;
+	padding: 0;
 }
 
-#scene ul.eventslist-day li {
-	clear: both;
+#scene ul.scene-event-list {
+	margin: 0;
+	padding: 0;
+	width: 96%;
+}
+
+#scene ul.scene-event-list li {
+	-moz-box-shadow: 1px 2px 4px #999;
+		-webkit-box-shadow: 1px 2px 4px #999;
+			box-shadow: 1px 2px 4px #999;
+	-moz-border-radius: 5px;
+		-webkit-border-radius: 5px;
+			border-radius: 5px;
 	float: left;
-	display: inline;
-	height: 170px;
-	width: 230px;
-	background-color: yellow;
-	padding: 20px 10px;
+	padding: 7px;
+	margin: 5px;
+	height: 200px;
+	width: 45%;
+	overflow: hidden;
+}
+
+.scene-event-list .el-name h3 {
+	line-height: 120%;
+	margin-top: 0;
+}
+
+/* PLACES */
+
+#places-container {
+	width: 100%;
+	height: 400px;
+	clear: both;
+}
+
+ul.scene-places {
+	width: 100%;
+	padding: 0;
+	margin-left: 15px;
+}
+
+ul.scene-places li {
+	width: 30%;
+	height: 200px;
+	margin: 5px;
+	border: 5px red solid;
+	float: left;	
 	overflow: auto;
+}
+
+p.pager {
+	clear: both;
+	display: block;
 }
