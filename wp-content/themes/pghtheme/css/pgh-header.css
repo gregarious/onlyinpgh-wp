@@ -1,5 +1,3 @@
-/* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-header.css */
-
 #header {
     -moz-box-shadow: 0 5px 10px -1px #000;
 	-webkit-box-shadow: 0 5px 10px -1px #000;
@@ -60,6 +58,9 @@ ul#menu-header-menu li#menu-item-7776 a{
     padding: 0px;
 }
 
+#staticheader a:hover {
+    text-decoration:none;
+}
 
 .logo a {
 	color: #FFFFFF;

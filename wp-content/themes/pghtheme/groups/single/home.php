@@ -6,20 +6,9 @@
 
 		<form action="" method="post" id="groups-directory-form" class="dir-form">
 
-			<!-- Commenting out Create Group functionality -->
-			<h3><?php _e( 'Scenes', 'buddypress' ); ?><!--<?php //if ( is_user_logged_in() && bp_user_can_create_groups() ) : ?> &nbsp;<a class="button" href="<?php //echo trailingslashit( bp_get_root_domain() . '/' . bp_get_groups_root_slug() . '/create' ); ?>"><?php //_e( 'Add a Scene', 'buddypress' ); ?></a><?php //endif; ?>--></h3>
-
 			<?php do_action( 'bp_before_directory_groups_content' ); ?>
 
-			<div id="group-dir-search" class="dir-search alignright" role="search">
-
-				<?php bp_directory_groups_search_form() ?>
-
-			</div><!-- #group-dir-search -->
-
-
 			<div class="item-list-tabs" role="navigation">
-
 				<!-- If user is a group admin, show the admin menu -->
 				<?php if ( bp_group_is_admin() ) { ?>		
 					<div id="item-nav" class="scene-admin">
@@ -64,19 +53,6 @@
 
 					<?php locate_template( array( 'groups/single/group-header.php' ), true ); ?>
 
-					<div id="item-actions">
-
-						<?php if ( bp_group_is_visible() ) : ?>
-
-							<h3><?php _e( 'Admins:', 'buddypress' ); ?></h3>
-
-							<?php bp_group_list_admins();
-
-							do_action( 'bp_after_group_menu_admins' );
-
-						endif; ?>
-
-					</div><!-- #item-actions -->
 				</div><!-- #item-header -->
 
 		<!--<pre>
@@ -130,6 +106,14 @@
 							
 							endif;?>
 							
+							<!-- <div id="item-actions">
+									<?php if ( bp_group_is_visible() ) : ?>
+										<h3><?php _e( 'Admins:', 'buddypress' ); ?></h3>
+										<?php bp_group_list_admins();
+										do_action( 'bp_after_group_menu_admins' );
+									endif; ?>
+								</div> #item-actions -->
+
 							<div class="chatter-content"> <?php
 								locate_template( array( 'groups/single/activity.php' ), true ); ?>
 							</div> 
