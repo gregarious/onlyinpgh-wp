@@ -31,6 +31,18 @@ class MyPghiCal {
 
 		$ic_config = array( "unique_id" => "onlyinpgh.com",
 							'filename' =>  $this->filename);
+
+		// Since Wordpress is so damn fun, we need to see if it exists and has screwed
+		//	with the default local time. If it has, we're temporarily changing it.
+		// See http://wordpress.stackexchange.com/questions/30946/default-timezone-hardcoded-as-utc
+		$orig_default_tz = '';
+		if(function_exists('get_option')) {
+			$local_tz = get_option('timezone_string');
+			if($local_tz) {
+				$orig_default_tz = date_default_timezone_get();
+				date_default_timezone_set($local_tz);
+			}
+		} 
 		$vcal = new vcalendar( $ic_config );
 
 		$vcal->setProperty("method", "PUBLISH");
@@ -51,5 +63,10 @@ class MyPghiCal {
 		}
 
 		$vcal->returnCalendar();
+
+		// see Wordpress rant above
+		if($orig_default_tz) {
+			date_default_timezone_set($orig_default_tz);
+		}
 	}
 }
