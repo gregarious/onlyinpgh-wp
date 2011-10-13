@@ -11,6 +11,12 @@
 
 			<?php do_action( 'bp_before_directory_groups_content' ); ?>
 
+			<div id="group-dir-search" class="dir-search alignright" role="search">
+
+				<?php bp_directory_groups_search_form() ?>
+
+			</div><!-- #group-dir-search -->
+
 
 			<div class="item-list-tabs" role="navigation">
 
@@ -58,6 +64,19 @@
 
 					<?php locate_template( array( 'groups/single/group-header.php' ), true ); ?>
 
+					<div id="item-actions">
+
+						<?php if ( bp_group_is_visible() ) : ?>
+
+							<h3><?php _e( 'Admins:', 'buddypress' ); ?></h3>
+
+							<?php bp_group_list_admins();
+
+							do_action( 'bp_after_group_menu_admins' );
+
+						endif; ?>
+
+					</div><!-- #item-actions -->
 				</div><!-- #item-header -->
 
 		<!--<pre>
@@ -99,20 +118,19 @@
 					elseif ( bp_group_is_visible() && bp_is_active( 'activity' ) ) : ?>
 
 						<div id="chatter-container">
-							<h2>The Chatter Box</h2>
-								<div class="chatter-content"> 
-									<?php
-										if ( is_user_logged_in() && bp_group_is_member() ) :
-											locate_template( array( 'activity/post-form.php'), true );
-										else: ?>
-											<h4>
-												<a href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>" class="sign-up simplemodal-login"> Sign up or login to post!</a> 
-											</h4><?php
-											do_action( 'bp_after_group_activity_post_form' );
-											do_action( 'bp_before_group_activity_content' ); 
-										
-										endif; ?>
-									<?php
+							<h2>The Chatter Box</h2><?php
+							
+							if ( is_user_logged_in() && bp_group_is_member() ) :
+								locate_template( array( 'activity/post-form.php'), true );
+							else: ?>
+								<h4> Sign up or login to post!</p> <?php
+								
+								do_action( 'bp_after_group_activity_post_form' );
+								do_action( 'bp_before_group_activity_content' ); 
+							
+							endif;?>
+							
+							<div class="chatter-content"> <?php
 								locate_template( array( 'groups/single/activity.php' ), true ); ?>
 							</div> 
 						</div><!-- #chatter-container --> <?php

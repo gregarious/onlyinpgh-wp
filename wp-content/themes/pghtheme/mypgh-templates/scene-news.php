@@ -8,12 +8,12 @@
 	
 	<a href="#">
 		<li>
-<!--			<div id="rss-img">
+<!--		<div id="rss-img">
 				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
 			</div> -->
 			<h3 class="rss-title">
 				An interesting article about music
-			</h3><br>
+			</h3>
 
 			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> OMGPGH!</h4>
 			<p class="rss-date">March 12, 1989</p>
@@ -25,12 +25,12 @@
 		
 	<a href="#">
 		<li>
-<!--			<div id="rss-img">
+<!--		<div id="rss-img">
 				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
 			</div> -->
 			<h3 class="rss-title">
 				Shadyside is the new Berlin
-			</h3><br>
+			</h3>
 
 			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> BoringPGH</h4>
 			<p class="rss-date">March 12, 1989</p>
@@ -39,13 +39,14 @@
 
 		</li>
 	</a>
-				<li>
-<!--			<div id="rss-img">
+		
+		<li>
+<!--		<div id="rss-img">
 				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
 			</div> -->
 			<h3 class="rss-title">
 				Lots of cool kids in the burgh
-			</h3><br>
+			</h3>
 
 			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> Post Gazette</h4>
 			<p class="rss-date">March 12, 1989</p>
@@ -54,13 +55,13 @@
 
 		</li>
 
-				<li>
-<!--			<div id="rss-img">
+		<li>
+<!--		<div id="rss-img">
 				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
 			</div> -->
 			<h3 class="rss-title">
 				Wow, there are a lot of concerts in Pittsburgh
-			</h3><br>
+			</h3>
 
 			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> IheartPgh</h4>
 			<p class="rss-date">March 12, 1989</p>

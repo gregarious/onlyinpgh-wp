@@ -14,29 +14,24 @@ do_action( 'bp_before_group_header' );
 	<div id="item-meta">
 
 		<div id="item-header-avatar">
-		<a href="<?php bp_group_permalink(); ?>" title="<?php bp_group_name(); ?>">
+		
+			<a href="<?php bp_group_permalink(); ?>" title="<?php bp_group_name(); ?>"> <?php
 
-			<?php bp_group_avatar(); ?>
+			if (is_page('scenes')) {
+				$img_dir = get_stylesheet_directory_uri();
+				echo '<img src="'.$img_dir.'/images/music-scene-head.png">';
+			} ?>
 
 		</a>
 
 	</div><!-- #item-header-avatar -->
 
-		<?php bp_group_description(); ?>
+		<?php //bp_group_description(); ?>
 
 		<div id="item-buttons">
 
 			<div id="item-actions">
 
-				<?php if ( bp_group_is_visible() ) : ?>
-
-					<h3><?php _e( 'Admins:', 'buddypress' ); ?></h3>
-
-					<?php bp_group_list_admins();
-
-					do_action( 'bp_after_group_menu_admins' );
-
-				endif; ?>
 
 			</div><!-- #item-actions -->
 			

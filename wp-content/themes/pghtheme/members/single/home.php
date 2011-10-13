@@ -29,8 +29,6 @@
 				<?php elseif ( bp_is_user_blogs() ) : ?>
 					<?php locate_template( array( 'members/single/blogs.php' ), true ) ?>
 
-			
-
 				<?php elseif ( bp_is_user_groups() ) : ?>
 					<?php locate_template( array( 'members/single/groups.php' ), true ) ?>
 
