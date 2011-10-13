@@ -26,13 +26,6 @@
 
 			<?php do_action( 'bp_before_directory_groups_content' ); ?>
 
-			<div id="group-dir-search" class="dir-search alignright" role="search">
-
-				<?php bp_directory_groups_search_form() ?>
-
-			</div><!-- #group-dir-search -->
-
-
 			<div class="item-list-tabs" role="navigation">
 				<ul>
 					<li class="selected" id="groups-about"><a href="http://oip.local/scenes"><?php echo 'About'; ?></a></li>

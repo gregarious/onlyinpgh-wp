@@ -79,7 +79,7 @@ define('WPLANG', '');
 * in their development environments.
 */
 
-define('WP_DEBUG', false);
+define('WP_DEBUG', true);
 
 /* That's all, stop editing! Happy blogging. */
 

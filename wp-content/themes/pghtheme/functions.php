@@ -5,7 +5,6 @@
 // BUDDYPRESS //
 ////////////////
 
-
 define( 'BP_DTHEME_DISABLE_CUSTOM_HEADER', true );
 
 // Set up MyPgh navigation
@@ -303,9 +302,15 @@ function new_excerpt_more($more) {
 }
 add_filter('excerpt_more', 'new_excerpt_more');
 
+
 // Changing excerpt length to 30 words
 function new_excerpt_length($length) {
-      return 30;
+
+      if (in_category('profiles')) {
+            return 5;
+      } else {
+            return 30;
+      }
 }
 add_filter('excerpt_length', 'new_excerpt_length'); 
 

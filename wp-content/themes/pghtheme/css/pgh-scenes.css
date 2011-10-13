@@ -1,20 +1,25 @@
 /* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-scenes.css */
 
-a.group-button.join-group {
-	background: #000;
+#scene a.group-button, a.group-button:hover {
+	color: #000;
+	padding: 0;
+	float: right;
 	font-size: 2em;
-	-moz-box-shadow: 1px 2px 4px #999;
-		-webkit-box-shadow: 1px 2px 4px #999;
-			box-shadow: 1px 2px 4px #999;
+	-moz-border-radius: 0;
+    -webkit-border-radius: 0;
+	text-shadow: -1px -1px 1px rgba(0,0,0,0.5);
+    background: 0;
+    cursor: pointer;
 }
 
-a.group-button.join-group:hover {
-	font-size: 2em;
+a.group-button:hover {
+	color: #666;
 }
 
-a.group-button.join-group:active {
+a.group-button:active {
 	font-size: 2em;
-	box-shadow: none;
+	text-shadow: none;
+	color: #222;
 }
 
 
@@ -23,6 +28,16 @@ a.group-button.join-group:active {
 #scene p {
 	line-height: 115%;
 	font-size: 90%;
+	font-weight: normal;
+}
+
+#scene h5 {
+	color: #000;
+	display: inline;
+	padding: 0;
+	margin: 0 0 0 10px;
+	position: relative;
+	bottom: 20px;
 }
 
 #scene ul li {
@@ -30,7 +45,6 @@ a.group-button.join-group:active {
 }
 
 #scene a.button:hover {
-	color: #FFEC4B;
 	text-decoration: none;
 }
 
@@ -44,28 +58,37 @@ a.group-button.join-group:active {
 }
 
 #scene textarea#whats-new, #scene div.activity-comments form textarea {
-	width: 100%;
+	width: 95%;
+	font-size: .9em;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+		border-radius: 5px;
 	font-size: 1.2em;
 	color: #555;
 	height: 60px;
 	border: none;
 	padding: 6px;
+	margin:20px 10px 0;
 }
 
-#scene textarea#whats-new {
-	font-size: .9em;
+#scene #aw-whats-new-submit {
+	margin: 10px;
 }
+
+#whats-new-avatar {
+	display: inline;	
+}
+
 
 /* Header/item headers and nav */
 
 #item-header.scene {
-	margin: 40px 0;
+	margin: 30px 0;
 }
 
 #scene .item-list-tabs {
 	border-bottom: 1px #ccc solid;
 }
-
 
 #scene #groups-directory-form h3 {
 	display: inline;
@@ -94,6 +117,10 @@ a.group-button.join-group:active {
 	display: inline;
 }
 
+#scene #item-header #item-meta {
+	margin-top: 30px;
+}
+
 #scene #item-header #item-meta p {
 	font-size: 1.1em;
 	line-height: 120%;
@@ -106,28 +133,25 @@ a.group-button.join-group:active {
 }
 
 #scene #item-header h2 a {
-	font-size: 2.4em;
+	font-size: 3.3em;
 	line-height: 80%;
 	text-decoration: none;
-	color: #999;
-	text-shadow: 0px 4px 3px rgba(0,0,0,.9),
+	color: #666;
+	text-shadow: 0px 4px 3px rgba(0,0,0,0.1),
              0px 1px 6px rgba(0,0,0,0.1),
              0px 5px 5px rgba(0,0,0,0.1);
-
-
 }
 
 #scene #item-header h3 {
-	font-size: 1,5em;
+	font-size: 2em;
 	letter-spacing: 2px;
 }
 
 #scene #item-header-content {
-	width: 65%;
 	margin-right: 20px;
 }
 
-div#item-header img.avatar {
+#scene #item-header img.avatar {
 	float: left;
 	margin: 0 15px 10px 0;
 }
@@ -150,19 +174,18 @@ ul#group-admins li {
 /* CHATTER */
 
 #chatter-container {
-	width:900px;
-	margin: auto;
+	width:94%;
+	margin: 20px auto;
 	clear: both;
 	padding: 20px 20px 40px 20px;
 	background-color: #f1f1f1;
 	-moz-border-radius: 5px;
 		-webkit-border-radius: 5px;
 			border-radius: 5px;
-
 }
 
 .chatter-content {
-	width: 900px;
+	width: 70%;
 	overflow: auto;	
 	padding: 5px;
 }
@@ -171,8 +194,22 @@ div.acomment-options a {
 	font-size: .7em;
 }
 
+#scene ul.activity-list {
+	margin-right: 10px;
+}
+
+#scene .chatter-whats-new {
+	display: block;
+}
+
+
+#scene li.groups.joined_group.mini {
+	display: none;
+}
+
 #scene ul.activity-list li {
 	padding: 30px;
+	display: block;
 	margin: 7px;
 	background-color: #fff;
 	overflow: hidden;
@@ -188,6 +225,10 @@ div.acomment-options a {
 	-moz-border-radius: 4px;
 	-webkit-border-radius: 4px;
 	padding: 0;
+}
+
+#scene a.sign-up {
+	font-weight: normal;
 }
 
 #scene form#whats-new-form {
@@ -325,8 +366,8 @@ ul.rss-list a:hover {
 }
 
 ul.rss-list li {
-	margin: 20px 0;	
-	padding: 17px;
+	margin: 10px 0;	
+	padding: 10px;
 	background-color: #eee;
 	-moz-border-radius: 5px;
 	-webkit-border-radius: 5px;
@@ -417,21 +458,21 @@ h4.rss-blog {
 
 #places-container {
 	width: 100%;
-	height: 400px;
 	clear: both;
 }
 
 ul.scene-places {
 	width: 100%;
 	padding: 0;
-	margin-left: 15px;
+	margin: 0;
 }
 
 ul.scene-places li {
 	width: 30%;
 	height: 200px;
-	margin: 5px;
-	border: 5px red solid;
+	padding: 7px;
+	margin: 7px;
+	border: 1px gray dotted;
 	float: left;	
 	overflow: auto;
 }

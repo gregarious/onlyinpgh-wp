@@ -13,7 +13,7 @@
 			</div> -->
 			<h3 class="rss-title">
 				An interesting article about music
-			</h3>
+			</h3><br>
 
 			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> OMGPGH!</h4>
 			<p class="rss-date">March 12, 1989</p>
@@ -30,7 +30,7 @@
 			</div> -->
 			<h3 class="rss-title">
 				Shadyside is the new Berlin
-			</h3>
+			</h3><br>
 
 			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> BoringPGH</h4>
 			<p class="rss-date">March 12, 1989</p>
@@ -45,7 +45,7 @@
 			</div> -->
 			<h3 class="rss-title">
 				Lots of cool kids in the burgh
-			</h3>
+			</h3><br>
 
 			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> Post Gazette</h4>
 			<p class="rss-date">March 12, 1989</p>
@@ -60,7 +60,7 @@
 			</div> -->
 			<h3 class="rss-title">
 				Wow, there are a lot of concerts in Pittsburgh
-			</h3>
+			</h3><br>
 
 			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> IheartPgh</h4>
 			<p class="rss-date">March 12, 1989</p>
