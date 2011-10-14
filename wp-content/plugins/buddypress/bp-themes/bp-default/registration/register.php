@@ -1,5 +1,5 @@
 <?php get_header( 'buddypress' ) ?>
-
+<div id="wrapper">
 	<div id="content">
 		<div class="padder">
 
@@ -252,7 +252,7 @@
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
-
+</div><!-- #wrapper -->
 	<script type="text/javascript">
 		jQuery(document).ready( function() {
 			if ( jQuery('div#blog-details').length && !jQuery('div#blog-details').hasClass('show') )

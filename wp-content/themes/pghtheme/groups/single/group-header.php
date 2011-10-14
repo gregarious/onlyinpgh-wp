@@ -21,22 +21,28 @@ do_action( 'bp_before_group_header' );
 
 		</div><!-- #item-header-avatar -->
 
-		<div id="item-buttons"><?php 
-			// If user isn't logged in, prompt them to login 
-			if ( !is_user_logged_in() ) { ?>
-				<a href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>" class="group-button join-group button simplemodal-login">Log in to Join!</a> <?php
-			}
-			do_action( 'bp_group_header_actions' );?>
-		</div><!-- #item-buttons -->
-
 		<?php do_action( 'bp_group_header_meta' ); ?>
 
 	</div>
 	
 </div><!-- #item-header-content -->
-<h3> <a class="show-survey">What do you think of scenes?</a></h3>	
+
+<div id="item-buttons"><?php 
+
+	// If user isn't logged in, prompt them to login 
+	if ( !is_user_logged_in() ) { ?>
+		<a href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>" class="group-button join-group button simplemodal-login">Log in to Join</a> <?php
+	}
+	do_action( 'bp_group_header_actions' );
+
+	locate_template( array( 'mypgh-templates/scene-members.php' ), true); ?>	
+
+</div><!-- #item-buttons -->
+
+
+<h3><a class="show-survey">What do you think of scenes?</a></h3>
 <div id="scene-survey"><?php
-	echo do_shortcode('[gravityform id=9 name=Whatdo you think of Scenes? ajax=true]'); ?>
+	echo do_shortcode('[gravityform id=9 name=Whatdo you think of Scenes? title=false ajax=true]'); ?>
 </div>
 
 <?php

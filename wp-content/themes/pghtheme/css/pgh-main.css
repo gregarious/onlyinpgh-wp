@@ -50,7 +50,7 @@ td {
 	overflow: visible;
 }
 
-#content {
+/*#content {
 	width: 980px;
 	margin: auto;
 	background-color: #ffffff;
@@ -60,7 +60,7 @@ td {
 	box-shadow: 0px 0px 20px -2px #000;
 	overflow: auto;
 	padding-bottom: 30px;
-}
+}*/
 
 .padder {
 	padding: 20px 0 0 20px;

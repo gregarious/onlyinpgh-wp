@@ -1,5 +1,5 @@
 		
-<h2>Where to go?</h2> 
+<h2 class="scene-part-title">Where to go?</h2> 
 <!--<span id="cal-buttons" class="alignright">
 	<a href="" class="day-nav-link" id="cal-nav-prev">&larr; Previous</a>
 	<a href="" class="day-nav-link" id="cal-nav-next">Next &rarr;</a>

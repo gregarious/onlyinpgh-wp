@@ -44,35 +44,26 @@
 				<?php do_action( 'bp_before_group_home_content' ) ?>
 
 				<div id="news-container" class="scene-part">
+					<h2 class="scene-part-title">What's up?</h2> 
 					<div class="news-content"> <?php
 						locate_template( array( 'mypgh-templates/scene-news.php' ), true ); ?>							
-					</div>
-				</div>
-				
+					</div>	
+				</div> <!-- #news-container-->
+
 				<div id="item-header" role="complementary" class="scene">
 
 					<?php locate_template( array( 'groups/single/group-header.php' ), true ); ?>
 
 				</div><!-- #item-header -->
 
-		<!--<pre>
-			<?php 
-			global $bp;
-			echo '<strong>CUSTOM</strong><br>';
-			print_r(bp_is_group_single());
-			//print_r($bp);
-			
-			?>
-		</pre>-->
-
 				<div id="item-body">
 					<div id="events-container" class="scene-part">
 						<?php locate_template( array( 'mypgh-templates/scene-events.php' ), true ); ?>							
-					</div>
-					
+					</div> <!-- #events-container -->
+			
 					<div id="places-container" class="scene-part">
 						<?php locate_template( array( 'mypgh-templates/scene-places.php' ), true ); ?>							
-					</div>
+					</div> <!-- #places-container -->
 
 					<?php do_action( 'bp_before_group_body' );
 
