@@ -122,6 +122,10 @@ div.item-list-tabs li {
 		color: #0f0f0f;
 		text-transform: uppercase;
 	}
+
+	div.item-list-tabs ul li a:hover {
+		text-decoration:underline;
+	}
 		
 		div.item-list-tabs ul li.selected a,
 		div.item-list-tabs ul li.current a {

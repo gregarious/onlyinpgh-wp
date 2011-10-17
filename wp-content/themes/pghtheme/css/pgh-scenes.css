@@ -81,17 +81,11 @@ h2.scene-part-title {
 }
 
 #scene textarea#whats-new, #scene div.activity-comments form textarea {
-	width: 95%;
+	width: 100%;
 	font-size: .9em;
-	-moz-border-radius: 5px;
-		-webkit-border-radius: 5px;
-			border-radius: 5px;
-	font-size: 1.2em;
 	color: #555;
 	height: 60px;
 	border: none;
-	padding: 6px;
-	margin:20px 10px 0;
 }
 
 #scene #aw-whats-new-submit {
@@ -102,6 +96,12 @@ h2.scene-part-title {
 	display: inline;	
 }
 
+#whats-new-avatar img {
+	display: inline;
+	margin-left: 10px;
+	height: 30px;
+	width: 30px;	
+}
 
 /* Header/item headers and nav */
 
@@ -223,13 +223,13 @@ ul#group-admins li {
 }
 
 
-/* CHATTER */
+/* @group CHATTER */
 
 #chatter-container {
-	width:94%;
-	margin: 20px auto;
-	clear: both;
-	padding: 20px 20px 40px 20px;
+	width:33%;
+	margin: 20px 15px 0 0;
+	float: right;
+	padding: 7px;
 	background-color: #f1f1f1;
 	-moz-border-radius: 5px;
 		-webkit-border-radius: 5px;
@@ -237,7 +237,6 @@ ul#group-admins li {
 }
 
 .chatter-content {
-	width: 70%;
 	overflow: auto;	
 	padding: 5px;
 }
@@ -260,9 +259,9 @@ div.acomment-options a {
 }
 
 #scene ul.activity-list li {
-	padding: 30px;
+	padding: 10px;
 	display: block;
-	margin: 7px;
+	margin: 7px 0;
 	background-color: #fff;
 	overflow: hidden;
 	-moz-border-radius: 5px;
@@ -283,10 +282,18 @@ div.acomment-options a {
 	font-weight: normal;
 }
 
-#scene form#whats-new-form {
-	margin-bottom: 15px;
+form#whats-new-form {
 	overflow: hidden;
-	padding-bottom: 10px;
+}
+
+form#whats-new-form textarea {
+	height: 70px;
+	font-size: 11px;
+	font-family: inherit;
+	color: #555;
+	border: none;
+	margin: 0;
+	padding: 0;
 }
 
 .activity-list .activity-content .activity-inner, .activity-list .activity-content blockquote {
@@ -300,19 +307,27 @@ div.acomment-options a {
 }
 
 #scene .activity-content .activity-inner p {
+	font-size: .82em;
 	margin-top: 5px;
 }
 
 #scene .activity-comments {
-	position: relative;
-	margin: 0 0 0 15px;
+	margin: 0 15px;
 	width: auto;
-	overflow: hidden; /* IE fix */
+	overflow: visible; /* IE fix */
 }
 
 #scene .acomment-content p {
-	font-size: 1.3em;	
+	clear: both;
+	margin-top: 20px;
+	font-size: 1.2em;	
 	line-height: 130%;
+}
+
+div.activity-comments div.acomment-meta {
+	font-size: 11px;
+	margin-top: 5px;
+	color: #888;
 }
 
 #scene div.activity-avatar {
@@ -334,8 +349,14 @@ div.acomment-options a {
 	width: 30px;
 }
 
+/* Hide the group avatar from comments list */
 .activity-list .activity-content .activity-header img.avatar {
 	display: none;	
+}
+
+div.activity-comments div.acomment-content {
+	font-size: 11px;
+	margin: 10px 0;
 }
 
 #scene .activity-content div.activity-header p {
@@ -389,7 +410,9 @@ div.activity-meta a.acomment-reply:hover {
     display: none;
 }
 
-/* NEWS */
+/* @end */
+
+/* @group NEWS */
 
 #news-container, #members-container {
 	float: right;
@@ -463,6 +486,8 @@ h4.rss-blog {
 	margin-top: 5px;
 }
 
+/* @end */
+
 /* @group EVENTS */
 
 #events-container {
@@ -515,28 +540,22 @@ h4.rss-blog {
 
 #places-container {
 	width: 60%;
-	clear: both;
-}
-
-#member-count p {
 	float: left;
-}
-
-ul#member-list.item-list {
-	display: inline;	
+	position: relative;
+	top: 20px;
 }
 
 ul.scene-places {
 	width: 100%;
 	padding: 0;
-	margin: 0;
+	margin: 10px 0;
 }
 
 ul.scene-places li {
-	width: 30%;
+	width: 45.5%;
 	height: 200px;
 	padding: 7px;
-	margin: 7px;
+	margin: 5px;
 	border: 1px gray dotted;
 	float: left;	
 	overflow: auto;
@@ -561,6 +580,14 @@ p.pager {
 
 #members-container h2.scene-part-title {
 	margin-bottom: 10px;
+}
+
+#member-count p {
+	float: left;
+}
+
+ul#member-list.item-list {
+	display: inline;	
 }
 
 ul#member-list li img {

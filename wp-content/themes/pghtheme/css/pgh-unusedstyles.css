@@ -1,5 +1,7 @@
 /* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-unusedstyles.css */
 
+/* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-unusedstyles.css */
+
 /* from pgh-default.css */
 
 
@@ -1453,28 +1455,17 @@ table.forum {
 /* > Activity Stream Posting
 -------------------------------------------------------------- */
 
-form#whats-new-form {
-	margin-bottom: 5px;
-	border-bottom: 1px solid #f0f0f0;
-	overflow: hidden;
-	padding-bottom: 20px;
-}
-	#item-body form#whats-new-form {
-		margin-top: 20px;
-		border: none;
-	}
-
 	.home-page form#whats-new-form {
 		border-bottom: none;
 		padding-bottom: 0;
 	}
 
 	form#whats-new-form h5 {
-		margin: 0;
 		font-weight: normal;
 		font-size: 12px;
 		color: #888;
-		margin-left: 76px;
+		float: right;
+		margin: 0 15px 0 45px;
 		padding: 0 0 3px 0;
 	}
 
@@ -1483,28 +1474,18 @@ form#whats-new-form {
 	}
 
 	form#whats-new-form #whats-new-content {
-		margin-left: 54px;
-		padding-left: 22px;
+		clear: both;
+		padding-left: 10px;
 	}
 
 	form#whats-new-form #whats-new-textarea {
 		padding: 8px;
+		margin-right: 10px;
 		border: 1px inset #ccc;
 		background: #fff;
-		margin-bottom: 10px;
 		-moz-border-radius: 3px;
-		-webkit-border-radius: 3px;
-		border-radius: 3px;
-	}
-	form#whats-new-form textarea {
-		width: 100%;
-		height: 50px;
-		font-size: 14px;
-		font-family: inherit;
-		color: #555;
-		border: none;
-		margin: 0;
-		padding: 0;
+			-webkit-border-radius: 3px;
+				border-radius: 3px;
 	}
 
 	form#whats-new-form #whats-new-options select {
@@ -1868,8 +1849,7 @@ div.activity-comments ul, div.activity-comments ul li {
 		}
 
 	div.activity-comments ul li > ul {
-		margin-top: 0;
-		margin-left: 20px;
+		margin: 0;
 	}
 		body.activity-permalink div.activity-comments ul li > ul {
 			margin-top: 15px;
@@ -1885,11 +1865,6 @@ div.activity-comments ul, div.activity-comments ul li {
 		body.activity-permalink div.activity-comments div.acomment-content {
 			font-size: 14px;
 		}
-
-	div.activity-comments div.acomment-meta {
-		font-size: 11px;
-		color: #888;
-	}
 
 	div.activity-comments form.ac-form {
 
