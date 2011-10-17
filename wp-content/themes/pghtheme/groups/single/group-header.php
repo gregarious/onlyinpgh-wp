@@ -43,16 +43,3 @@ do_action( 'bp_before_group_header' );
 do_action( 'bp_after_group_header' );
 do_action( 'template_notices' );
 ?>
-
-
-<script>
-
-jQuery(document).ready( function() {
-	jQuery("#scene-survey").hide();
-	jQuery(".show-survey").click( function() {
-		jQuery("#scene-survey").slideToggle(900);
-	});
-
-});
-
-</script>

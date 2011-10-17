@@ -123,7 +123,7 @@
 				</div><!-- #item-body -->
 
 				<div id="survey-container">
-					<h2 class="scene-part-title"><a class="show-survey">What did you think of this scene? Click to let us know.</a></h2>
+					<h2 class="scene-part-title show-survey">What did you think of this scene? Click to let us know.</h2>
 					<div id="scene-survey"><?php
 						echo do_shortcode('[gravityform id=9 name=Whatdo you think of Scenes? title=false ajax=true]'); ?>
 					</div>
@@ -136,3 +136,15 @@
 	</div><!-- #content -->
 </div><!-- #wrapper -->
 <?php get_footer(); ?>
+
+<script>
+
+jQuery(document).ready( function() {
+	jQuery("#scene-survey").hide();
+	jQuery(".show-survey").click( function() {
+		jQuery("#scene-survey").slideToggle(900);
+	});
+
+});
+
+</script>

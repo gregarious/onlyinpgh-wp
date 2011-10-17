@@ -599,6 +599,7 @@ ul#member-list li {
 }
 
 #survey-container h2 {	
+	color:#000;
 	cursor:pointer;
 	background-color: #ffec4b;
 }
