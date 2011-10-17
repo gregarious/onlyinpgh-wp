@@ -122,6 +122,14 @@
 
 				</div><!-- #item-body -->
 
+				<div id="survey-container">
+					<h2 class="scene-part-title"><a class="show-survey">What did you think of this scene? Click to let us know.</a></h2>
+					<div id="scene-survey"><?php
+						echo do_shortcode('[gravityform id=9 name=Whatdo you think of Scenes? title=false ajax=true]'); ?>
+					</div>
+				</div> <!-- #survey-container -->
+
+
 			<?php endwhile; endif; ?>
 
 		</div><!-- .padder -->

@@ -2,7 +2,7 @@
 
 <?php if ( bp_group_has_members() ) : ?>
  
-  <div id="member-count" class="pag-count">
+ <div id="member-count" class="pag-count">
     <p>
       <?php bp_group_member_pagination_count() ?>
    </p> 

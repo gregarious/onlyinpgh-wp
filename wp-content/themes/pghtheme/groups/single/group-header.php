@@ -39,12 +39,6 @@ do_action( 'bp_before_group_header' );
 
 </div><!-- #item-buttons -->
 
-
-<h3><a class="show-survey">What do you think of scenes?</a></h3>
-<div id="scene-survey"><?php
-	echo do_shortcode('[gravityform id=9 name=Whatdo you think of Scenes? title=false ajax=true]'); ?>
-</div>
-
 <?php
 do_action( 'bp_after_group_header' );
 do_action( 'template_notices' );
