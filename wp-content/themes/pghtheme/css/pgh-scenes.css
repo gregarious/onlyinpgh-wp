@@ -199,7 +199,7 @@ ul#group-admins li {
 
 #chatter-container {
 	width:33%;
-	margin: 20px 10px 0 0;
+	margin: 30px 10px 0 0;
 	float: right;
 }
 
@@ -524,7 +524,7 @@ h4.rss-blog {
 #places-container {
 	width: 62%;
 	float: left;
-	margin-bottom: 30px;
+	margin: 30px 0;
 }
 
 ul.scene-places {
@@ -600,10 +600,15 @@ ul#member-list li {
 
 #survey-container h2 {	
 	cursor:pointer;
+	background-color: #ffec4b;
 }
 
-a.show-survey {
+#survey-container h2:hover {
+	background-color: #ffff4b;
+}
 
+a.show-survey:hover {
+	text-decoration: none;
 }
 
 #scene .gform_wrapper {
