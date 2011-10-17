@@ -41,8 +41,8 @@ while ($new_query->have_posts()) : $new_query->the_post(); ?>
 endwhile; ?>
 
 <div class="prev-next-bottom">
-	<div id="prev"><?php next_posts_link('&larr; Older Photos', $new_query->max_num_pages);?></div>
-	<div id="next"><?php previous_posts_link('Newer Photos &rarr;'); ?></div>
+	<div id="prev"><?php next_posts_link('&larr; Previous', $new_query->max_num_pages);?></div>
+	<div id="next"><?php previous_posts_link('Next &rarr;'); ?></div>
 </div>
 
 </ul>

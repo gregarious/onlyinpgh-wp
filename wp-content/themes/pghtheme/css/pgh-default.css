@@ -138,6 +138,10 @@ div.item-list-tabs li {
 			-webkit-border-top-right-radius: 3px;
 		}
 		
+		div.item-list-tabs ul li.selected a:hover {
+			text-decoration:none;
+		}
+
 span.activity {
 	display:none;
 } 

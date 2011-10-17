@@ -38,8 +38,6 @@ a.group-button:active {
 	display: inline;
 	padding: 0;
 	margin: 0 0 0 10px;
-	position: relative;
-	bottom: 20px;
 }
 
 h2.scene-part-title {
@@ -71,6 +69,10 @@ h2.scene-part-title {
 	text-decoration: none;
 }
 
+#scene .activity-meta a.acomment-reply {
+	padding: 0;
+}
+
 #scene .activity-meta a.acomment-reply:hover {
 	text-decoration: underline;
 	color: #000;
@@ -98,7 +100,7 @@ h2.scene-part-title {
 
 #whats-new-avatar img {
 	display: inline;
-	margin-left: 10px;
+	margin: 0 5px 10px;
 	height: 30px;
 	width: 30px;	
 }
@@ -227,18 +229,18 @@ ul#group-admins li {
 
 #chatter-container {
 	width:33%;
-	margin: 20px 15px 0 0;
+	margin: 20px 10px 0 0;
 	float: right;
-	padding: 7px;
+}
+
+.chatter-content {
+	height: 655px;
+	overflow: auto;	
+	padding: 10px;
 	background-color: #f1f1f1;
 	-moz-border-radius: 5px;
 		-webkit-border-radius: 5px;
 			border-radius: 5px;
-}
-
-.chatter-content {
-	overflow: auto;	
-	padding: 5px;
 }
 
 div.acomment-options a {
@@ -308,11 +310,11 @@ form#whats-new-form textarea {
 
 #scene .activity-content .activity-inner p {
 	font-size: .82em;
-	margin-top: 5px;
+	margin-top: 10px;
 }
 
 #scene .activity-comments {
-	margin: 0 15px;
+	margin: 0 5px;
 	width: auto;
 	overflow: visible; /* IE fix */
 }
@@ -360,7 +362,7 @@ div.activity-comments div.acomment-content {
 }
 
 #scene .activity-content div.activity-header p {
-	margin-top: 10px;
+	margin: 10px 0 0;
 	font-weight: normal;
 	font-size: 1.4em;
 }
@@ -370,23 +372,20 @@ div.activity-comments div.acomment-content {
 }
 	
 #scene .activity-meta {
-	margin: 10px 0;
+	margin: 0 0 5px 0;
 	clear: left;
 }
 	
-	
 .activity-list div.activity-meta a {
 	font-size: 11px;
-	background: #f4f4f4;
-	border-bottom: 1px solid #ddd;
-	border-right: 1px solid #ddd;
-	color: #999;
-	padding: 4px 8px;
+	background: none;
 	text-decoration: none;
-	-moz-border-radius: 4px;
-	-webkit-border-radius: 4px;
-	border-radius: 4px;
 	margin-right: 3px;
+}
+
+a.button.item-button.bp-secondary-action.delete-activity.confirm {
+	color: #000;
+	padding: 0;
 }
 
 .activity-list div.activity-meta a.acomment-reply {
@@ -418,7 +417,7 @@ div.activity-meta a.acomment-reply:hover {
 	float: right;
 	border-left: 2px #888 dotted;
 	margin-top: 10px;
-	padding-left: 30px;
+	padding-left: 10px;
 	width: 35%;
 }
 
@@ -491,7 +490,7 @@ h4.rss-blog {
 /* @group EVENTS */
 
 #events-container {
-	width: 60%;
+	width: 62%;
 	margin: 20px 0;
 	padding: 0;
 }
@@ -499,7 +498,7 @@ h4.rss-blog {
 #scene ul.scene-event-list {
 	margin: 0;
 	padding: 0;
-	width: 96%;
+	width: 98%;
 }
 
 #scene ul.scene-event-list li {
@@ -511,11 +510,23 @@ h4.rss-blog {
 			border-radius: 5px; */
 	float: left;
 	padding: 7px;
-	margin: 10px 5px;
+	margin: 10px 0;
 	height: 90px;
-	width: 100%;
+	width: 98%;
 	overflow: hidden;
 	border-bottom: 1px solid;
+}
+
+#scene ul.scene-event-list a:hover {
+	text-decoration: none;
+}
+
+#scene ul.scene-event-list a:hover li {
+	background-color: #f1f1f1;
+}
+
+#scene ul.scene-event-list li img {
+
 }
 
 #events-container ul.scene-event-list li h3.el-name {
@@ -539,10 +550,11 @@ h4.rss-blog {
 /* @group PLACES */
 
 #places-container {
-	width: 60%;
+	width: 62%;
 	float: left;
 	position: relative;
 	top: 20px;
+	height: 760px;
 }
 
 ul.scene-places {

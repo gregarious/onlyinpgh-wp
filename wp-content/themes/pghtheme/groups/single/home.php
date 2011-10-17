@@ -85,27 +85,27 @@
 					elseif ( bp_group_is_visible() && bp_is_active( 'activity' ) ) : ?>
 
 						<div id="chatter-container">
-							<h2>The Chatter Box</h2><?php
+							<h2 class="scene-part-title">The Chatter Box</h2>
+								<div class="chatter-content"> <?php
 							
-							if ( is_user_logged_in() && bp_group_is_member() ) :
-								locate_template( array( 'activity/post-form.php'), true );
-							else: ?>
-								<h4> Sign up or login to post!</p> <?php
+								if ( is_user_logged_in() && bp_group_is_member() ) :
+									locate_template( array( 'activity/post-form.php'), true );
+								else: ?>
+									<h4><a href="<?php get_bloginfo('site_url'); ?>/register">Sign up</a> or <a class="simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>">login</a> to post!</h4> <?php
+									
+									do_action( 'bp_after_group_activity_post_form' );
+									do_action( 'bp_before_group_activity_content' ); 
 								
-								do_action( 'bp_after_group_activity_post_form' );
-								do_action( 'bp_before_group_activity_content' ); 
-							
-							endif;?>
-							
-							<!-- <div id="item-actions">
+								endif;?>
+								
+								<!-- <div id="item-actions">
 									<?php if ( bp_group_is_visible() ) : ?>
 										<h3><?php _e( 'Admins:', 'buddypress' ); ?></h3>
 										<?php bp_group_list_admins();
 										do_action( 'bp_after_group_menu_admins' );
 									endif; ?>
-								</div> #item-actions -->
+								</div> #item-actions --> <?php
 
-							<div class="chatter-content"> <?php
 								locate_template( array( 'groups/single/activity.php' ), true ); ?>
 							</div> 
 						</div><!-- #chatter-container --> <?php
