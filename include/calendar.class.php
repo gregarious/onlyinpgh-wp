@@ -85,6 +85,17 @@ class TwoWeekCalendar {
 	 * All HTML rendering code 
 	 */
 	public function display() {
+		// Because WP is awesome, we need to explicitly set the local timezone. 
+		// See http://wordpress.stackexchange.com/questions/30946/default-timezone-hardcoded-as-utc
+		$orig_default_tz = '';
+		if(function_exists('get_option')) {
+			$local_tz = get_option('timezone_string');
+			if($local_tz) {
+				$orig_default_tz = date_default_timezone_get();
+				date_default_timezone_set($local_tz);
+			}
+		} 
+
 		print '<ul id="wk1-list">';
 		$this->printWeek(array_slice($this->date_list,0,7));
 		print "</ul>\n";
@@ -94,6 +105,10 @@ class TwoWeekCalendar {
 		print "</ul>\n";
 
 		$this->printOngoingEvents();
+
+		if($orig_default_tz) {
+			date_default_timezone_set($orig_default_tz);
+		}
 	}
 
 	private function printWeek($day_list) {
