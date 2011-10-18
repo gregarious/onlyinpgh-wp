@@ -1,138 +1,78 @@
-
 <ul class="rss-list">
-	
-	<a href="#">
-		<li>
-<!--		<div id="rss-img">
-				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
-			</div> -->
-			<h3 class="rss-title">
-				An interesting article about music
+
+<?php 
+
+// Get site title - so we can print the source for Google Reader articles
+// http://stackoverflow.com/questions/4348912/get-title-of-website-via-link
+function getTitle($url){
+    $str = file_get_contents($url);
+    if(strlen($str)>0){
+        preg_match("/\<title\>(.*)\<\/title\>/",$str,$title);
+        return $title[1];
+    }
+}
+
+// http://digwp.com/2009/11/import-and-display-feeds-in-wordpress/
+if ( function_exists('fetch_feed') ) {
+
+	include_once(ABSPATH . WPINC . '/feed.php');               // include the required file
+
+	// Show a different feed per scene
+	global $bp;
+	$group = $bp->groups->current_group->name;
+	$art = 'Art Scene';
+	$music = 'Music Scene';
+
+	if ( $group == $music ) { 
+		$feed = fetch_feed('http://www.google.com/reader/shared/LaraS126');
+	} elseif ( $group == $art ){ 
+		$feed = fetch_feed('http://notlaura.com/studioblog/feed/');
+	}
+
+	$limit = $feed->get_item_quantity(10); // specify number of items
+	$items = $feed->get_items(0, $limit); // create an array of items
+
+}
+
+if ($limit == 0) echo '<div>The feed is either empty or unavailable.</div>';
+else foreach ($items as $item) : 
+
+	// Parse the site url so it is just the domain name so that getTitle() returns the website title, not the article title
+	//http://stackoverflow.com/questions/276516/parsing-domain-from-url-in-php
+	$url = $item->get_permalink();
+	$parse = parse_url($url);
+	$domain = 'http://' . $parse['host']; // prints 'google.com' 
+	$desc = strip_tags(substr($item->get_description(), 0, 200)); 
+
+	?>
+
+
+
+	<a href="<?php echo $url; ?>" target="_blank">
+
+	  	<li>
+	  		<h3 class="rss-title">
+				<?php echo $item->get_title(); ?>
 			</h3>
 
-			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> OMGPGH!</h4></p>
-			<p class="rss-date">March 12, 1989</p>
+			<p class="rss-postedon">Source:</p><?php
+			
+			if( getTitle($domain) != 'Google FeedBurner' ) { ?>
+				<h4 class="rss-blog"> <?php echo getTitle($domain); ?></h4><?php
+			} else { ?>
+				<p>(Unavailable)</p><?php
+			} ?>
 
-			<p class="rss-desc">Bicycle rights helvetica mlkshk fanny pack +1 leggings, 8-bit artisan freegan stumptown wes anderson butcher cardigan organic gluten-free. Seitan VHS cliche tofu, vice keytar retro you probably haven't heard of them...</p>
+			<p class="rss-date"><?php echo $item->get_date('F j, Y'); ?></p>
+
+			<p class="rss-desc">
+				<?php echo $desc; ?> 
+				<span>...</span>
+			</p>
 
 		</li>
 	</a>
-		
-	<a href="#">
-		<li>
-<!--		<div id="rss-img">
-				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
-			</div> -->
-			<h3 class="rss-title">
-				Shadyside is the new Berlin
-			</h3>
 
-			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> BoringPGH</h4>
-			<p class="rss-date">March 12, 1989</p>
-
-			<p class="rss-desc">Bicycle rights helvetica mlkshk fanny pack +1 leggings, 8-bit artisan freegan stumptown wes anderson butcher cardigan organic gluten-free. Seitan VHS cliche tofu, vice keytar retro you probably haven't heard of them...</p>
-
-		</li>
-	</a>
-		
-		<li>
-<!--		<div id="rss-img">
-				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
-			</div> -->
-			<h3 class="rss-title">
-				Lots of cool kids in the burgh
-			</h3>
-
-			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> Post Gazette</h4>
-			<p class="rss-date">March 12, 1989</p>
-
-			<p class="rss-desc">Bicycle rights helvetica mlkshk fanny pack +1 leggings, 8-bit artisan freegan stumptown wes anderson butcher cardigan organic gluten-free. Seitan VHS cliche tofu, vice keytar retro you probably haven't heard of them...</p>
-
-		</li>
-
-		<li>
-<!--		<div id="rss-img">
-				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
-			</div> -->
-			<h3 class="rss-title">
-				Wow, there are a lot of concerts in Pittsburgh
-			</h3>
-
-			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> IheartPgh</h4>
-			<p class="rss-date">March 12, 1989</p>
-
-			<p class="rss-desc">Bicycle rights helvetica mlkshk fanny pack +1 leggings, 8-bit artisan freegan stumptown wes anderson butcher cardigan organic gluten-free. Seitan VHS cliche tofu, vice keytar retro you probably haven't heard of them...</p>
-
-		</li>
-
-	<a href="#">
-		<li>
-<!--		<div id="rss-img">
-				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
-			</div> -->
-			<h3 class="rss-title">
-				An interesting article about music
-			</h3>
-
-			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> OMGPGH!</h4>
-			<p class="rss-date">March 12, 1989</p>
-
-			<p class="rss-desc">Bicycle rights helvetica mlkshk fanny pack +1 leggings, 8-bit artisan freegan stumptown wes anderson butcher cardigan organic gluten-free. Seitan VHS cliche tofu, vice keytar retro you probably haven't heard of them...</p>
-
-		</li>
-	</a>
-		
-	<a href="#">
-		<li>
-<!--		<div id="rss-img">
-				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
-			</div> -->
-			<h3 class="rss-title">
-				Shadyside is the new Berlin
-			</h3>
-
-			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> BoringPGH</h4>
-			<p class="rss-date">March 12, 1989</p>
-
-			<p class="rss-desc">Bicycle rights helvetica mlkshk fanny pack +1 leggings, 8-bit artisan freegan stumptown wes anderson butcher cardigan organic gluten-free. Seitan VHS cliche tofu, vice keytar retro you probably haven't heard of them...</p>
-
-		</li>
-	</a>
-		
-		<li>
-<!--		<div id="rss-img">
-				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
-			</div> -->
-			<h3 class="rss-title">
-				Lots of cool kids in the burgh
-			</h3>
-
-			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> Post Gazette</h4>
-			<p class="rss-date">March 12, 1989</p>
-
-			<p class="rss-desc">Bicycle rights helvetica mlkshk fanny pack +1 leggings, 8-bit artisan freegan stumptown wes anderson butcher cardigan organic gluten-free. Seitan VHS cliche tofu, vice keytar retro you probably haven't heard of them...</p>
-
-		</li>
-
-		<li>
-<!--		<div id="rss-img">
-				<img src="http://profile.ak.fbcdn.net/hprofile-ak-ash2/277151_258604634157874_1077056_s.jpg" class="alignleft">
-			</div> -->
-			<h3 class="rss-title">
-				Wow, there are a lot of concerts in Pittsburgh
-			</h3>
-
-			<p class="rss-postedon">Posted on:<h4 class="rss-blog"> IheartPgh</h4>
-			<p class="rss-date">March 12, 1989</p>
-
-			<p class="rss-desc">Bicycle rights helvetica mlkshk fanny pack +1 leggings, 8-bit artisan freegan stumptown wes anderson butcher cardigan organic gluten-free. Seitan VHS cliche tofu, vice keytar retro you probably haven't heard of them...</p>
-
-		</li>
-
-
+<?php endforeach; ?>
 
 </ul>
-<!--<div class="prev-next-bottom">
-	<div id="prev">&larr; Previous</div>
-	<div id="next">Next &rarr;</div>
-</div>-->

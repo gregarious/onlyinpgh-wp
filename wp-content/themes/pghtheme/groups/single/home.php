@@ -11,7 +11,7 @@
 			<div class="item-list-tabs" role="navigation">
 				<!-- If user is a group admin, show the admin menu -->
 				<?php if ( bp_group_is_admin() ) { ?>		
-					<div id="item-nav" class="scene-admin">
+					<!--<div id="item-nav" class="scene-admin">
 						<div class="item-list-tabs no-ajax" id="object-nav" role="navigation">
 							<ul>
 
@@ -21,17 +21,23 @@
 
 							</ul>
 						</div>
-					</div><!-- #item-nav -->
+					</div> #item-nav -->
 				<?php } ?> 
 
 				<ul>
-					<li><a href="http://oip.local/scenes"><?php echo 'About'; ?></a></li>
+					<li><a href="<?php get_bloginfo('site_url'); ?>/scenes"><?php echo 'About'; ?></a></li>
 					<?php
 					// Toggling the active group tabs
-					if (bp_is_group_single() == 'pittsburgh-music-scene') { ?>
+					////***** CHANGE GROUP SLUGS HERE *****///
+					global $bp;
+					$group = $bp->groups->current_group->name;
+					$art = 'Art Scene';
+					$music = 'Music Scene';
+					
+					if ( $group == $music ) { ?>
 						<li class="selected"><a href="<?php echo get_bloginfo('url') . '/scenes/pittsburgh-music-scene/';?>">Music</a></li>
 						<li><a href="<?php echo get_bloginfo('url') . '/scenes/oakland-scene/';?>">Arts</a></li><?php
-					} else if (bp_is_group_single() == 'oakland-scene') { ?>
+					} else if ( $group == $art ) { ?>
 						<li><a href="<?php echo get_bloginfo('url') . '/scenes/pittsburgh-music-scene/';?>">Music</a></li>
 						<li class="selected"><a href="<?php echo get_bloginfo('url') . '/scenes/oakland-scene/';?>">Arts</a></li> <?php
 					}?>
@@ -134,6 +140,7 @@
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
+
 </div><!-- #wrapper -->
 <?php get_footer(); ?>
 

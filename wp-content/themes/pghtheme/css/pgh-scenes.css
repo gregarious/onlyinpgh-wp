@@ -23,7 +23,7 @@ a.group-button:active {
 }
 
 
-/* Main */
+/* @group Main */
 
 #scene p, #scene .gfield_description {
 	line-height: 125%;
@@ -103,7 +103,9 @@ h2.scene-part-title {
 	width: 30px;	
 }
 
-/* Header/item headers and nav */
+/* @end */
+
+/* @group Header/nav */
 
 #item-header.scene {
 	padding-left: 10px;
@@ -194,6 +196,7 @@ ul#group-admins {
 ul#group-admins li {
 }
 
+/* @end */
 
 /* @group CHATTER */
 
@@ -431,6 +434,10 @@ ul.rss-list li:hover {
 #news-container content ul.rss-list li p.rss-desc {
 	font-size: .8em;	
 	line-height: 120%;
+}
+
+ul.rss-list li img {
+	display:none;
 }
 
 h3.rss-title {
