@@ -238,18 +238,34 @@ for (i = 0; i < field.length; i++)
          					}
 						} else { ?>
 								<li><a class="mypghlink simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>">My PGH</a></li> <?php
-						} ?>
- 
+						}
 
-</ul>
-<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
-</div> <!--Close header_navigation-->
-</div> <!--Close header_content2-->
-<?php do_action( 'bp_header' ) ?>
-<div class="socialicons"><a href="https://www.facebook.com/onlyinpgh"><img src="<?php bloginfo('url'); ?>/menunav_images/fbicon.png"></a>
-<a href="https://twitter.com/#!/onlyinpgh/"><img src="<?php bloginfo('url'); ?>/menunav_images/twittericon.png"></a>
-<a href="<?php bloginfo('url'); ?>/feed/rss/"><img src="<?php bloginfo('url'); ?>/menunav_images/rssicon.png"></a></div>
-</div><!--Close header_below-->
+						// *** STUPID BUDDYPRESS MUST HARCODE- change for dev/prod *** //
+						// If on the 'Scenes' page, highlight its menu item ?>
+						<a href="http://oip.local/scenes/"> <?php
+						if ( is_page('scenes') ) { ?>
+							<li class="current_page_item menu-item scenes">Scenes</li><?php 
+						} else { ?>
+							<li class="menu-item scenes">Scenes</li><?php 
+						} ?>
+						</a>
+
+				</ul>
+
+				<?php wp_nav_menu( array( 'theme_location' => 'primary' ) ); ?>
+
+			
+
+			</div> <!--Close header_navigation-->
+		</div> <!--Close header_content-->
+
+		<?php do_action( 'bp_header' ) ?>
+		<div class="socialicons">
+			<a href="https://www.facebook.com/onlyinpgh"><img src="<?php bloginfo('url'); ?>/menunav_images/fbicon.png"></a>
+			<a href="https://twitter.com/#!/onlyinpgh/"><img src="<?php bloginfo('url'); ?>/menunav_images/twittericon.png"></a>
+			<a href="<?php bloginfo('url'); ?>/feed/rss/"><img src="<?php bloginfo('url'); ?>/menunav_images/rssicon.png"></a></div>
+	</div><!--Close header_below-->
 </div><!--Closes header-->
+
 <?php do_action( 'bp_after_header' ) ?>
 <?php do_action( 'bp_before_container' ) ?>

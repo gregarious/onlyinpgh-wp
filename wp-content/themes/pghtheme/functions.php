@@ -1,6 +1,100 @@
 <?php
 
+
+////////////////
+// BUDDYPRESS //
+////////////////
+
 define( 'BP_DTHEME_DISABLE_CUSTOM_HEADER', true );
+
+// Set up MyPgh navigation
+function pgh_setup_nav() {
+      global $bp;
+
+      $scenes_slug = $bp->groups->current_group->slug;
+      $scene_link = $bp->groups->slug;
+      
+      bp_core_new_nav_item( array( 
+            'name' => __( 'Export Calendar', 'buddypress' ), 
+            'slug' => 'calendar', 
+            'screen_function' => 'pgh_export_calendar_page', 
+            'position' => 30 
+      ) );
+
+      bp_core_new_nav_item( array(
+            'name' => __( 'My Events Map', 'buddypress' ),
+            'slug' => 'map',
+            'position' => 20,
+            'screen_function' => 'pgh_my_map_page' 
+      ) );
+
+      $bp->bp_nav['messages']['position'] = 100;
+      $bp->bp_nav['groups']['name'] = 'scenes';
+      $bp->bp_nav['groups']['name'] = 'scenes';
+      $bp->bp_nav['groups']['all-groups']['name'] = 'all-scenes';
+      $bp->bp_nav['activity'] = false;
+}
+
+add_action( 'bp_setup_nav', 'pgh_setup_nav' );
+
+
+// Load the My Map and Export Calendar page templates
+function pgh_my_map_page() {
+      bp_core_load_template( 'mypgh-templates/my-map' );
+}
+
+function pgh_export_calendar_page() {
+      bp_core_load_template( 'mypgh-templates/export-calendar' );
+}
+
+function pgh_about_scene_page() {
+      bp_core_load_template( 'mypgh-templates/about-scene' );
+}
+
+// http://wpmu.org/daily-tip-how-to-remove-mentions-from-buddypress/
+// Remove @mention links in updates, forum posts, etc.
+remove_filter( 'bp_activity_new_update_content', 'bp_activity_at_name_filter' );
+remove_filter( 'groups_activity_new_update_content', 'bp_activity_at_name_filter' );
+remove_filter( 'pre_comment_content', 'bp_activity_at_name_filter' );
+remove_filter( 'group_forum_topic_text_before_save', 'bp_activity_at_name_filter' );
+remove_filter( 'group_forum_post_text_before_save', 'bp_activity_at_name_filter' );
+remove_filter( 'bp_activity_comment_content', 'bp_activity_at_name_filter' );
+// Remove @mention email notifications
+remove_action( 'bp_activity_posted_update', 'bp_activity_at_message_notification', 10, 3 );
+remove_action( 'bp_groups_posted_update', 'groups_at_message_notification', 10, 4 );
+remove_action( 'groups_promoted_member', 'groups_notification_promoted_member', 10, 2 );
+
+// Remove Activities/Mentions sub nav item
+function pgh_remove_mention_nav() {
+      global $bp;
+      bp_core_remove_subnav_item( $bp->activity->slug, 'mentions' );
+}
+add_action( 'init', 'pgh_remove_mention_nav' );
+
+
+function scenes_page_title(){
+      return 'About Scenes | ' . get_bloginfo('title');
+}
+
+/*if ( bp_has_groups() ) {
+      add_filter('bp_page_title', 'scenes_page_title', 10, 2);
+}*/
+
+////////////////
+// BP FILTERS //
+////////////////
+
+
+function pgh_updates_register_activity_actions() {
+      global $bp;
+
+      bp_activity_set_action( $bp->activity->id, 'activity_update', __( '', 'buddypress' ) );
+
+      do_action( 'updates_register_activity_actions' );
+}
+//add_filter( 'updates_register_activity_actions', 'pgh_updates_register_activity_actions' );
+
+
 
 ////////////////
 // THUMBNAILS //
@@ -217,9 +311,15 @@ function new_excerpt_more($more) {
 }
 add_filter('excerpt_more', 'new_excerpt_more');
 
+
 // Changing excerpt length to 30 words
 function new_excerpt_length($length) {
-      return 30;
+
+      if (in_category('profiles')) {
+            return 5;
+      } else {
+            return 30;
+      }
 }
 add_filter('excerpt_length', 'new_excerpt_length'); 
 

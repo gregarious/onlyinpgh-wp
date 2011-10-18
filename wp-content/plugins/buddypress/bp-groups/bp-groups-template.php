@@ -1536,8 +1536,8 @@ function bp_group_join_button( $group = false ) {
 				'wrapper_class'     => 'group-button ' . $group->status,
 				'wrapper_id'        => 'groupbutton-' . $group->id,
 				'link_href'         => wp_nonce_url( bp_get_group_permalink( $group ) . 'leave-group', 'groups_leave_group' ),
-				'link_text'         => __( 'Leave Group', 'buddypress' ),
-				'link_title'        => __( 'Leave Group', 'buddypress' ),
+				'link_text'         => __( 'Leave Scene', 'buddypress' ),
+				'link_title'        => __( 'Leave Scene', 'buddypress' ),
 				'link_class'        => 'group-button leave-group',
 			);
 
@@ -1559,8 +1559,8 @@ function bp_group_join_button( $group = false ) {
 						'wrapper_class'     => 'group-button ' . $group->status,
 						'wrapper_id'        => 'groupbutton-' . $group->id,
 						'link_href'         => wp_nonce_url( bp_get_group_permalink( $group ) . 'join', 'groups_join_group' ),
-						'link_text'         => __( 'Join Group', 'buddypress' ),
-						'link_title'        => __( 'Join Group', 'buddypress' ),
+						'link_text'         => __( 'Join Scene', 'buddypress' ),
+						'link_title'        => __( 'Join Scene', 'buddypress' ),
 						'link_class'        => 'group-button join-group',
 					);
 					break;
@@ -1935,7 +1935,7 @@ function bp_group_member_pagination_count() {
 		$to_num = bp_core_number_format( ( $start_num + ( $members_template->pag_num - 1 ) > $members_template->total_member_count ) ? $members_template->total_member_count : $start_num + ( $members_template->pag_num - 1 ) );
 		$total = bp_core_number_format( $members_template->total_member_count );
 
-		return apply_filters( 'bp_get_group_member_pagination_count', sprintf( __( 'Viewing members %1$s to %2$s (of %3$s members)', 'buddypress' ), $from_num, $to_num, $total ) );
+		return apply_filters( 'bp_get_group_member_pagination_count', sprintf( __( '%3$s members', 'buddypress' ), $from_num, $to_num, $total ) );
 	}
 
 function bp_group_member_admin_pagination() {

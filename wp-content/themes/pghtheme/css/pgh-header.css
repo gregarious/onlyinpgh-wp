@@ -1,5 +1,7 @@
 /* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-header.css */
 
+/* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-header.css */
+
 #header {
     -moz-box-shadow: 0 5px 10px -1px #000;
 	-webkit-box-shadow: 0 5px 10px -1px #000;
@@ -35,16 +37,39 @@
     top: -65px;
 }
 
-ul#menu-header-menu li#menu-item-7776 a{
-	background-image: url("http://onlyinpgh.com/menunav_images/calendarnav.png");	
-}
-
 .gohomelink {
     background-image: url("../images/homenav.png");
     background-position: center top !important;
     background-repeat: no-repeat;
     font-size: 16px;
     padding: 45px 5px 0 !important;
+}
+
+/* Calendar icon */
+#menu-item-7494 {
+    background-image: url("../images/calendarnav.png");
+    background-position: 18px 5px;
+    background-repeat: no-repeat;	
+}
+
+/* Blog icon */
+#menu-item-124 {
+    background-image: url("../images/blognav.png");
+    background-position: 13px 10px;
+    background-repeat: no-repeat;		
+}
+
+/* Photo icon */
+#menu-item-123 {
+    background-image: url("../images/photonav.png");
+    background-position: 10px 8px;
+    background-repeat: no-repeat;	
+}
+
+#staticheader .scenes {
+	background-image: url("../images/scenenav.png");
+    background-position: center top !important;
+    background-repeat: no-repeat;
 }
 
 .mypghlink {
@@ -60,6 +85,9 @@ ul#menu-header-menu li#menu-item-7776 a{
     padding: 0px;
 }
 
+#staticheader a:hover {
+    text-decoration:none;
+}
 
 .logo a {
 	color: #FFFFFF;

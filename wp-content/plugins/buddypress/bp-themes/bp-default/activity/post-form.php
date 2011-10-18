@@ -20,7 +20,7 @@
 	</div>
 
 	<h5><?php if ( bp_is_group() )
-			printf( __( "What's new in %s, %s?", 'buddypress' ), bp_get_group_name(), bp_get_user_firstname() );
+			printf( __( "What's new in the %s, %s?", 'buddypress' ), bp_get_group_name(), bp_get_user_firstname() );
 		else
 			printf( __( "What's new, %s?", 'buddypress' ), bp_get_user_firstname() );
 	?></h5>

@@ -123,19 +123,7 @@ add_action( is_multisite() ? 'network_admin_menu' : 'admin_menu', 'bp_example_ad
 // Add 'Export Calendar to MyPgh nav //
 //----------------------//
 
-function pgh_cal_setup_nav() {
-	global $bp;
 
-	/* Add the subnav items to the profile nav item */
-	bp_core_new_nav_item( array( 'name' => __( 'Export Calendar', 'buddypress' ), 
-			'slug' => 'calendar', 
-			'screen_function' => 'bp_example_screen_two', 
-			'position' => 30 ) );
-
-	$bp->bp_nav['messages']['position'] = 100;
-}
-
-add_action( 'bp_setup_nav', 'pgh_cal_setup_nav' );
 
 
 function bp_example_setup_nav() {
@@ -143,13 +131,7 @@ function bp_example_setup_nav() {
 //----------------------//
 // Add 'My Events Map' to the main user profile navigation //
 //----------------------//
-	bp_core_new_nav_item( array(
-		'name' => __( 'My Events Map', 'bp-example' ),
-		'slug' => $bp->example->slug,
-		'position' => 20,
-		'screen_function' => 'bp_example_screen_one',
-		'default_subnav_slug' => 'screen-one'
-	) );
+	
 
 	$example_link = $bp->loggedin_user->domain . $bp->example->slug . '/';
 
@@ -177,17 +159,6 @@ function bp_example_setup_nav() {
 }
 add_action( 'bp_setup_nav', 'bp_example_setup_nav' );
 
-function bp_second_nav_setup() {
-		/* Add 'Example' to the main user profile navigation */
-	bp_core_new_nav_item( array(
-		'name' => __( 'My Events Map', 'bp-example' ),
-		'slug' => $bp->example->slug,
-		'position' => 80,
-		'screen_function' => 'bp_example_screen_one',
-		'default_subnav_slug' => 'screen-one'
-	) );
-}
-add_action( 'bp_setup_nav', 'bp_example_setup_nav' );
 
 /**
  * bp_example_load_template_filter()
@@ -239,103 +210,7 @@ add_filter( 'bp_located_template', 'bp_example_load_template_filter', 10, 2 );
  *
  * Sets up and displays the screen output for the sub nav item "example/screen-one"
  */
-function bp_example_screen_one() {
-	global $bp;
 
-	/**
-	 * There are three global variables that you should know about and you will
-	 * find yourself using often.
-	 *
-	 * $bp->current_component (string)
-	 * This will tell you the current component the user is viewing.
-	 *
-	 * Example: If the user was on the page http://example.org/members/andy/groups/my-groups
-	 *          $bp->current_component would equal 'groups'.
-	 *
-	 * $bp->current_action (string)
-	 * This will tell you the current action the user is carrying out within a component.
-	 *
-	 * Example: If the user was on the page: http://example.org/members/andy/groups/leave/34
-	 *          $bp->current_action would equal 'leave'.
-	 *
-	 * $bp->action_variables (array)
-	 * This will tell you which action variables are set for a specific action
-	 *
-	 * Example: If the user was on the page: http://example.org/members/andy/groups/join/34
-	 *          $bp->action_variables would equal array( '34' );
-	 */
-
-	/**
-	 * On this screen, as a quick example, users can send you a "High Five", by clicking a link.
-	 * When a user sends you a high five, you receive a new notification in your
-	 * notifications menu, and you will also be notified via email.
-	 */
-
-	/**
-	 * We need to run a check to see if the current user has clicked on the 'send high five' link.
-	 * If they have, then let's send the five, and redirect back with a nice error/success message.
-	 */
-	if ( $bp->current_component == $bp->example->slug && 'screen-one' == $bp->current_action && 'send-h5' == $bp->action_variables[0] ) {
-		/* The logged in user has clicked on the 'send high five' link */
-		if ( bp_is_my_profile() ) {
-			/* Don't let users high five themselves */
-			bp_core_add_message( __( 'No self-fives! :)', 'bp-example' ), 'error' );
-		} else {
-			if ( bp_example_send_highfive( $bp->displayed_user->id, $bp->loggedin_user->id ) )
-				bp_core_add_message( __( 'High-five sent!', 'bp-example' ) );
-			else
-				bp_core_add_message( __( 'High-five could not be sent.', 'bp-example' ), 'error' );
-		}
-
-		bp_core_redirect( $bp->displayed_user->domain . $bp->example->slug . '/screen-one' );
-	}
-
-	/* Add a do action here, so your component can be extended by others. */
-	do_action( 'bp_example_screen_one' );
-
-	/****
-	 * Displaying Content
-	 */
-
-	/****
-	 * OPTION 1:
-	 * You've got a few options for displaying content. Your first option is to bundle template files
-	 * with your plugin that will be used to output content.
-	 *
-	 * In an earlier function bp_example_load_template_filter() we set up a filter on the core BP template
-	 * loading function that will make it first look in the plugin directory for template files.
-	 * If it doesn't find any matching templates it will look in the active theme directory.
-	 *
-	 * This example component comes bundled with a template for screen one, so we can load that
-	 * template to display what we need. If you copied this template from the plugin into your theme
-	 * then it would load that one instead. This allows users to override templates in their theme.
-	 */
-
-	/* This is going to look in wp-content/plugins/[plugin-name]/includes/templates/ first */
-	bp_core_load_template( apply_filters( 'bp_example_template_screen_one', 'example/screen-one' ) );
-
-	/****
-	 * OPTION 2 (NOT USED FOR THIS SCREEN):
-	 * If your component is simple, and you just want to insert some HTML into the user's active theme
-	 * then you can use the bundle plugin template.
-	 *
-	 * There are two actions you need to hook into. One for the title, and one for the content.
-	 * The functions you hook these into should simply output the content you want to display on the
-	 * page.
-	 *
-	 * The follow lines are commented out because we are not using this method for this screen.
-	 * You'd want to remove the OPTION 1 parts above and uncomment these lines if you want to use
-	 * this option instead.
-	 *
-	 * Generally, this method of adding content is preferred, as it makes your plugin
-	 * work better with a wider variety of themes.
- 	 */
-
-//	add_action( 'bp_template_title', 'bp_example_screen_one_title' );
-//	add_action( 'bp_template_content', 'bp_example_screen_one_content' );
-
-//	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
-}
 	/***
 	 * The second argument of each of the above add_action() calls is a function that will
 	 * display the corresponding information. The functions are presented below:
@@ -379,59 +254,6 @@ function bp_example_screen_one() {
  *
  * Sets up and displays the screen output for the sub nav item "example/screen-two"
  */
-function bp_example_screen_two() {
-	global $bp;
-
-	/**
-	 * On the output for this second screen, as an example, there are terms and conditions with an
-	 * "Accept" link (directs to http://example.org/members/andy/example/screen-two/accept)
-	 * and a "Reject" link (directs to http://example.org/members/andy/example/screen-two/reject)
-	 */
-
-	if ( $bp->current_component == $bp->example->slug && 'screen-two' == $bp->current_action && 'accept' == $bp->action_variables[0] ) {
-		if ( bp_example_accept_terms() ) {
-			/* Add a success message, that will be displayed in the template on the next page load */
-			bp_core_add_message( __( 'Terms were accepted!', 'bp-example' ) );
-		} else {
-			/* Add a failure message if there was a problem */
-			bp_core_add_message( __( 'Terms could not be accepted.', 'bp-example' ), 'error' );
-		}
-
-		/**
-		 * Now redirect back to the page without any actions set, so the user can't carry out actions multiple times
-		 * just by refreshing the browser.
-		 */
-		bp_core_redirect( $bp->loggedin_user->domain . $bp->current_component );
-	}
-
-	if ( $bp->current_component == $bp->example->slug && 'screen-two' == $bp->current_action && 'reject' == $bp->action_variables[0] ) {
-		if ( bp_example_reject_terms() ) {
-			/* Add a success message, that will be displayed in the template on the next page load */
-			bp_core_add_message( __( 'Terms were rejected!', 'bp-example' ) );
-		} else {
-			/* Add a failure message if there was a problem */
-			bp_core_add_message( __( 'Terms could not be rejected.', 'bp-example' ), 'error' );
-		}
-
-		/**
-		 * Now redirect back to the page without any actions set, so the user can't carry out actions multiple times
-		 * just by refreshing the browser.
-		 */
-		bp_core_redirect( $bp->loggedin_user->domain . $bp->current_component );
-	}
-
-	/**
-	 * If the user has not Accepted or Rejected anything, then the code above will not run,
-	 * we can continue and load the template.
-	 */
-	do_action( 'bp_example_screen_two' );
-
-	add_action( 'bp_template_title', 'bp_example_screen_two_title' );
-	add_action( 'bp_template_content', 'bp_example_screen_two_content' );
-
-	/* Finally load the plugin template file. */
-	bp_core_load_template( apply_filters( 'bp_core_template_plugin', 'members/single/plugins' ) );
-}
 
 	function bp_example_screen_two_title() {
 		_e( 'Export MyPgh Calendar', 'bp-example' );
@@ -445,62 +267,7 @@ function bp_example_screen_two() {
 //----------------------////----------------------////----------------------////----------------------////----------------------////----------------------//
 //----------------------////----------------------////----------------------////----------------------////----------------------////----------------------//
 
-	function bp_example_screen_two_content() {
-		global $bp; ?>
-
-		<?php require_once(ABSPATH . '/icalfeedurl.php');
-		$ical_url = get_ical_url(bp_loggedin_user_id());
-		?>
-
-		<div id="export-cal-container">
-			<p>Copy the following URL to import your MyPgh calendar into the calendar application of your choosing. If you are unsure what to do next, follow the instructions below.</p>
-			<input type"text" class="cal-feed-field" value="<?php echo $ical_url;?>" style="width:540px" name="ical-link-text" id="ical-link-text" readonly="readonly">
-			<!--<input class="attend-button cal-url" type="button" value="Copy to Clipboard">-->
-			<h4>Google Calendar</h4>
-			<ol>
-				<li>Click the down arrow nest to <strong>Other Calendars</strong></li>
-				<li>Select <strong>Add by URL</strong> from the menu</li>
-				<li>Enter your calendar feed URL in the field provided.</li>
-				<li>Click the <strong>Add Calendar</strong> button.</li>
-				<li><a href="http://www.google.com/support/calendar/bin/answer.py?answer=37100">Read more here.</a></li>
-			</ol>
-			<h4>Apple iCal</h4>
-			<ol>
-				<li>From the <strong>Calendar</strong> menu select <strong>Subscribe</strong></li>
-				<li>Tap <strong>Mail, Contacts, Calendars</strong></li>
-				<li>Copy and paste your calendar feed into the <strong>Calendar URL</strong> field.</strong> </li>
-				<li>Click <strong>Subscribe.</strong></li>
-				<li><a href="http://mcb.berkeley.edu/academic-programs/seminars/ical-feed-instructions/">Read more here.</a></li>
-			</ol>
-			<h4>Outlook 2010</h4>
-			<ol>
-				<li>Click <strong>Open Calendar</strong> and select <strong>from Internet</strong>.</li>
-				<li>Paste your URL in the box and click <strong>OK<strong>.</li>
-				<li>Tap <strong>Mail, Contacts, Calendars</strong></li>
-				<li>Scroll down and tap <strong>Add Account...</strong> </li>
-				<li>Tap <strong>Other</strong></li>
-				<li>Tap <strong>Add Subscribed Calendar</strong></li>
-				<li>In the server field, type in your calendar feed URL. Then tap <strong>Next</strong></li>
-				<li>On the next screen, change the name of the calendar under "Description" if you choose. Then tap <strong>Save</strong>.</li>
-				<li><a href="http://www.sadev.co.za/content/using-outlook-2010-google-calendar-0">Read more here.</a></li>
-			</ol>
-			<h4>Outlook 2007</h4>
-			<ol>
-				<li>Select <strong>Tools/Account Settings</strong>.</li>
-				<li>Click the <strong>Internet Calendars</strong> tab.</li>
-				<li>Click <strong>New</strong>. </li>
-				<li>Enter your calendar URL in the field.</li>
-				<li>Click <strong>Add</strong>.</li>
-				<li><a href="http://www.rackspace.com/apps/support/portal/6008">Read more here.</a></li>
-			</ol>
-		</div>
-
-		<script type="text/javascript">
-			jQuery('#ical-link-text').click(function(){this.focus();this.select()});
-		</script>
-
-	<?php
-	}
+	
 
 function bp_example_screen_settings_menu() {
 	global $bp, $current_user, $bp_settings_updated, $pass_error;
