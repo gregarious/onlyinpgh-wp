@@ -12,6 +12,7 @@
 
 //The Query
 $category_id = get_cat_ID('Profiles');
+$cat_link = get_category_link($category_id);
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $new_query = new WP_Query();
 $new_query->query( 'showposts=6&cat='.$category_id.'&paged='.$paged );
@@ -41,8 +42,7 @@ while ($new_query->have_posts()) : $new_query->the_post(); ?>
 endwhile; ?>
 
 <div class="prev-next-bottom">
-	<div id="prev"><?php next_posts_link('&larr; Previous', $new_query->max_num_pages);?></div>
-	<div id="next"><?php previous_posts_link('Next &rarr;'); ?></div>
+	<div id="next"><a href="<?php echo $cat_link; ?>">See more &rarr;</div>
 </div>
 
 </ul>

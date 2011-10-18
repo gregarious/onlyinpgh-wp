@@ -3,27 +3,25 @@
 <?php 
 
 // http://stackoverflow.com/questions/4348912/get-title-of-website-via-link
-// http://davidwalsh.name/download-urls-content-php-curl
 
 // Get site title - so we can print the source for Google Reader articles
 function getTitle($url){
 
 	if ( function_exists('file_get_contents') ) {
-		$str = file_get_contents($url);
-	} else {
-		$ch = curl_init();
-		curl_setopt ($ch, CURLOPT_URL, $url);
-		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 5);
-		$str = curl_exec($ch);
-		curl_close($ch);
-		return $str;
+
+		$context = stream_context_create( array(
+				'http' => array (
+						'timeout' => 3
+					) 
+			));
+		$str = file_get_contents($url, 0, $context);
 	}
   
     if ( strlen($str)>0 ) {
         preg_match("/\<title\>(.*)\<\/title\>/",$str,$title);
         return $title[1];
     }
+    
 }
 
 // http://digwp.com/2009/11/import-and-display-feeds-in-wordpress/
@@ -39,7 +37,7 @@ if ( function_exists('fetch_feed') ) {
 
 	if ( $group == $music ) { 
 		$feed = fetch_feed('http://www.google.com/reader/shared/LaraS126');
-	} elseif ( $group == $art ){ 
+	} elseif ( $group == $art ){
 		$feed = fetch_feed('http://notlaura.com/studioblog/feed/');
 	}
 

@@ -1,4 +1,4 @@
-<h2 class="scene-part-title">What to do?</h2> 
+<h2 class="scene-part-title">What's Happening?</h2> 
 <!--<span id="cal-buttons" class="alignright">
 	<a href="" class="day-nav-link" id="cal-nav-prev">&larr; Previous</a>
 	<a href="" class="day-nav-link" id="cal-nav-next">Next &rarr;</a>

@@ -1,7 +1,8 @@
 <?php get_header(); ?>
 
+<div id="wrapper">
 	<div id="content">
-		<div class="padder">
+		<div class="padder" id="sidebar-page">
 
 		<?php do_action( 'bp_before_archive' ) ?>
 
@@ -65,6 +66,10 @@
 
 		<?php do_action( 'bp_after_archive' ) ?>
 
-		</div><!-- .padder -->
-</div><!-- #content -->
+		</div> <!-- .padder -->
+
+		<div id="sidebar"><?php locate_template( array( 'sidebar-blog.php' ), true ) ?></div>
+		
+	</div> <!-- #content -->
+</div> <!-- #wrapper -->
 <?php get_footer() ?>
