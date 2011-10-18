@@ -22,7 +22,6 @@ a.group-button:active {
 			box-shadow: none;
 }
 
-
 /* @group Main */
 
 #scene p, #scene .gfield_description {
@@ -57,6 +56,12 @@ h2.scene-part-title {
 #news-container h2.scene-part-title, #members-container h2.scene-part-title {
 	margin: 10px 10px 0 0;
 	padding-left: 10px;
+}
+
+#place-chat-container {
+	clear:both;
+	width:100%;
+	height: 860px;
 }
 
 #scene ul li {
@@ -105,6 +110,19 @@ h2.scene-part-title {
 
 /* @end */
 
+/* @group About */
+
+.about p {
+	font-size: 1em;
+}
+
+.about ul li {
+	font-size: .9em;
+	margin-bottom: 3px;
+}
+
+/* @end */
+
 /* @group Header/nav */
 
 #item-header.scene {
@@ -112,7 +130,7 @@ h2.scene-part-title {
 	margin-top: 20px;
 }
 
-#scene .item-list-tabs {
+#scene .item-list-tabs, .about .item-list-tabs {
 	border-bottom: 1px #ccc solid;
 }
 
@@ -208,7 +226,7 @@ ul#group-admins li {
 }
 
 .chatter-content {
-	height: 655px;
+	height: 760px;
 	overflow: auto;	
 	padding: 10px;
 	background-color: #f1f1f1;
@@ -443,6 +461,7 @@ ul.rss-list li img {
 
 h3.rss-title {
 	font-size: 1.2em;	
+	line-height: 120%;
 	text-shadow: 0 1px 0 #999;
 }
 
@@ -564,6 +583,10 @@ ul.scene-places li .photo-container img {
 	text-align: center;
 	margin: 0;
 }
+
+#places-container #next {
+	margin-top: 20px;
+}
 /* @end */
 
 /* @group MEMBERS */
@@ -655,3 +678,39 @@ a.show-survey:hover {
 }	
 
 /* @end */
+
+.email-form {
+	float: right;
+	display: inline;
+	height: 100px;
+	padding: 0;
+	width: 300px;
+}
+
+.email-form input.gform_button {
+	display: inline;
+}
+
+#item-buttons div.email-form h5 a {
+	margin: 0;	
+}
+
+#scene .email-form .gform_wrapper, .email-form .top-label {
+	margin: 0;
+}
+
+.email-form .gfield-label, .email-form .ginput_container {
+	display: inline;
+	margin: 5px;
+}
+
+ul.gform_fields {
+	clear: both;
+	margin: 0;
+	padding: 0;
+}
+
+ul.gform_fields li {
+	padding: 0;
+	display: inline;
+}

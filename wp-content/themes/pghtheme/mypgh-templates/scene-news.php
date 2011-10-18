@@ -38,7 +38,7 @@ if ( function_exists('fetch_feed') ) {
 	if ( $group == $music ) { 
 		$feed = fetch_feed('http://www.google.com/reader/shared/LaraS126');
 	} elseif ( $group == $art ){
-		$feed = fetch_feed('http://notlaura.com/studioblog/feed/');
+		$feed = fetch_feed('http://www.google.com/reader/shared/hill.cmh');
 	}
 
 	$limit = $feed->get_item_quantity(10); // specify number of items

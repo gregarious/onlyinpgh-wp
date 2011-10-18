@@ -1,3 +1,4 @@
+/* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-default.css */
 
 /* All of these will be in one sheet and minified for actual site - usability purposes right now*/
 
@@ -26,19 +27,17 @@
 div#item-header {
 	overflow: hidden;
 }
-	div#item-header div#item-header-content { float: right;}
+	div#item-header div#item-header-content { }
 
 	div#item-header h2 {
 		font-size: 28px;
 		margin: 0 0 15px 0;
 		line-height: 120%;
 	}
-		div#item-header h2 a {
+		div#item-header h2.profile-name a {
 			text-decoration: none;
 			color: #777;
 		}
-
-	div#item-header h2 { margin-bottom: 5px; }
 
 	div#item-header span.activity {
 		vertical-align: middle;
@@ -48,6 +47,23 @@ div#item-header {
 		margin-bottom: 7px;
 	}
 
+	#item-header-avatar.profile {
+		display: inline;
+		float: left;
+	}
+	
+	#item-header-avatar.profile img {
+		margin: 0 20px 20px 0;
+	}
+	
+	h2.profile-name {
+		display: inline;
+		margin-top: 10px;
+	}
+
+	h2.profile-name a {
+		font-size: 1.4em;
+	}	
 	
 /* > Item Tabs
 -------------------------------------------------------------- */

@@ -32,6 +32,7 @@ function pgh_setup_nav() {
       $bp->bp_nav['groups']['name'] = 'scenes';
       $bp->bp_nav['groups']['name'] = 'scenes';
       $bp->bp_nav['groups']['all-groups']['name'] = 'all-scenes';
+      $bp->bp_nav['activity'] = false;
 }
 
 add_action( 'bp_setup_nav', 'pgh_setup_nav' );

@@ -15,8 +15,8 @@
 
 <div id="wrapper">
 	<div id="content">
-		<div class="padder">
-
+		<div class="padder about" id="sidebar-page">
+		
 		<?php do_action( 'bp_before_directory_groups' ); ?>
 
 		<form action="" method="post" id="groups-directory-form" class="dir-form">
@@ -56,10 +56,13 @@
 				<li>What other features would you like in each Scene page?</li>
 			</ul>
 
-			<p>Enjoy!</p>
+			<p><strong>Enjoy!</strong></p>
 
 
 		</div><!-- .padder -->
+			
+			<div id="sidebar"><?php locate_template( array( 'sidebar-blog.php' ), true ) ?></div>
+
 	</div><!-- #content -->
 </div><!-- #wrapper -->
 	<?php do_action( 'bp_after_directory_groups_page' ); ?>

@@ -13,10 +13,16 @@ do_action( 'bp_before_group_header' );
 	<div id="item-meta">
 
 		<div id="item-header-avatar"> <?php
+			global $bp;
+			$group = $bp->groups->current_group->name;
+			$art = 'Art Scene';
+			$music = 'Music Scene';
 
-			if (is_page('scenes')) {
-				$img_dir = get_stylesheet_directory_uri();
-				echo '<img src="'.$img_dir.'/images/music-scene-head.png">';
+			$img_dir = get_stylesheet_directory_uri();
+			if ( $group == $art ) {
+				echo '<img src="'.$img_dir.'/images/artscene-head.jpg">';
+			} elseif ( $group == $music ) {
+				echo '<img src="'.$img_dir.'/images/musicscene-head.jpg">';
 			} ?>
 
 		</div><!-- #item-header-avatar -->
@@ -39,7 +45,10 @@ do_action( 'bp_before_group_header' );
 
 </div><!-- #item-buttons -->
 
-<?php
+
+<?
+
 do_action( 'bp_after_group_header' );
 do_action( 'template_notices' );
+
 ?>

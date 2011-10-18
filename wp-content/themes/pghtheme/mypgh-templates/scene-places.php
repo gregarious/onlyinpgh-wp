@@ -1,5 +1,5 @@
 		
-<h2 class="scene-part-title">Where to go?</h2> 
+<h2 class="scene-part-title">Places to Go, People to See</h2> 
 <!--<span id="cal-buttons" class="alignright">
 	<a href="" class="day-nav-link" id="cal-nav-prev">&larr; Previous</a>
 	<a href="" class="day-nav-link" id="cal-nav-next">Next &rarr;</a>
@@ -15,7 +15,7 @@ $category_id = get_cat_ID('Profiles');
 $cat_link = get_category_link($category_id);
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $new_query = new WP_Query();
-$new_query->query( 'showposts=6&cat='.$category_id.'&paged='.$paged );
+$new_query->query( 'showposts=9&cat='.$category_id.'&paged='.$paged );
 
 //The Loop
 while ($new_query->have_posts()) : $new_query->the_post(); ?>
@@ -35,8 +35,8 @@ while ($new_query->have_posts()) : $new_query->the_post(); ?>
 
 endwhile; ?>
 
-<div class="prev-next-bottom">
-	<div id="next"><a href="<?php echo $cat_link; ?>">See more &rarr;</div>
-</div>
-
 </ul>
+
+<div class="prev-next-bottom">
+	<div id="next"><a href="<?php echo $cat_link; ?>">More...</div>
+</div>
