@@ -71,6 +71,14 @@ function pgh_remove_mention_nav() {
 add_action( 'init', 'pgh_remove_mention_nav' );
 
 
+function scenes_page_title(){
+      return 'About Scenes | ' . get_bloginfo('title');
+}
+
+/*if ( bp_has_groups() ) {
+      add_filter('bp_page_title', 'scenes_page_title', 10, 2);
+}*/
+
 ////////////////
 // BP FILTERS //
 ////////////////

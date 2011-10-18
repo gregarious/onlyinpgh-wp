@@ -2,11 +2,25 @@
 
 <?php 
 
-// Get site title - so we can print the source for Google Reader articles
 // http://stackoverflow.com/questions/4348912/get-title-of-website-via-link
+// http://davidwalsh.name/download-urls-content-php-curl
+
+// Get site title - so we can print the source for Google Reader articles
 function getTitle($url){
-    $str = file_get_contents($url);
-    if(strlen($str)>0){
+
+	if ( function_exists('file_get_contents') ) {
+		$str = file_get_contents($url);
+	} else {
+		$ch = curl_init();
+		curl_setopt ($ch, CURLOPT_URL, $url);
+		curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
+		curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, 5);
+		$str = curl_exec($ch);
+		curl_close($ch);
+		return $str;
+	}
+  
+    if ( strlen($str)>0 ) {
         preg_match("/\<title\>(.*)\<\/title\>/",$str,$title);
         return $title[1];
     }
@@ -34,10 +48,10 @@ if ( function_exists('fetch_feed') ) {
 
 }
 
-if ($limit == 0) echo '<div>The feed is either empty or unavailable.</div>';
+if ( $limit == 0 ) echo '<div>The feed is either empty or unavailable.</div>';
 else foreach ($items as $item) : 
 
-	// Parse the site url so it is just the domain name so that getTitle() returns the website title, not the article title
+	// Parse the site url to get the domain name, then getTitle() returns the website title, not the article title
 	//http://stackoverflow.com/questions/276516/parsing-domain-from-url-in-php
 	$url = $item->get_permalink();
 	$parse = parse_url($url);
@@ -57,10 +71,10 @@ else foreach ($items as $item) :
 
 			<p class="rss-postedon">Source:</p><?php
 			
-			if( getTitle($domain) != 'Google FeedBurner' ) { ?>
+			if ( getTitle($domain) != 'Google FeedBurner' ) { ?>
 				<h4 class="rss-blog"> <?php echo getTitle($domain); ?></h4><?php
 			} else { ?>
-				<p>(Unavailable)</p><?php
+				 (Unavailable)<?php
 			} ?>
 
 			<p class="rss-date"><?php echo $item->get_date('F j, Y'); ?></p>
