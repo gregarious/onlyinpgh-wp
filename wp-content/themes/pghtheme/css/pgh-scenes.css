@@ -541,21 +541,29 @@ ul.scene-places {
 	margin: 10px 0;
 }
 
-ul.scene-places li {
-	width: 45.5%;
-	height: 200px;
-	padding: 7px;
+ul.scene-places li.photo-post {
+	width: 30%;
+	height: 230px;
+	padding: 3px;
 	margin: 5px;
-	border: 1px gray dotted;
+	text-align: center;
 	float: left;	
-	overflow: auto;
+	overflow: hidden;
 }
 
-p.pager {
-	clear: both;
-	display: block;
+ul.scene-places li .photo-container {
+	width: 100%;
 }
 
+ul.scene-places li .photo-container img {
+	margin: 0;
+	padding: 0;
+}
+
+.scene-places .photo-post h5 {
+	text-align: center;
+	margin: 0;
+}
 /* @end */
 
 /* @group MEMBERS */
@@ -631,5 +639,19 @@ a.show-survey:hover {
 .gfield {
 	padding:10px 0;
 }
+
+/* @end */
+
+
+/* @group ARCHIVE */
+
+#blog-archives img {
+	float: left;
+	display: inline;
+}
+
+#blog-archives .post-content{
+	width: 600px;
+}	
 
 /* @end */

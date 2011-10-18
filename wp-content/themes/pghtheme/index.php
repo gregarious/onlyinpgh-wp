@@ -46,7 +46,7 @@
 					<p class="center"><?php _e( 'Sorry, but you are looking for something that isn\'t here.', 'buddypress' ) ?></p>
 
 					<?php endif; ?>
-			</div>
+			</div> <!-- #blog-latest -->
 
 			<?php do_action( 'bp_after_blog_home' ) ?>
 

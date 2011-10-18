@@ -1,3 +1,5 @@
+/* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-header.css */
+
 #header {
     -moz-box-shadow: 0 5px 10px -1px #000;
 	-webkit-box-shadow: 0 5px 10px -1px #000;
@@ -45,6 +47,28 @@ ul#menu-header-menu li#menu-item-7776 a{
     padding: 45px 5px 0 !important;
 }
 
+/* Calendar icon */
+#menu-item-7494 {
+    background-image: url("../images/calendarnav.png");
+    background-position: 18px 5px;
+    background-repeat: no-repeat;	
+}
+
+/* Blog icon */
+#menu-item-124 {
+    background-image: url("../images/blognav.png");
+    background-position: 13px 10px;
+    background-repeat: no-repeat;		
+}
+
+/* Photo icon */
+#menu-item-123 {
+    background-image: url("../images/photonav.png");
+    background-position: 10px 8px;
+    background-repeat: no-repeat;	
+}
+
+
 .mypghlink {
     background-image: url("../images/mypghnav.png");
     background-position: center top !important;
@@ -56,6 +80,12 @@ ul#menu-header-menu li#menu-item-7776 a{
 #staticheader {
     margin: 0px;
     padding: 0px;
+}
+
+#staticheader .scenes {
+	background-image: url("../images/sceneicon.png");
+    background-position: 18px 2px;
+    background-repeat: no-repeat;
 }
 
 #staticheader a:hover {

@@ -240,12 +240,13 @@ for (i = 0; i < field.length; i++)
 								<li><a class="mypghlink simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>">My PGH</a></li> <?php
 						}
 
+						// *** STUPID BUDDYPRESS MUST HARCODE- change for dev/prod *** //
 						// If on the 'Scenes' page, highlight its menu item ?>
-						<a href="<?php get_bloginfo('url') ?>scenes/"> <?php
+						<a href="http://oip.local/scenes/"> <?php
 						if ( is_page('scenes') ) { ?>
-							<li class="current_page_item menu-item">Scenes</li><?php 
+							<li class="current_page_item menu-item scenes">Scenes</li><?php 
 						} else { ?>
-							<li class="menu-item">Scenes</li><?php 
+							<li class="menu-item scenes">Scenes</li><?php 
 						} ?>
 						</a>
 

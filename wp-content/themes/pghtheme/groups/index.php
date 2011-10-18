@@ -34,11 +34,30 @@
 				</ul>
 			</div><!-- .item-list-tabs -->
 
-			<h1>We'll have some generic, about scenes content here.<h1>
-			
-			<p>
-				Vinyl fap synth retro, vice carles banksy wes anderson tofu. PBR craft beer salvia mustache. Tofu next level wolf, master cleanse hoodie mlkshk put a bird on it mixtape irony. Marfa you probably haven't heard of them craft beer carles. Food truck wayfarers fanny pack carles, master cleanse gluten-free banh mi messenger bag you probably haven't heard of them scenester quinoa chambray blog mustache vice. Cliche whatever vegan banksy brooklyn, tumblr vinyl wayfarers banh mi squid pitchfork high life craft beer marfa. Cardigan high life organic, mcsweeney's wayfarers synth scenester lomo fap.
-			</p>
+			<h1>Welcome to OnlyinPgh Scenes!</h1>
+
+			<p>Pittsburgh has lots of Scenes, but how do you learn about them, connect to them and get involved?</p>
+
+			<p>Starting with the Arts and Music Scenes, we're working on giving you a better way to do that. On the tabs to your right you'll see the names of different Scenes, and clicking on them will bring you to the Scene's Page. On each Scene Page you'll be able to:</p>
+
+			<ul>
+				<li>Read news and articles from local sources about each Scene</li>
+				<li>See a list of curated Scene Events </li>
+				<li>Learn about the Places and People that make the Scene great</li>
+				<li>Join the Scene to get special updates about what's going on</li>
+				<li>Use the Chatterbox where you can share, discuss and connect to other people interested in the Scene.</li>
+			</ul>
+
+			<p>Try it out and let us know what you think! This is a beta launch and we really want to hear your feedback and ideas so we can incorporate them into additional Scenes.  Feel free to use the Feedback tab on the right of every page or the contact page to let us know what you think!</p>
+
+			<p>In particular, we want to know your thoughts about:</p>
+			<ul>
+				<li>What other Scenes would you like to see?</li>
+				<li>What other features would you like in each Scene page?</li>
+			</ul>
+
+			<p>Enjoy!</p>
+
 
 		</div><!-- .padder -->
 	</div><!-- #content -->

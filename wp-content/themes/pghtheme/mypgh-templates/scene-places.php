@@ -20,23 +20,17 @@ $new_query->query( 'showposts=6&cat='.$category_id.'&paged='.$paged );
 //The Loop
 while ($new_query->have_posts()) : $new_query->the_post(); ?>
 	
-	
-		<li> <a href="<?php the_permalink();?>">
-		
-		<?php
+	<li class="photo-post"><div class="photo-container"><a href="<?php the_permalink() ?>" rel="bookmark"> <?php
 		
 		if ( (function_exists('has_post_thumbnail')) && (has_post_thumbnail()) ) {
 			the_post_thumbnail();
 		} else { ?>
-			<?php wpf_get_first_thumb_url(); ?></a> 
+			<a href="<?php the_permalink();?>"><?php wpf_get_first_thumb_url(); ?></a> 
+		<?php } ?></a></div>
 		
-		<?php } ?>
+		<h5 class="thumb-title"><?php the_title(); ?></h5>
 		
-		<h3><?php the_title() . '<br>'; ?></h3>
-		<p>1234 PerryPie Lane<br>
-			Braddock, PA 15638</p>
-		<p><?php the_excerpt(); ?></p>
-		</li> </a>
+	</li>
 	<?php
 
 endwhile; ?>
