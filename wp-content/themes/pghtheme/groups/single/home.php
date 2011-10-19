@@ -147,13 +147,37 @@
 						endif; ?>
 						
 					</div> <!-- #place-chat-container-->
-					
+
 				</div><!-- #item-body -->
+
+
+					<div id="survey-container">
+						<h2 class="scene-part-title show-survey">What do you think of scenes? Click to let us know.</h2>
+						<div id="scene-survey"><?php
+							echo do_shortcode('[gravityform id=10 name=SceneSurvey title=false ajax=true]'); ?>
+						</div>
+					</div> <!-- #survey-container -->
+					
 					
 			<?php endwhile; endif; ?>
+
+
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
 
 </div><!-- #wrapper -->
 <?php get_footer(); ?>
+
+
+<script>
+
+jQuery(document).ready( function() {
+	jQuery("#scene-survey").hide();
+	jQuery(".show-survey").click( function() {
+		jQuery("#scene-survey").slideToggle(900);
+	});
+
+});
+
+</script>
