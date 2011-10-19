@@ -744,6 +744,7 @@ div.gfield_description {
 
 .email-form .medium {
 	width:230px;
+	top:9px;
 	position:relative;
 	right:45px;	
 }
