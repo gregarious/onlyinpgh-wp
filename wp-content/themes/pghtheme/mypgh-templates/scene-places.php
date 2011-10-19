@@ -11,8 +11,19 @@
 //http://wordpress.org/support/topic/adding-pagination-to-a-wp_query-loop
 
 //The Query
-$category_id = get_cat_ID('Profiles');
-$cat_link = get_category_link($category_id);
+
+// Show a different feed per scene
+global $bp;
+$group = $bp->groups->current_group->name;
+$art = 'Arts Scene';
+$music = 'Music Scene';
+
+if ( $group == $music ) { 
+	$cat_link = get_category_link(757);
+} elseif ( $group == $art ){
+	$cat_link = get_category_link(758);
+}
+
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $new_query = new WP_Query();
 $new_query->query( 'showposts=9&cat='.$category_id.'&paged='.$paged );

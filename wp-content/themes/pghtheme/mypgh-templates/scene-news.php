@@ -1,88 +1,61 @@
 <ul class="rss-list">
 
 <?php 
+// Show a different feed per scene
+//global $bp;
+$group = 'Music Scene';//$bp->groups->current_group->name;
+$art = 'Art Scene';
+$music = 'Music Scene';
 
-// http://stackoverflow.com/questions/4348912/get-title-of-website-via-link
-
-// Get site title - so we can print the source for Google Reader articles
-function getTitle($url){
-
-	if ( function_exists('file_get_contents') ) {
-
-		$context = stream_context_create( array(
-				'http' => array (
-						'timeout' => 3
-					) 
-			));
-		$str = file_get_contents($url, 0, $context);
-	}
-  
-    if ( strlen($str)>0 ) {
-        preg_match("/\<title\>(.*)\<\/title\>/",$str,$title);
-        return $title[1];
-    }
-    
+if ( $group == $music ) { 
+	// Nina's Google Reader feed
+	$feed_url = 'http://www.google.com/reader/public/atom/user%2F04855140688536519265%2Fstate%2Fcom.google%2Fbroadcast';
+//		$feed_url = 'https://www.google.com/reader/shared/04855140688536519265';
+} elseif ( $group == $art ){
+	// Carrie's Google Reader feed
+	$feed_url = 'http://www.google.com/reader/public/atom/user%2F06185373270144193201%2Fstate%2Fcom.google%2Fbroadcast';
 }
 
-// http://digwp.com/2009/11/import-and-display-feeds-in-wordpress/
-if ( function_exists('fetch_feed') ) {
+$ch = curl_init('http://www.google.com/reader/public/atom/user%2F12172415832096680001%2Fstate%2Fcom.google%2Fbroadcast');
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+curl_setopt($ch, CURLOPT_HEADER, 0);
+curl_setopt($ch, CURLOPT_TIMEOUT, 3);
 
-	include_once(ABSPATH . WPINC . '/feed.php');               // include the required file
+$xmlstr = curl_exec($ch);
+curl_close($ch);
 
-	// Show a different feed per scene
-	global $bp;
-	$group = $bp->groups->current_group->name;
-	$art = 'Art Scene';
-	$music = 'Music Scene';
+$xml = simplexml_load_string( $xmlstr );
 
-	if ( $group == $music ) { 
-		$feed = fetch_feed('http://www.google.com/reader/shared/LaraS126');
-	} elseif ( $group == $art ){
-		$feed = fetch_feed('http://www.google.com/reader/shared/hill.cmh');
-	}
+if ( count($xml->entry) == 0 ):
+	echo '<div>The feed is either empty or unavailable.</div>';	
+else:
+	foreach($xml->entry as $entry) : 
+		$title = $entry->title;
+		$source = $entry->source->title;
+		$desc = strip_tags(substr($entry->content, 0, 200)); 
 
-	$limit = $feed->get_item_quantity(10); // specify number of items
-	$items = $feed->get_items(0, $limit); // create an array of items
+		$pub_dt = new DateTime($entry->published);
+		$pub_date = $pub_dt->format('F j, Y');
+		?>
 
-}
+		<a href="<?php echo $url; ?>" target="_blank">
 
-if ( $limit == 0 ) echo '<div>The feed is either empty or unavailable.</div>';
-else foreach ($items as $item) : 
+		  	<li>
+		  		<h3 class="rss-title">
+					<?php echo $title; ?>
+				</h3>
 
-	// Parse the site url to get the domain name, then getTitle() returns the website title, not the article title
-	//http://stackoverflow.com/questions/276516/parsing-domain-from-url-in-php
-	$url = $item->get_permalink();
-	$parse = parse_url($url);
-	$domain = 'http://' . $parse['host']; // prints 'google.com' 
-	$desc = strip_tags(substr($item->get_description(), 0, 200)); 
+				<p class="rss-postedon">Source:<h4 class="rss-blog"> <?php echo $source; ?></h4></p>
+				<p class="rss-date"><?php echo $pub_date; ?></p>
+				<p class="rss-desc">
+					<?php echo $desc; ?> 
+					<span>...</span>
+				</p>
 
-	?>
-
-	<a href="<?php echo $url; ?>" target="_blank">
-
-	  	<li>
-	  		<h3 class="rss-title">
-				<?php echo $item->get_title(); ?>
-			</h3>
-
-			<p class="rss-postedon">Source:</p><?php
-			
-			if ( getTitle($domain) != 'Google FeedBurner' ) { ?>
-				<h4 class="rss-blog"> <?php echo getTitle($domain); ?></h4><?php
-			} else { ?>
-				 (Unavailable)<?php
-			} ?>
-
-			<p class="rss-date"><?php echo $item->get_date('F j, Y'); ?></p>
-
-			<p class="rss-desc">
-				<?php echo $desc; ?> 
-				<span>...</span>
-			</p>
-
-		</li>
-	</a>
-
+			</li>
+		</a>
 <?php endforeach; ?>
+<?php endif; ?>
 
 </ul>
+<? 

@@ -15,7 +15,7 @@ do_action( 'bp_before_group_header' );
 		<div id="item-header-avatar"> <?php
 			global $bp;
 			$group = $bp->groups->current_group->name;
-			$art = 'Art Scene';
+			$art = 'Arts Scene';
 			$music = 'Music Scene';
 
 			$img_dir = get_stylesheet_directory_uri();

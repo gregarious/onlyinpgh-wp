@@ -11,7 +11,7 @@ global $bp;
 $group = $bp->groups->current_group->name;
 $scene_tag = '';
 switch($group) {
-	case 'Art Scene':
+	case 'Arts Scene':
 		$scene_tag = 'art';
 		break;
 	case 'Music Scene':
@@ -31,8 +31,8 @@ include ABSPATH . '/sceneevents.php';	// print the initial event listings
 </ul>
 
 <div class="prev-next-bottom">
-	<div id="prev-events">&larr; Earlier</div>
-	<div id="next-events">Later &rarr;</div>
+	<div id="prev">&larr; Previous</div>
+	<div id="next">Next &rarr;</div>
 </div>
 
 <script type="text/javascript">
@@ -48,15 +48,19 @@ function eventsAjaxCall(offset) {
 			);
 }
 
-jQuery('#prev-events').click( function() {
+jQuery('#prev').click( function() {
 	if(event_offset >= 4) {
 		event_offset = event_offset - 4;
 		eventsAjaxCall(event_offset)
+	} 
+	if (event_offset < 4) {
+		jQuery("#prev").hide();
 	}
 });
 
-jQuery('#next-events').click( function() {
+jQuery('#next').click( function() {
 	event_offset = event_offset + 4;
-	eventsAjaxCall(event_offset)
+	eventsAjaxCall(event_offset);
+	jQuery("#prev").show();
 });
 </script>
