@@ -172,12 +172,9 @@
 
 <script>
 
-jQuery(document).ready( function() {
 	jQuery("#scene-survey").hide();
 	jQuery(".show-survey").click( function() {
 		jQuery("#scene-survey").slideToggle(900);
 	});
-
-});
 
 </script>
