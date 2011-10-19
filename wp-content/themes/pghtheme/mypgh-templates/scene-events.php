@@ -19,9 +19,6 @@ switch($group) {
 		break;
 }
 
-// TESTING ONLY: TAKE THIS OUT ZOMG
-$scene_tag = 'admin';
-
 ?>
 
 <?php
