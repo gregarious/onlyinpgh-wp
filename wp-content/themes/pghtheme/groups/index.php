@@ -23,13 +23,15 @@
 
 			<?php do_action( 'bp_before_directory_groups_content' ); ?>
 
-			<div class="item-list-tabs" role="navigation">
-				<ul>
-					<li class="selected" id="groups-about"><a href="http://oip.local/scenes"><?php echo 'About'; ?></a></li>
-					<li><a href="<?php echo get_bloginfo('url') . '/scenes/music-scene/';?>">Music</a></li>
-					<li><a href="<?php echo get_bloginfo('url') . '/scenes/arts-scene/';?>">Arts</a></li>
-				</ul>
-			</div><!-- .item-list-tabs -->
+			<div class="top-stuff">
+				<div class="item-list-tabs" role="navigation">
+					<ul>
+						<li class="selected" id="groups-about"><a href="http://oip.local/scenes"><?php echo 'About'; ?></a></li>
+						<li><a href="<?php echo get_bloginfo('url') . '/scenes/music-scene/';?>">Music</a></li>
+						<li><a href="<?php echo get_bloginfo('url') . '/scenes/arts-scene/';?>">Arts</a></li>
+					</ul>
+				</div><!-- .item-list-tabs -->
+			</div><!-- .top-stuff -->
 			<div id="content-about">
 				<h1>Welcome to OnlyinPgh Scenes!</h1>
 
