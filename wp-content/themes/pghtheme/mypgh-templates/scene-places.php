@@ -15,11 +15,12 @@ $art = 'Arts Scene';
 $music = 'Music Scene';
 
 if ( $group == $music ) { 
-	$cat_link = get_category_link(757);
+	$category_id = 757;
 } elseif ( $group == $art ){
-	$cat_link = get_category_link(758);
+	$category_id=758;
 }
 
+$cat_link = get_category_link($category_id);
 $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $new_query = new WP_Query();
 $new_query->query( 'showposts=9&cat='.$category_id.'&paged='.$paged );
