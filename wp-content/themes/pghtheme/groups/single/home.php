@@ -41,11 +41,11 @@
 				if ( $is_member == 1 ) { ?>
 					<?php
 						if ( $group == $art ) { ?>
-							<p><strong>Sign up for Art Scene emails:</strong></p><?php
-							echo do_shortcode('[gravityform id=10 name=UntitledForm title=false]');
+							<p><strong>Sign up for Arts Scene emails:</strong></p><?php
+							echo do_shortcode('[gravityform id=11 name=ArtsEmail title=false]');
 						} else if ( $group == $music ) { ?>
 							<p><strong>Sign up for Music Scene emails:</strong></p><?php
-							echo do_shortcode('[gravityform id=10 name=UntitledForm title=false]');
+							echo do_shortcode('[gravityform id=12 name=MusicEmail title=false]');
 						} 
 					} else if ( $is_member == 0 && is_user_logged_in() ) { ?>
 						<h4>Join Scene for email updates!</h4> <?php
@@ -149,14 +149,6 @@
 					</div> <!-- #place-chat-container-->
 					
 				</div><!-- #item-body -->
-
-				<div id="survey-container">
-					<h2 class="scene-part-title show-survey">What did you think of this scene? Click to let us know.</h2>
-					<div id="scene-survey"><?php
-						echo do_shortcode('[gravityform id=9 name=Whatdo you think of Scenes? title=false ajax=true]'); ?>
-					</div>
-				</div> <!-- #survey-container -->
-
 					
 			<?php endwhile; endif; ?>
 
@@ -165,15 +157,3 @@
 
 </div><!-- #wrapper -->
 <?php get_footer(); ?>
-
-<script>
-
-jQuery(document).ready( function() {
-	jQuery("#scene-survey").hide();
-	jQuery(".show-survey").click( function() {
-		jQuery("#scene-survey").slideToggle(900);
-	});
-
-});
-
-</script>

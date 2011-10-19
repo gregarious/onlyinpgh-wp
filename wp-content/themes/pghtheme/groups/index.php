@@ -53,7 +53,7 @@
 			<div id="survey-container">
 				<h2 class="scene-part-title show-survey">What do you think of scenes? Click to let us know.</h2>
 				<div id="scene-survey"><?php
-					echo do_shortcode('[gravityform id=9 name=SceneSurvey title=false ajax=true]'); ?>
+					echo do_shortcode('[gravityform id=10 name=SceneSurvey title=false ajax=true]'); ?>
 				</div>
 			</div> <!-- #survey-container -->
 
