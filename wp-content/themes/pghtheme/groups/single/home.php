@@ -157,7 +157,7 @@
 							echo do_shortcode('[gravityform id=10 name=SceneSurvey title=false ajax=true]'); ?>
 						</div>
 					</div> <!-- #survey-container -->
-					<?php echo do_shortcode('[gravityform id=10 name=SceneSurvey title=false ajax=true]'); ?>
+					
 					
 			<?php endwhile; endif; ?>
 
