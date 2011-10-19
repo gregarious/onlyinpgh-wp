@@ -1,4 +1,4 @@
-
+<div id="members-container">
 
 <?php if ( bp_group_has_members() ) : ?>
  
@@ -28,3 +28,5 @@
   </div>
  
 <?php endif;?>
+
+</div>

@@ -53,7 +53,7 @@ h2.scene-part-title {
 			border-radius: 2px;
 }
 
-#news-container h2.scene-part-title, #members-container h2.scene-part-title {
+#news-container h2.scene-part-title {
 	margin: 10px 10px 0 0;
 	padding-left: 10px;
 }
@@ -409,7 +409,7 @@ div.activity-meta a.acomment-reply:hover {
 
 /* @group NEWS */
 
-#news-container, #members-container {
+#news-container {
 	float: right;
 	border-left: 2px #888 dotted;
 	margin-top: 10px;
@@ -600,16 +600,14 @@ ul.scene-places li .photo-container img {
 
 /* @group MEMBERS */
 
-#members-container {
-	border:none;
-	clear: both;
-	margin-left: 0;
-	padding: 10px 0;
-	height: 200px;
+#item-buttons {
+	margin-top:20px;
 }
 
-#members-container h2.scene-part-title {
-	margin-bottom: 10px;
+#members-container {
+	width:70%;
+	height:35px;
+	overflow:hidden;
 }
 
 #member-count p {
@@ -622,8 +620,8 @@ ul#member-list.item-list {
 }
 
 ul#member-list li img {
-	width:30px;
-	height:30px;
+	width:25px;
+	height:25px;
 }
 
 ul#member-list li {
