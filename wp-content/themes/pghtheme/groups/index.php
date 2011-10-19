@@ -33,32 +33,32 @@
 					<li><a href="<?php echo get_bloginfo('url') . '/scenes/oakland-scene/';?>">Arts</a></li>
 				</ul>
 			</div><!-- .item-list-tabs -->
+			<div id="content-about">
+				<h1>Welcome to OnlyinPgh Scenes!</h1>
 
-			<h1>Welcome to OnlyinPgh Scenes!</h1>
+				<p>Pittsburgh has lots of Scenes, but how do you learn about them, connect to them and get involved?</p>
 
-			<p>Pittsburgh has lots of Scenes, but how do you learn about them, connect to them and get involved?</p>
+				<p>Starting with the Arts and Music Scenes, we're working on giving you a better way to do that. On the tabs to your right you'll see the names of different Scenes, and clicking on them will bring you to the Scene's Page. On each Scene Page you'll be able to:</p>
 
-			<p>Starting with the Arts and Music Scenes, we're working on giving you a better way to do that. On the tabs to your right you'll see the names of different Scenes, and clicking on them will bring you to the Scene's Page. On each Scene Page you'll be able to:</p>
+				<ul>
+					<li>Read news and articles from local sources about each Scene</li>
+					<li>See a list of curated Scene Events </li>
+					<li>Learn about the Places and People that make the Scene great</li>
+					<li>Join the Scene to get special updates about what's going on</li>
+					<li>Use the Chatterbox where you can share, discuss and connect to other people interested in the Scene.</li>
+				</ul>
 
-			<ul>
-				<li>Read news and articles from local sources about each Scene</li>
-				<li>See a list of curated Scene Events </li>
-				<li>Learn about the Places and People that make the Scene great</li>
-				<li>Join the Scene to get special updates about what's going on</li>
-				<li>Use the Chatterbox where you can share, discuss and connect to other people interested in the Scene.</li>
-			</ul>
+				<p>Try it out and let us know what you think! This is a beta launch and we really want to hear your feedback and ideas so we can incorporate them into additional Scenes.  Feel free to use the Feedback tab on the right of every page or the contact page to let us know what you think!</p>
 
-			<p>Try it out and let us know what you think! This is a beta launch and we really want to hear your feedback and ideas so we can incorporate them into additional Scenes.  Feel free to use the Feedback tab on the right of every page or the contact page to let us know what you think!</p>
+				<p>In particular, we want to know your thoughts about:</p>
+				<ul>
+					<li>What other Scenes would you like to see?</li>
+					<li>What other features would you like in each Scene page?</li>
+				</ul>
 
-			<p>In particular, we want to know your thoughts about:</p>
-			<ul>
-				<li>What other Scenes would you like to see?</li>
-				<li>What other features would you like in each Scene page?</li>
-			</ul>
+				<p><strong>Enjoy!</strong></p>
 
-			<p><strong>Enjoy!</strong></p>
-
-
+			</div>
 		</div><!-- .padder -->
 			
 			<div id="sidebar"><?php locate_template( array( 'sidebar-blog.php' ), true ) ?></div>

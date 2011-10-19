@@ -1,5 +1,7 @@
 /* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-scenes.css */
 
+/* @override http://oip.local/wp-content/themes/pghtheme/css/pgh-scenes.css */
+
 #scene a.group-button {
 	padding: 0;
 	float: right;
@@ -56,6 +58,10 @@ h2.scene-part-title {
 #news-container h2.scene-part-title, #members-container h2.scene-part-title {
 	margin: 10px 10px 0 0;
 	padding-left: 10px;
+}
+
+#news-container h2.scene-part-title {
+	margin-top: 0;
 }
 
 #place-chat-container {
@@ -132,6 +138,8 @@ h2.scene-part-title {
 
 #scene .item-list-tabs, .about .item-list-tabs {
 	border-bottom: 1px #ccc solid;
+	width:600px;
+	float:left;
 }
 
 #item-nav.scene-admin {
@@ -679,38 +687,45 @@ a.show-survey:hover {
 
 /* @end */
 
+.top-stuff {
+	clear:both;
+	width:100%;
+	height:70px;
+}
+
 .email-form {
-	float: right;
-	display: inline;
-	height: 100px;
-	padding: 0;
-	width: 300px;
+	width:300px;
+	height:60px;
+	overflow:visible;
+	float:right;
+
 }
 
-.email-form input.gform_button {
-	display: inline;
+.email-form p {
+	postion:relative;
+	top:40px;
 }
 
-#item-buttons div.email-form h5 a {
-	margin: 0;	
+.email-form .ginput_container {
+	position:relative;
+	bottom:20px;
 }
 
-#scene .email-form .gform_wrapper, .email-form .top-label {
-	margin: 0;
+.email-form label.gfield_label, .email-form .gfield_required {
+	display:none;
 }
 
-.email-form .gfield-label, .email-form .ginput_container {
-	display: inline;
-	margin: 5px;
+#field_10_1 label.gfield_label {
+	display: none;	
+} 
+
+.email-form .gform_button {
+	position:relative;
+	bottom:68px;
+	left:200px;
 }
 
-ul.gform_fields {
-	clear: both;
-	margin: 0;
-	padding: 0;
-}
-
-ul.gform_fields li {
-	padding: 0;
-	display: inline;
+#content-about {
+	position: relative;
+	top: 30px;
 }

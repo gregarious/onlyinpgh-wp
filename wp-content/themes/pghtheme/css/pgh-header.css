@@ -68,7 +68,7 @@
 
 #staticheader .scenes {
 	background-image: url("../images/scenenav.png");
-    background-position: center top !important;
+    background-position: 15px 8px;
     background-repeat: no-repeat;
 }
 

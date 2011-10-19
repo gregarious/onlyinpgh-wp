@@ -58,8 +58,6 @@ else foreach ($items as $item) :
 
 	?>
 
-
-
 	<a href="<?php echo $url; ?>" target="_blank">
 
 	  	<li>

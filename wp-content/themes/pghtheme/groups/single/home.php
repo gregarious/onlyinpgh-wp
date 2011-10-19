@@ -8,28 +8,51 @@
 
 			<?php do_action( 'bp_before_directory_groups_content' ); ?>
 
-			<div class="item-list-tabs" role="navigation">
-					
-				<ul>
-					<li><a href="<?php get_bloginfo('site_url'); ?>/scenes"><?php echo 'About'; ?></a></li>
-					<?php
-					// Toggling the active group tabs
-					////***** CHANGE GROUP SLUGS HERE *****///
-					global $bp;
-					$group = $bp->groups->current_group->name;
-					$art = 'Art Scene';
-					$music = 'Music Scene';
-					
-					if ( $group == $music ) { ?>
-						<li class="selected"><a href="<?php echo get_bloginfo('url') . '/scenes/pittsburgh-music-scene/';?>">Music</a></li>
-						<li><a href="<?php echo get_bloginfo('url') . '/scenes/oakland-scene/';?>">Arts</a></li><?php
-					} else if ( $group == $art ) { ?>
-						<li><a href="<?php echo get_bloginfo('url') . '/scenes/pittsburgh-music-scene/';?>">Music</a></li>
-						<li class="selected"><a href="<?php echo get_bloginfo('url') . '/scenes/oakland-scene/';?>">Arts</a></li> <?php
-					}?>
-				</ul>
+			<div class="top-stuff">
+				<div class="item-list-tabs" role="navigation">
+						
+					<ul>
+						<li><a href="<?php get_bloginfo('site_url'); ?>/scenes"><?php echo 'About'; ?></a></li>
+						<?php
+						// Toggling the active group tabs
+						////***** CHANGE GROUP SLUGS HERE *****///
+						global $bp;
+						$group = $bp->groups->current_group->name;
+						$art = 'Art Scene';
+						$music = 'Music Scene';
+						
+						if ( $group == $music ) { ?>
+							<li class="selected"><a href="<?php echo get_bloginfo('url') . '/scenes/pittsburgh-music-scene/';?>">Music</a></li>
+							<li><a href="<?php echo get_bloginfo('url') . '/scenes/oakland-scene/';?>">Arts</a></li><?php
+						} else if ( $group == $art ) { ?>
+							<li><a href="<?php echo get_bloginfo('url') . '/scenes/pittsburgh-music-scene/';?>">Music</a></li>
+							<li class="selected"><a href="<?php echo get_bloginfo('url') . '/scenes/oakland-scene/';?>">Arts</a></li> <?php
+						} ?>
 
-			</div><!-- .item-list-tabs -->
+					</ul> 
+
+				</div><!-- .item-list-tabs -->
+
+
+				<div class="email-form">
+				<?php
+				// If user is a member, show the email form for that group
+				$is_member = $bp->groups->current_group->is_member;
+				if ( $is_member == 1 ) { ?>
+					<?php
+						if ( $group == $art ) { ?>
+							<p><strong>Sign up for Art Scene emails:</strong></p><?php
+							echo do_shortcode('[gravityform id=10 name=UntitledForm title=false]');
+						} else if ( $group == $music ) { ?>
+							<p><strong>Sign up for Music Scene emails:</strong></p><?php
+							echo do_shortcode('[gravityform id=10 name=UntitledForm title=false]');
+						} 
+					} else { ?>
+						<h4>Join Scene for email updates!</h4> <?php
+					}?>
+				</div>
+					
+			</div><!-- .top-stuff -->
 
 			<?php if ( bp_has_groups() ) : while ( bp_groups() ) : bp_the_group(); ?>
 
@@ -38,7 +61,7 @@
 				<div id="news-container" class="scene-part">
 					<h2 class="scene-part-title">What's up?</h2> 
 					<div class="news-content"> <?php
-						locate_template( array( 'mypgh-templates/scene-news.php' ), true ); ?>							
+						//locate_template( array( 'mypgh-templates/scene-news.php' ), true ); ?>							
 					</div>	
 				</div> <!-- #news-container-->
 
@@ -115,15 +138,6 @@
 						endif; ?>
 					</div> <!-- #place-chat-container-->
 
-					<?php
-					if ( is_user_logged_in() ) { ?>
-						<!--<div class="email-form">
-							<p><strong>Sign up for scene emails:</strong></p>
-							<?php echo do_shortcode('[gravityform id=10 name=UntitledForm title=false]'); ?>
-						</div>--> <?php
-					} ?>
-
-
 				</div><!-- #item-body -->
 
 				<div id="survey-container">
@@ -133,8 +147,11 @@
 					</div>
 				</div> <!-- #survey-container -->
 
-
-			<?php endwhile; endif; ?>
+					
+			<?php global $bp;  ?>
+			<!--<pre>
+			<?print_r($bp);  endwhile; endif; ?>
+			</pre>-->
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
