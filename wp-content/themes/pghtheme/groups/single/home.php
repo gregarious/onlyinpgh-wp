@@ -61,7 +61,7 @@
 				<?php do_action( 'bp_before_group_home_content' ) ?>
 
 				<div id="news-container" class="scene-part">
-					<h2 class="scene-part-title">What's up?</h2> 
+					<h2 class="scene-part-title">From the Burghosphere</h2> 
 					<div class="news-content"> <?php
 						locate_template( array( 'mypgh-templates/scene-news.php' ), true ); ?>							
 					</div>	

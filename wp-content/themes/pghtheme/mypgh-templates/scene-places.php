@@ -1,9 +1,5 @@
 		
 <h2 class="scene-part-title">Places to Go, People to See</h2> 
-<!--<span id="cal-buttons" class="alignright">
-	<a href="" class="day-nav-link" id="cal-nav-prev">&larr; Previous</a>
-	<a href="" class="day-nav-link" id="cal-nav-next">Next &rarr;</a>
-</span>-->
 
 <ul class="scene-places">
 <?php

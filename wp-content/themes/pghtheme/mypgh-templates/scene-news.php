@@ -33,9 +33,10 @@ else:
 		$title = $entry->title;
 		$source = $entry->source->title;
 		$desc = strip_tags(substr($entry->content, 0, 200)); 
-
 		$pub_dt = new DateTime($entry->published);
 		$pub_date = $pub_dt->format('F j, Y');
+		$link_att = $entry->link->attributes();
+		$url = $link_att['href'];
 		?>
 
 		<a href="<?php echo $url; ?>" target="_blank">
