@@ -4,7 +4,7 @@
 // Show a different feed per scene
 //global $bp;
 $group = 'Music Scene';//$bp->groups->current_group->name;
-$art = 'Art Scene';
+$art = 'Arts Scene';
 $music = 'Music Scene';
 
 if ( $group == $music ) { 
