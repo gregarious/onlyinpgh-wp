@@ -2,8 +2,8 @@
 
 <?php 
 // Show a different feed per scene
-//global $bp;
-$group = 'Music Scene';//$bp->groups->current_group->name;
+global $bp;
+$group = $bp->groups->current_group->name;
 $art = 'Arts Scene';
 $music = 'Music Scene';
 
