@@ -3,7 +3,7 @@ get_header();
 $img_dir = get_bloginfo('stylesheet_directory') . '/images';
 
  require_once(ABSPATH . '/icalfeedurl.php');
-//$ical_url = get_ical_url(bp_loggedin_user_id());
+$ical_url = get_ical_url(bp_loggedin_user_id());
 
 ?>
 
