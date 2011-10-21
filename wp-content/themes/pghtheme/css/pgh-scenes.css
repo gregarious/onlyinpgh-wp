@@ -135,6 +135,7 @@ h2.scene-part-title {
 
 #scene .item-list-tabs, .about .item-list-tabs {
 	border-bottom: 1px #ccc solid;
+	width:600px;
 	float:left;
 }
 
@@ -716,10 +717,6 @@ div.gfield_description {
 	clear:both;
 	width:100%;
 	height:70px;
-}
-
-#scene .top-stuff .item-list-tabs {
-	width: 99%;
 }
 
 .email-form {
