@@ -2,9 +2,9 @@
 
 <?php 
 // Show a different feed per scene
-//global $bp;
-$group = 'Music Scene';//$bp->groups->current_group->name;
-$art = 'Art Scene';
+global $bp;
+$group = $bp->groups->current_group->name;
+$art = 'Arts Scene';
 $music = 'Music Scene';
 
 if ( $group == $music ) { 
@@ -32,7 +32,7 @@ else:
 	foreach($xml->entry as $entry) : 
 		$title = $entry->title;
 		$source = $entry->source->title;
-		$desc = strip_tags(substr($entry->content, 0, 200)); 
+		$desc = substr(strip_tags($entry->content), 0, 200);
 		$pub_dt = new DateTime($entry->published);
 		$pub_date = $pub_dt->format('F j, Y');
 		$link_att = $entry->link->attributes();
