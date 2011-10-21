@@ -713,6 +713,15 @@ div.gfield_description {
 	margin-bottom:10px;	
 }
 
+#survey-container h2.scene-part-title.show-survey.join-it  {
+	cursor:text;
+}
+
+#survey-container h2.scene-part-title.show-survey.join-it:hover {
+	background-color: #ffec4b;
+}
+
+
 /* @end */
 
 

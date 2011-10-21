@@ -146,7 +146,7 @@ $is_member = $bp->groups->current_group->is_member;
 					if ( $is_member == 1 ) { ?>
 						<h2 class="scene-part-title show-survey loggedin">Click to sign up for scene emails:</h2><?php
 					} else if ( $is_member == 0 && is_user_logged_in() ) { ?>
-						<h2 class="scene-part-title show-survey">Join this Scene for email updates!</h4> <?php
+						<h2 class="scene-part-title show-survey join-it">Join this Scene for email updates!</h2> <?php
 					} else { ?>
 						<a class="simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>"><h2 class="scene-part-title show-survey">Login and join the scene for email updates!</h2></a> <?php
 					}?>
