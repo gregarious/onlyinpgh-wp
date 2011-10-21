@@ -135,8 +135,10 @@ h2.scene-part-title {
 
 #scene .item-list-tabs, .about .item-list-tabs {
 	border-bottom: 1px #ccc solid;
+}
+
+.about .item-list-tabs {	
 	width:600px;
-	float:left;
 }
 
 #item-nav.scene-admin {
