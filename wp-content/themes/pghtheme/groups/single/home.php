@@ -53,7 +53,11 @@ $is_member = $bp->groups->current_group->is_member;
 					</div>	
 
 					<div id="get-profile-container" class="scene-part-title">
-						<h3 class="rss-title">Are you a Place to go or Person to see in the <? if ( $group == $music ) { echo 'Music'; } else if ( $group == $art ) { echo 'Arts'; } ?> Scene? <br><br> Contact <? if ( $group == $music ) { echo 'Music'; } else if ( $group == $art ) { echo 'Arts'; } ?>@onlyinpgh.com!</h3>
+						<h3 class="rss-title">Are you a "Place to Go" or "Person to See" in the <?php 
+						if ( $group == $music ) { echo 'Music'; } 
+						else if ( $group == $art ) { echo 'Arts'; } ?> Scene? <br><br> Contact <?php 
+						if ( $group == $music ) { echo '<a href="mailto:music@onlyinpgh.com">music'; } 
+						else if ( $group == $art ) { echo '<a href="mailto:arts@onlyinpgh.com">arts'; } ?>@onlyinpgh.com!</a></h3>
 					</div> 
 
 				</div> <!-- #news-container-->
