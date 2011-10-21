@@ -55,7 +55,10 @@
 			<div id="survey-container">
 				<h2 class="scene-part-title show-survey">What do you think of scenes? Click to let us know.</h2>
 				<div id="scene-survey"><?php
-					echo do_shortcode('[gravityform id=10 name=SceneSurvey title=false ajax=true]'); ?>
+					//echo do_shortcode('[gravityform id=10 name=SceneSurvey title=false ajax=true]'); ?>
+
+					<iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFV2d2d0ZWNjLTkyZVJ4RXI0ZHF4Q3c6MQ" width="600" height="750" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
+
 				</div>
 			</div> <!-- #survey-container -->
 

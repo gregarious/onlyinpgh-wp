@@ -659,6 +659,10 @@ ul#member-list li {
 	clear: left;
 }
 
+#scene-survey {
+	margin:20px;
+}
+
 #survey-container h2 {	
 	color:#000;
 	cursor:pointer;
