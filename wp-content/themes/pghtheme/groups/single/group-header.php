@@ -11,7 +11,6 @@ do_action( 'bp_before_group_header' );
 	<?php do_action( 'bp_before_group_header_meta' ); ?>
 
 	<div id="item-meta">
-	<a name="join-scene"></a>
 		<div id="item-header-avatar"> <?php
 			global $bp;
 			$group = $bp->groups->current_group->name;

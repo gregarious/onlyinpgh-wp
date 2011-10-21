@@ -46,7 +46,7 @@ else:
 					<?php echo $title; ?>
 				</h3>
 
-				<p class="rss-postedon">Source:<h4 class="rss-blog"> <?php echo $source; ?></h4></p>
+				<p class="rss-postedon">Source:</p><h4 class="rss-blog"> <?php echo $source; ?></h4>
 				<p class="rss-date"><?php echo $pub_date; ?></p>
 				<p class="rss-desc">
 					<?php echo $desc; ?> 

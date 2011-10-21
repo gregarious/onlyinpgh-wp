@@ -51,6 +51,11 @@ $is_member = $bp->groups->current_group->is_member;
 					<div class="news-content"> <?php
 						locate_template( array( 'mypgh-templates/scene-news.php' ), true ); ?>							
 					</div>	
+
+					<div id="get-profile-container" class="scene-part-title">
+						<h3 class="rss-title">Are you a Place to go or Person to see in the <? if ( $group == $music ) { echo 'Music'; } else if ( $group == $art ) { echo 'Arts'; } ?> Scene? <br><br> Contact <? if ( $group == $music ) { echo 'Music'; } else if ( $group == $art ) { echo 'Arts'; } ?>@onlyinpgh.com!</h3>
+					</div> 
+
 				</div> <!-- #news-container-->
 
 				<div id="item-header" role="complementary" class="scene">
@@ -141,7 +146,7 @@ $is_member = $bp->groups->current_group->is_member;
 					if ( $is_member == 1 ) { ?>
 						<h2 class="scene-part-title show-survey loggedin">Click to sign up for scene emails:</h2><?php
 					} else if ( $is_member == 0 && is_user_logged_in() ) { ?>
-						<a href="#join-scene"><h2 class="scene-part-title show-survey">Join this Scene for email updates!</h4></a> <?php
+						<h2 class="scene-part-title show-survey">Join this Scene for email updates!</h4> <?php
 					} else { ?>
 						<a class="simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>"><h2 class="scene-part-title show-survey">Login and join the scene for email updates!</h2></a> <?php
 					}?>
@@ -156,7 +161,6 @@ $is_member = $bp->groups->current_group->is_member;
 						
 					</div>
 				</div> <!-- #survey-container -->
-					
 					
 			<?php endwhile; endif; ?>
 
