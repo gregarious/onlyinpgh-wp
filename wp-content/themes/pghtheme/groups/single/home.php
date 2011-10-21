@@ -141,9 +141,9 @@ $is_member = $bp->groups->current_group->is_member;
 					if ( $is_member == 1 ) { ?>
 						<h2 class="scene-part-title show-survey loggedin">Click to sign up for scene emails:</h2><?php
 					} else if ( $is_member == 0 && is_user_logged_in() ) { ?>
-						<h2 class="scene-part-title show-survey"><a href="#join-scene">Join this Scene for email updates!</h4> <?php
+						<a href="#join-scene"><h2 class="scene-part-title show-survey">Join this Scene for email updates!</h4></a> <?php
 					} else { ?>
-						<a class="simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>"><h2 class="scene-part-title show-survey">Sign up or login to join for scene updates!</h2></a> <?php
+						<a class="simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>"><h2 class="scene-part-title show-survey">Login and join the scene for email updates!</h2></a> <?php
 					}?>
 					<div id="scene-survey"><?php
 						//echo do_shortcode('[gravityform id=10 name=SceneSurvey title=false ajax=true]'); 

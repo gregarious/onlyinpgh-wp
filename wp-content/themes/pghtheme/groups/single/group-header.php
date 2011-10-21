@@ -11,7 +11,7 @@ do_action( 'bp_before_group_header' );
 	<?php do_action( 'bp_before_group_header_meta' ); ?>
 
 	<div id="item-meta">
-
+	<a name="join-scene"></a>
 		<div id="item-header-avatar"> <?php
 			global $bp;
 			$group = $bp->groups->current_group->name;
@@ -24,9 +24,7 @@ do_action( 'bp_before_group_header' );
 			} elseif ( $group == $music ) {
 				echo '<img src="'.$img_dir.'/images/musicscene-head.jpg">';
 			} ?>
-		<a name="join-scene"></a>
 		</div><!-- #item-header-avatar -->
-
 		<?php do_action( 'bp_group_header_meta' ); ?>
 
 	</div>
