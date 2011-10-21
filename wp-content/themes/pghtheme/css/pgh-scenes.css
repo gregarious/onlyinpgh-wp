@@ -615,10 +615,10 @@ ul.scene-places li .photo-container img {
 
 #members-container {
 	border:none;
-	margin-left: 0;
-	padding: 10px 0;
-	width: 60%;
-	height: 30px;
+    border: medium none;
+    margin-left: 0;
+    padding: 12px 0 10px;
+    width: 70%;
 }
 
 #members-container h2.scene-part-title {
@@ -639,11 +639,11 @@ ul#member-list li img {
 	height:30px;
 }
 
-ul#member-list li {
-	clear: right;
-	padding: 0;
-	margin-left:10px;
+#members-container ul#member-list li {
 	display: inline;
+    float: left;
+    margin-left: 0;
+    padding: 0;
 }
 
 #members-container #member-count p{
@@ -715,8 +715,8 @@ div.gfield_description {
 	height:70px;
 }
 
-.top-stuff .item-list-tabs {
-	width:
+#scene .top-stuff .item-list-tabs {
+	width: 99%;
 }
 
 .email-form {

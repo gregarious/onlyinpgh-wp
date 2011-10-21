@@ -1,4 +1,12 @@
-<?php get_header( 'buddypress' ); ?>
+<?php get_header( 'buddypress' ); 
+
+global $bp;
+$group = $bp->groups->current_group->name;
+$art = 'Arts Scene';
+$music = 'Music Scene';
+$is_member = $bp->groups->current_group->is_member;
+
+?>
 
 <div id="wrapper">
 	<div id="content">
@@ -16,10 +24,6 @@
 						<?php
 						// Toggling the active group tabs
 						////***** CHANGE GROUP SLUGS HERE *****///
-						global $bp;
-						$group = $bp->groups->current_group->name;
-						$art = 'Arts Scene';
-						$music = 'Music Scene';
 						
 						if ( $group == $music ) { ?>
 							<li class="selected"><a href="<?php echo get_bloginfo('url') . '/scenes/music-scene/';?>">Music</a></li>
@@ -34,25 +38,7 @@
 				</div><!-- .item-list-tabs -->
 
 
-				<div class="email-form">
-				<?php
-				// If user is a member, show the email form for that group
-				$is_member = $bp->groups->current_group->is_member;
-				if ( $is_member == 1 ) { ?>
-					<?php
-						if ( $group == $art ) { ?>
-							<p><strong>Sign up for Arts Scene emails:</strong></p><?php
-							echo do_shortcode('[gravityform id=11 name=ArtsEmail title=false]');
-						} else if ( $group == $music ) { ?>
-							<p><strong>Sign up for Music Scene emails:</strong></p><?php
-							echo do_shortcode('[gravityform id=12 name=MusicEmail title=false]');
-						} 
-					} else if ( $is_member == 0 && is_user_logged_in() ) { ?>
-						<h4>Join Scene for email updates!</h4> <?php
-					} else { ?>
-						<h4><a href="<?php get_bloginfo('site_url'); ?>/register">Sign up</a> or <a class="simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>">login</a> for scene updates!</h4> <?php
-					}?>
-				</div>
+		
 					
 			</div><!-- .top-stuff -->
 
@@ -151,20 +137,28 @@
 				</div><!-- #item-body -->
 
 
-					<div id="survey-container">
-						<h2 class="scene-part-title show-survey">What do you think of scenes? Click to let us know.</h2>
-						<div id="scene-survey"><?php
-							//echo do_shortcode('[gravityform id=10 name=SceneSurvey title=false ajax=true]'); ?>
-
-							<iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dFV2d2d0ZWNjLTkyZVJ4RXI0ZHF4Q3c6MQ" width="760" height="750" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe>
-							
-						</div>
-					</div> <!-- #survey-container -->
+				<div id="survey-container"><?php
+					if ( $is_member == 1 ) { ?>
+						<h2 class="scene-part-title show-survey loggedin">Click to sign up for scene emails:</h2><?php
+					} else if ( $is_member == 0 && is_user_logged_in() ) { ?>
+						<h2 class="scene-part-title show-survey"><a href="#join-scene">Join this Scene for email updates!</h4> <?php
+					} else { ?>
+						<a class="simplemodal-login" href="/wp-login.php?redirect_to=<?php echo $_SERVER['REQUEST_URI']; ?>"><h2 class="scene-part-title show-survey">Sign up or login to join for scene updates!</h2></a> <?php
+					}?>
+					<div id="scene-survey"><?php
+						//echo do_shortcode('[gravityform id=10 name=SceneSurvey title=false ajax=true]'); 
+						if ( $group == $music ) { ?>
+							<iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dEd5RnBvSzNSR2RrZkpwNUVubW5LWlE6MQ" width="760" height="229" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe><?php
+						} else if ( $group == $art ) { ?>
+							<iframe src="https://docs.google.com/spreadsheet/embeddedform?formkey=dGNaeGpPRlJNRWhjUV9WNmRCMjk2SGc6MQ" width="760" height="229" frameborder="0" marginheight="0" marginwidth="0">Loading...</iframe><?php
+						}?>
+						
+						
+					</div>
+				</div> <!-- #survey-container -->
 					
 					
 			<?php endwhile; endif; ?>
-
-
 
 		</div><!-- .padder -->
 	</div><!-- #content -->
@@ -176,7 +170,7 @@
 <script>
 
 	jQuery("#scene-survey").hide();
-	jQuery(".show-survey").click( function() {
+	jQuery(".loggedin").click( function() {
 		jQuery("#scene-survey").slideToggle(900);
 	});
 

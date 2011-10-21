@@ -24,7 +24,7 @@ do_action( 'bp_before_group_header' );
 			} elseif ( $group == $music ) {
 				echo '<img src="'.$img_dir.'/images/musicscene-head.jpg">';
 			} ?>
-
+		<a name="join-scene"></a>
 		</div><!-- #item-header-avatar -->
 
 		<?php do_action( 'bp_group_header_meta' ); ?>
