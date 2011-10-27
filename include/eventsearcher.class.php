@@ -1,6 +1,6 @@
 <?php  
 
-class DJEventSearcher {
+class EventSearcher {
 	public function __construct($process_output=TRUE) {
 		$this->DAYTIME_CUTOFF = '08:00';	// anytime before 4am is considered part of the previous day (for now using 8 AM for utc)
 		$this->timezone = date_default_timezone_get();
@@ -117,8 +117,8 @@ class DJEventSearcher {
 		 
 		 // connect to DB and run query
 		try {
-			$pdo = new PDO('mysql:host='.DJEVENTS_DB_HOST.';dbname='.DJEVENTS_DB_NAME, 
-							DJEVENTS_DB_USER, DJEVENTS_DB_PASSWORD);
+			$pdo = new PDO('mysql:host='.EVENTS_DB_HOST.';dbname='.EVENTS_DB_NAME, 
+							EVENTS_DB_USER, EVENTS_DB_PASSWORD);
 			$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			$statement = $pdo->prepare($query);
 			$statement->execute($this->query_args);
