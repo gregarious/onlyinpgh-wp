@@ -42,15 +42,17 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-	font-size: 400%;
+	font-size: 600%;
 }
 
-h3 {
-	font-size: 140%;
+h2 {
+	font-size: 200%; 
+	margin: 0 0 0.7em 0;
 }
 
-h3, h4, p {
+h2, h4 {
 	color: @yellow;
+	margin: 0 !important;
 }
 
 h3, h4 {
@@ -70,19 +72,15 @@ body {
 	color: #000;
 }
 
-img {
-	.size(100%,100%);
-}
-
 section {
-	padding-top: 1em; // This is a hack, padding is creating a gap when 0
+	padding: 2% 0;
 	background-color: #000;
 	height: 15em;
 }
 
 button {
 	padding: 1%;
-	width: 30%;
+	width: 5em;
 	margin-left: 1%;
 	.rounded-corners(10px);
 	font-weight: bold;
@@ -100,7 +98,7 @@ button:active {
 
 input {
 	padding: 10px;
-	width: 60%;
+	width: 14em;
 	.rounded-corners(10px);
 	border: 3px @yellow solid;
 }
@@ -110,18 +108,17 @@ input:focus {
 	border: 2px darken(@yellow, 15%) solid;
 	
 }
+
 /* Main */
+
 #top {
-	padding: 7% 0 1% 0;
+	padding: 0.5em 0 0.1em 0;
 	text-align: center;
 	height: 30%;
 }
 
 #title {
-	text-shadow: 0 0.05em 0 #fefefe,
-                 0 0.1em 0.13em rgba(0,0,0,0.15),
-                 0.1em 0.3em 0.03em rgba(0,0,0,0.1),
-                 0 0.4em 0.33em rgba(0,0,0,0.1);
+	text-shadow: 0 0.1em 0.13em rgba(0,0,0,0.15),
 }
 
 .wrapper{
@@ -133,13 +130,17 @@ input:focus {
 	text-align: center;
 }
 
+#sign-up {
+	padding: 1.3em 0 1em 0;
+}
+
 #skyline {
 	padding: 0;
-	height: 20em;
+	height: 12em;
 	background-image: url("../img/skyline.png");
 }
 
-/* Mobile */
+/* Media Queries */
 
 @media screen and (max-width: 600px) {
 	#skyline {
@@ -156,6 +157,18 @@ input:focus {
 @media only screen and (max-device-width: 480px) {
 	#skyline {
 		background-image: url("../img/skyline_480.png");
-		height: 5em;
+		height: 8em;
+	}
+	
+	.wrapper{
+		margin:auto;
+		width: 99%;
+	}
+	
+	input {
+		padding: 5px;
+		width: 10em;
+		.rounded-corners(10px);
+		border: 3px @yellow solid;
 	}
 }
