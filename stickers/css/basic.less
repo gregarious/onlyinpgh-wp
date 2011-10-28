@@ -1,0 +1,161 @@
+@yellow: #FFC900;
+
+/* Mixins */
+
+.frank {
+	font-family: 'FrancoisOneRegular', Arial, sans-serif;
+	font-weight: normal;
+} 
+
+.lucy {
+	font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+
+.size(@height, @width) {
+	width: @width;
+	height: @height;
+}
+
+.rounded-corners (@radius) {
+	border-radius: @radius;
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+}
+
+.gradient (@first, @second) {
+	 background-color: @first;
+	 background-image: -webkit-gradient(linear, left top, left bottom, from(@first), to(@second)); /* Saf4+, Chrome */
+	 background-image: -webkit-linear-gradient(top, @first, @second); /* Chrome 10+, Saf5.1+, iOS 5+ */
+	 background-image:    -moz-linear-gradient(top, @first, @second); /* FF3.6 */
+	 background-image:     -ms-linear-gradient(top, @first, @second); /* IE10 */
+	 background-image:      -o-linear-gradient(top, @first, @second); /* Opera 11.10+ */
+	 background-image:         linear-gradient(top, @first, @second);
+	           /*filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=@first, EndColorStr=@second); /* IE6-IE9 */
+
+}
+
+/* Typography */
+
+h1, h2, h3, h4, h5 {
+	.frank;
+	font-weight: normal;
+}
+
+h1 {
+	font-size: 400%;
+}
+
+h3 {
+	font-size: 140%;
+}
+
+h3, h4, p {
+	color: @yellow;
+}
+
+h3, h4 {
+	font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+	letter-spacing: 1px;
+}
+
+label, input {
+	.lucy;
+}
+
+/* Element styles */
+
+body {
+	background-color: @yellow;
+	font-size: 120%;
+	color: #000;
+}
+
+img {
+	.size(100%,100%);
+}
+
+section {
+	padding-top: 1em; // This is a hack, padding is creating a gap when 0
+	background-color: #000;
+	height: 15em;
+}
+
+button {
+	padding: 1%;
+	width: 30%;
+	margin-left: 1%;
+	.rounded-corners(10px);
+	font-weight: bold;
+	.gradient(@yellow,lighten(@yellow, 30%));
+	border: 2px darken(@yellow, 15%) solid;
+}
+
+button:hover {
+	.gradient(lighten(@yellow, 30%),@yellow);
+}
+
+button:active {
+	.gradient(darken(@yellow, 30%),@yellow);
+}
+
+input {
+	padding: 10px;
+	width: 60%;
+	.rounded-corners(10px);
+	border: 3px @yellow solid;
+}
+
+input:focus {
+	background-color: #fff;
+	border: 2px darken(@yellow, 15%) solid;
+	
+}
+/* Main */
+#top {
+	padding: 7% 0 1% 0;
+	text-align: center;
+	height: 30%;
+}
+
+#title {
+	text-shadow: 0 0.05em 0 #fefefe,
+                 0 0.1em 0.13em rgba(0,0,0,0.15),
+                 0.1em 0.3em 0.03em rgba(0,0,0,0.1),
+                 0 0.4em 0.33em rgba(0,0,0,0.1);
+}
+
+.wrapper{
+	margin:auto;
+	width: 90%;
+}
+
+#main {
+	text-align: center;
+}
+
+#skyline {
+	padding: 0;
+	height: 20em;
+	background-image: url("../img/skyline.png");
+}
+
+/* Mobile */
+
+@media screen and (max-width: 600px) {
+	#skyline {
+		background-image: url("../img/skyline_600.png");
+		height: 7em;
+	}
+	
+	.wrapper{
+		margin:auto;
+		width: 99%;
+	}
+}
+
+@media only screen and (max-device-width: 480px) {
+	#skyline {
+		background-image: url("../img/skyline_480.png");
+		height: 5em;
+	}
+}
