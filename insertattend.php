@@ -7,19 +7,19 @@ $eventid = $_GET["eventid"];
 
 
 // Opens a connection to a mySQL server
-$connection = mysql_connect(OIP_DB_HOST, OIP_DB_USER, OIP_DB_PASSWORD);
+$connection = mysql_connect(EVENTS_DB_HOST, EVENTS_DB_USER, EVENTS_DB_PASSWORD);
 if (!$connection) {
   die("Not connected : " . mysql_error());
 }
 
 // Set the active mySQL database
-$db_selected = mysql_select_db(OIP_DB_NAME, $connection);
+$db_selected = mysql_select_db(EVENTS_DB_NAME, $connection);
 if (!$db_selected) {
   die ("Can\'t use db : " . mysql_error());
 }
 
 // Search the rows in the markers table
-$query = sprintf("INSERT INTO wp_em_bookings (event_id, person_id, booking_spaces) VALUES ('%s', '%s', '1')", 
+$query = sprintf("INSERT INTO events_attendee (event_id, individual) VALUES ('%s', '%s')", 
   mysql_real_escape_string($eventid),
   mysql_real_escape_string($userid));
 $result = mysql_query($query);
