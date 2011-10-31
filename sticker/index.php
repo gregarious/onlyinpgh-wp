@@ -48,6 +48,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	<script src="js/libs/less-1.1.3.min.js"></script>
 	<script src="js/libs/modernizr-2.0.min.js"></script>
 	<script src="js/libs/respond.min.js"></script>
+
+	<?php 
+	// include any applicable analytics code
+	include_once('analytics.html');
+	?>
 </head>
 <body>
 	<header id="top">
