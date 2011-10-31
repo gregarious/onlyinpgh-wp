@@ -10,8 +10,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     if(isset($_POST['form_key'])) {
     	if($formKey->validate()) { 
     		require_once('email_store.inc.php');
-    		if(	isset($_POST['email_address']) && 
-    			storeEmail($_POST['email_address']) ) {
+    		if(	isset($_POST['email-address']) && 
+    			storeEmail($_POST['email-address']) ) {
 				$formStatus = 'SUBMITTED';
 			}
 			else {
@@ -66,16 +66,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			
 			<div id="email-form">
 				<?php if ($formStatus === 'SUBMITTED'): ?>
-					<p id='post-submit-thanks'>Thanks! We'll be in touch!</p>
+					<h2 id='post-submit-thanks'>Thanks! We'll be in touch!</p>
 				<?php else: ?>
-					<form action="" method="post">
+					<form action="" method="post" id="email-form">
 					<?php $formKey->outputKey(); ?>
-					<input name="email_address" type="email" placeholder="Email">
+					<input id="email-address" name="email-address" type="email" placeholder="Email">
 					<button type="sumbit">Send</button>
 					</form>
 					<?php if ($formStatus == 'ERROR'): ?>
-						<p id='post-submit-thanks'>Problem submitting e-mail. Try again later!</p>	
-					?>
+						<br />
+						<h4 id='post-submit-thanks'>Problem submitting e-mail. Try again later!</p>	
 					<?php endif; ?>
 				<?php endif; ?>
 			</div>
