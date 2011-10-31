@@ -1,16 +1,16 @@
 <?php  
 
-#require_once '../etc/config.php';
-
 class EventSearcher {
 	public function __construct($process_output=TRUE) {
-		$this->DAYTIME_CUTOFF = '04:00';	// anytime before 4am is considered part of the previous day
+		$this->DAYTIME_CUTOFF = '08:00';	// anytime before 4am is considered part of the previous day (for now using 8 AM for utc)
+		$this->timezone = date_default_timezone_get();
 
 		$this->q_loc = FALSE;
 		$this->q_org = FALSE;
 		$this->q_att = FALSE;	
 
-		$this->f_loc = NULL;	// will be 3-tuple of (lat,long,rad) if set
+		$this->f_dist = NULL;	// will be 3-tuple of (lat,long,rad) if set
+		$this->f_hasgeocode = NULL;	// will be TRUE if set
 		$this->f_eid = NULL;	// will be simple event id string if set
 		$this->f_sdate = NULL;	// will be date string (no time) if set
 		$this->f_edate = NULL;	// will be date string (no time) if set
@@ -39,9 +39,18 @@ class EventSearcher {
 		$this->query_uid = $userid;
 	}
 
-	public function filterByDistance($lat,$long,$radius) {
-		$this->f_loc = array($lat,$long,$radius);
+	public function setTimezone($timezone_str) {
+		$this->timezone = $timezone_str;
 	}
+
+	public function filterByDistance($lat,$long,$radius) {
+		$this->f_dist = array($lat,$long,$radius);
+	}
+
+	public function filterByHasGeocoded() {
+		$this->f_hasgeocode = TRUE;
+	}
+
 	public function filterByEventId($eid) {
 		$this->f_eid = $eid;
 	}
@@ -101,13 +110,15 @@ class EventSearcher {
 		$query = $this->buildSelect() . ' ' .
 					$this->buildFrom() . ' ' .
 					$this->buildWhere() . ' ' .
-					'ORDER BY e.event_end_date ASC, e.event_start_date DESC' . ' ' .
+					"GROUP BY e.id" . ' ' .
+					$this->buildHaving() . ' ' .
+					'ORDER BY e.dtend ASC, e.dtstart DESC' . ' ' .
 			 		"LIMIT $offset, " . ($limit+1);
 		 
 		 // connect to DB and run query
 		try {
-			$pdo = new PDO('mysql:host='.OIP_DB_HOST.';dbname='.OIP_DB_NAME, 
-							OIP_DB_USER, OIP_DB_PASSWORD);
+			$pdo = new PDO('mysql:host='.EVENTS_DB_HOST.';dbname='.EVENTS_DB_NAME, 
+							EVENTS_DB_USER, EVENTS_DB_PASSWORD);
 			$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 			$statement = $pdo->prepare($query);
 			$statement->execute($this->query_args);
@@ -119,51 +130,41 @@ class EventSearcher {
 
 		$all_events = array();
 		$counter = 0;
+		$utc_tz = new DateTimeZone('UTC');
+		$local_tz = new DateTimeZone($this->timezone);
 		while($row = $statement->fetch()) {
 			$counter++;
 			if($counter > $limit) break;
 			
-			$new_event =
-				array(	'id'			=> intval($row['event_id']),
-						'name'			=> $this->processText($row['event_name']),
-						'wp_slug'		=> $row['event_slug'],
-						'description_short' => ($row['event_notes'] !== NULL) ? 
-												$this->processText($row['event_notes']) : NULL,
-						'description'   => ($row['event_notes'] !== NULL) ? 
-												$this->processText($row['event_notes_full']) : NULL,
-						'categories'	=> ($row['event_type'] !== NULL) ?
-												explode(',',$this->processText($row['event_type'])) : NULL,
-						'image_url'		=> $row['event_pic'],
-						'start_dt'	=> NULL,
-						'end_dt'		=> NULL );
+			// do time zone conversion here
+			$dtstart = new DateTime($row['dtstart'],$utc_tz);
+			$dtstart->setTimezone($local_tz);
+			$dtend = new DateTime($row['dtend'],$utc_tz);
+			$dtend->setTimezone($local_tz);
 
-			if($row['event_start_date'] && $row['event_start_time']) {
-				$new_event['start_dt'] = new DateTime( 
-					date("F j, Y", strtotime($row['event_start_date'])) . ' ' . 
-					date("g:i a", strtotime($row['event_start_time']))
-					);
-			}
-			if($row['event_end_date'] && $row['event_end_time']) {
-				$new_event['end_dt'] = new DateTime( 
-					date("F j, Y", strtotime($row['event_end_date'])) . ' ' . 
-					date("g:i a", strtotime($row['event_end_time']))
-					);
-			}
+			$new_event =
+				array(	'id'			=> intval($row['id']),
+						'name'			=> $row['name'],
+						'description_short' => $row['description_short'],
+						'description'   => $row['description'],
+						'categories'	=> ($row['categories'] !== NULL) ?
+												explode(',',$row['categories']) : NULL,
+						'image_url'		=> $row['image_url'],
+						'start_dt'		=> $dtstart,
+						'end_dt'		=> $dtend );
 
 			if($this->q_att) {
-				$new_event['attending'] = $row['booking_spaces']==1;
+				$new_event['attending'] = $row['individual']!==NULL;
 			}
 
 			if($this->q_loc) {
-				$new_event['address'] = $this->processText($row['location_address']);
-				$new_event['lat'] = ($row['location_latitude'] !== NULL) ?
-												floatval($row['location_latitude']) : NULL;
-				$new_event['long'] = ($row['location_longitude'] !== NULL) ?
-												floatval($row['location_longitude']) : NULL;
+				$new_event['address'] = $row['address'];
+				$new_event['lat'] = $row['latitude'];
+				$new_event['long'] = $row['longitude'];
 			}
 
 			if($this->q_org) {
-				$new_event['org_name'] = $this->processText($row['organization_name']);
+				$new_event['org_name'] = $row['organization_name'];
 				$new_event['org_url'] = $row['organization_link_url'];
 				$new_event['org_fancount'] = $row['organization_fan_count'];
 			}
@@ -175,83 +176,71 @@ class EventSearcher {
 		return $all_events;
 	}
 
-	private function processText($text) {
-		if(!$this->process_output) {
-			return $text;
-		}
-		else {
-			// hilariously hacky way to replace problem characters read in from DB with more friendly ones
-			$tmp = urlencode($text);
-			$tmp = str_replace('%92', '%27', $tmp);
-			$tmp = str_replace('%93', '%22', $tmp);
-			$tmp = str_replace('%94', '%22', $tmp);
-			$tmp = str_replace('%96', '-', $tmp);
-			$tmp = str_replace('%97', '--', $tmp);
-			$text = urldecode($tmp);
-			return htmlentities($text,ENT_QUOTES,'ISO-8859-1',FALSE);
-		}
-	}
-
 	// returns TRUE if more results were available than the current query returned
 	public function moreResultsAvailable() {
 		return $this->more_results_exist;
 	}
 
 	private function buildSelect() {
-		$select = "SELECT DISTINCT e.event_name, 
-							e.event_id, 
-							e.event_notes as event_notes_full,
-							SUBSTRING_INDEX(e.event_notes, ' ', 30) as event_notes,
-							e.event_start_date, 
-							e.event_end_date, 
-							e.event_start_time, 
-							e.event_end_time, 
-							e.event_slug, 
-							e.event_pic,
-							e.event_type";
+		$select = "SELECT DISTINCT e.name, 
+							e.id, 
+							e.description,
+							SUBSTRING_INDEX(e.description, ' ', 30) as description_short,
+							e.dtstart, 
+							e.dtend,
+							e.image_url,
+							GROUP_CONCAT(m.meta_value) as categories";
+							
 		if($this->q_org||$this->f_kw!==NULL) {
 			$select .= ", o.name AS organization_name, 
-							o.link_url AS organization_link_url,
+							o.url AS organization_link_url,
 							o.fan_count AS organization_fan_count";
 		}
-		if($this->q_loc||$this->f_loc!==NULL) {
-			$select .= ", l.location_address, 
-							l.location_latitude, 
-							l.location_longitude";
-			if($this->f_loc!==NULL) {
-				$select .= ", ( 3959 * acos( cos( radians(:lat) ) * cos( radians( l.location_latitude ) ) * cos( radians( l.location_longitude ) - radians(:long) ) + sin( radians(:lat) ) * sin( radians( l.location_latitude ) ) ) ) AS distance";
-				$this->query_args['lat'] = $this->f_loc[0];	
-				$this->query_args['long'] = $this->f_loc[1];
+
+		if($this->q_loc||$this->f_dist!==NULL||$this->f_hasgeocode!==NULL) {
+			$select .= ", l.address, 
+							l.latitude, 
+							l.longitude";
+
+			if($this->f_dist!==NULL) {
+				$select .= ", ( 3959 * acos( cos( radians(:lat) ) * cos( radians( l.latitude ) ) * cos( radians( l.longitude ) - radians(:long) ) + sin( radians(:lat) ) * sin( radians( l.latitude ) ) ) ) AS distance";
+				$this->query_args['lat'] = $this->f_dist[0];	
+				$this->query_args['long'] = $this->f_dist[1];
 			}
 		}
 
 		if($this->q_att||$this->f_att!==NULL) {
-			$select .= ", b.booking_spaces";
+			$select .= ", a.individual";
 		}
 		return $select;
 	}
 
 	private function buildFrom() {
-		$from = "FROM wp_em_events e";
-		$bookings_clause = 'JOIN wp_em_bookings b ON (e.event_id = b.event_id) AND (b.person_id = :uid) AND (b.booking_spaces = 1)';
-		
+		// always querying primarily from the events table
+		$from = "FROM events_event e";
 
-		if($this->f_att!==NULL) {
-			$from .= ' JOIN wp_em_bookings b ON (e.event_id = b.event_id) AND (b.person_id = :uid) AND (b.booking_spaces = 1)';
-			$this->query_args['uid'] = $this->query_uid;
-		}
-		elseif($this->q_att) {
-			$from .= ' LEFT JOIN wp_em_bookings b ON (e.event_id = b.event_id) AND (b.person_id = :uid)';
-			$this->query_args['uid'] = $this->query_uid;
+		// if location is being queried
+		if($this->q_loc||$this->f_hasgeocode!==NULL||$this->f_dist!==NULL) {
+			$from .= " INNER JOIN events_location l ON (e.location_id = l.id)";
 		}
 
-		if($this->q_loc||$this->f_loc!==NULL) {
-			$from .= " JOIN wp_em_locations l USING (location_id)";
+		// if attendance information is needed
+		if($this->q_att||$this->f_att!==NULL) {
+			// if we're actually filtering by attendance, use an INNER JOIN to exclude
+			//  rows with no attendance by the user. otherwise, just do a LEFT OUTER
+			$join_type = ($this->f_att!==NULL) ? "INNER" : "LEFT OUTER";
+			$from .= " " . $join_type . " JOIN events_attendee a ON (e.id = a.event_id)";
 		}
 
+		// if organization info is needed
 		if($this->q_org||$this->f_kw!==NULL) {
-			$from .= " JOIN wp_em_organizations o";	
+			$from .= " LEFT OUTER JOIN events_role ON (e.id = events_role.event_id AND events_role.role_name = 'creator')";
+			$from .= " LEFT OUTER JOIN events_organization o ON (events_role.organization_id = o.id)";
 		}
+
+		// ensure event types are always returned
+		$from .= " LEFT OUTER JOIN events_meta m ON (e.id = m.event_id AND m.meta_key = 'oldtype')";
+
 		return $from;
 	}
 
@@ -259,48 +248,54 @@ class EventSearcher {
 	private function buildWhere() {
 		$where_clauses = array();
 		
-		if($this->q_org||$this->f_kw!==NULL) {	// need to include this clause any time org table is queried
-			$where_clauses[] = 'o.id = e.event_creator';
-		}
+		// if querying by id
 		if($this->f_eid!==NULL) {
-			$where_clauses[] = 'e.event_id = :eid';
+			$where_clauses[] = 'e.id = :eid';
 			$this->query_args['eid'] = $this->f_eid;
 		}
+
+		if($this->f_sdate!==NULL) {
+			$where_clauses[] = 'e.dtend > :startdate';
+			$dt = new DateTime($this->f_sdate);
+			// automatically add the time cutoff
+			$this->query_args['startdate'] = $dt->format('Y-m-d') . ' ' . $this->DAYTIME_CUTOFF;
+		}
+
+		if($this->f_edate!==NULL) {
+			$where_clauses[] = 'e.dtstart < :enddate';
+			// if end date is D, we actually want to enclude events that start before the daytime cutoff on the next day
+			$dt = new DateTime($this->f_edate);
+			$dt->add(new DateInterval('P1D'));	// end time is officially 4:00 AM on 
+			// automatically add the time cutoff
+			$this->query_args['enddate'] = $dt->format('Y-m-d') . ' ' . $this->DAYTIME_CUTOFF;
+		}
+
+		if($this->f_hasgeocode!==NULL) {
+			$where_clauses[] = "l.latitude IS NOT NULL AND l.longitude IS NOT NULL";
+		}
+
+		if($this->f_att!==NULL) {
+			$where_clauses[] = "a.individual = :uid";
+			$this->query_args['uid'] = $this->query_uid;
+		}
+
 		if(count($where_clauses) > 0)
 		{
-			$where = "WHERE (" . implode($where_clauses,") AND (") . ")";
+			$where = "WHERE ((" . implode($where_clauses,") AND (") . "))";
 		}
 		else {
 			$where = 'WHERE 1';
 		}
 
-		// build HAVING clauses for date/radius/keyword filtering
+		return $where;
+	}
+
+	function buildHaving() {
 		$having_clauses = array();
-		if($this->f_sdate!==NULL) {
-			// start date condition means the event neither:
-			//	1. ends before our start date NOR
-			//  2. ends before the cutoff time (4am) on our start date
-			$having_clauses[] = '(NOT (e.event_end_date < :startdate OR
-										(e.event_end_date = :startdate AND e.event_end_time < :timecutoff)))';
-			$dt = new DateTime($this->f_sdate);
-			$this->query_args['startdate'] = $dt->format('Y-m-d');;
-			$this->query_args['timecutoff'] = $this->DAYTIME_CUTOFF;	// start time is officially after the cutoff on day
-		}
-		if($this->f_edate!==NULL) {
-			// start date condition means the event neither:
-			//	1. starts the day after our end date NOR
-			//  2. starts after the cutoff time (4am) the day after our end date
-			$having_clauses[] = '(NOT (e.event_start_date > :enddate OR
-										(e.event_start_date = :enddate AND e.event_start_time > :timecutoff)))';
-			// if end date is D, we actually want to enclude events that start before 4 AM on the next day
-			$dt = new DateTime($this->f_edate);
-			$dt->add(new DateInterval('P1D'));	// end time is officially 4:00 AM on the day after the end date
-			$this->query_args['enddate'] = $dt->format('Y-m-d');
-			$this->query_args['timecutoff'] = $this->DAYTIME_CUTOFF;	// start time is officially after the cutoff on day
-		}
-		if($this->f_loc!==NULL) {
+
+		if($this->f_dist!==NULL) {
+			$this->query_args['rad'] = $this->f_dist[2];
 			$having_clauses[] = "distance < :rad";
-			$this->query_args['rad'] = $this->f_loc[2];
 		}
 
 		if($this->f_kw!==NULL) {
@@ -308,25 +303,21 @@ class EventSearcher {
 			$i = 0;
 			foreach ($this->f_kw as $term) {
 				$term_clauses[] = "organization_name rLIKE :keyword$i OR 
-									e.event_name rLIKE :keyword$i OR 
-									e.event_type rLIKE :keyword$i OR 
-									event_notes_full rLIKE :keyword$i";
+									e.name rLIKE :keyword$i OR 
+									categories rLIKE :keyword$i OR 
+									e.description rLIKE :keyword$i";
 				$this->query_args["keyword$i"] = $term;
 				$i++;
 			}
 			$having_clauses[] = implode(' OR ', $term_clauses);
 		}
 
-		if( $where == 'WHERE' ) {
-			$where = 'WHERE 1';	
-		}
-
-		// if any having subclause was set above, create a HAVING clause here
 		if(count($having_clauses) > 0)
 		{
-			$having = "HAVING (" . implode($having_clauses,") AND (") . ")";
-			$where .= " " . $having;
+			return "HAVING ((" . implode($having_clauses,") AND (") . "))";
 		}
-		return $where;
+		else {
+			return '';
+		}
 	}
 }

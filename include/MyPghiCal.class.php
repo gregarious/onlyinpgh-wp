@@ -1,7 +1,7 @@
 <?php
 
 require_once("include/eventsearcher.class.php");
-require_once("include/phpicalendar/iCalcreator.class.php");
+require_once("include/icalcreator/iCalcreator.class.php");
 
 function dt_to_array($dt) {
 	return array(
@@ -11,6 +11,7 @@ function dt_to_array($dt) {
 		'hour' => $dt->format('H'),
 		'min' => $dt->format('i'),
 		'sec' => $dt->format('s'),
+		'tz' => $dt->format('e')
 		);
 }
 
@@ -23,6 +24,7 @@ class MyPghiCal {
 	public function generate($title="OnlyinPgh Cal",$desc="OnlyinPgh Calendar") {
 		$searcher = new EventSearcher(FALSE);
 
+		$searcher->setTimezone('UTC');
 		$searcher->queryLocation();
 		$searcher->queryOrganization();
 		$searcher->filterByAttendance($this->uid);
