@@ -31,13 +31,13 @@ $long = $results[0]['long'];
 	
 // Reformattng start and end dates
 $start_dt = $results[0]['start_dt'];
-$start_date = $start_dt->format('F j, g:00 a');
+$start_date = $start_dt->format('F j, g:i a');
 $end_dt = $results[0]['end_dt'];
 
 if (onSameDay($start_dt,$end_dt) == true) {
-	$end_date = $end_dt->format('g:00 a');
+	$end_date = $end_dt->format('g:i a');
 } else {
-	$end_date = $end_dt->format('F j, g:00 a');
+	$end_date = $end_dt->format('F j, g:i a');
 }
 
 ?>

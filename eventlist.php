@@ -20,6 +20,7 @@ $date_txt = $date_dt->format('l, F j, Y');
 $searcher = new EventSearcher();
 $searcher->queryLocation();
 $searcher->queryOrganization();
+$searcher->setTimezone('US/Eastern');
 
 // WP/BP functions -- this means this PHP script won't work without WP calling it
 if( is_user_logged_in() ) {

@@ -196,6 +196,7 @@ class TwoWeekCalendar {
 		$searcher = new EventSearcher();
 		$searcher->filterByStartDate($start);
 		$searcher->filterByEndDate($end);
+		$searcher->setTimezone('US/Eastern');
 
 		$events = $searcher->runQuery(0,10000);		// runQuery needs a result limit, use something huge
 		return $events;

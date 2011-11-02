@@ -36,6 +36,7 @@ $uid = $scene_id_map[$scene_name];
 $searcher = new EventSearcher();
 $searcher->queryLocation();		// needed for address
 $searcher->queryOrganization();	// needed for org_name
+$searcher->setTimezone('US/Eastern');
 
 // Now add filters to only include events scene moderators are attending after the current datetime
 

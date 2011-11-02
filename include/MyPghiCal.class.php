@@ -24,11 +24,12 @@ class MyPghiCal {
 	public function generate($title="OnlyinPgh Cal",$desc="OnlyinPgh Calendar") {
 		$searcher = new EventSearcher(FALSE);
 
-		$searcher->setTimezone('UTC');
 		$searcher->queryLocation();
 		$searcher->queryOrganization();
 		$searcher->filterByAttendance($this->uid);
 
+		# want the iCalendar entries in UTC
+		$searcher->setTimezone('UTC');
 		$results = $searcher->runQuery(0,100000);
 
 		$ic_config = array( "unique_id" => "onlyinpgh.com",
