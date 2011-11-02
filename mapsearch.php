@@ -96,6 +96,7 @@ if(array_key_exists('limit',$_GET)) {
 	$limit = intval($_GET['limit']);
 }
 
+$searcher->setTimezone('US/Eastern');
 $results = $searcher->runQuery($offset,$limit);
 
 $json_events = array();
