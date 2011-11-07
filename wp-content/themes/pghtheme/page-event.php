@@ -6,17 +6,15 @@ Template Name: Single Event
 */
 
 
+get_header(); 
 
 /* events.php has already been called in the header, but for whatever
 	Wordpressy reason its ouput $results var isn't available here. */
-require(ABSPATH . 'events.php'); 
-
+require(ABSPATH . 'events.php'); // implicit is a requirement that GET has an eid entry
 if(count($results)===0) {
 	header('Location: ' . bloginfo('stylesheet_directory') . '/404.php');
 	die();
 }
-
-get_header(); 
 
 $eid = $results[0]['id'];
 $name =  $results[0]['name'];

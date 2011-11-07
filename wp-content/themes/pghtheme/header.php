@@ -133,11 +133,11 @@ for (i = 0; i < field.length; i++)
 <link href='http://fonts.googleapis.com/css?family=Francois+One' rel='stylesheet' type='text/css'>
 
 <?php
+
 	/* Facebook OpenGraph meta info for single event pages */
 	if ( is_page('event')) {
-		require_once(ABSPATH . 'events.php'); 
-
-		$id = $results[0]['eid'];
+		require(ABSPATH . 'events.php'); // implicit is a requirement that GET has an eid entry
+		$eid = $results[0]['id'];
 		$name =  $results[0]['name'];
 		$desc = $results[0]['description'];
 		$img = $results[0]['image_url'];
@@ -153,7 +153,6 @@ for (i = 0; i < field.length; i++)
 		<meta property="fb:app_id" content="203898346321665"/>
 		<meta property="og:description" content="<?php echo $desc; ?>"/>
         <?php
-
     	if($lat && $long) {
     		?>
     		<meta property="og:latitude" content="<?php echo $lat; ?>"/>
@@ -164,7 +163,6 @@ for (i = 0; i < field.length; i++)
 ?>
 
 </head>
-
 
 <body style="margin:0px; padding:0px;">
 <?php do_action( 'bp_before_header' ) ?>
