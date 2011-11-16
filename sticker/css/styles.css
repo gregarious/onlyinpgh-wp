@@ -7,45 +7,46 @@
   font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
 }
 /* ============================== */
-/* ! Layout for desktop version   */
+/* ! Styles for desktop version   */
 /* ============================== */
-/* Typography */
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: 'FrancoisOneRegular', Arial, sans-serif;
-  font-weight: normal;
-  font-weight: normal;
+html, body {
+  height: 100%;
+  min-height: 100%;
+}
+body {
+  text-align: center;
+  background-color: #000;
 }
 h2 {
-  font-size: 200%;
-  margin: 0 0 0.7em 0;
-}
-h2, h4 {
+  font-size: 2em;
   color: #ffc900;
-  margin: 0 !important;
+  font-family: 'FrancoisOneRegular', Arial, sans-serif;
+  font-weight: normal;
 }
-h3, h4 {
-  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+h4 {
+  color: #ffc900;
   letter-spacing: 1px;
 }
-label, input {
-  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+p {
+  color: #ffc900;
+  font-size: 1.2em;
 }
-/* Element styles */
-body {
-  padding-top: 2%;
-  background: #ffc900 url('../img/skyline.png') repeat-x top;
+p a, p a:hover, p a:visited {
+  font-weight: bold;
+  color: #ffc900;
+}
+label, input, p {
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
 }
 input {
   padding: 10px;
-  width: 14em;
-  border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
+  border-radius: 10px;
   border: 3px #ffc900 solid;
+}
+#email-address {
+  width: 70%;
 }
 input:focus {
   background-color: #fff;
@@ -53,11 +54,11 @@ input:focus {
 }
 .submit-email {
   padding: 1%;
-  width: 5em;
+  width: 25%;
   margin-left: 1%;
-  border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
+  border-radius: 10px;
   font-weight: bold;
   background-color: #ffc900;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc900), to(#ffe999));
@@ -122,41 +123,39 @@ input:focus {
   /*filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=@first, EndColorStr=@second); /* IE6-IE9 */
 
 }
-/* Main */
-.top {
-  text-align: center;
-  min-height: 200px;
+.skyline {
+  background: #ffc900 url('../img/skyline.png') repeat-x bottom;
+  height: 40%;
+  padding-top: 2%;
 }
 .points {
-  font-size: 600%;
-  text-shadow: 0 0.1em 0.13em rgba(0, 0, 0, 0.15);
+  font-size: 8em;
+  text-align: left;
+  color: #000;
   font-family: 'FrancoisOneRegular', Arial, sans-serif;
   font-weight: normal;
 }
-.sign-up {
-  padding: 2% 0 1% 0;
-}
-.skyline-container {
-  position: absolute;
-  z-index: -2;
-}
-.skyline {
-  position: relative;
+.content-intro {
+  margin-bottom: 10%;
 }
 /* ============================= */
-/* ! Layout for mobile version   */
+/* ! Styles for mobile version   */
 /* ============================= */
-@media handheld, only screen and (max-width: 767px) {
-  body {
-    font-size: 120%;
-    background-image: #ffc900 url('../img/skyline480.png') repeat-x top;
+@media all and (max-width: 767px) {
+  .skyline {
+    background-image: url('../img/skyline_600.png');
+    height: 35%;
+    padding-left: 4%;
+  }
+  header {
+    padding-top: 8%;
   }
   input {
     padding: 5px;
     width: 10em;
-    border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
+    border-radius: 10px;
     border: 3px #ffc900 solid;
   }
 }

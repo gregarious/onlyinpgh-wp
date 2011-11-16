@@ -40,13 +40,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	<meta name="author" content="">
 
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-
-	<link rel="stylesheet" href="assets/francois-one-fontfacekit/stylesheet.css">
-	<link rel="stylesheet" href="css/default-style.css">
+	
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/1140.css">
+	<link rel="stylesheet" href="assets/francois-one-fontfacekit/stylesheet.css">
+	<link rel="stylesheet" href="css/default-style.css">
 
 	<script src="js/libs/modernizr-2.0.min.js"></script>
+	<script src="js/libs/css3-mediaqueries.js"></script>
 	<script src="js/libs/respond.min.js"></script>
 
 	<?php 
@@ -56,44 +57,60 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 </head>
 <body>
 
-	<header class="row">
-		<div class="fivecol points">+5 !</div>
-	</header>
-
-	<article>
-		<hgroup>
-			<h1> Pittsburgh 3.0</h1>
-			<h4 id="sign-up">Sign up to get the 412.</h4>
-		</hgroup>
-		<div id="email-form" class="row">
-			<?php if ($formStatus === 'SUBMITTED'): ?>
-				<h2 id='post-submit-thanks'>Thanks! We'll be in touch!</p>
-			<?php else: ?>
-				<form action="" method="post" id="email-form">
-				<?php $formKey->outputKey(); ?>
-				<input id="email-address" name="email-address" type="email" placeholder="Email">
-				<input class="submit-email" type="sumbit">Send</input>
-				</form>
-				<?php if ($formStatus == 'ERROR'): ?>
-					<br />
-					<h4 id='post-submit-thanks'>Problem submitting e-mail. Try again later!</p>	
-				<?php endif; ?>
-			<?php endif; ?>
+	<header class="skyline">
+		<div class="row">
+			<span class="points">+5 !</span>
 		</div>
-	</article>
+	</header>
+	
+		<article class="content">
+			
+			<div class="row">
+				<section class="fivecol">
+					<header class="content-intro">
+						<h2>
+							Ready to take this whole<br />	&#8220;internet	&#8221;<br /> thing to the next level?
+						</h2>
+					</header>
 
-	<footer>
-	</footer>
+					<p>
+						<a href="http://onlyinpgh.com" title="Onlyinpgh" targe="_blank">OnlyinPgh</a> is building a new way for you to get into your favorite Scenes in Pittsburgh.
+					</p>
+				</section>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+				<section class="email-form sixcol last">
+					<hgroup>
+						<h3>Private Beta launching soon.</h3>
+						<h4>Signup now to be part of it.</h4>
+					</hgroup>
+					<?php if ($formStatus === 'SUBMITTED'): ?>
+						<p class="post-submit-thanks">Thanks! We'll be in touch!</p>
+					<?php else: ?>
+						<form method="post" id="email-form">
+							<?php $formKey->outputKey(); ?>
+							<input id="email-address" name="email-address" type="email" placeholder="Email">
+							<input class="submit-email" type="sumbit" value="Submit">
+						</form>
+						<?php if ($formStatus == 'ERROR'): ?>
+							<br />
+							<p class='post-submit-thanks'>Problem submitting e-mail. Try again later!</p>	
+						<?php endif; ?>
+					<?php endif; ?>
+				</section>
+			</div> <!-- .row -->
 
-<script src="js/script.js"></script>
+		</article> <!-- .content -->
 
-<!--[if lt IE 7 ]>
-	<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
-	<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
-<![endif]-->
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+
+	<script src="js/script.js"></script>
+
+	<!--[if lt IE 7 ]>
+		<script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.2/CFInstall.min.js"></script>
+		<script>window.attachEvent("onload",function(){CFInstall.check({mode:"overlay"})})</script>
+	<![endif]-->
 
 </body>
 </html>
