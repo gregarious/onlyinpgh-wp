@@ -41,53 +41,49 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 
-	<link rel="stylesheet/less" href="assets/francois-one-fontfacekit/stylesheet.css">
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet/less" href="css/basic.less">
+	<link rel="stylesheet" href="assets/francois-one-fontfacekit/stylesheet.css">
+	<link rel="stylesheet" href="css/default-style.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<link rel="stylesheet" href="css/1140.css">
 
-	<script src="js/libs/less-1.1.3.min.js"></script>
 	<script src="js/libs/modernizr-2.0.min.js"></script>
 	<script src="js/libs/respond.min.js"></script>
 
 	<?php 
 	// include any applicable analytics code
-	include_once('analytics.html');
+	//include_once('analytics.html');
 	?>
 </head>
 <body>
-	<header id="top">
-		<h1 id="title"  class="wrapper" >+5 !</h1>
-	</header>
-	
-	<div id="skyline"> 
-		<!-- Skyline image here -->
-	</div>
 
-	<section id="main">
-		<article class="wrapper">
-		
-			<h4 id="coming-soon">Coming soon:</h4>
-			<h2> Pittsburgh 3.0</h2>								<h4 id="sign-up">Sign up to get the 412.</h4>
-			
-			<div id="email-form">
-				<?php if ($formStatus === 'SUBMITTED'): ?>
-					<h2 id='post-submit-thanks'>Thanks! We'll be in touch!</p>
-				<?php else: ?>
-					<form action="" method="post" id="email-form">
-					<?php $formKey->outputKey(); ?>
-					<input id="email-address" name="email-address" type="email" placeholder="Email">
-					<button type="sumbit">Send</button>
-					</form>
-					<?php if ($formStatus == 'ERROR'): ?>
-						<br />
-						<h4 id='post-submit-thanks'>Problem submitting e-mail. Try again later!</p>	
-					<?php endif; ?>
+	<header class="row">
+		<div class="fivecol points">+5 !</div>
+	</header>
+
+	<article>
+		<hgroup>
+			<h1> Pittsburgh 3.0</h1>
+			<h4 id="sign-up">Sign up to get the 412.</h4>
+		</hgroup>
+		<div id="email-form" class="row">
+			<?php if ($formStatus === 'SUBMITTED'): ?>
+				<h2 id='post-submit-thanks'>Thanks! We'll be in touch!</p>
+			<?php else: ?>
+				<form action="" method="post" id="email-form">
+				<?php $formKey->outputKey(); ?>
+				<input id="email-address" name="email-address" type="email" placeholder="Email">
+				<input class="submit-email" type="sumbit">Send</input>
+				</form>
+				<?php if ($formStatus == 'ERROR'): ?>
+					<br />
+					<h4 id='post-submit-thanks'>Problem submitting e-mail. Try again later!</p>	
 				<?php endif; ?>
-			</div>
-		</article>
-	</section>
-	<div class="pull"></div>
-</div>
+			<?php endif; ?>
+		</div>
+	</article>
+
+	<footer>
+	</footer>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>

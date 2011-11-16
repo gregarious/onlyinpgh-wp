@@ -1,0 +1,166 @@
+
+@yellow: #FFC900;
+
+/* Mixins */
+
+.frank {
+	font-family: 'FrancoisOneRegular', Arial, sans-serif;
+	font-weight: normal;
+} 
+
+.lucy {
+	font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+
+.size(@height, @width) {
+	width: @width;
+	height: @height;
+}
+
+.rounded-corners (@radius) {
+	border-radius: @radius;
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+}
+
+.gradient (@first, @second) {
+	 background-color: @first;
+	 background-image: -webkit-gradient(linear, left top, left bottom, from(@first), to(@second)); /* Saf4+, Chrome */
+	 background-image: -webkit-linear-gradient(top, @first, @second); /* Chrome 10+, Saf5.1+, iOS 5+ */
+	 background-image:    -moz-linear-gradient(top, @first, @second); /* FF3.6 */
+	 background-image:     -ms-linear-gradient(top, @first, @second); /* IE10 */
+	 background-image:      -o-linear-gradient(top, @first, @second); /* Opera 11.10+ */
+	 background-image:         linear-gradient(top, @first, @second);
+	           /*filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=@first, EndColorStr=@second); /* IE6-IE9 */
+
+}
+
+/* ============================== */
+/* ! Layout for desktop version   */
+/* ============================== */
+	/* Typography */
+
+	h1, h2, h3, h4, h5 {
+		.frank;
+		font-weight: normal;
+	}
+
+
+	h2 {
+		font-size: 200%; 
+		margin: 0 0 0.7em 0;
+	}
+
+	h2, h4 {
+		color: @yellow;
+		margin: 0 !important;
+	}
+
+	h3, h4 {
+		font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+		letter-spacing: 1px;
+	}
+
+	label, input {
+		.lucy;
+	}
+
+	/* Element styles */
+
+	body {		
+		padding-top: 2%;
+		background: @yellow url('../img/skyline.png') repeat-x top;
+	}
+
+	input {
+		padding: 10px;
+		width: 14em;
+		.rounded-corners(10px);
+		border: 3px @yellow solid;
+	}
+
+	input:focus {
+		background-color: #fff;
+		border: 2px darken(@yellow, 15%) solid;
+		
+	}
+
+	.submit-email {
+		padding: 1%;
+		width: 5em;
+		margin-left: 1%;
+		.rounded-corners(10px);
+		font-weight: bold;
+		.gradient(@yellow,lighten(@yellow, 30%));
+		border: 2px darken(@yellow, 15%) solid;
+
+		&:hover {
+			.gradient(lighten(@yellow, 30%),@yellow);
+		}
+
+		&:active {
+			.gradient(darken(@yellow, 30%),@yellow);			
+		}
+
+	}
+
+	/* Main */
+
+	.top {
+		text-align: center;
+		min-height: 200px;
+	}
+
+	.points {
+		font-size: 600%;
+		text-shadow: 0 0.1em 0.13em rgba(0,0,0,0.15);
+		.frank;
+	}
+
+	.sign-up {
+		padding: 2% 0 1% 0;
+	}
+
+	.skyline-container {
+		position: absolute;
+		z-index: -2;
+	}
+
+	.skyline {
+		position: relative;
+	}
+
+
+/* ============================= */
+/* ! Layout for mobile version   */
+/* ============================= */
+
+@media handheld, only screen and (max-width: 767px) {
+
+	body {
+		font-size: 120%;
+		background-image: @yellow url('../img/skyline480.png') repeat-x top;
+	}
+
+	input {
+		padding: 5px;
+		width: 10em;
+		.rounded-corners(10px);
+		border: 3px @yellow solid;
+	}
+
+}
+
+
+/* ========================================== */
+/* ! Provide higher res assets for iPhone 4   */
+/* ========================================== */
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2) { 
+
+/*	.logo {
+		background: url(logo2x.jpg) no-repeat;
+		background-size: 212px 303px;
+	}*/
+
+}

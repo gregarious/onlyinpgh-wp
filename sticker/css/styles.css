@@ -1,0 +1,171 @@
+/* Mixins */
+.frank {
+  font-family: 'FrancoisOneRegular', Arial, sans-serif;
+  font-weight: normal;
+}
+.lucy {
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+/* ============================== */
+/* ! Layout for desktop version   */
+/* ============================== */
+/* Typography */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: 'FrancoisOneRegular', Arial, sans-serif;
+  font-weight: normal;
+  font-weight: normal;
+}
+h2 {
+  font-size: 200%;
+  margin: 0 0 0.7em 0;
+}
+h2, h4 {
+  color: #ffc900;
+  margin: 0 !important;
+}
+h3, h4 {
+  font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+  letter-spacing: 1px;
+}
+label, input {
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+/* Element styles */
+body {
+  padding-top: 2%;
+  background: #ffc900 url('../img/skyline.png') repeat-x top;
+}
+input {
+  padding: 10px;
+  width: 14em;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border: 3px #ffc900 solid;
+}
+input:focus {
+  background-color: #fff;
+  border: 2px #b38d00 solid;
+}
+.submit-email {
+  padding: 1%;
+  width: 5em;
+  margin-left: 1%;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  font-weight: bold;
+  background-color: #ffc900;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc900), to(#ffe999));
+  /* Saf4+, Chrome */
+
+  background-image: -webkit-linear-gradient(top, #ffc900, #ffe999);
+  /* Chrome 10+, Saf5.1+, iOS 5+ */
+
+  background-image: -moz-linear-gradient(top, #ffc900, #ffe999);
+  /* FF3.6 */
+
+  background-image: -ms-linear-gradient(top, #ffc900, #ffe999);
+  /* IE10 */
+
+  background-image: -o-linear-gradient(top, #ffc900, #ffe999);
+  /* Opera 11.10+ */
+
+  background-image: linear-gradient(top, #ffc900, #ffe999);
+  /*filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=@first, EndColorStr=@second); /* IE6-IE9 */
+
+  border: 2px #b38d00 solid;
+}
+.submit-email:hover {
+  background-color: #ffe999;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffe999), to(#ffc900));
+  /* Saf4+, Chrome */
+
+  background-image: -webkit-linear-gradient(top, #ffe999, #ffc900);
+  /* Chrome 10+, Saf5.1+, iOS 5+ */
+
+  background-image: -moz-linear-gradient(top, #ffe999, #ffc900);
+  /* FF3.6 */
+
+  background-image: -ms-linear-gradient(top, #ffe999, #ffc900);
+  /* IE10 */
+
+  background-image: -o-linear-gradient(top, #ffe999, #ffc900);
+  /* Opera 11.10+ */
+
+  background-image: linear-gradient(top, #ffe999, #ffc900);
+  /*filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=@first, EndColorStr=@second); /* IE6-IE9 */
+
+}
+.submit-email:active {
+  background-color: #665000;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#665000), to(#ffc900));
+  /* Saf4+, Chrome */
+
+  background-image: -webkit-linear-gradient(top, #665000, #ffc900);
+  /* Chrome 10+, Saf5.1+, iOS 5+ */
+
+  background-image: -moz-linear-gradient(top, #665000, #ffc900);
+  /* FF3.6 */
+
+  background-image: -ms-linear-gradient(top, #665000, #ffc900);
+  /* IE10 */
+
+  background-image: -o-linear-gradient(top, #665000, #ffc900);
+  /* Opera 11.10+ */
+
+  background-image: linear-gradient(top, #665000, #ffc900);
+  /*filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=@first, EndColorStr=@second); /* IE6-IE9 */
+
+}
+/* Main */
+.top {
+  text-align: center;
+  min-height: 200px;
+}
+.points {
+  font-size: 600%;
+  text-shadow: 0 0.1em 0.13em rgba(0, 0, 0, 0.15);
+  font-family: 'FrancoisOneRegular', Arial, sans-serif;
+  font-weight: normal;
+}
+.sign-up {
+  padding: 2% 0 1% 0;
+}
+.skyline-container {
+  position: absolute;
+  z-index: -2;
+}
+.skyline {
+  position: relative;
+}
+/* ============================= */
+/* ! Layout for mobile version   */
+/* ============================= */
+@media handheld, only screen and (max-width: 767px) {
+  body {
+    font-size: 120%;
+    background-image: #ffc900 url('../img/skyline480.png') repeat-x top;
+  }
+  input {
+    padding: 5px;
+    width: 10em;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border: 3px #ffc900 solid;
+  }
+}
+/* ========================================== */
+/* ! Provide higher res assets for iPhone 4   */
+/* ========================================== */
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+  /*	.logo {
+  		background: url(logo2x.jpg) no-repeat;
+  		background-size: 212px 303px;
+  	}*/
+}
