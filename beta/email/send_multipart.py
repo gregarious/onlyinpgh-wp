@@ -5,8 +5,6 @@ from email.mime.text import MIMEText
 
 
 def main(to_address,textfile,htmlfile):
-    # me == my email address
-    # you == recipient's email address
     from_address = "OnlyinPgh.com <contact@onlyinpgh.com>"
 
     # Create message container - the correct MIME type is multipart/alternative.
@@ -44,3 +42,4 @@ def main(to_address,textfile,htmlfile):
 if __name__ == '__main__':
     assert len(sys.argv) == 4
     main(*sys.argv[1:])
+

@@ -17,14 +17,22 @@ function storeEmail($email) {
 						OIP_DB_USER, OIP_DB_PASSWORD);
 		$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
 
-		$query = 'INSERT INTO `oip_sticker_interest` ' .
-					'SET `email_address` = :email';
-
+		$query = 'SELECT * FROM `oip_sticker_interest` ' .
+					'WHERE `email_address` = :email';
 		$statement = $pdo->prepare($query);
 		$statement->execute(
 			array( 'email' =>	trim($email) )
 		);
-		$statement->setFetchMode();
+
+		if($statement->rowCount() < 1) {
+			$query = 'INSERT INTO `oip_sticker_interest` ' .
+						'SET `email_address` = :email';
+
+			$statement = $pdo->prepare($query);
+			$statement->execute(
+				array( 'email' =>	trim($email) )
+			);
+		}
 	}
 	catch(PDOException $e) {  
 		die($e);

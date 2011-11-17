@@ -9,13 +9,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
     //Validate the form key 
     if(isset($_POST['form_key'])) {
     	if($formKey->validate()) { 
-    		require_once('email_store.inc.php');
-    		if(	isset($_POST['email-address']) && 
-    			storeEmail($_POST['email-address']) ) {
-				$formStatus = 'SUBMITTED';
-			}
-			else {
-				$formStatus = 'ERROR';
+    		require_once('email.inc.php');
+    		if(	isset($_POST['email-address']) ) {
+    			$address = trim($_POST['email-address']);
+	    		if(	storeEmail($address) ) {
+					$formStatus = 'SUBMITTED';
+				}
+				else {
+					$formStatus = 'ERROR';
+				}
+				// use a python script to send the welcome email
+				$script = escapeshellarg($_SERVER['DOCUMENT_ROOT'] . '/beta/email/send_multipart.py');
+				$plaintext = escapeshellarg($_SERVER['DOCUMENT_ROOT'] . '/beta/email/message.txt');
+				$htmltext = escapeshellarg($_SERVER['DOCUMENT_ROOT'] . '/beta/email/message.html');
+				$address = escapeshellarg($address);
+
+				exec("python $script $address $plaintext $htmltext");
 			}
     	}
     	else {
