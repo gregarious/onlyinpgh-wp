@@ -17,8 +17,13 @@ class RGCurrency{
         if(is_numeric($text))
             return floatval($text);
 
-        //Removing symbol in unicode format (i.e. &#4444;)
+        //Making sure symbol is in unicode format (i.e. &#4444;)
         $text = preg_replace("/&.*?;/", "", $text);
+
+        //Removing symbol from text
+        $text = str_replace($this->currency["symbol_right"], "", $text);
+        $text = str_replace($this->currency["symbol_left"], "", $text);
+
 
         //Removing all non-numeric characters
         $array = str_split($text);
@@ -26,7 +31,7 @@ class RGCurrency{
         $clean_number = "";
         foreach($array as $char){
 
-            if (($char >= '0' && $char <= '9') || $char=="," || $char==".")
+            if (($char >= '0' && $char <= '9') || $char == $this->currency["decimal_separator"])
                 $clean_number .= $char;
             else if($char == '-')
                 $is_negative = true;

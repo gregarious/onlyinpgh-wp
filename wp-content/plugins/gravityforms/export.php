@@ -39,13 +39,20 @@ class GFExport{
 
                     if($inputType == "checkbox")
                         unset($field["inputs"]);
-                    else if($inputType != "address")
-                        unset($field["addressType"]);
-                    else if($inputType != "date")
-                        unset($field["calendarIconType"]);
-                    else if($field["type"] == $field["inputType"])
-                        unset($field["inputType"]);
 
+                    if($inputType != "address")
+                        unset($field["addressType"]);
+
+                    if($inputType != "date"){
+                        unset($field["calendarIconType"]);
+                        unset($field["dateType"]);
+                    }
+
+                    if($inputType != "creditcard")
+                        unset($field["creditCards"]);
+
+                    if($field["type"] == $field["inputType"])
+                        unset($field["inputType"]);
 
                     if(in_array($inputType, array("checkbox", "radio", "select")) && !rgar($field,"enableChoiceValue")){
                         foreach($field["choices"] as &$choice)
@@ -66,6 +73,7 @@ class GFExport{
                 "forms/form/postCategory" => array("is_attribute" => true),
                 "forms/form/postStatus" => array("is_attribute" => true),
                 "forms/form/postAuthor" => array("is_attribute" => true),
+                "forms/form/postFormat" => array("is_attribute" => true),
                 "forms/form/labelPlacement" => array("is_attribute" => true),
                 "forms/form/confirmation/type" => array("is_attribute" => true),
                 "forms/form/lastPageButton/type" => array("is_attribute" => true),
@@ -87,9 +95,11 @@ class GFExport{
                 "forms/form/fields/field/inputs/input/id" => array("is_attribute" => true),
                 "forms/form/fields/field/inputs/input/name" => array("is_attribute" => true),
                 "forms/form/fields/field/formId" => array("is_hidden" => true),
+                "forms/form/fields/field/descriptionPlacement" => array("is_hidden" => true),
                 "forms/form/fields/field/allowsPrepopulate" => array("is_attribute" => true),
                 "forms/form/fields/field/adminOnly" => array("is_attribute" => true),
                 "forms/form/fields/field/enableChoiceValue" => array("is_attribute" => true),
+                "forms/form/fields/field/enableEnhancedUI" => array("is_attribute" => true),
                 "forms/form/fields/field/conditionalLogic/actionType" => array("is_attribute" => true),
                 "forms/form/fields/field/conditionalLogic/logicType" => array("is_attribute" => true),
                 "forms/form/fields/field/conditionalLogic/rules/rule/fieldId" => array("is_attribute" => true),
@@ -107,6 +117,7 @@ class GFExport{
                 "forms/form/fields/field/choices/choice/value" => array("allow_empty" => true),
                 "forms/form/fields/field/rangeMin" => array("is_attribute" => true),
                 "forms/form/fields/field/rangeMax" => array("is_attribute" => true),
+                "forms/form/fields/field/numberFormat" => array("is_attribute" => true),
                 "forms/form/fields/field/calendarIconType" => array("is_attribute" => true),
                 "forms/form/fields/field/dateFormat" => array("is_attribute" => true),
                 "forms/form/fields/field/dateType" => array("is_attribute" => true),
@@ -115,6 +126,9 @@ class GFExport{
                 "forms/form/fields/field/addressType" => array("is_attribute" => true),
                 "forms/form/fields/field/hideCountry" => array("is_attribute" => true),
                 "forms/form/fields/field/hideAddress2" => array("is_attribute" => true),
+                "forms/form/fields/field/disableQuantity" => array("is_attribute" => true),
+                "forms/form/fields/field/productField" => array("is_attribute" => true),
+                "forms/form/fields/field/enablePrice" => array("is_attribute" => true),
                 "forms/form/fields/field/displayTitle" => array("is_attribute" => true),
                 "forms/form/fields/field/displayCaption" => array("is_attribute" => true),
                 "forms/form/fields/field/displayDescription" => array("is_attribute" => true),
@@ -189,6 +203,7 @@ class GFExport{
                         "choice"=> array("unserialize_as_array" => true),
                         "input"=> array("unserialize_as_array" => true),
                         "routing_item"=> array("unserialize_as_array" => true),
+                        "creditCard"=> array("unserialize_as_array" => true),
                         "routin"=> array("unserialize_as_array" => true) //routin is for backwards compatibility
                         );
         $xml = new RGXML($options);
@@ -253,12 +268,8 @@ class GFExport{
         ?>
         <link rel="stylesheet" href="<?php echo GFCommon::get_base_url()?>/css/admin.css"/>
         <div class="wrap">
-            <img alt="<?php _e("Gravity Forms", "gravityforms") ?>" style="margin: 15px 7px 0pt 0pt; float: left;" src="<?php echo GFCommon::get_base_url() ?>/images/gravity-import-icon-32.png"/>
+        <div class="icon32" id="gravity-import-icon"><br></div>
             <h2><?php _e("Import Forms", "gravityforms") ?></h2>
-
-
-
-
 
             <p class="textleft"><?php
             self::export_links();
@@ -292,7 +303,7 @@ class GFExport{
         ?>
         <link rel="stylesheet" href="<?php echo GFCommon::get_base_url()?>/css/admin.css"/>
         <div class="wrap">
-            <img alt="<?php _e("Gravity Forms", "gravityforms") ?>" style="margin: 15px 7px 0pt 0pt; float: left;" src="<?php echo GFCommon::get_base_url() ?>/images/gravity-export-icon-32.png"/>
+            <div class="icon32" id="gravity-export-icon"><br></div>
             <h2><?php _e("Export Forms", "gravityforms") ?></h2>
             <?php
             self::export_links();
@@ -371,7 +382,9 @@ class GFExport{
         <link rel="stylesheet" href="<?php echo GFCommon::get_base_url()?>/css/admin.css"/>
 
         <div class="wrap">
-            <img alt="<?php _e("Gravity Forms", "gravityforms") ?>" style="margin: 15px 7px 0pt 0pt; float: left;" src="<?php echo GFCommon::get_base_url() ?>/images/gravity-export-icon-32.png"/>
+
+            <div class="icon32" id="gravity-export-icon"><br></div>
+
             <h2><?php _e("Export Form Entries", "gravityforms") ?></h2>
             <?php
             self::export_links();
@@ -445,6 +458,51 @@ class GFExport{
 
     }
 
+    private static function get_field_row_count($form, $exported_field_ids, $entry_count){
+        $list_fields = GFCommon::get_fields_by_type($form, array("list"));
+
+        //only getting fields that have been exported
+        $field_ids = "";
+        foreach($list_fields as $field){
+            if(in_array($field["id"], $exported_field_ids) && rgar($field, "enableColumns"))
+                $field_ids .= $field["id"] . ",";
+        }
+
+        if(empty($field_ids))
+            return array();
+
+        $field_ids = substr($field_ids, 0, strlen($field_ids) -1);
+
+        $page_size = 200;
+        $offset = 0;
+
+        $row_counts = array();
+        global $wpdb;
+        while($entry_count > 0){
+            $sql = "SELECT d.field_number as field_id, ifnull(l.value, d.value) as value
+                    FROM {$wpdb->prefix}rg_lead_detail d
+                    LEFT OUTER JOIN {$wpdb->prefix}rg_lead_detail_long l ON d.id = l.lead_detail_id
+                    WHERE d.form_id={$form["id"]} AND cast(d.field_number as decimal) IN ({$field_ids})
+                    LIMIT {$offset}, {$page_size}";
+
+            $results = $wpdb->get_results($sql, ARRAY_A);
+
+            foreach($results as $result){
+                $list = unserialize($result["value"]);
+                $current_row_count = isset($row_counts[$result["field_id"]]) ? intval($row_counts[$result["field_id"]]) : 0;
+
+                if(is_array($list) && count($list) > $current_row_count ){
+                    $row_counts[$result["field_id"]] = count($list);
+                }
+            }
+
+            $offset += $page_size;
+            $entry_count -= $page_size;
+        }
+
+        return $row_counts;
+    }
+
     public static function start_export($form){
 
         $form_id = $form["id"];
@@ -467,13 +525,27 @@ class GFExport{
         $offset = 0;
 
         //Adding BOM marker for UTF-8
-        $lines= chr(239) . chr(187) . chr(191);
+        $lines = chr(239) . chr(187) . chr(191);
+
+        // set the separater
+        $separator = apply_filters('gform_export_separator_' . $form_id, apply_filters('gform_export_separator', ',', $form_id), $form_id);
+
+        $field_rows = self::get_field_row_count($form, $fields, $entry_count);
 
         //writing header
         foreach($fields as $field_id){
             $field = RGFormsModel::get_field($form, $field_id);
-            $value = '"' . str_replace('"', '""', GFCommon::get_label($field, $field_id)) . '"';
-            $lines .= "$value,";
+            $value = str_replace('"', '""', GFCommon::get_label($field, $field_id)) ;
+
+            $subrow_count = isset($field_rows[$field_id]) ? intval($field_rows[$field_id]) : 0;
+            if($subrow_count == 0){
+                $lines .= '"' . $value . '"' . $separator;
+            }
+            else{
+                for($i = 1; $i <= $subrow_count; $i++){
+                    $lines .= '"' . $value . " " . $i . '"' . $separator;
+                }
+            }
         }
         $lines = substr($lines, 0, strlen($lines)-1) . "\n";
 
@@ -496,9 +568,32 @@ class GFExport{
                                 $long_text = RGFormsModel::get_field_value_long($lead["id"], $field_id);
 
                             $value = !empty($long_text) ? $long_text : $lead[$field_id];
+
                         break;
                     }
-                    $lines .= '"' . str_replace('"', '""', $value) . '",';
+
+                    if(isset($field_rows[$field_id])){
+                        $list = empty($value) ? array() : unserialize($value);
+
+                        foreach($list as $row){
+                            $row_values = array_values($row);
+                            $row_str = implode("|", $row_values);
+                            $lines .= '"' . str_replace('"', '""', $row_str) . '"' . $separator;
+                        }
+
+                        //filling missing subrow columns (if any)
+                        $missing_count = intval($field_rows[$field_id]) - count($list);
+                        for($i=0; $i<$missing_count; $i++)
+                            $lines .= '""' . $separator;
+
+                    }
+                    else{
+                        $value = maybe_unserialize($value);
+                        if(is_array($value))
+                            $value = implode("|", $value);
+
+                        $lines .= '"' . str_replace('"', '""', $value) . '"' . $separator;
+                    }
                 }
                 $lines = substr($lines, 0, strlen($lines)-1);
                 $lines.= "\n";
@@ -526,7 +621,8 @@ class GFExport{
 
             foreach($form["fields"] as &$field){
                 $input_type = RGFormsModel::get_input_type($field);
-                if(in_array($input_type, array("checkbox", "radio", "select"))){
+
+                if(in_array($input_type, array("checkbox", "radio", "select", "multiselect"))){
 
                     //creating inputs array for checkboxes
                     if($input_type == "checkbox" && !isset($field["inputs"]))
