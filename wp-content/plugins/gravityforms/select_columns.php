@@ -1,5 +1,15 @@
 <?php
-require_once (preg_replace("/wp-content.*/","wp-blog-header.php",__FILE__));
+for ( $i = 0; $i < $depth = 10; $i++ ) {
+    $wp_root_path = str_repeat( '../', $i );
+
+    if ( file_exists("{$wp_root_path}wp-load.php" ) ) {
+        require_once("{$wp_root_path}wp-load.php");
+        require_once("{$wp_root_path}wp-admin/includes/admin.php");
+        break;
+    }
+}
+
+auth_redirect();
 
 $form_id = $_GET["id"];
 if(empty($form_id)){
@@ -21,7 +31,7 @@ $form = RGFormsModel::get_form_meta($form_id);
         <script src="<?php echo GFCommon::get_base_url()?>/js/jquery-ui/ui.sortable.js?ver=<?php echo GFCommon::$version ?>"></script>
 
         <style type="text/css">
-        	  body {font-family:"Lucida Grande",Verdana,Arial,sans-serif;}
+            body {font-family:"Lucida Grande",Verdana,Arial,sans-serif;}
             #sortable_available, #sortable_selected { list-style-type: none; margin: 0; padding: 2px; height:250px; border:1px solid #eaeaea; -moz-border-radius:4px; -webkit-border-radius:4px; -khtml-border-radius:4px; border-radius:4px  background-color:#FFF;}
             #sortable_available li, #sortable_selected li { margin: 0 2px 2px 2px; padding:2px; width: 96%; border:1px solid white; cursor:pointer; font-size: 13px;}
             .field_hover { border: 1px dashed #2175A9!important;}
@@ -79,7 +89,7 @@ $form = RGFormsModel::get_form_meta($form_id);
         array_push($form["fields"],array("id" => "created_by" , "label" => __("User", "gravityforms")));
 
         ?>
-        <div class="panel-instructions">Drag &amp; drop to order &amp;select which columns are displayed in the entries table.</div>
+        <div class="panel-instructions"><?php _e("Drag & drop to order and select which columns are displayed in the entries table.", "gravityforms") ?></div>
         <div class="gcolumn_wrapper">
             <div class="gcolumn_container_left">
                 <div class="gform_select_column_heading"><?php _e("Active Columns", "gravityforms"); ?></div>
@@ -101,16 +111,22 @@ $form = RGFormsModel::get_form_meta($form_id);
                 <ul id="sortable_available" class="sortable_connected">
                     <?php
                     foreach($form["fields"] as $field){
+                        if(RGFormsModel::get_input_type($field) == "checkbox" && !in_array($field["id"], $field_ids)){
+                            ?>
+                            <li id="<?php echo $field["id"]?>"><?php echo esc_html(rgar($field,"label")) ?></li>
+                            <?php
+                        }
+
                         if(is_array(rgar($field, "inputs"))){
                             foreach($field["inputs"] as $input){
-                                if(!in_array($input["id"], $field_ids)){
+                                if(!in_array($input["id"], $field_ids) && !($field["type"] == "creditcard" && in_array($input["id"], array(floatval("{$field["id"]}.2"), floatval("{$field["id"]}.3")))) ){
                                     ?>
                                     <li id="<?php echo $input["id"]?>"><?php echo esc_html(GFCommon::get_label($field, $input["id"])) ?></li>
                                     <?php
                                 }
                             }
                         }
-                        else if(!rgar($field, "displayOnly") && !in_array($field["id"], $field_ids)){
+                        else if(!rgar($field, "displayOnly") && !in_array($field["id"], $field_ids) && RGFormsModel::get_input_type($field) != "list"){
                             ?>
                             <li id="<?php echo $field["id"]?>"><?php echo  esc_html($field["label"]) ?></li>
                             <?php

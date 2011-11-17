@@ -17,7 +17,8 @@ class GFSettings{
         ?>
         <link rel="stylesheet" href="<?php echo GFCommon::get_base_url()?>/css/admin.css" />
         <div class="wrap">
-            <img alt="<?php $page_title ?>" src="<?php echo $icon_path?>" style="float:left; margin:15px 7px 0 0;"/>
+
+            <div class="icon32" id="gravity-settings-icon"><br></div>
             <h2><?php echo $page_title ?></h2>
 
         <?php
@@ -54,6 +55,11 @@ class GFSettings{
         if(!GFCommon::ensure_wp_version())
             return;
 
+        if(isset($_GET["setup"])){
+            //forcing setup
+            RGForms::setup(true);
+        }
+
         if(isset($_POST["submit"])){
             check_admin_referer('gforms_update_settings', 'gforms_update_settings');
 
@@ -65,7 +71,9 @@ class GFSettings{
             update_option("rg_gforms_enable_html5", $_POST["gforms_enable_html5"]);
             update_option("rg_gforms_captcha_public_key", $_POST["gforms_captcha_public_key"]);
             update_option("rg_gforms_captcha_private_key", $_POST["gforms_captcha_private_key"]);
-            update_option("rg_gforms_currency", $_POST["gforms_currency"]);
+
+            if(!rgempty("gforms_currency"))
+                update_option("rg_gforms_currency", rgpost("gforms_currency"));
 
 
             //Updating message because key could have been changed
@@ -148,14 +156,18 @@ class GFSettings{
                      <th scope="row"><label for="gforms_enable_html5"><?php _e("Output HTML5", "gravityforms"); ?></label>  <?php gform_tooltip("settings_html5") ?></th>
                     <td>
                         <input type="radio" name="gforms_enable_html5" value="1" <?php echo get_option('rg_gforms_enable_html5') == 1 ? "checked='checked'" : "" ?> id="gforms_enable_html5"/> <?php _e("Yes", "gravityforms"); ?>&nbsp;&nbsp;
-                        <input type="radio" name="gforms_enable_html5" value="0" <?php echo get_option('rg_gforms_enable_html5') == 1 ? "" : "checked='checked'" ?> /><?php _e("No", "gravityforms"); ?><br />
+                        <input type="radio" name="gforms_enable_html5" value="0" <?php echo get_option('rg_gforms_enable_html5') == 1 ? "" : "checked='checked'" ?> /> <?php _e("No", "gravityforms"); ?><br />
                         <?php _e("Set this to No if you would like to disable the plugin from outputting HTML5 form fields.", "gravityforms"); ?>
                     </td>
                 </tr>
                 <tr valign="top">
                     <th scope="row"><label for="gforms_currency"><?php _e("Currency", "gravityforms"); ?></label>  <?php gform_tooltip("settings_currency") ?></th>
                     <td>
-                        <select id="gforms_currency" name="gforms_currency">
+                        <?php
+                        $disabled = apply_filters("gform_currency_disabled", false) ? "disabled='disabled'" : ""
+                        ?>
+
+                        <select id="gforms_currency" name="gforms_currency" <?php echo $disabled ?>>
                             <?php
                                 require_once("currency.php");
                                 $current_currency = GFCommon::get_currency();
@@ -167,6 +179,7 @@ class GFSettings{
                                 }
                             ?>
                         </select>
+                        <?php do_action("gform_currency_setting_message", ""); ?>
                     </td>
                 </tr>
             </table>

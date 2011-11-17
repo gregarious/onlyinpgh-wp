@@ -1,7 +1,5 @@
 <?php
 
-
-
 class GFFormDetail{
 
     public static function forms_page($form_id){
@@ -11,11 +9,12 @@ class GFFormDetail{
         if(!GFCommon::ensure_wp_version())
             return;
 
-        if(RGForms::post("operation") == "delete"){
+        $update_result = "";
+        if(rgpost("operation") == "delete"){
             check_admin_referer('gforms_delete_form', 'gforms_delete_form');
             RGFormsModel::delete_form($form_id);
             ?>
-                <script>
+                <script type="text/javascript">
                 jQuery(document).ready(
                     function(){document.location.href="?page=gf_edit_forms";}
                 );
@@ -23,9 +22,31 @@ class GFFormDetail{
             <?php
             exit;
         }
+        else if(!rgempty("gform_meta")){
+            check_admin_referer("gforms_update_form_{$form_id}", 'gforms_update_form');
+
+            $update_result = self::save_form_info($form_id, rgpost("gform_meta", false));
+        }
+
+        ?>
+        <script type='text/javascript'>
+            /* <![CDATA[
+            *Needed for custom version of thickbox
+            */
+            var thickboxL10n = {
+                loadingAnimation: "<?php echo includes_url() ?>js/thickbox/loadingAnimation.gif",
+                closeImage: "<?php echo includes_url() ?>js/thickbox/tb-close.png"
+            };
+            try{convertEntities(thickboxL10n);}catch(e){};
+            /* ]]> */
+        </script>
+        <?php
+        wp_register_script("gf_thickbox", GFCommon::get_base_url() . "/js/thickbox.js", null, GFCommon::$version);
         wp_register_script("rg_currency", GFCommon::get_base_url() . "/js/gravityforms.js", null, GFCommon::$version);
-        wp_print_scripts(array("jquery-ui-core","jquery-ui-sortable","jquery-ui-tabs","sack","thickbox", "rg_currency"));
-        wp_print_styles(array("thickbox"));
+        wp_register_style("gf_thickbox", GFCommon::get_base_url() . "/js/thickbox.css", null, GFCommon::$version);
+
+        wp_print_scripts(array("jquery-ui-core","jquery-ui-sortable","jquery-ui-tabs","sack","gf_thickbox", "rg_currency"));
+        wp_print_styles(array("gf_thickbox"));
         ?>
         <script src="<?php echo GFCommon::get_base_url() ?>/js/jquery.dimensions.js?ver=<?php echo GFCommon::$version ?>"></script>
         <script src="<?php echo GFCommon::get_base_url() ?>/js/floatmenu_init.js?ver=<?php echo GFCommon::$version ?>"></script>
@@ -37,7 +58,7 @@ class GFFormDetail{
 
         <link rel="stylesheet" href="<?php echo GFCommon::get_base_url() ?>/css/jquery-ui-1.7.2.custom.css?ver=<?php echo GFCommon::$version ?>" type="text/css" />
         <link rel="stylesheet" href="<?php echo GFCommon::get_base_url() ?>/css/admin.css?ver=<?php echo GFCommon::$version ?>" type="text/css" />
-        <script>
+        <script type="text/javascript">
             jQuery(document).ready(
                 function() {
                     jQuery('.datepicker').datepicker({showOn: "both", buttonImage: "<?php echo GFCommon::get_base_url() ?>/images/calendar.png", buttonImageOnly: true});
@@ -124,11 +145,17 @@ class GFFormDetail{
             .field_type input{
                 width:100px;
             }
+            .description-list { margin: 10px 0; padding: 0 20px; }
+            .description-list li { padding: 0; list-style: disc; overflow: visible; }
+            .custom_mask_instructions h5 { margin: 0 0 4px; font-size: 11px; }
+            .custom_mask_instructions span.label { font-size: 11px; display: -moz-inline-stack; display: inline-block; zoom: 1; *display: inline;
+                width: 80px; }
+            .custom_mask_instructions li { margin: 0 0 14px; }
         </style>
 
         <?php
 
-        $form = RGFormsModel::get_form_meta($form_id);
+        $form = !rgempty("meta",$update_result) ? rgar($update_result, "meta") : RGFormsModel::get_form_meta($form_id);
         $form = RGFormsModel::add_default_properties($form);
 
         if($form == null)
@@ -137,19 +164,52 @@ class GFFormDetail{
         $form = apply_filters("gform_admin_pre_render_" . $form_id, apply_filters("gform_admin_pre_render", $form));
 
         if(isset($form['id']))
-            echo "<script>var form = " . GFCommon::json_encode($form) . ";</script>";
+            echo "<script type=\"text/javascript\">var form = " . GFCommon::json_encode($form) . ";</script>";
         else
-            echo "<script>var form = new Form();</script>";
+            echo "<script type=\"text/javascript\">var form = new Form();</script>";
 
         ?>
 
         <?php echo GFCommon::get_remote_message(); ?>
-        <div class="wrap gforms_edit_form">
+        <div class="wrap gforms_edit_form <?php echo GFCommon::get_browser_class() ?>">
 
-            <img alt="<?php _e("Gravity Forms", "gravityforms") ?>" src="<?php echo GFCommon::get_base_url()?>/images/gravity-edit-icon-32.png" class="gtitle_icon"/>
+
+            <div class="icon32" id="gravity-edit-icon"><br></div>
+
+
             <h2><?php echo empty($form_id) ? __("New Form", "gravityforms") : __("Form Editor :", "gravityforms") . " " . esc_html($form["title"]) ?></h2>
 
             <?php RGForms::top_toolbar() ?>
+
+            <?php
+            switch(rgar($update_result, "status")){
+                case "invalid_json" :
+                    ?>
+                    <div class="error_base gform_editor_status" id="after_update_error_dialog">
+                        <?php _e("There was an error while saving your form.", "gravityforms") ?>
+                        <?php printf(__("Please %scontact our support team%s.", "gravityforms"), '<a href="http://www.gravityhelp.com">', '</a>') ?>
+                    </div>
+                    <?php
+                break;
+
+                case "duplicate_title" :
+                    ?>
+                    <div class="error_base gform_editor_status" id="after_update_error_dialog">
+                        <?php _e("The form title you have entered is already taken. Please enter an unique form title.", "gravityforms") ?>
+                    </div>
+                    <?php
+                break;
+                default :
+                    if(!empty($update_result)){
+                        ?>
+                        <div class="updated_base gform_editor_status" id="after_update_dialog">
+                            <strong><?php _e("Form updated successfully.", "gravityforms"); ?></strong>
+                        </div>
+                        <?php
+                    }
+                break;
+            }
+            ?>
 
             <table width="100%">
             <tr>
@@ -159,13 +219,14 @@ class GFFormDetail{
                         <form method="post" id="form_delete">
                             <?php wp_nonce_field('gforms_delete_form', 'gforms_delete_form') ?>
 
-                            <?php if(GFCommon::current_user_can_any("gravityforms_delete_forms")){
-                                $delete_link = '<a href="javascript:void(0);" class="form_delete_icon" title="' . __("Delete this Form", "gravityforms") . '" onclick="if(confirm(\'' . __("Would you like to delete this form and ALL entries associated with it? \'Cancel\' to stop. \'OK\' to delete", "gravityforms") . '\')){jQuery(\'#form_delete\')[0].submit();} else{return false;}">' . __("Delete Form", "gravityforms") . '</a>';
-                                echo apply_filters("gform_form_delete_link", $delete_link);
-                                ?>
 
-                            <?php } ?>
-                            <a class="form_edit_icon edit_icon_collapsed" title="<?php _e("Edit Form's properties", "gravityforms"); ?>"><?php _e("Edit", "gravityforms"); ?></a>
+                            <div class="gform_admin_icons">
+                                <div class="gform_admin_header_title"><?php _e("Form Settings", "gravityforms");
+                                    if(!rgempty("id", $_GET))
+                                        echo " : " . __("Form ID", "gravityforms") . " " . rgget("id") ?>
+                                </div>
+                                <a href="javascript:void(0);" class="form_edit_icon edit_icon_collapsed" title="<?php _e("Edit Form's properties", "gravityforms"); ?>"><?php _e("Edit", "gravityforms"); ?></a>
+                            </div>
 
                             <input type="hidden" value="delete" name="operation"/>
                         </form>
@@ -192,9 +253,9 @@ class GFFormDetail{
                                             <?php _e("Description", "gravityforms"); ?>
                                             <?php gform_tooltip("form_description") ?>
                                         </label>
-                                        <textarea id="form_description_input" class="fieldwidth-3 fieldheight-2" onkeyup="UpdateFormProperty('description', this.value);"/></textarea>
+                                        <textarea id="form_description_input" class="fieldwidth-3 fieldheight-2" onkeyup="UpdateFormProperty('description', this.value);"></textarea>
                                     </li>
-                                    <li>
+                                    <li class="gform_setting_left_half">
                                         <label for="form_label_placement" style="display:block;">
                                             <?php _e("Label Placement", "gravityforms"); ?>
                                             <?php gform_tooltip("form_label_placement") ?>
@@ -203,6 +264,16 @@ class GFFormDetail{
                                             <option value="top_label"><?php _e("Top aligned", "gravityforms"); ?></option>
                                             <option value="left_label"><?php _e("Left aligned", "gravityforms"); ?></option>
                                             <option value="right_label"><?php _e("Right aligned", "gravityforms"); ?></option>
+                                        </select>
+                                    </li>
+                                    <li id='description_placement_setting' class="gform_setting_right_half">
+                                        <label for="form_label_placement" style="display:block;">
+                                            <?php _e("Description Placement", "gravityforms"); ?>
+                                            <?php gform_tooltip("form_description_placement") ?>
+                                        </label>
+                                        <select id="form_description_placement" onchange="UpdateDescriptionPlacement();">
+                                            <option value="below"><?php _e("Below inputs", "gravityforms"); ?></option>
+                                            <option value="above"><?php _e("Above inputs", "gravityforms"); ?></option>
                                         </select>
                                     </li>
                                 </ul>
@@ -246,7 +317,6 @@ class GFFormDetail{
                                                 <div id="form_button_conditional_logic_container" style="display:none; padding-top:10px;">
                                                     <!-- content dynamically created from js.php -->
                                                 </div>
-
                                             </div>
                                         </div>
                                     </li>
@@ -257,23 +327,32 @@ class GFFormDetail{
                                         </label>
                                         <input type="text" id="form_css_class" class="fieldwidth-3"/>
                                     </li>
-                                   <li>
+                                    <li>
                                         <input type="checkbox" id="gform_limit_entries" onclick="ToggleLimitEntry();"/> <label for="gform_limit_entries"><?php _e("Limit number of entries", "gravityforms") ?> <?php gform_tooltip("form_limit_entries") ?></label>
+
                                         <br/>
                                         <div id="gform_limit_entries_container" style="display:none;">
                                             <br/>
                                             <label for="gform_limit_entries_count" style="display:block;">
                                                 <?php _e("Number of Entries", "gravityforms"); ?>
                                             </label>
-                                            <input type="text" id="gform_limit_entries_count"/>
+                                            <input type="text" id="gform_limit_entries_count" style="width:70px;"/>
+                                            &nbsp;
+                                            <select id="gform_limit_entries_period" style="height:22px;">
+                                                <option value=""><?php _e("total entries", "gravityforms")?></option>
+                                                <option value="day"><?php _e("per day", "gravityforms")?></option>
+                                                <option value="week"><?php _e("per week", "gravityforms")?></option>
+                                                <option value="month"><?php _e("per month", "gravityforms")?></option>
+                                                <option value="year"><?php _e("per year", "gravityforms")?></option>
+                                            </select>
                                             <br/><br/>
                                             <label for="form_limit_entries_message" style="display:block;">
                                                 <?php _e("Entry Limit Reached Message", "gravityforms"); ?>
                                             </label>
                                             <textarea id="form_limit_entries_message" class="fieldwidth-3"></textarea>
                                         </div>
-                                   </li>
-                                   <li>
+                                    </li>
+                                    <li>
                                         <input type="checkbox" id="gform_schedule_form" onclick="ToggleSchedule();"/> <label for="gform_schedule_form"><?php _e("Schedule form", "gravityforms") ?> <?php gform_tooltip("form_schedule_form") ?></label>
                                         <br/>
                                         <div id="gform_schedule_form_container" style="display:none;">
@@ -350,8 +429,19 @@ class GFFormDetail{
                                     <li>
                                         <input type="checkbox" id="gform_enable_honeypot" /> <label for="gform_enable_honeypot"><?php _e("Enable anti-spam honeypot", "gravityforms") ?> <?php gform_tooltip("form_honeypot") ?></label>
                                     </li>
-                                     <li>
+                                    <li>
                                         <input type="checkbox" id="gform_enable_animation" /> <label for="gform_enable_animation"><?php _e("Enable animation", "gravityforms") ?> <?php gform_tooltip("form_animation") ?></label>
+                                    </li>
+                                    <li>
+                                        <input type="checkbox" id="gform_require_login" onclick="ToggleRequireLogin();"/> <label for="gform_require_login"><?php _e("Require user to be logged in", "gravityforms") ?> <?php gform_tooltip("form_require_login") ?></label>
+                                        <br/>
+                                        <div id="gform_require_login_container" style="display:none;">
+                                            <br/>
+                                            <label for="gform_require_login_message" style="display:block;">
+                                                <?php _e("Require Login Message", "gravityforms"); ?> <?php gform_tooltip("form_require_login_message") ?>
+                                            </label>
+                                            <textarea id="gform_require_login_message" class="fieldwidth-3"></textarea>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -382,7 +472,7 @@ class GFFormDetail{
                                                 <div>
                                                     <?php GFCommon::insert_variables($form["fields"], "form_confirmation_message"); ?>
                                                 </div>
-                                                <textarea id="form_confirmation_message" style="width:400px; height:300px;" /></textarea>
+                                                <textarea id="form_confirmation_message" style="width:400px; height:300px;" ></textarea>
                                                 <div style="margin-top:5px;">
                                                     <input type="checkbox" id="form_disable_autoformatting" /> <label for="form_disable_autoformatting"><?php _e("Disable Auto-formatting", "gravityforms") ?> <?php gform_tooltip("form_confirmation_autoformat") ?></label>
                                                 </div>
@@ -390,7 +480,7 @@ class GFFormDetail{
 
                                             <div id="form_confirmation_page_container" style="margin-top:5px;">
                                                 <div>
-                                                    <?php wp_dropdown_pages(array("name" => "form_confirmation_page", "show_option_none" => "Select a page")); ?>
+                                                    <?php wp_dropdown_pages(array("name" => "form_confirmation_page", "show_option_none" => __("Select a page", "gravityforms"))); ?>
                                                 </div>
                                             </div>
 
@@ -403,7 +493,7 @@ class GFFormDetail{
                                                     <br/>
                                                     <div id="form_redirect_querystring_container" style="display:none;">
                                                         <div style="margin-top:6px;">
-                                                            <?php GFCommon::insert_variables($form["fields"], "form_redirect_querystring", true); ?>
+                                                            <?php GFCommon::insert_variables($form["fields"], "form_redirect_querystring", true, "", "", 40, null, "url"); ?>
                                                         </div>
                                                         <textarea name="form_redirect_querystring" id="form_redirect_querystring" style="width:98%; height:100px;"></textarea><br/>
                                                         <div class="instruction"><?php _e("Sample: phone={Phone:1}&email{Email:2}", "gravityforms"); ?></div>
@@ -512,8 +602,10 @@ class GFFormDetail{
                             </div>
                         </div>
                     </div>
-
-                    <ul id="gform_fields" class="<?php echo $form["labelPlacement"] ?>" style="position: relative;">
+                    <?php
+                    $description_class = rgar($form,"descriptionPlacement") == "above" ? "description_above" : "description_below";
+                    ?>
+                    <ul id="gform_fields" class="<?php echo rgar($form,"labelPlacement"). " " . $description_class ?>" style="position: relative;">
                         <?php
                         if(is_array($form["fields"]))
                         {
@@ -575,18 +667,10 @@ class GFFormDetail{
                     </div>
 
                     <div>
-                        <?php
-                            $button_text = rgar($form,"id") > 0 ? __("Update Form", "gravityforms") : __("Save Form", "gravityforms");
-                            $save_button = '<input type="button" class="button-primary gfbutton" value="' . $button_text . '" onclick="SaveForm();" />';
-                            $save_button = apply_filters("gform_save_form_button", $save_button);
-                            echo $save_button;
-                        ?>
-                        <span id="please_wait_container" style="display:none; margin-left:15px;">
-                            <img src="<?php echo GFCommon::get_base_url()?>/images/loading.gif"> <?php _e("Saving form. Please wait...", "gravityforms"); ?>
-                        </span>
+
                         <div id="after_insert_dialog" style="display:none;">
                             <h3><?php _e("You have successfully saved your form!", "gravityforms"); ?></h3>
-                            <p><?php _e("What do you want to do next?", "gravityforms"); ?></p>
+                            <p><?php _e("What would you like to do next?", "gravityforms"); ?></p>
                             <div class="new-form-option"><a title="<?php _e("Preview this form", "gravityforms"); ?>" id="preview_form_link" href="<?php echo GFCommon::get_base_url() ?>/preview.php?id={formid}" target="_blank"><?php _e("Preview this Form", "gravityforms"); ?></a></div>
 
                             <?php if(GFCommon::current_user_can_any("gravityforms_edit_forms")){ ?>
@@ -597,21 +681,6 @@ class GFFormDetail{
 
                             <div class="new-form-option"><a title="<?php _e("I am done. Take me back to form list", "gravityforms"); ?>" href="?page=gf_edit_forms"><?php _e("Return to Form List", "gravityforms"); ?></a></div>
 
-                        </div>
-                        <div class="updated_base" id="after_update_dialog" style="padding:10px 10px 16px 10px; display:none;">
-                            <strong><?php _e("Form updated successfully.", "gravityforms"); ?></strong><br />
-                            <a title="<?php _e("Continue editing this form", "gravityforms"); ?>" id="continue_form_link" href="?page=gf_edit_forms&id=<?php echo rgar($form, "id")?>" onclick="jQuery('#after_update_dialog').slideUp();"><?php _e("Continue Editing", "gravityforms"); ?></a> |
-                            <a title="<?php _e("Setup email notifications for this form", "gravityforms"); ?>" href="?page=gf_edit_forms&view=notification&id=<?php echo absint(rgar($form, "id")) ?>"><?php _e("Setup Email Notifications", "gravityforms"); ?></a> |
-
-                            <?php if(GFCommon::current_user_can_any("gravityforms_view_entries")){ ?>
-                                <a title="<?php _e("View this form's entries", "gravityforms"); ?>" href="?page=gf_entries&view=entries&id=<?php echo absint(rgar($form, "id")) ?>"><?php _e("View Entries", "gravityforms"); ?></a> |
-                            <?php } ?>
-
-                            <a title="<?php _e("Preview this form", "gravityforms"); ?>" href="<?php echo GFCommon::get_base_url() ?>/preview.php?id=<?php echo absint(rgar($form, "id")) ?>" target="_blank"><?php _e("Preview Form", "gravityforms"); ?></a>
-                        </div>
-                        <div class="error_base" id="after_update_error_dialog" style="padding:10px 10px 16px 10px; display:none;">
-                            There was an error while saving your form, most likely caused by a plugin conflict.
-                            Please <a href="http://www.gravityhelp.com">contact us</a> and we will be happy to help you get this corrected.
                         </div>
 
 
@@ -654,8 +723,9 @@ class GFFormDetail{
                                 <select id="product_field_type" onchange="if(jQuery(this).val() == '') return; jQuery('#field_settings').slideUp(function(){StartChangeProductType(jQuery('#product_field_type').val());});">
                                     <option value="singleproduct"><?php _e("Single Product", "gravityforms"); ?></option>
                                     <option value="select"><?php _e("Drop Down", "gravityforms"); ?></option>
-                                    <option value="radio"><?php _e("Multiple Choice", "gravityforms"); ?></option>
+                                    <option value="radio"><?php _e("Radio Buttons", "gravityforms"); ?></option>
                                     <option value="price"><?php _e("User Defined Price", "gravityforms"); ?></option>
+                                    <option value="hiddenproduct"><?php _e("Hidden", "gravityforms"); ?></option>
                                 </select>
                             </li>
                             <?php
@@ -669,7 +739,7 @@ class GFFormDetail{
                                 <select id="shipping_field_type" onchange="if(jQuery(this).val() == '') return; jQuery('#field_settings').slideUp(function(){StartChangeShippingType(jQuery('#shipping_field_type').val());});">
                                     <option value="singleshipping"><?php _e("Single Method", "gravityforms"); ?></option>
                                     <option value="select"><?php _e("Drop Down", "gravityforms"); ?></option>
-                                    <option value="radio"><?php _e("Multiple Choice", "gravityforms"); ?></option>
+                                    <option value="radio"><?php _e("Radio Buttons", "gravityforms"); ?></option>
                                 </select>
                             </li>
                             <?php
@@ -704,7 +774,7 @@ class GFFormDetail{
                                 <select id="option_field_type" onchange="if(jQuery(this).val() == '') return; jQuery('#field_settings').slideUp(function(){StartChangeInputType(jQuery('#option_field_type').val());});">
                                     <option value="select"><?php _e("Drop Down", "gravityforms"); ?></option>
                                     <option value="checkbox"><?php _e("Checkboxes", "gravityforms"); ?></option>
-                                    <option value="radio"><?php _e("Multiple Choice", "gravityforms"); ?></option>
+                                    <option value="radio"><?php _e("Radio Buttons", "gravityforms"); ?></option>
                                 </select>
                             </li>
                              <?php
@@ -718,7 +788,7 @@ class GFFormDetail{
                                 <select id="donation_field_type" onchange="if(jQuery(this).val() == '') return; jQuery('#field_settings').slideUp(function(){StartChangeDonationType(jQuery('#donation_field_type').val());});">
                                     <option value="select"><?php _e("Drop Down", "gravityforms"); ?></option>
                                     <option value="donation"><?php _e("User Defined Price", "gravityforms"); ?></option>
-                                    <option value="radio"><?php _e("Multiple Choice", "gravityforms"); ?></option>
+                                    <option value="radio"><?php _e("Radio Buttons", "gravityforms"); ?></option>
                                 </select>
                             </li>
                             <?php
@@ -744,7 +814,7 @@ class GFFormDetail{
                                     <?php _e("Content", "gravityforms"); ?>
                                     <?php gform_tooltip("form_field_content") ?>
                                 </label>
-                                <textarea id="field_content" class="fieldwidth-3 fieldheight-1" onkeyup="SetFieldProperty('content', this.value);"/></textarea>
+                                <textarea id="field_content" class="fieldwidth-3 fieldheight-1" onkeyup="SetFieldProperty('content', this.value);"></textarea>
                             </li>
 
                             <?php
@@ -843,8 +913,10 @@ class GFFormDetail{
                                     <option value="text"><?php _e("Single line text", "gravityforms"); ?></option>
                                     <option value="textarea"><?php _e("Paragraph Text", "gravityforms"); ?></option>
                                     <option value="select"><?php _e("Drop Down", "gravityforms"); ?></option>
+                                    <option value="multiselect"><?php _e("Multi Select", "gravityforms"); ?></option>
                                     <option value="number"><?php _e("Number", "gravityforms"); ?></option>
-                                    <option value="radio"><?php _e("Multiple Choice", "gravityforms"); ?></option>
+                                    <option value="checkbox"><?php _e("Checkboxes", "gravityforms"); ?></option>
+                                    <option value="radio"><?php _e("Radio Buttons", "gravityforms"); ?></option>
                                     <option value="hidden"><?php _e("Hidden", "gravityforms"); ?></option>
 
                                     <option value="" class="option_header"><?php _e("Advanced Fields", "gravityforms"); ?></option>
@@ -854,6 +926,7 @@ class GFFormDetail{
                                     <option value="website"><?php _e("Website", "gravityforms"); ?></option>
                                     <option value="email"><?php _e("Email", "gravityforms"); ?></option>
                                     <option value="fileupload"><?php _e("File Upload", "gravityforms"); ?></option>
+                                    <option value="list"><?php _e("List", "gravityforms"); ?></option>
                                 </select>
                             </li>
                             <?php
@@ -867,8 +940,9 @@ class GFFormDetail{
                                 <select id="post_tag_type" onchange="if(jQuery(this).val() == '') return; jQuery('#field_settings').slideUp(function(){StartChangeInputType(jQuery('#post_tag_type').val());});">
                                     <option value="text"><?php _e("Single line text", "gravityforms"); ?></option>
                                     <option value="select"><?php _e("Drop Down", "gravityforms"); ?></option>
+                                    <option value="multiselect"><?php _e("Multi Select", "gravityforms"); ?></option>
                                     <option value="checkbox"><?php _e("Checkboxes", "gravityforms"); ?></option>
-                                    <option value="radio"><?php _e("Multiple Choice", "gravityforms"); ?></option>
+                                    <option value="radio"><?php _e("Radio Buttons", "gravityforms"); ?></option>
                                 </select>
                             </li>
                             <?php
@@ -980,9 +1054,9 @@ class GFFormDetail{
                                     <?php gform_tooltip("form_field_post_status") ?>
                                 </label>
                                 <select id="field_post_status" name="field_post_status">
-                                    <option value="draft">Draft</option>
-                                    <option value="pending">Pending Review</option>
-                                    <option value="publish">Published</option>
+                                    <option value="draft"><?php _e("Draft", "gravityforms") ?></option>
+                                    <option value="pending"><?php _e("Pending Review", "gravityforms") ?></option>
+                                    <option value="publish"><?php _e("Published", "gravityforms") ?></option>
                                 </select>
                             </li>
                             <?php
@@ -1003,9 +1077,39 @@ class GFFormDetail{
                                     <label for="gfield_current_user_as_author" class="inline"><?php _e("Use logged in user as author", "gravityforms"); ?> <?php gform_tooltip("form_field_current_user_as_author") ?></label>
                                 </div>
                             </li>
+
+                            <?php
+                            do_action("gform_field_standard_settings", 775, $form_id);
+                            ?>
+
+                            <?php if(current_theme_supports('post-formats')) { ?>
+
+                            <li class="post_format_setting field_setting">
+                                <label for="field_post_format">
+                                    <?php _e("Post Format", "gravityforms"); ?>
+                                    <?php gform_tooltip("form_field_post_format") ?>
+                                </label>
+
+                                <?php
+
+                                $post_formats = get_theme_support('post-formats');
+                                $post_formats_dropdown = '<option value="0">Standard</option>';
+                                foreach($post_formats[0] as $post_format){
+                                    $post_formats_dropdown .= "<option value='$post_format'>" . ucfirst($post_format) . "</option>";
+                                }
+
+                                echo '<select name="field_post_format" id="field_post_format">' . $post_formats_dropdown . '</select>';
+
+                                ?>
+
+                            </li>
+
+                            <?php } // if theme supports post formats ?>
+
                             <?php
                             do_action("gform_field_standard_settings", 800, $form_id);
                             ?>
+
                             <li class="post_category_setting field_setting">
                                 <label for="field_post_category">
                                     <?php _e("Post Category", "gravityforms"); ?>
@@ -1134,6 +1238,16 @@ class GFFormDetail{
                                     <?php _e("Description", "gravityforms"); ?>
                                 </label>
                             </li>
+
+                            <?php
+                            do_action("gform_field_standard_settings", 1025, $form_id);
+                            ?>
+
+                            <li class="post_image_featured_image field_setting">
+                                <input type="checkbox" id="gfield_featured_image" onclick="SetFeaturedImage();" />
+                                <label for="gfield_featured_image" class="inline"><?php _e('Set as Featured Image', 'gravityforms'); ?> <?php gform_tooltip("form_field_featured_image") ?></label>
+                            </li>
+
                             <?php
                             do_action("gform_field_standard_settings", 1050, $form_id);
                             ?>
@@ -1251,6 +1365,7 @@ class GFFormDetail{
                                 <select id="field_date_input_type" onchange="SetDateInputType(jQuery(this).val());">
                                     <option value="datefield"><?php _e("Date Field", "gravityforms") ?></option>
                                     <option value="datepicker"><?php _e("Date Picker", "gravityforms") ?></option>
+                                    <option value="datedropdown"><?php _e("Date Drop Down", "gravityforms") ?></option>
                                 </select>
                                 <div id="date_picker_container">
 
@@ -1289,6 +1404,11 @@ class GFFormDetail{
                                 <select id="field_date_format" onchange="SetDateFormat(jQuery(this).val());">
                                     <option value="mdy">mm/dd/yyyy</option>
                                     <option value="dmy">dd/mm/yyyy</option>
+                                    <option value="dmy_dash">dd-mm-yyyy</option>
+                                    <option value="dmy_dot">dd.mm.yyyy</option>
+                                    <option value="ymd_slash">yyyy/mm/dd</option>
+                                    <option value="ymd_dash">yyyy-mm-dd</option>
+                                    <option value="ymd_dot">yyyy.mm.dd</option>
                                 </select>
                             </li>
                             <?php
@@ -1302,9 +1422,50 @@ class GFFormDetail{
                                <input type="text" id="field_file_extension" size="40" onkeyup="SetFieldProperty('allowedExtensions', this.value);"/>
                                <div><small><?php _e("Separated with commas (i.e. jpg, gif, png, pdf)", "gravityforms"); ?></small></div>
                             </li>
+
+                            <?php
+                            do_action("gform_field_standard_settings", 1275, $form_id);
+                            ?>
+                            <li class="columns_setting field_setting">
+
+                                <input type="checkbox" id="field_columns_enabled" onclick="SetFieldProperty('enableColumns', this.checked); ToggleColumns();"/>
+                                <label for="field_columns_enabled" class="inline"><?php _e("Enable multiple columns", "gravityforms") ?><?php gform_tooltip("form_field_columns") ?></label>
+                                <br />
+                                <div id="gfield_settings_columns_container">
+                                    <ul id="field_columns"></ul>
+                                </div>
+                            </li>
+
+                            <?php
+                            do_action("gform_field_standard_settings", 1287, $form_id);
+                            ?>
+                            <li class="maxrows_setting field_setting">
+                                <label for="field_maxrows">
+                                    <?php _e("Maximum Rows", "gravityforms"); ?>
+                                    <?php gform_tooltip("form_field_maxrows") ?>
+                                </label>
+                                <input type="text" id="field_maxrows" onkeyup="SetFieldProperty('maxRows', this.value);"/></input>
+                            </li>
+
                             <?php
                             do_action("gform_field_standard_settings", 1300, $form_id);
                             ?>
+
+                            <li class="time_format_setting field_setting">
+                                <label for="field_time_format">
+                                    <?php _e("Time Format", "gravityforms"); ?>
+                                    <?php gform_tooltip("form_field_time_format") ?>
+                                </label>
+                                <select id="field_time_format" onchange="SetTimeFormat(this.value);">
+                                    <option value="12"><?php _e("12 hour", "gravityforms") ?></option>
+                                    <option value="24"><?php _e("24 hour", "gravityforms") ?></option>
+                                </select>
+
+                            </li>
+                            <?php
+                            do_action("gform_field_standard_settings", 1325, $form_id);
+                            ?>
+
                             <li class="phone_format_setting field_setting">
                                 <label for="field_phone_format">
                                     <?php _e("Phone Format", "gravityforms"); ?>
@@ -1331,8 +1492,7 @@ class GFFormDetail{
                                 </div>
 
                                 <?php $window_title = __("Bulk Add / Predefined Choices" , "gravityforms"); ?>
-                                <a title="<?php echo $window_title ?>" href="javascript:void(0);" onclick="tb_show('<?php echo esc_js($window_title) ?>', '#TB_inline?height=500&amp;width=600&amp;inlineId=gfield_bulk_add', ''); return false;" class="button"><?php echo $window_title ?></a>
-
+                                <input type='button' value='<?php echo esc_attr($window_title) ?>' onclick="tb_show('<?php echo esc_js($window_title) ?>', '#TB_inline?height=500&amp;width=600&amp;inlineId=gfield_bulk_add', '');" class="button"/>
 
                                 <div id="gfield_bulk_add" style="display:none;">
                                     <div>
@@ -1364,19 +1524,20 @@ class GFFormDetail{
 
                                         );
                                         $predefined_choices = apply_filters("gform_predefined_choices_" . rgar($form, "id"), apply_filters("gform_predefined_choices", $predefined_choices));
-                                        ?>
-                                        <script type="text/javascript">
-                                            var gform_predefined_choices = <?php echo GFCommon::json_encode($predefined_choices) ?>;
-                                        </script>
 
-                                <div class="panel-instructions">Select a category and customize the predefined choices or paste your own list to bulk add choices.</div>
+                                        $custom_choices = RGFormsModel::get_custom_choices();
+
+                                        ?>
+
+                                        <div class="panel-instructions"><?php _e("Select a category and customize the predefined choices or paste your own list to bulk add choices.", "gravityforms") ?></div>
+
                                         <div class="bulk-left-panel">
-                                            <ul>
+                                            <ul id="bulk_items">
                                             <?php
                                             foreach(array_keys($predefined_choices) as $name){
                                                 $key = str_replace("'", "\'", $name);
                                             ?>
-                                                <li><a href="javascript:void(0);" onclick="jQuery('#gfield_bulk_add_input').val(gform_predefined_choices['<?php echo $key ?>'].join('\n'));" class="bulk-choice"><?php echo $name ?></a>
+                                                <li><a href="#" onclick="SelectPredefinedChoice('<?php echo $key ?>');" class="bulk-choice"><?php echo $name ?></a>
                                             <?php
                                             }
                                             ?>
@@ -1385,18 +1546,51 @@ class GFFormDetail{
                                         <div class="bulk-arrow-mid"></div>
                                         <textarea id="gfield_bulk_add_input"></textarea>
                                         <br style="clear:both;"/>
-
-                                        <div class="panel-buttons">
-                                            <input type="button" onclick="InsertBulkChoices(jQuery('#gfield_bulk_add_input').val().split('\n')); tb_remove();" class="button-primary" value="<?php _e("Update Choices", "gravityforms") ?>" />&nbsp;
+                                        <div class="panel-buttons" style="">
+                                            <input type="button" onclick="InsertBulkChoices(jQuery('#gfield_bulk_add_input').val().split('\n')); tb_remove();" class="button-primary" value="<?php _e("Insert Choices", "gravityforms") ?>" />&nbsp;
                                             <input type="button" onclick="tb_remove();" class="button" value="Cancel" />
                                         </div>
+
+                                        <div class="panel-custom" style="">
+                                            <a href="#" onclick="LoadCustomChoicesPanel(true, 'slow');" id="bulk_save_as"><?php _e("Save as new custom choice", "gravityforms") ?></a>
+                                            <div id="bulk_custom_edit" style="display:none;">
+                                                <?php _e("Save as", "gravityforms"); ?> <input type="text" id="custom_choice_name" value="<?php _e("Enter name", "gravityforms"); ?>" onfocus="if(this.value == '<?php _e("enter name", "gravityforms"); ?>') this.value='';">&nbsp;&nbsp;
+                                                <a href="#" onclick="SaveCustomChoices();" class="button" id="bulk_save_button"><?php _e("Save", "gravityforms") ?></a>&nbsp;
+                                                <a href="#" onclick="CloseCustomChoicesPanel('slow');" id="bulk_cancel_link"><?php _e("Cancel", "gravityforms") ?></a>
+                                                <a href="#" onclick="DeleteCustomChoice();" id="bulk_delete_link"><?php _e("Delete", "gravityforms") ?></a>
+                                            </div>
+                                            <div id="bulk_custom_message" class="alert_yellow" style="display:none; margin-top:8px; padding: 8px;">
+                                                <!--Message will be added via javascript-->
+                                            </div>
+                                        </div>
+
+                                        <script type="text/javascript">
+                                            var gform_selected_custom_choice = "";
+                                            var gform_custom_choices = <?php echo GFCommon::json_encode($custom_choices) ?>;
+                                            var gform_predefined_choices = <?php echo GFCommon::json_encode($predefined_choices) ?>;
+                                        </script>
+
                                     </div>
                                 </div>
-
                             </li>
                             <?php
                             do_action("gform_field_standard_settings", 1362, $form_id);
                             ?>
+
+                            <li class="other_choice_setting field_setting">
+
+                                <input type="checkbox" id="field_other_choice" onclick="var value = jQuery(this).is(':checked'); SetFieldProperty('enableOtherChoice', value); UpdateFieldChoices(GetInputType(field));" />
+                                <label for="field_other_choice" class="inline">
+                                    <?php _e('Enable "other" choice', "gravityforms"); ?>
+                                    <?php gform_tooltip("form_field_other_choice") ?>
+                                </label>
+
+                            </li>
+
+                            <?php
+                            do_action("gform_field_standard_settings", 1368, $form_id);
+                            ?>
+
                             <li class="email_confirm_setting field_setting">
                                 <input type="checkbox" id="gfield_email_confirm_enabled" onclick="SetEmailConfirmation(this.checked);"/>
                                 <label for="gfield_email_confirm_enabled" class="inline">
@@ -1414,6 +1608,18 @@ class GFFormDetail{
                                     <?php gform_tooltip("form_field_password_strength_enable") ?>
                                 </label>
                             </li>
+
+                             <?php
+                            do_action("gform_field_standard_settings", 1387, $form_id);
+                            ?>
+                            <li class="enable_enhanced_ui_setting field_setting">
+                                <input type="checkbox" id="gfield_enable_enhanced_ui" onclick="SetFieldProperty('enableEnhancedUI', jQuery(this).is(':checked') ? 1 : 0);"/>
+                                <label for="gfield_enable_enhanced_ui" class="inline">
+                                    <?php _e("Enable enhanced user interface", "gravityforms"); ?>
+                                    <?php gform_tooltip("form_field_enable_enhanced_ui") ?>
+                                </label>
+                            </li>
+
                             <li id="gfield_min_strength_container">
                                 <label for="gfield_min_strength">
                                     <?php _e("Minimum Strength", "gravityforms"); ?>
@@ -1431,16 +1637,157 @@ class GFFormDetail{
                             <?php
                             do_action("gform_field_standard_settings", 1400, $form_id);
                             ?>
+
+                            <li class="number_format_setting field_setting">
+                                <label for="field_number_format">
+                                    <?php _e("Number Format", "gravityforms"); ?>
+                                    <?php gform_tooltip("form_field_number_format") ?>
+                                </label>
+                                <select id="field_number_format" onchange="SetFieldProperty('numberFormat', this.value);">
+                                    <option value="decimal_dot">9,999.99</option>
+                                    <option value="decimal_comma">9.999,99</option>
+                                </select>
+
+                            </li>
+
+                            <?php do_action("gform_field_standard_settings", 1425, $form_id); ?>
+
                             <li class="description_setting field_setting">
                                 <label for="field_description">
                                     <?php _e("Description", "gravityforms"); ?>
                                     <?php gform_tooltip("form_field_description") ?>
                                 </label>
-                                <textarea id="field_description" class="fieldwidth-3  fieldheight-2" onkeyup="SetFieldDescription(this.value);"/></textarea>
+                                <textarea id="field_description" class="fieldwidth-3 fieldheight-2" onkeyup="SetFieldDescription(this.value);"></textarea>
+                            </li>
+
+                            <?php do_action("gform_field_standard_settings", 1430, $form_id); ?>
+                            <li class="credit_card_setting field_setting">
+                                <label>
+                                    <?php _e("Supported Credit Cards", "gravityforms"); ?>
+                                    <?php gform_tooltip("form_field_credit_cards") ?>
+                                </label>
+                                <ul>
+                                <?php $cards = GFCommon::get_card_types();
+                                foreach($cards as $card) { ?>
+
+                                    <li>
+                                        <input type="checkbox" id="field_credit_card_<?php echo $card['slug']; ?>" value="<?php echo $card['slug']; ?>" onclick="SetCardType(this, this.value);" />
+                                        <label for="field_credit_card_<?php echo $card['slug']; ?>" class="inline"><?php echo $card['name']; ?></label>
+                                    </li>
+
+                                <?php } ?>
+                                </ul>
                             </li>
                             <?php
-                            do_action("gform_field_standard_settings", 1450, $form_id);
+                            do_action("gform_field_standard_settings", 1435, $form_id);
                             ?>
+                            <li class="credit_card_style_setting field_setting">
+                                <label for="credit_card_style">
+                                    <?php _e("Card Icon Style", "gravityforms"); ?>
+                                    <?php gform_tooltip("form_field_card_style") ?>
+                                </label>
+                                <select id="credit_card_style" onchange="SetFieldProperty('creditCardStyle', this.value);">
+                                    <option value="style1"><?php _e("Standard", "gravityforms") ?></option>
+                                    <option value="style2"><?php _e("3D", "gravityforms") ?></option>
+                                </select>
+                            </li>
+
+                            <?php do_action("gform_field_standard_settings", 1440, $form_id); ?>
+
+                            <li class="input_mask_setting field_setting">
+
+                                <input type="checkbox" id="field_input_mask" onclick="ToggleInputMask();"/>
+                                <label for="field_input_mask" class="inline">
+                                    <?php _e("Input Mask", "gravityforms"); ?>
+                                    <?php gform_tooltip("form_field_mask") ?>
+                                </label><br />
+
+                                <div id="gform_input_mask">
+
+                                    <br />
+
+                                    <div style="width:100px; float:left;">
+                                        <input type="radio" name="field_mask_option" id="field_mask_standard" size="10" onclick="ToggleInputMaskOptions();" />
+                                        <label for="field_mask_standard" class="inline">
+                                            <?php _e("Standard", "gravityforms"); ?>
+                                        </label>
+                                    </div>
+                                    <div style="width:100px; float:left;">
+                                        <input type="radio" name="field_mask_option" id="field_mask_custom" size="10" onclick="ToggleInputMaskOptions();" />
+                                        <label for="field_mask_custom" class="inline">
+                                            <?php _e("Custom", "gravityforms"); ?>
+                                        </label>
+                                    </div>
+
+                                    <div class="clear"></div>
+
+                                    <input type="text" id="field_mask_text" size="35" onkeyup="SetFieldProperty('inputMaskValue', this.value);" />
+                                    <p class="mask_text_description" style="margin:5px 0 0;">
+                                        <?php _e("Enter a custom mask", "gravityforms") ?>.
+                                        <a href="#" onclick="tb_show('<?php _e("Custom Mask Instructions", "gravityforms"); ?>', '#TB_inline?width=350&amp;inlineId=custom_mask_instructions', '');"><?php _e("Help", "gravityhelp") ?></a>
+                                    </p>
+                                    <div id="custom_mask_instructions" style="display:none;">
+                                        <div class="custom_mask_instructions">
+
+                                            <h4><?php _e("Usage", "gravityforms") ?></h4>
+                                            <ul class="description-list">
+                                                <li><?php _e("Use a <em>'9'</em> to indicate a numerical character.", "gravityforms") ?></li>
+                                                <li><?php _e("Use a lower case <em>'a'</em> to indicate an alphabetical character.", "gravityforms") ?></li>
+                                                <li><?php _e("Use an asterick <em>'*'</em> to indicate any alphanumeric character.", "gravityforms") ?></li>
+                                                <li><?php _e("Use a question mark <em>'?'</em> to indicate optional characters. <em>Note:</em> All characters after the question mark will be optional.", "gravityforms") ?></li>
+                                                <li><?php _e("All other characters are literal values and will be displayed automatically.", "gravityforms") ?></li>
+                                            </ul>
+
+                                            <h4><?php _e("Examples", "gravityforms") ?></h4>
+                                            <ul class="examples-list">
+                                                <li>
+                                                    <h5><?php _e("Date", "gravityforms") ?></h5>
+                                                    <span class="label"><?php _e("Mask", "gravityforms") ?></span> <code>99/99/9999</code><br />
+                                                    <span class="label"><?php _e("Valid Input", "gravityforms") ?></span> <code>10/21/2011</code>
+                                                </li>
+                                                <li>
+                                                    <h5><?php _e("Social Security Number", "gravityforms") ?></h5>
+                                                    <span class="label"><?php _e("Mask", "gravityforms") ?></span> <code>999-99-9999</code><br />
+                                                    <span class="label"><?php _e("Valid Input", "gravityforms") ?></span> <code>987-65-4329</code>
+                                                </li>
+                                                <li>
+                                                    <h5><?php _e("Course Code", "gravityforms") ?></h5>
+                                                    <span class="label"><?php _e("Mask", "gravityforms") ?></span> <code>aaa 999</code><br />
+                                                    <span class="label"><?php _e("Valid Input", "gravityforms") ?></span> <code>BIO 101</code>
+                                                </li>
+                                                <li>
+                                                    <h5><?php _e("License Key", "gravityforms") ?></h5>
+                                                    <span class="label"><?php _e("Mask", "gravityforms") ?></span> <code>***-***-***</code><br />
+                                                    <span class="label"><?php _e("Valid Input", "gravityforms") ?></span> <code>a9a-f0c-28Q</code>
+                                                </li>
+                                                <li>
+                                                    <h5><?php _e("Zip Code w/ Optional Plus Four", "gravityforms") ?></h5>
+                                                    <span class="label"><?php _e("Mask", "gravityforms") ?></span> <code>99999?-9999</code><br />
+                                                    <span class="label"><?php _e("Valid Input", "gravityforms") ?></span> <code>23462</code> or <code>23462-4062</code>
+                                                </li>
+                                            </ul>
+
+                                        </div>
+                                    </div>
+
+                                    <select id="field_mask_select" onchange="SetFieldProperty('inputMaskValue', jQuery(this).val());">
+                                        <option value=""><?php _e("Select a Mask", "gravityforms"); ?></option>
+                                        <?php
+                                            $masks = RGFormsModel::get_input_masks();
+                                            foreach($masks as $mask_name => $mask_value){
+                                                ?>
+                                                <option value="<?php echo $mask_value; ?>"><?php echo $mask_name; ?></option>
+                                                <?php
+                                            }
+                                        ?>
+                                    </select>
+
+                                </div>
+
+                            </li>
+
+                            <?php do_action("gform_field_standard_settings", 1450, $form_id); ?>
+
                             <li class="maxlen_setting field_setting">
                                 <label for="field_maxlen">
                                     <?php _e("Maximum Characters", "gravityforms"); ?>
@@ -1451,6 +1798,7 @@ class GFFormDetail{
                             <?php
                             do_action("gform_field_standard_settings", 1500, $form_id);
                             ?>
+
                             <li class="range_setting field_setting">
                                 <div style="clear:both;"><?php _e("Range", "gravityforms"); ?>
                                 <?php gform_tooltip("form_field_number_range") ?>
@@ -1551,6 +1899,26 @@ class GFFormDetail{
                                     </label>
                                     <input type="text" id="field_error_message" class="fieldwidth-2" onkeyup="SetFieldProperty('errorMessage', this.value);"/>
                                 </li>
+
+                                <?php do_action("gform_field_advanced_settings", 225, $form_id); ?>
+
+                                <li class="credit_card_icon_style_setting field_setting">
+                                    <label>
+                                        <?php _e("Credit Card Icon Style", "gravityforms"); ?>
+                                        <?php gform_tooltip("form_field_credit_card_icon_style") ?>
+                                    </label>
+                                    <ul>
+                                    <?php $cards = GFCommon::get_card_types();
+                                    foreach($cards as $card) { ?>
+                                        <li>
+                                            <input type="checkbox" id="field_credit_card_<?php echo $card['slug']; ?>" value="<?php echo $card['slug']; ?>" onclick="SetCardType(this, this.value);" />
+                                            <label for="field_credit_card_<?php echo $card['slug']; ?>" class="inline"><?php echo $card['name']; ?></label>
+                                        </li>
+
+                                    <?php } ?>
+                                    </ul>
+                                </li>
+
                                 <?php
                                 do_action("gform_field_advanced_settings", 250, $form_id);
                                 ?>
@@ -1581,11 +1949,39 @@ class GFFormDetail{
                                     <input type="text" id="field_css_class" size="30" onkeyup="SetFieldProperty('cssClass', this.value);"/>
                                 </li>
                                 <?php
+                                do_action("gform_field_advanced_settings", 325, $form_id);
+                                ?>
+                                <li class="add_icon_url_setting field_setting">
+                                    <label for="field_add_icon_url">
+                                        <?php _e("Add Icon URL", "gravityforms"); ?>
+                                        <?php gform_tooltip("form_field_add_icon_url") ?>
+                                    </label>
+                                    <input type="text" id="field_add_icon_url" class="fieldwidth-2" onkeyup="SetFieldProperty('addIconUrl', this.value);"/>
+                                </li>
+                                <?php
+                                do_action("gform_field_advanced_settings", 337, $form_id);
+                                ?>
+                                <li class="delete_icon_url_setting field_setting">
+                                    <label for="field_delete_icon_url">
+                                        <?php _e("Delete Icon URL", "gravityforms"); ?>
+                                        <?php gform_tooltip("form_field_delete_icon_url") ?>
+                                    </label>
+                                    <input type="text" id="field_delete_icon_url" class="fieldwidth-2" onkeyup="SetFieldProperty('deleteIconUrl', this.value);"/>
+                                </li>
+                                <?php
                                 do_action("gform_field_advanced_settings", 350, $form_id);
                                 ?>
                                 <li class="password_field_setting field_setting">
                                     <input type="checkbox" id="field_password" onclick="SetPasswordProperty(this.checked);"/> <label for="field_password" class="inline"><?php _e("Enable Password Input", "gravityforms") ?><?php gform_tooltip("form_field_password") ?></label>
                                 </li>
+
+                                <?php
+                                do_action("gform_field_advanced_settings", 375, $form_id);
+                                ?>
+                                <li class="force_ssl_field_setting field_setting">
+                                    <input type="checkbox" id="field_force_ssl" onclick="SetFieldProperty('forceSSL', this.checked);"/> <label for="field_force_ssl" class="inline"><?php _e("Force SSL", "gravityforms") ?><?php gform_tooltip("form_field_force_ssl") ?></label>
+                                </li>
+
                                 <?php
                                 do_action("gform_field_advanced_settings", 400, $form_id);
                                 ?>
@@ -1656,63 +2052,66 @@ class GFFormDetail{
                     </div>
                 </td>
                 <td valign="top" align="right">
-                    <div id="add_fields" style="text-align:left; width:285px; padding:0 20px 0 15px;">
+                    <div id="add_fields">
                         <div id="floatMenu">
-                            <h3 class="gf_add_fields"><?php _e("Add Fields", "gravityforms"); ?></h3>
 
                             <!-- begin add button boxes -->
                             <ul id="sidebarmenu1" class="menu collapsible expandfirst">
 
                             <?php
                                 $standard_fields = array(
-                                                    array("class"=>"button", "value" => __("Single Line Text", "gravityforms"), "onclick" => "StartAddField('text');"),
-                                                    array("class"=>"button", "value" => __("Paragraph Text", "gravityforms"), "onclick" => "StartAddField('textarea');"),
-                                                    array("class"=>"button", "value" => __("Drop Down", "gravityforms"), "onclick" => "StartAddField('select');"),
-                                                    array("class"=>"button", "value" => __("Number", "gravityforms"), "onclick" => "StartAddField('number');"),
-                                                    array("class"=>"button", "value" => __("Checkboxes", "gravityforms"), "onclick" => "StartAddField('checkbox');"),
-                                                    array("class"=>"button", "value" => __("Multiple Choice", "gravityforms"), "onclick" => "StartAddField('radio');"),
-                                                    array("class"=>"button", "value" => __("Hidden", "gravityforms"), "onclick" => "StartAddField('hidden');"),
-                                                    array("class"=>"button", "value" => __("HTML", "gravityforms"), "onclick" => "StartAddField('html');"),
-                                                    array("class"=>"button", "value" => __("Section Break", "gravityforms"), "onclick" => "StartAddField('section');"),
-                                                    array("class"=>"button", "value" => __("Page Break", "gravityforms"), "onclick" => "StartAddField('page');")
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("text"), "onclick" => "StartAddField('text');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("textarea"), "onclick" => "StartAddField('textarea');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("select"), "onclick" => "StartAddField('select');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("multiselect"), "onclick" => "StartAddField('multiselect');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("number"), "onclick" => "StartAddField('number');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("checkbox"), "onclick" => "StartAddField('checkbox');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("radio"), "onclick" => "StartAddField('radio');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("hidden"), "onclick" => "StartAddField('hidden');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("html"), "onclick" => "StartAddField('html');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("section"), "onclick" => "StartAddField('section');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("page"), "onclick" => "StartAddField('page');")
                                                     );
 
 
                                 $advanced_fields = array(
-                                                    array("class"=>"button", "value" => __("Name", "gravityforms"), "onclick" => "StartAddField('name');"),
-                                                    array("class"=>"button", "value" => __("Date", "gravityforms"), "onclick" => "StartAddField('date');"),
-                                                    array("class"=>"button", "value" => __("Time", "gravityforms"), "onclick" => "StartAddField('time');"),
-                                                    array("class"=>"button", "value" => __("Phone", "gravityforms"), "onclick" => "StartAddField('phone');"),
-                                                    array("class"=>"button", "value" => __("Address", "gravityforms"), "onclick" => "StartAddField('address');"),
-                                                    array("class"=>"button", "value" => __("Website", "gravityforms"), "onclick" => "StartAddField('website');"),
-                                                    array("class"=>"button", "value" => __("Email", "gravityforms"), "onclick" => "StartAddField('email');")
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("name"), "onclick" => "StartAddField('name');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("date"), "onclick" => "StartAddField('date');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("time"), "onclick" => "StartAddField('time');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("phone"), "onclick" => "StartAddField('phone');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("address"), "onclick" => "StartAddField('address');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("website"), "onclick" => "StartAddField('website');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("email"), "onclick" => "StartAddField('email');")
 
                                                     );
 
                                                     if(apply_filters("gform_enable_password_field", false))
-                                                        $advanced_fields[] = array("class"=>"button", "value" => __("Password", "gravityforms"), "onclick" => "StartAddField('password');");
+                                                        $advanced_fields[] = array("class"=>"button", "value" => GFCommon::get_field_type_title("password"), "onclick" => "StartAddField('password');");
 
-                                                    $advanced_fields[] = array("class"=>"button", "value" => __("File Upload", "gravityforms"), "onclick" => "StartAddField('fileupload');");
-                                                    $advanced_fields[] = array("class"=>"button", "value" => __("CAPTCHA", "gravityforms"), "onclick" => "AddCaptchaField();");
+                                                    $advanced_fields[] = array("class"=>"button", "value" => GFCommon::get_field_type_title("fileupload"), "onclick" => "StartAddField('fileupload');");
+                                                    $advanced_fields[] = array("class"=>"button", "value" => GFCommon::get_field_type_title("captcha"), "onclick" => "AddCaptchaField();");
+                                                    $advanced_fields[] = array("class"=>"button", "value" => GFCommon::get_field_type_title("list"), "onclick" => "StartAddField('list');");
 
                                 $post_fields = array(
-                                                    array("class"=>"button", "value" => __("Title", "gravityforms"), "onclick" => "StartAddField('post_title');"),
-                                                    array("class"=>"button", "value" => __("Body", "gravityforms"), "onclick" => "StartAddField('post_content');"),
-                                                    array("class"=>"button", "value" => __("Excerpt", "gravityforms"), "onclick" => "StartAddField('post_excerpt');"),
-                                                    array("class"=>"button", "value" => __("Tags", "gravityforms"), "onclick" => "StartAddField('post_tags');"),
-                                                    array("class"=>"button", "value" => __("Category", "gravityforms"), "onclick" => "StartAddField('post_category');"),
-                                                    array("class"=>"button", "value" => __("Image", "gravityforms"), "onclick" => "StartAddField('post_image');"),
-                                                    array("class"=>"button", "value" => __("Custom Field", "gravityforms"), "onclick" => "StartAddField('post_custom_field');")
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("post_title"), "onclick" => "StartAddField('post_title');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("post_content"), "onclick" => "StartAddField('post_content');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("post_excerpt"), "onclick" => "StartAddField('post_excerpt');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("post_tags"), "onclick" => "StartAddField('post_tags');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("post_category"), "onclick" => "StartAddField('post_category');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("post_image"), "onclick" => "StartAddField('post_image');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("post_custom_field"), "onclick" => "StartAddField('post_custom_field');")
                                                     );
 
                                 $pricing_fields = array(
-                                                    array("class"=>"button", "value" => __("Product", "gravityforms"), "onclick" => "StartAddField('product');"),
-                                                    array("class"=>"button", "value" => __("Quantity", "gravityforms"), "onclick" => "StartAddField('quantity');"),
-                                                    array("class"=>"button", "value" => __("Option", "gravityforms"), "onclick" => "StartAddField('option');"),
-                                                    array("class"=>"button", "value" => __("Shipping", "gravityforms"), "onclick" => "StartAddField('shipping');"),
-                                                    array("class"=>"button", "value" => __("Donation", "gravityforms"), "onclick" => "StartAddField('donation');"),
-                                                    array("class"=>"button", "value" => __("Total", "gravityforms"), "onclick" => "StartAddField('total');")
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("product"), "onclick" => "StartAddField('product');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("quantity"), "onclick" => "StartAddField('quantity');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("option"), "onclick" => "StartAddField('option');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("shipping"), "onclick" => "StartAddField('shipping');"),
+                                                    array("class"=>"button", "value" => GFCommon::get_field_type_title("total"), "onclick" => "StartAddField('total');")
                                                     );
+
+                                                    if(apply_filters("gform_enable_credit_card_field", false))
+                                                        $pricing_fields[] = array("class"=>"button", "value" => GFCommon::get_field_type_title("creditcard"), "onclick" => "StartAddField('creditcard');");
 
                                 $field_groups = array(
                                                     array("name" => "standard_fields", "label"=> __("Standard Fields", "gravityforms"), "fields" => $standard_fields, "tooltip_class" => "tooltip_bottomleft"),
@@ -1729,7 +2128,7 @@ class GFFormDetail{
                                     $tooltip_class = empty($group["tooltip_class"]) ? "tooltip_left" : $group["tooltip_class"];
                                     ?>
                                     <li id="add_<?php echo $group["name"]?>" class="add_field_button_container">
-                                        <div class="button-title-link"><div class="add-buttons-title"><?php echo $group["label"] ?> <?php gform_tooltip("form_{$group["name"]}", $tooltip_class) ?></div></div>
+                                        <div class="button-title-link <?php echo $group["name"] == "standard_fields" ? "gf_button_title_active" : ""?>"><div class="add-buttons-title"><?php echo $group["label"] ?> <?php gform_tooltip("form_{$group["name"]}", $tooltip_class) ?></div></div>
                                         <ul>
                                             <li class="add-buttons">
                                                 <ol class="field_type">
@@ -1746,6 +2145,36 @@ class GFFormDetail{
                             </ul>
                             <br style="clear:both;"/>
                             <!--end add button boxes -->
+
+                            <?php
+                            if(GFCommon::current_user_can_any("gravityforms_delete_forms")){
+                                $delete_link = '<a class="submitdelete" title="' . __("Delete this Form", "gravityforms") . '" onclick="if(confirm(\'' . __("Would you like to delete this form and ALL entries associated with it? \'Cancel\' to stop. \'OK\' to delete", "gravityforms") . '\')){jQuery(\'#form_delete\')[0].submit();} else{return false;}">' . __("Delete Form", "gravityforms") . '</a>';
+                                echo apply_filters("gform_form_delete_link", $delete_link);
+                            }
+
+                            $button_text = rgar($form,"id") > 0 ? __("Update Form", "gravityforms") : __("Save Form", "gravityforms");
+                            $isNew = rgar($form, "id") > 0 ? 0 : 1;
+                            $save_button = '<input type="button" class="button-primary gfbutton" value="' . $button_text . '" onclick="SaveForm(' . $isNew . ');" />';
+                            $save_button = apply_filters("gform_save_form_button", $save_button);
+                            echo $save_button;
+                            ?>
+
+                            <span id="please_wait_container" style="display:none;"><img src="<?php echo GFCommon::get_base_url()?>/images/loading.gif"></span>
+
+                            <div class="updated_base" id="after_update_dialog" style="display:none;">
+                                <strong><?php _e("Form updated successfully.", "gravityforms"); ?>
+                                &nbsp;<a title="<?php _e("Preview this form", "gravityforms"); ?>" href="<?php echo GFCommon::get_base_url() ?>/preview.php?id=<?php echo absint(rgar($form, "id")) ?>" target="_blank"><?php _e("Preview", "gravityforms"); ?></a></strong>
+                            </div>
+                            <div class="error_base" id="after_update_error_dialog" style="padding:10px 10px 16px 10px; display:none;">
+                                <?php _e("There was an error while saving your form.", "gravityforms") ?>
+                                <?php printf(__("Please %scontact our support team%s.", "gravityforms"), '<a href="http://www.gravityhelp.com">', '</a>') ?>
+                            </div>
+
+                            <form method="post" id="gform_update">
+                                <?php wp_nonce_field("gforms_update_form_{$form_id}", "gforms_update_form") ?>
+                                <input type="hidden" id="gform_meta" name="gform_meta" />
+                            </form>
+
                         </div>
                     </div>
                 </td>
@@ -1904,6 +2333,18 @@ class GFFormDetail{
         die("EndAddField($field_json, \"$field_html\");");
     }
 
+    public static function duplicate_field(){
+        check_ajax_referer("rg_duplicate_field", "rg_duplicate_field");
+        $source_field_id = rgpost('source_field_id');
+        $field_json = stripslashes_deep($_POST["field"]);
+        $field = GFCommon::json_decode($field_json, true);
+
+        require_once(GFCommon::get_base_path() . "/form_display.php");
+        $field_html = GFFormDisplay::get_field($field, "", true);
+
+        die("EndDuplicateField($field_json, \"$field_html\", $source_field_id);");
+    }
+
     public static function delete_field(){
         check_ajax_referer("rg_delete_field", "rg_delete_field");
         $form_id =  intval($_POST["form_id"]);
@@ -1926,13 +2367,20 @@ class GFFormDetail{
         die("EndChangeInputType('$id', '$type', \"$field_content\");");
     }
 
-    public static function save_form(){
+    public static function delete_custom_choice(){
+        check_ajax_referer("gf_delete_custom_choice", "gf_delete_custom_choice");
+        RGFormsModel::delete_custom_choice(rgpost("name"));
+        exit();
+    }
+
+    public static function save_custom_choice(){
+        check_ajax_referer("gf_save_custom_choice", "gf_save_custom_choice");
+        RGFormsModel::save_custom_choice(rgpost("previous_name"), rgpost("new_name"), GFCommon::json_decode(rgpost("choices")));
+        exit();
+    }
+
+    public static function save_form_info($id, $form_json){
         global $wpdb;
-        check_ajax_referer('rg_save_form', 'rg_save_form');
-        $id = $_POST["id"];
-
-        $form_json = $_POST["form"];
-
         $form_json = stripslashes($form_json);
 
         //$form_json = preg_replace('|\r\n?|', '\n', $form_json);
@@ -1940,7 +2388,7 @@ class GFFormDetail{
 
         $form_meta = GFCommon::json_decode($form_json, true);
         if(!$form_meta)
-            die("EndUpdateForm(0);");
+            return array("status" => "invalid_json", "meta"=> null);
 
         $form_table_name =  $wpdb->prefix . "rg_form";
         $meta_table_name =  $wpdb->prefix . "rg_form_meta";
@@ -1949,7 +2397,7 @@ class GFFormDetail{
         $forms = RGFormsModel::get_forms();
         foreach($forms as $form)
             if(strtolower($form->title) == strtolower($form_meta["title"]) && $form_meta["id"] != $form->id)
-                die('DuplicateTitleMessage();');
+                return array("status" => "duplicate_title", "meta" => $form_meta);
 
         if($id > 0){
             RGFormsModel::update_form_meta($id, $form_meta);
@@ -1957,7 +2405,8 @@ class GFFormDetail{
             //updating form title
             $wpdb->query($wpdb->prepare("UPDATE $form_table_name SET title=%s WHERE id=%d", $form_meta["title"], $form_meta["id"]));
 
-            die("EndUpdateForm($id);");
+            $form_meta = RGFormsModel::get_form_meta($id);
+            return array("status" => $id, "meta" => $form_meta);
         }
         else{
             //inserting form
@@ -1976,7 +2425,36 @@ class GFFormDetail{
             //updating form meta
             RGFormsModel::update_form_meta($id, $form_meta);
 
-            die("EndInsertForm($id);");
+            $form_meta = RGFormsModel::get_form_meta($id);
+            return array("status" => $id * -1, "meta" => $form_meta);
+        }
+    }
+
+    public static function save_form(){
+
+        check_ajax_referer('rg_save_form', 'rg_save_form');
+        $id = $_POST["id"];
+        $form_json = $_POST["form"];
+
+        $result = self::save_form_info($id, $form_json);
+
+        switch(rgar($result,"status")){
+            case "invalid_json" :
+                die("EndUpdateForm(0);");
+            break;
+
+            case "duplicate_title" :
+                die('DuplicateTitleMessage();');
+            break;
+
+            default :
+                $form_id = $result["status"];
+                if($form_id < 0)
+                    die("EndInsertForm(" . abs($form_id) . ");");
+                else
+                    die("EndUpdateForm({$form_id});");
+            break;
+
         }
     }
 }

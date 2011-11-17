@@ -56,8 +56,8 @@ Class GFNotification{
         $email_fields = GFCommon::get_email_fields($form);
         $name_fields = GFCommon::get_fields_by_type($form, array("name"));
 
-        $has_admin_notification_fields =(!empty($form["notification"]["to"]) || !empty($form["notification"]["routing"])) && (!empty($form["notification"]["subject"]) || !empty($form["notification"]["message"]));
-        $has_user_notification_fields = !empty($form["autoResponder"]["toField"]) && (!empty($form["autoResponder"]["subject"]) || !empty($form["autoResponder"]["message"]));
+        $has_admin_notification_fields = GFCommon::has_admin_notification($form);
+        $has_user_notification_fields = GFCommon::has_user_notification($form);
 
         $is_admin_notification_enabled = ($has_admin_notification_fields && empty($_POST["save"])) || !empty($_POST["form_notification_enable_admin"]);
         $is_user_notification_enabled =  ($has_user_notification_fields && empty($_POST["save"])) || !empty($_POST["form_notification_enable_user"]);
@@ -177,6 +177,9 @@ Class GFNotification{
         }
 
         function TruncateMiddle(text, maxCharacters){
+            if(!text)
+                return "";
+
             if(text.length <= maxCharacters)
                 return text;
             var middle = parseInt(maxCharacters / 2);
@@ -200,11 +203,11 @@ Class GFNotification{
                 if(isSelected)
                     isAnySelected = true;
 
-                str += "<option value='" + choiceValue.replace("'", "&#039;") + "' " + selected + ">" + TruncateMiddle(field.choices[i].text, labelMaxCharacters) + "</option>";
+                str += "<option value='" + choiceValue.replace(/'/g, "&#039;") + "' " + selected + ">" + TruncateMiddle(field.choices[i].text, labelMaxCharacters) + "</option>";
             }
 
             if(!isAnySelected && selectedValue){
-                str += "<option value='" + selectedValue.replace("'", "&#039;") + "' selected='selected'>" + TruncateMiddle(selectedValue, labelMaxCharacters) + "</option>";
+                str += "<option value='" + selectedValue.replace(/'/g, "&#039;") + "' selected='selected'>" + TruncateMiddle(selectedValue, labelMaxCharacters) + "</option>";
             }
 
             return str;
@@ -253,7 +256,9 @@ Class GFNotification{
             <?php wp_nonce_field('gforms_save_notification', 'gforms_save_notification') ?>
             <input type="hidden" id="gform_routing_meta" name="gform_routing_meta" />
             <div class="wrap">
-                <img alt="<?php _e("Gravity Forms", "gravityforms") ?>" src="<?php echo GFCommon::get_base_url()?>/images/gravity-notification-icon-32.png" style="float:left; margin:15px 7px 0 0;"/>
+
+                <div class="icon32" id="gravity-notification-icon"><br></div>
+
                 <h2><?php _e("Notifications", "gravityforms"); ?> : <?php echo esc_html($form["title"])?></h2>
 
                 <?php RGForms::top_toolbar() ?>
@@ -307,7 +312,7 @@ Class GFNotification{
                                                         if(empty($routing_fields)){//if(empty(){
                                                             ?>
                                                             <div class="gold_notice">
-                                                                <p><?php _e("To use notification routing, your form must have a drop down, checkbox or multiple choice field.", "gravityforms"); ?></p>
+                                                                <p><?php _e("To use notification routing, your form must have a drop down, checkbox or radio button field.", "gravityforms"); ?></p>
                                                             </div>
                                                             <?php
                                                         }

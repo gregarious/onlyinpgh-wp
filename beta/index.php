@@ -58,6 +58,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	<meta property="og:site_name" content="Onlyinpgh" />
 	<meta property="fb:app_id" content="203898346321665" />
 
+  <?php include('analytics.html'); ?>
 </head>
 <body>
 

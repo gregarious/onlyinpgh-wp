@@ -1,11 +1,19 @@
 <?php
-require_once (preg_replace("/wp-content.*/","wp-blog-header.php",__FILE__));
-require_once (preg_replace("/wp-content.*/","/wp-admin/includes/admin.php",__FILE__));
+for ( $i = 0; $i < $depth = 10; $i++ ) {
+    $wp_root_path = str_repeat( '../', $i );
+
+    if ( file_exists("{$wp_root_path}wp-load.php" ) ) {
+        require_once("{$wp_root_path}wp-load.php");
+        require_once("{$wp_root_path}wp-admin/includes/admin.php");
+        RGForms::maybe_process_form();
+        break;
+    }
+}
 
 //redirect to the login page if user is not authenticated
 auth_redirect();
 
-if(!GFCommon::current_user_can_any(array("gravityforms_edit_forms", "gravityforms_create_form")))
+if(!GFCommon::current_user_can_any(array("gravityforms_edit_forms", "gravityforms_create_form", "gravityforms_preview_forms")))
     die(__("You don't have adequate permission to preview forms.", "gravityforms"));
 
 ?>
@@ -24,18 +32,25 @@ if(!GFCommon::current_user_can_any(array("gravityforms_edit_forms", "gravityform
             $form = RGFormsModel::get_form_meta($_GET["id"]);
             GFFormDisplay::enqueue_form_scripts($form);
             wp_print_scripts();
+
+            $styles = apply_filters("gform_preview_styles", false, $form);
+            if(!empty($styles)){
+                wp_print_styles($styles);
+            }
         ?>
+
     </head>
     <body>
     <div id="preview_top">
 	    <div id="preview_hdr">
 		    <div><span class="actionlinks"><a href="javascript:window.close()" class="close_window"><?php _e("close window", "gravityforms") ?></a></span><?php _e("Form Preview", "gravityforms") ?></div>
 	    </div>
-	    <div id="preview_note"><?php _e("Note: This is a simple form preview. This form may display differently when added to your page based on individual theme styles.", "gravityforms") ?></div>
+	    <div id="preview_note"><?php _e("Note: This is a simple form preview. This form may display differently when added to your page based on inheritance from individual theme styles.", "gravityforms") ?></div>
     </div>
     <div id="preview_form_container">
         <?php
         echo RGForms::get_form($_GET["id"], true, true, true);
+
         ?>
         </div>
     </body>
