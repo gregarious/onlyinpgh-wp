@@ -19,7 +19,7 @@ body {
   background-color: #000;
   color: #ffd94c;
 }
-h2 {
+h1, h2 {
   font-family: 'FrancoisOneRegular', Arial, sans-serif;
   font-weight: normal;
   letter-spacing: 1px;

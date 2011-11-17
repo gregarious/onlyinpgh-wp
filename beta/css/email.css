@@ -1,0 +1,66 @@
+.row {
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+body {
+	background-color: #fff;
+	color: #000;
+	text-align: left;
+}
+
+header {
+	text-align: center;
+}
+
+h1 {
+	font-size: 4em;
+	border-bottom: 2px #FFD94C solid;
+}
+
+a:link, a:active, a:hover, a:visited {
+	color: #000;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:hover {
+	background-color: #FFD94C;
+}
+
+p {
+	font-family: Arial, sans-serif;
+	font-size: 1.1em;
+}
+
+h1 {
+	font-family: 'FrancoisOneRegular', Impact, sans-serif;
+	font-weight: normal;
+}	
+
+.email-content, .email-intro, footer {
+	margin: auto;
+}
+
+.email-intro {
+	width: 85%;
+}
+
+.email-content {
+	width: 75%;
+}
+
+.from {
+	font-weight: bold;
+}
+
+img {
+	height: auto;
+	max-width: 100%;
+}
+
+footer {
+	width: 80%;
+}
