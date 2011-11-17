@@ -54,14 +54,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	<meta property="og:title" content="Onlyinpgh Sceneable Beta Testing" />
 	<meta property="og:type" content="company" />
 	<meta property="og:url" content="http://onlyinpgh.com/beta" />
-	<meta property="og:image" content="http://notlaura.com/sticker/img/stickerthumb.png" />
+	<meta property="og:image" content="http://onlyinpgh.com/beta/img/beta-thumb.png" />
 	<meta property="og:site_name" content="Onlyinpgh" />
 	<meta property="fb:app_id" content="203898346321665" />
 
-	<?php 
-	// include any applicable analytics code
-	//include_once('analytics.html');
-	?>
 </head>
 <body>
 
