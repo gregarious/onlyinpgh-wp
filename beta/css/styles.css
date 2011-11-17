@@ -19,7 +19,7 @@ body {
   background-color: #000;
   color: #ffd94c;
 }
-h2 {
+h1, h2 {
   font-family: 'FrancoisOneRegular', Arial, sans-serif;
   font-weight: normal;
   letter-spacing: 1px;
@@ -58,6 +58,7 @@ input[type="email"]:focus {
 }
 input[type="submit"] {
   width: 20%;
+  font-size: 0.89em;
   font-weight: bold;
   background-color: #ffd94c;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#ffd94c), to(#fff9e5));
@@ -197,7 +198,7 @@ input[type="submit"]:active {
 }
 @media screen and (max-width: 480px) {
   .skyline {
-    height: 40%;
+    height: 34%;
   }
   .points {
     font-size: 5em;
