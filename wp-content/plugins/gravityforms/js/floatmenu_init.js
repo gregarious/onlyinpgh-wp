@@ -5,9 +5,9 @@ window.onscroll = function()
         if (document.documentElement.scrollTop > 160 || self.pageYOffset > 160) {
             jQuery('#floatMenu').css('position','fixed');
             jQuery('#floatMenu').css('top','5px');
-        } else if (document.documentElement.scrollTop < 120 || self.pageYOffset < 120) {
+        } else if (document.documentElement.scrollTop < 112 || self.pageYOffset < 112) {
             jQuery('#floatMenu').css('position','absolute');
-            jQuery('#floatMenu').css('top','120px');
+            jQuery('#floatMenu').css('top','112px');
         }
     }
 }

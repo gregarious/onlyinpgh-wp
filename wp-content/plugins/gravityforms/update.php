@@ -14,8 +14,9 @@ class GFUpdate{
         <link rel="stylesheet" href="<?php echo GFCommon::get_base_url() . "/css/admin.css"?>" />
 
         <div class="wrap">
-            <img alt="<?php _e("Gravity Forms", "gravityforms") ?>" style="margin: 15px 7px 0pt 0pt; float: left;" src="<?php echo GFCommon::get_base_url() ?>/images/gravity-update-icon-32.png"/>
-            <h2><?php echo _e("Gravity Forms Updates", "gravityforms") ?></h2>
+        
+        	<div class="icon32" id="gravity-update-icon"><br></div>
+          <h2><?php echo _e("Gravity Forms Updates", "gravityforms") ?></h2>
             <?php
 
             $version_info = GFCommon::get_version_info(false);

@@ -25,21 +25,25 @@ class GFFormList{
         }
         else if($bulk_action == "delete"){
             check_admin_referer('gforms_update_forms', 'gforms_update_forms');
-            $form_ids = RGForms::post("form");
+            $form_ids = rgpost("form");
             RGFormsModel::delete_forms($form_ids);
         }
         else if($bulk_action == "reset_views"){
             check_admin_referer('gforms_update_forms', 'gforms_update_forms');
-            $form_ids = RGForms::post("form");
-            foreach($form_ids as $form_id){
-                RGFormsModel::delete_views($form_id);
+            $form_ids = rgpost("form");
+            if(is_array($form_ids)){
+                foreach($form_ids as $form_id){
+                    RGFormsModel::delete_views($form_id);
+                }
             }
         }
         else if($bulk_action == "delete_entries"){
             check_admin_referer('gforms_update_forms', 'gforms_update_forms');
             $form_ids = RGForms::post("form");
-            foreach($form_ids as $form_id){
-                RGFormsModel::delete_leads_by_form($form_id);
+            if(is_array($form_ids)){
+                foreach($form_ids as $form_id){
+                    RGFormsModel::delete_leads_by_form($form_id);
+                }
             }
         }
 
@@ -109,7 +113,8 @@ class GFFormList{
 
         <link rel="stylesheet" href="<?php echo GFCommon::get_base_url()?>/css/admin.css" />
         <div class="wrap">
-            <img alt="<?php _e("Gravity Forms", "gravityforms") ?>" src="<?php echo GFCommon::get_base_url()?>/images/gravity-edit-icon-32.png" style="float:left; margin:15px 7px 0 0;"/>
+
+            <div class="icon32" id="gravity-edit-icon"><br></div>
             <h2>
                 <?php _e("Edit Forms", "gravityforms"); ?>
                 <a class="button add-new-h2" href="admin.php?page=gf_new_form"><?php _e("Add New", "gravityforms") ?></a>
@@ -129,7 +134,7 @@ class GFFormList{
                 if(GFCommon::current_user_can_any("gravityforms_delete_forms")){
                 ?>
                     <div class="tablenav">
-                        <div class="alignleft actions" style="padding:8px 0 7px; 0">
+                        <div class="alignleft actions" style="padding:8px 0 7px 0;">
 
                             <label class="hidden" for="bulk_action"><?php _e("Bulk action", "gravityforms") ?></label>
                             <select name="bulk_action" id="bulk_action">
@@ -143,7 +148,8 @@ class GFFormList{
                             echo apply_filters("gform_form_apply_button", $apply_button);
                             ?>
 
-                            <br class="clear"></div>
+                            <br class="clear" />
+
                         </div>
                     </div>
                 <?php
@@ -205,7 +211,7 @@ class GFFormList{
                                     }
                                     ?>
 
-                                    <td><img src="<?php echo GFCommon::get_base_url() ?>/images/active<?php echo intval($form->is_active) ?>.png" alt="<?php echo $form->is_active ? __("Active", "gravityforms") : __("Inactive", "gravityforms");?>" title="<?php echo $form->is_active ? __("Active", "gravityforms") : __("Inactive", "gravityforms");?>" onclick="ToggleActive(this, <?php echo $form->id ?>); " /></td>
+                                    <td><img src="<?php echo GFCommon::get_base_url() ?>/images/active<?php echo intval($form->is_active) ?>.png" style="cursor: pointer;" alt="<?php echo $form->is_active ? __("Active", "gravityforms") : __("Inactive", "gravityforms");?>" title="<?php echo $form->is_active ? __("Active", "gravityforms") : __("Inactive", "gravityforms");?>" onclick="ToggleActive(this, <?php echo $form->id ?>); " /></td>
                                     <td class="column-id"><?php echo $form->id ?></td>
                                     <td class="column-title">
                                         <strong><a class="row-title" href="admin.php?page=gf_edit_forms&id=<?php echo $form->id ?>" title="<?php _e("Edit", "gravityforms") ?>"><?php echo $form->title ?></a></strong>
@@ -214,6 +220,7 @@ class GFFormList{
                                             <a title="Edit this form" href="admin.php?page=gf_edit_forms&id=<?php echo $form->id ?>"><?php _e("Edit", "gravityforms"); ?></a>
                                             |
                                             </span>
+
                                             <span class="edit">
                                             <a title="<?php _e("Preview this form", "gravityforms"); ?>" href="<?php echo GFCommon::get_base_url() ?>/preview.php?id=<?php echo $form->id ?>" target="_blank"><?php _e("Preview", "gravityforms"); ?></a>
                                             |
@@ -279,7 +286,7 @@ class GFFormList{
                     </tbody>
                 </table>
                 <div class="tablenav">
-                    <div class="alignleft actions" style="padding:8px 0 7px; 0">
+                    <div class="alignleft actions" style="padding:8px 0 7px 0;">
                         <?php
                         if(GFCommon::current_user_can_any("gravityforms_delete_forms")){
                             ?>

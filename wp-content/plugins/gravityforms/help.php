@@ -9,14 +9,14 @@ class GFHelp{
             ?>
             <link rel="stylesheet" href="<?php echo GFCommon::get_base_url()?>/css/admin.css" />
             <div class="wrap">
-                <img alt="<?php _e("Gravity Forms", "gravityforms") ?>" style="margin: 15px 7px 0pt 0pt; float: left;" src="<?php echo GFCommon::get_base_url() ?>/images/gravity-help-icon-32.png"/>
+                <div class="icon32" id="gravity-help-icon"><br></div>
                 <h2><?php _e("Gravity Forms Help", "gravityforms"); ?></h2>
 
                 <div style="margin-top:10px;">
 
                 <div class="gforms_help_alert alert_yellow"><?php _e("<strong>IMPORTANT NOTICE:</strong> We do not provide support via e-mail. Please post any support queries in our <a href='http://forum.gravityhelp.com/'>support forums</a>.", "gravityforms") ?></div>
 
-                <div><?php _e("Please review the plugin documentation and frequently asked questions (FAQ) first. If you still can't find the answer you need visit our <a href='http://forum.gravityhelp.com/'>support forums</a> where we will be happy to answer your questions and assist you with any problems. <strong>Please note:</strong> If you have not <a href='http://www.gravityforms.com/purchase-gravity-forms/'>purchased a license</a> from us, you won't have access to these help resources.", "gravityforms"); ?></div>
+                <div><?php _e("Please review the plugin documentation and <a href='http://www.gravityhelp.com/frequently-asked-questions/'>frequently asked questions (FAQ)</a> first. If you still can't find the answer you need visit our <a href='http://forum.gravityhelp.com/'>support forums</a> where we will be happy to answer your questions and assist you with any problems. <strong>Please note:</strong> If you have not <a href='http://www.gravityforms.com/purchase-gravity-forms/'>purchased a license</a> from us, you won't have access to these help resources.", "gravityforms"); ?></div>
 
 
                 <div class="hr-divider"></div>

@@ -1,15 +1,106 @@
 -------------------------------------------------------------------------------------------------------------------
-Version 1.5.3
-    - Resolved XSS vulnerability
+Version 1.6.1
+    - Fixed issue with form preview returning a 404
+    - Fixed issue with credit card field not escaping translated text properly and causing issues with French translation.
+    - Updated 'gform_allowable_tags' filter to run on every field including post fields
+    - Fixed issue with form export including the <creditCards> node for non credit card fields.
+    - Fixed issue with gform_save_field_value filter not accepting values greater than 200 characters
+    - Fixed issue with last field in the form being saved with the value of the total field.
 
 -------------------------------------------------------------------------------------------------------------------
-Version 1.5.2.12
-    - Added gform_after_submission hook
-
--------------------------------------------------------------------------------------------------------------------
-Version 1.5.2.11
-    - Cleaned up Notice messages
-    - Resolved issue where opening/closing the Form Settings in IE was incorrectly triggering the unsaved data prompt
+Version 1.6
+    - Added additional version-specific IE browser classes to gform_wrapper
+    - Removed json.php. Using WordPress JSON class instead.
+    - Fixed issue where blank post meta keys are created when empty value is submitted
+    - Added support for running Gravity Forms setup from settings page based on "setup" query string. (ie. ?page=gf_settings&setup)
+    - Fixed issue with radio buttons when using jQuery 1.6.4 (Wordpress 3.3)
+    - Fixed issue with post images getting saved in a wrong folder (based on the date of the embedded post/page instead of the newly created post)
+    - Fixed debug notice messages
+    - Added support for merge codes :label to allow field labels to be conditionally written to the outputted only when the field has a value.
+    - Fixed issue with Post Format not being selected correctly in the form editor
+    - Added hook on preview.php file to enqueue custom styles
+    - Added Primary key to wp_rg_form_meta and wp_rg_lead_detail_long tables
+    - Fixed issue on checkbox merge tag when targeting specific checkbox item
+    - Added support for :currency and :price modifier on pricing merge tags
+    - Updated tooltip script printing so that only tooltip specific scripts are printed when calling wp_print_scripts();
+    - Updated "gform_confirmation_anchor" hook to affect AJAX forms and provide option for AJAX forms that allows you to specify an integer for the scroll position
+    - Fixed issue with thickbox script on upcoming WP 3.3
+    - Fixed issue with Post Custom Field (Date field type) not honoring date format when storing post meta
+    - Updated editor "Update Form" button to do a full refresh instead of AJAX
+    - Fixed issue with formatting and total calculation of the Swiss Franc currency
+    - Added ID attribute to the "Add Form" link
+    - Dynamically calculating WordPress root directory on files that are loaded outside the WP context (i.e. preview.php, select_columns.php)
+    - Added "gform_post_render" javascript hook to functions to bound to every form render on AJAX enabled forms.
+        Documentation: http://www.gravityhelp.com/documentation/page/Gform_post_render
+        Example:
+            jQuery(document).bind('gform_post_render', function(){
+                // code to trigger on AJAX form render
+            });
+    - Added support for additional date formats
+    - Fixed conditional logic issue on multi-page forms when AJAX is turned on
+    - Fixed issue where the full list of radio and checkbox items were displayed in the admin after editing a choice
+    - Fixed erroneous single quote from AJAX inline script block
+    - Fixed issue with conditional logic fields not making into notification email when sending notification after payment is made.
+    - Added "gform_allowable_tags" hook to allow enabling HTML or specific HTML tags for submitted data
+        Documentation: http://www.gravityhelp.com/documentation/page/Gform_allowable_tags
+        Example:
+        add_filter("gform_allowable_tags", "__return_true");
+    - Added browser class to gform_wrapper
+    - Added a form specific class to the confirmation container. "gform_confirmation_message_FORMID".
+    - Fixed issue where adding any post field to a form prevented the form from saving if Post Formats were not supported
+    - Fixed problem creating warning messages on radio button fields.
+    - Added extra classes to pagination steps
+    - Updated form editor UI
+    - Added Mask setting to Text Field.
+    - Fixed markup on form list page causing WP footer to overlap with long form list.
+    - Aded form advanced setting to require user to be logged in to view form and a configurable message.
+    - Added re-send notification functionality to entry list and entry detail page.
+    - Added Print to list of bulk action operations so that multiple entries can be printed at once.
+    - Added hook to change separator of entry export file.
+    - Added "Other" option to radio button field.
+    - Added tab index to shortcode and function to specify starting tab index.
+    - Added CDATA around scripts to ensure valid HTML.
+    - Updated shortcode wizard to remove square brackets( [ ] ) characters from form name when placed in the shortcode.
+    - Added duplicate field functionality.
+    - Added update message for bulk actions on entries list page.
+    - Added post format setting to main post fields (title, body).
+    - Added option to set post image field as a featured image.
+    - Added default value settings to simple name field
+    - Updated default price for options to $0.00 price instead of blank.
+    - Added visibility setting to product fields so that they can be hidden.
+    - Added trash and spam functionality.
+    - Added integration with Akismet.
+    - Fixed conditional logic problem when target values have single quotes.
+    - Fixed number field validation.
+    - Added support for 24 hour time on time field.
+    - Added Date drop down type to date field.
+    - Added new gform_after_submission hook that fires early in the process and deprecated gform_post_submission.
+    - Enhanced Limit entry option to allow (per day/week/month/year).
+    - Added hidden product field.
+    - Added list field type.
+    - Updated file upload field to increase security.
+    - Added lookup by form name on gravityform shortcode.
+    - Added checkbox merge variable to return a comma separated list of selected items.
+    - Updated product fields to improve pre-population via hooks.
+    - Added new easier to use field validation filter.
+    - Updated entry detail and notification emails to hide section break when all fields in that section are blank.
+    - Added validation so that option field does not get added to a form without a product field.
+    - Added hook for single product sublabels.
+    - Added support for merge tags in confirmation URL redirect field
+    - Added checkbox input type to Post Custom Field.
+    - Added an option to send emails in text format.
+    - Added rg_lead_meta table to be used by Add-On developers.
+    - Removed donation field button (still providing support for existing donation fields).
+    - Added option to use the "chosen" script on drop downs.
+    - Added multi-select field.
+    - Added multi-select field as input type for: Tag, Custom Field.
+    - Added checkbox (comma separated) to entry list.
+    - Added ability to save a predefined choice from the bulk add screen.
+    - Added list field to custom post field.
+    - Added hook for list field column.
+    - Added description placement setting (top label only).
+    - Added new merge tag for displaying Admin labels on notifications(create {all_fields:admin_label} and make it more flexible)
+    - Fixed issue with "gform_notification_format" filter not passing all of the parameters correctly
 
 -------------------------------------------------------------------------------------------------------------------
 Version 1.5.2.10

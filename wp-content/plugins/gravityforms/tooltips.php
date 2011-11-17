@@ -4,11 +4,12 @@
 add_action("admin_print_scripts", 'print_tooltip_scripts');
 function print_tooltip_scripts(){
     wp_register_script('qtip-lib' , GFCommon::get_base_url() ."/js/jquery.qtip-1.0.0-rc2.min.js", null, GFCommon::$version);
-    wp_enqueue_script('qtip-init' , GFCommon::get_base_url() ."/js/qtip_init.js", array('qtip-lib'), GFCommon::$version);
+    wp_enqueue_script('qtip-init' , GFCommon::get_base_url() ."/js/qtip_init.js", array('jquery', 'qtip-lib'), GFCommon::$version);
     wp_enqueue_style("gf_tooltip", GFCommon::get_base_url() ."/css/tooltip.css", null, GFCommon::$version);
 
-    wp_print_scripts();
-    wp_print_styles();
+    //qtip is required to be printed in the head
+    wp_print_scripts("qtip-init");
+    wp_print_styles("gf_tooltip");
 }
 
 function gform_tooltip($name, $css_class="tooltip"){
@@ -33,14 +34,17 @@ function gform_tooltip($name, $css_class="tooltip"){
         "form_tile" => "<h6>" . __("Form Title", "gravityforms") . "</h6>" . __("Enter the title of your form.", "gravityforms"),
         "form_description" => "<h6>" . __("Form Description", "gravityforms") . "</h6>" . __("Enter a description for your form. This may be used for user instructions.", "gravityforms"),
         "form_label_placement" => "<h6>" . __("Form Label Placement", "gravityforms") . "</h6>" . __("Select the label placement.  Labels can be top aligned above a field, left aligned to the left of a field, or right aligned to the left of a field.", "gravityforms"),
+        "form_description_placement" => "<h6>" . __("Description Placement", "gravityforms") . "</h6>" . __("Select the description placement.  Descriptions can be placed above the field inputs or below the field inputs.", "gravityforms"),
         "form_button_text" => "<h6>" . __("Form Button Text", "gravityforms") . "</h6>" . __("Enter the text you would like to appear on the form submit button.", "gravityforms"),
         "form_button_image" => "<h6>" . __("Form Button Image", "gravityforms") . "</h6>" . __("Enter the path to an image you would like to use as the form submit button.", "gravityforms"),
         "form_css_class" => "<h6>" . __("Form CSS Class Name", "gravityforms") . "</h6>" . __("Enter the CSS class name you would like to use in order to override the default styles for this form.", "gravityforms"),
+        "form_field_add_icon_url" => "<h6>" . __("Add Icon URL", "gravityforms") . "</h6>" . __("Enter the URL of a custom image to replace the default 'add item' icon.", "gravityforms"),
+        "form_field_delete_icon_url" => "<h6>" . __("Delete Icon URL", "gravityforms") . "</h6>" . __("Enter the URL of a custom image to replace the default 'delete item' icon.", "gravityforms"),
         "form_confirmation_message" => "<h6>" . __("Confirmation Message Text", "gravityforms") . "</h6>" . __("Enter the text you would like the user to see on the confirmation page of this form.", "gravityforms"),
         "form_confirmation_autoformat" => "<h6>" . __("Disable Auto-Formatting", "gravityforms") . "</h6>" . __("When enabled, auto-formatting will insert paragraph breaks automatically. Disable auto-formatting when using HTML to create the confirmation content.", "gravityforms"),
         "form_redirect_to_webpage" => "<h6>" . __("Redirect Form to Page", "gravityforms") . "</h6>" . __("Select the page you would like the user to be redirected to after they have submitted the form.", "gravityforms"),
         "form_redirect_to_url" => "<h6>" . __("Redirect Form to URL", "gravityforms") . "</h6>" . __("Enter the URL of the webpage you would like the user to be redirected to after they have submitted the form.", "gravityforms"),
-        "form_redirect_querystring" => "<h6>" . __("Pass Data Via Query String", "gravityforms") . "</h6>" . __("To pass field data to the confirmation page, build a Query String using the 'Insert form field' drop down. <a href='http://en.wikipedia.org/wiki/Query_string' target='_blank'>..more info on querystrings &raquo;</a>", "gravityforms"),
+        "form_redirect_querystring" => "<h6>" . __("Pass Data Via Query String", "gravityforms") . "</h6>" . __("To pass field data to the confirmation page, build a Query String using the 'Insert Merge Tag' drop down. <a href='http://en.wikipedia.org/wiki/Query_string' target='_blank'>..more info on querystrings &raquo;</a>", "gravityforms"),
         "form_field_label" => "<h6>" . __("Field Label", "gravityforms") . "</h6>" . __("Enter the label of the form field.  This is the field title the user will see when filling out the form.", "gravityforms"),
         "form_field_label_html" => "<h6>" . __("Field Label", "gravityforms") . "</h6>" . __("Enter the label for this HTML block. It will help you identify your HTML blocks in the form editor, but it will not be displayed on the form.", "gravityforms"),
         "form_field_disable_margins" => "<h6>" . __("Disable Default Margins", "gravityforms") . "</h6>" . __("When enabled, margins are added to properly align the HTML content with other form fields.", "gravityforms"),
@@ -49,6 +53,7 @@ function gform_tooltip($name, $css_class="tooltip"){
         "form_field_custom_field_name" => "<h6>" . __("Custom Field Name", "gravityforms") . "</h6>" . __("Select the custom field name from available existing custom fields, or enter a new custom field name.", "gravityforms"),
         "form_field_type" => "<h6>" . __("Field type", "gravityforms") . "</h6>" . __("Select the type of field from the available form fields.", "gravityforms"),
         "form_field_maxlength" => "<h6>" . __("Maximum Characters", "gravityforms") . "</h6>" . __("Enter the maximum number of characters that this field is allowed to have.", "gravityforms"),
+        "form_field_maxrows" => "<h6>" . __("Maximum Rows", "gravityforms") . "</h6>" . __("Enter the maximum number of rows that users are allowed to add.", "gravityforms"),
         "form_field_date_input_type" => "<h6>" . __("Date Input Type", "gravityforms") . "</h6>" . __("Select the type of inputs you would like to use for the date field. Date Picker will let users select a date from a calendar. Date Field will let users free type the date.", "gravityforms"),
         "form_field_address_type" => "<h6>" . __("Address Type", "gravityforms") . "</h6>" . __("Select the type of address you would like to use.", "gravityforms"),
         "form_field_address_default_state_us" => "<h6>" . __("Default State", "gravityforms") . "</h6>" . __("Select the state you would like to be selected by default when the form gets displayed.", "gravityforms"),
@@ -60,7 +65,11 @@ function gform_tooltip($name, $css_class="tooltip"){
         "form_field_address_hide_state_canadian" => "<h6>" . __("Hide Province Field", "gravityforms") . "</h6>" . __("Check this box to prevent Province field from being displayed in the form.", "gravityforms"),
         "form_field_address_hide_state_international" => "<h6>" . __("Hide State/Province/Region", "gravityforms") . "</h6>" . __("Check this box to prevent the State/Province/Region from being displayed in the form.", "gravityforms"),
         "form_field_name_format" => "<h6>" . __("Field Name Format", "gravityforms") . "</h6>" . __("Select the format you would like to use for the Name field.  There are 3 options, Normal which includes First and Last Name, Extended which adds Prefix and Suffix, or Simple which is a single input field.", "gravityforms"),
+        "form_field_number_format" => "<h6>" . __("Number Format", "gravityforms") . "</h6>" . __("Select the format of numbers that are allowed in this field. You have the option to use a comma or a dot as the decimal separator.", "gravityforms"),
+        "form_field_force_ssl" => "<h6>" . __("Force SSL", "gravityforms") . "</h6>" . __("Check this box to prevent this field from being displayed in a non-secure page (i.e. not https://). It will redirect the page to the same URL, but starting with https:// instead. This option requires a properly configured SSL certificate.", "gravityforms"),
+        "form_field_card_style" => "<h6>" . __("Credit Card Icon Style", "gravityforms") . "</h6>" . __("Select the style you would like to use for the credit card icons.", "gravityforms"),
         "form_field_date_format" => "<h6>" . __("Field Date Format", "gravityforms") . "</h6>" . __("Select the format you would like to use for the date input.  Available options are MM/DD/YYYY and DD/MM/YYYY.", "gravityforms"),
+        "form_field_time_format" => "<h6>" . __("Time Format", "gravityforms") . "</h6>" . __("Select the format you would like to use for the time field.  Available options are 12 hour (i.e. 8:30 pm) and 24 hour (i.e. 20:30).", "gravityforms"),
         "form_field_fileupload_allowed_extensions" => "<h6>" . __("Allowed File Extensions", "gravityforms") . "</h6>" . __("Enter that allowed file extensions for file uploads.  This will limit what type of files a user may upload.", "gravityforms"),
         "form_field_phone_format" => "<h6>" . __("Phone Number Format", "gravityforms") . "</h6>" . __("Select the format you would like to use for the phone input.  Available options are domestic US/CANADA style phone number and international long format phone number.", "gravityforms"),
         "form_field_description" => "<h6>" . __("Field Description", "gravityforms") . "</h6>" . __("Enter the description for the form field.  This will be displayed to the user and provide some direction on how the field should be filled out or selected.", "gravityforms"),
@@ -77,6 +86,10 @@ function gform_tooltip($name, $css_class="tooltip"){
         "form_field_choices" => "<h6>" . __("Field Choices", "gravityforms") . "</h6>" . __("Add Choices to this field. You can mark each choice as checked by default by using the radio/checkbox fields on the left.", "gravityforms"),
         "form_field_choice_values" => "<h6>" . __("Enable Choice Values", "gravityforms") . "</h6>" . __("Check this option to specify a value for each choice. Choice values are not displayed to the user viewing the form, but are accessible to administrators when viewing the entry.", "gravityforms"),
         "form_field_conditional_logic" => "<h6>" . __("Conditional Logic", "gravityforms") . "</h6>" . __("Create rules to dynamically display or hide this field based on values from another field", "gravityforms"),
+        "form_field_enable_enhanced_ui" => "<h6>" . __("Enable Enhanced UI", "gravityforms") . "</h6>" . __("By selecting this option, the <a href='http://harvesthq.github.com/chosen/' target='_blank'>Chosen</a> jQuery script will be applied to this field, enabling search capabilities to Drop Down fields and a more user-friendly interface for Multi Select fields.", "gravityforms"),
+        "form_field_other_choice" => "<h6>" . __("\"Other\" Choice", "gravityforms") . "</h6>" . __("Check this option to add a text input as the final choice of your radio button field. This allows the user to specify a value that is not a predefined choice.", "gravityforms"),
+        "form_require_login" => "<h6>" . __("Require user to be logged in", "gravityforms") . "</h6>" . __("Check this option to require a user to be logged in to view this form", "gravityforms"),
+        "form_require_login_message" => "<h6>" . __("Require Login Message", "gravityforms") . "</h6>" . __("Enter a message to be displayed to users who are not logged in (shortcodes and HTML are supported)", "gravityforms"),
         "form_page_conditional_logic" => "<h6>" . __("Page Conditional Logic", "gravityforms") . "</h6>" . __("Create rules to dynamically display or hide this page based on values from another field", "gravityforms"),
         "form_progress_indicator" => "<h6>" . __("Progress Indicator", "gravityforms") . "</h6>" . __("Select which type of visual progress indicator you would like to display.  Progress Bar, Steps or None", "gravityforms"),
         "form_percentage_style" => "<h6>" . __("Progress Bar Style", "gravityforms") . "</h6>" . __("Select which progress bar style you would like to use.  Select custom to choose your own text and background color", "gravityforms"),
@@ -90,16 +103,19 @@ function gform_tooltip($name, $css_class="tooltip"){
         "form_field_post_category_selection" => "<h6>" . __("Post Category", "gravityforms") . "</h6>" . __("Select which categories are displayed. You can choose to display all of them or select individual ones.", "gravityforms"),
         "form_field_post_status" => "<h6>" . __("Post Status", "gravityforms") . "</h6>" . __("Select the post status that will be used for the post that is created by the form entry.", "gravityforms"),
         "form_field_post_author" => "<h6>" . __("Post Author", "gravityforms") . "</h6>" . __("Select the author that will be used for the post that is created by the form entry.", "gravityforms"),
-        "form_field_post_content_template_enable" => "<h6>" . __("Post Content Template", "gravityforms") . "</h6>" . __("Check this option to format and insert form fields into the Post Content.", "gravityforms"),
-        "form_field_post_title_template_enable" => "<h6>" . __("Post Title Template", "gravityforms") . "</h6>" . __("Check this option to format and insert form fields into the Post Title.", "gravityforms"),
+        "form_field_post_format" => "<h6>" . __("Post Format", "gravityforms") . "</h6>" . __("Select the post format that will be used for the post that is created by the form entry.", "gravityforms"),
+        "form_field_post_content_template_enable" => "<h6>" . __("Post Content Template", "gravityforms") . "</h6>" . __("Check this option to format and insert merge tags into the Post Content.", "gravityforms"),
+        "form_field_post_title_template_enable" => "<h6>" . __("Post Title Template", "gravityforms") . "</h6>" . __("Check this option to format and insert merge tags into the Post Title.", "gravityforms"),
         "form_field_post_category" => "<h6>" . __("Post Category", "gravityforms") . "</h6>" . __("Select the category that will be used for the post that is created by the form entry.", "gravityforms"),
         "form_field_current_user_as_author" => "<h6>" . __("Use Current User as Author", "gravityforms") . "</h6>" . __("Selecting this option will set the post author to the WordPress user that submitted the form.", "gravityforms"),
         "form_field_image_meta" => "<h6>" . __("Image Meta", "gravityforms") . "</h6>" . __("Select one or more image metadata field to be displayed along with the image upload field. They enable users to enter additional information about the uploaded image.", "gravityforms"),
+        "form_field_featured_image" => "<h6>" . __("Set as Featured Image", "gravityforms") . "</h6>" . __("Check this option to set this image as the post's Featured Image.", "gravityforms"),
         "form_field_prepopulate" => "<h6>" . __("Incoming Field Data", "gravityforms") . "</h6>" . __("Check this option to enable data to be passed to the form and pre-populate this field dynamically. Data can be passed via Query Strings, Shortcode and/or Hooks", "gravityforms"),
         "form_field_content" => "<h6>" . __("Content", "gravityforms") . "</h6>" . __("Enter the content (Text or HTML) to be displayed on the form.", "gravityforms"),
         "form_field_base_price" => "<h6>" . __("Base Price", "gravityforms") . "</h6>" . __("Enter the base price for this product.", "gravityforms"),
         "form_field_disable_quantity" => "<h6>" . __("Disable Quantity", "gravityforms") . "</h6>" . __("Disables the quantity field.  A quantity of 1 will be assumed or you can add a Quantity field to your form from the Pricing Fields.", "gravityforms"),
         "form_field_product" => "<h6>" . __("Product Field", "gravityforms") . "</h6>" . __("Select which Product this field is tied to.", "gravityforms"),
+        "form_field_mask" => "<h6>" . __("Input Mask", "gravityforms") . "</h6>" . __("Input masks provide a visual guide allowing users to more easily enter data in a specific format such as dates and phone numbers.", "gravityforms"),
         "form_standard_fields" => "<h6>" . __("Standard Fields", "gravityforms") . "</h6>" . __("Standard Fields provide basic form functionality.", "gravityforms"),
         "form_advanced_fields" => "<h6>" . __("Advanced Fields", "gravityforms") . "</h6>" . __("Advanced Fields are for specific uses.  They enable advanced formatting of regularly used fields such as Name, Email, Address, etc.", "gravityforms"),
         "form_post_fields" => "<h6>" . __("Post Fields", "gravityforms") . "</h6>" . __("Post Fields allow you to add fields to your form that create Post Drafts in WordPress from the submitted data.", "gravityforms"),
@@ -115,7 +131,8 @@ function gform_tooltip($name, $css_class="tooltip"){
         "settings_recaptcha_private" => "<h6>" . __("reCaptcha Private Key", "gravityforms") . "</h6>" . __("Enter your reCAPTCHA Private Key, if you do not have a key you can register for one at the provided link.  reCAPTCHA is a free service.", "gravityforms"),
         "settings_currency" => "<h6>" . __("Currency", "gravityforms") . "</h6>" . __("Please select the currency for your location.  Currency is used for pricing fields and price calculations.", "gravityforms"),
         "entries_conversion" => "<h6>" . __("Entries Conversion", "gravityforms") . "</h6>" . __("Conversion is the percentage of form views that generated an entry. If a form was viewed twice, and one entry was generated, the conversion will be 50%.", "gravityforms"),
-        "widget_tabindex" => "<h6>" . __("Tab Index Start Value", "gravityforms") . "</h6>" . __("If you have other forms on the page (i.e. Comments Form), specify a higher tabindex start value so that your Gravity Form does not end up with the same tabindices as your other forms. To disable the tabindex, enter 0 (zero).", "gravityforms")
+        "widget_tabindex" => "<h6>" . __("Tab Index Start Value", "gravityforms") . "</h6>" . __("If you have other forms on the page (i.e. Comments Form), specify a higher tabindex start value so that your Gravity Form does not end up with the same tabindices as your other forms. To disable the tabindex, enter 0 (zero).", "gravityforms"),
+        "notification_override_email" => "<h6>" . __("Override Notifications", "gravityforms") . "</h6>" . __("Enter a comma separated list of email addresses you would like to receive the selected notification emails.", "gravityforms"),
 
     );
 
@@ -123,7 +140,7 @@ function gform_tooltip($name, $css_class="tooltip"){
 
     if(isset($gf_tooltips[$name])){
         ?>
-        <a href="javascript:void(0);" class="<?php echo esc_attr($css_class) . " tooltip_" . $name?> " tooltip="<?php echo esc_attr($gf_tooltips[$name]) ?>">(?)</a>
+        <a href="#" onclick="return false;" class="<?php echo esc_attr($css_class) . " tooltip_" . $name?> " tooltip="<?php echo esc_attr($gf_tooltips[$name]) ?>">(?)</a>
         <?php
     }
 }

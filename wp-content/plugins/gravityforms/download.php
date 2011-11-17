@@ -1,6 +1,13 @@
 <?php
-require_once (preg_replace("/wp-content.*/","wp-blog-header.php",__FILE__));
-require_once (preg_replace("/wp-content.*/","/wp-admin/includes/admin.php",__FILE__));
+for ( $i = 0; $i < $depth = 10; $i++ ) {
+    $wp_root_path = str_repeat( '../', $i );
+
+    if ( file_exists("{$wp_root_path}wp-load.php" ) ) {
+        require_once("{$wp_root_path}wp-load.php");
+        require_once("{$wp_root_path}wp-admin/includes/admin.php");
+        break;
+    }
+}
 
 //redirect to the login page if user is not authenticated
 auth_redirect();
