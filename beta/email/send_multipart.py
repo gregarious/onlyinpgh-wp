@@ -9,7 +9,7 @@ def main(to_address,textfile,htmlfile):
 
     # Create message container - the correct MIME type is multipart/alternative.
     msg = MIMEMultipart('alternative')
-    msg['Subject'] = "Link"
+    msg['Subject'] = "OnlyinPgh.com Beta"
     msg['From'] = from_address
     msg['To'] = to_address
 
@@ -41,5 +41,8 @@ def main(to_address,textfile,htmlfile):
 
 if __name__ == '__main__':
     assert len(sys.argv) == 4
-    main(*sys.argv[1:])
+    try:
+        main(*sys.argv[1:])
+    except:
+        pass    # suppress output for PHP's sake
 

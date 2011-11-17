@@ -24,7 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 				$htmltext = escapeshellarg($_SERVER['DOCUMENT_ROOT'] . '/beta/email/message.html');
 				$address = escapeshellarg($address);
 
-				exec("python $script $address $plaintext $htmltext");
+				system("python $script $address $plaintext $htmltext");
 			}
     	}
     	else {
