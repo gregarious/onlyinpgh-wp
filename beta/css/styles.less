@@ -84,6 +84,7 @@
 		padding: 5px;
 		border: 3px @yellow solid;
 		.rounded-corners(10px);
+		margin: auto;
 	}
 
 	input[type="email"] {
@@ -123,11 +124,15 @@
 		background-color: @yellow;
 	}
 
+	.main {
+		height: 65%;
+	}
+
 	.points {
 		font-size: 8em;
 		color: #000;
 		font-family: 'KomikaTitleRegular', Arial, sans-serif;
-		text-shadow: 3px 3px 0 #fff;
+		text-shadow: 0.2em 0.2em 0 #fff;
 	}
 
 	.content-about {
@@ -145,8 +150,6 @@
 		}
 	}
 
-	
-
 	.announcement-form {
 		margin: 0 8% 0 0;
 		
@@ -159,6 +162,14 @@
 		margin-bottom: 10%;
 	}
 
+	.social.row {
+		margin-top: 5%;
+	}
+
+	.twitter-follow-button {
+		float: left;
+		margin-bottom: 5%;
+	}
 
 /* ============================= */
 /* ! Styles for mobile version   */
@@ -186,8 +197,33 @@
 		margin-bottom: 5%;
 	}
 
+	.twitter-follow-button {
+		margin-bottom: 1%;
+	}
+
+
 }
 
+@media screen and (max-width: 480px) {
+
+	.skyline {		
+		height: 40%;
+	}
+
+	.points {
+		font-size: 5em;
+	}
+
+	input[type="email"] {
+		width: 90%;
+		margin: 0 5%;
+	}
+
+	input[type="submit"] {
+		width: 50%;
+		margin: 5% 25%;
+	}
+}
 
 /* ========================================== */
 /* ! Provide higher res assets for iPhone 4   */

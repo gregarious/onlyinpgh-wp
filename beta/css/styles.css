@@ -47,6 +47,7 @@ input {
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
+  margin: auto;
 }
 input[type="email"] {
   width: 70%;
@@ -131,11 +132,14 @@ input[type="submit"]:active {
   height: 20%;
   background-color: #ffd94c;
 }
+.main {
+  height: 65%;
+}
 .points {
   font-size: 8em;
   color: #000;
   font-family: 'KomikaTitleRegular', Arial, sans-serif;
-  text-shadow: 3px 3px 0 #fff;
+  text-shadow: 0.2em 0.2em 0 #fff;
 }
 .content-about {
   margin: auto;
@@ -158,6 +162,13 @@ input[type="submit"]:active {
 .content-intro {
   margin-bottom: 10%;
 }
+.social.row {
+  margin-top: 5%;
+}
+.twitter-follow-button {
+  float: left;
+  margin-bottom: 5%;
+}
 /* ============================= */
 /* ! Styles for mobile version   */
 /* ============================= */
@@ -179,6 +190,25 @@ input[type="submit"]:active {
   }
   .content-intro {
     margin-bottom: 5%;
+  }
+  .twitter-follow-button {
+    margin-bottom: 1%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .skyline {
+    height: 40%;
+  }
+  .points {
+    font-size: 5em;
+  }
+  input[type="email"] {
+    width: 90%;
+    margin: 0 5%;
+  }
+  input[type="submit"] {
+    width: 50%;
+    margin: 5% 25%;
   }
 }
 /* ========================================== */
