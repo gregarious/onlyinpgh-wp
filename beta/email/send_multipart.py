@@ -9,7 +9,7 @@ def main(to_address,textfile,htmlfile):
 
     # Create message container - the correct MIME type is multipart/alternative.
     msg = MIMEMultipart('alternative')
-    msg['Subject'] = "OnlyinPgh.com Beta"
+    msg['Subject'] = "OnlyinPgh.com Beta Signup"
     msg['From'] = from_address
     msg['To'] = to_address
 
