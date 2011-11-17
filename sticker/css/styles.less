@@ -1,5 +1,5 @@
 
-@yellow: #FFC900;
+@yellow: #FFD94C;
 
 /* Mixins */
 
@@ -46,58 +46,60 @@
 
 	body {		
 		text-align: center;
+		.lucy;
 		background-color: #000;
+		color: @yellow;
 	}
 
 	h2 {
-		font-size: 2em; 
-		color: @yellow;
 		.frank;
-	}
-
-	h4 {
-		color: @yellow;
 		letter-spacing: 1px;
 	}
 
-	p {
-		color: @yellow;
-		font-size: 1.2em;
+	h3 {
+		.frank;
+		letter-spacing: 1px;
+		margin-bottom: 5%;
+	}
 
+	h4 {
+		
+	}
+
+	p {
 		a, a:hover, a:visited {
 			font-weight: bold;
 			color: @yellow;
 		}
-	}
 
-	label, input, p {
-		.lucy;
+		a:hover {
+			color: #fff;
+		}
+
+		font-size: 1.2em;
+		line-height: 1.4em
 	}
 
 	input {
-		padding: 10px;
-		.rounded-corners(10px);
+		padding: 5px;
 		border: 3px @yellow solid;
-	}
-
-	#email-address {
-		width: 70%;
-	}
-
-	input:focus {
-		background-color: #fff;
-		border: 2px darken(@yellow, 15%) solid;
-		
-	}
-
-	.submit-email {
-		padding: 1%;
-		width: 25%;
-		margin-left: 1%;
 		.rounded-corners(10px);
+	}
+
+	input[type="email"] {
+		
+		width: 70%;
+		float: left;
+		&:focus {
+			border: 2px darken(@yellow, 15%) solid;			
+		}
+	}
+
+	input[type="submit"] {
+		width: 20%;
 		font-weight: bold;
 		.gradient(@yellow,lighten(@yellow, 30%));
-		border: 2px darken(@yellow, 15%) solid;
+		float: right;
 
 		&:hover {
 			.gradient(lighten(@yellow, 30%),@yellow);
@@ -110,16 +112,47 @@
 	}
 
 	.skyline {
-		background: #FFC900 url('../img/skyline.png') repeat-x bottom;
-		height: 40%;
+		background: @yellow url('../img/skyline.png') repeat-x bottom;
+		height: 25%;
 		padding-top: 2%;
+		margin-bottom: 2%;
+	}
+
+	.points-container {
+		height: 20%;
+		background-color: @yellow;
 	}
 
 	.points {
 		font-size: 8em;
-		text-align: left;
 		color: #000;
-		.frank;
+		font-family: 'KomikaTitleRegular', Arial, sans-serif;
+		text-shadow: 3px 3px 0 #fff;
+	}
+
+	.content-about {
+		margin: auto;
+		padding-bottom: 5%;
+	}
+
+	.content {
+		margin: 0 0 0 8%;
+		padding-right: 1%;
+		border-right: 1px  #ccc dashed;
+	
+		.content-about {
+			width: 70%;
+		}
+	}
+
+	
+
+	.announcement-form {
+		margin: 0 8% 0 0;
+		
+		p {
+			font-size: 1.2em;
+		}	
 	}
 
 	.content-intro {
@@ -135,12 +168,7 @@
 
 	.skyline {		
 		background-image: url('../img/skyline_600.png');
-		height: 35%;
-		padding-left: 4%;
-	}
-
-	header {
-		padding-top: 8%;
+		height: 20%;
 	}
 
 	input {
@@ -148,6 +176,14 @@
 		width: 10em;
 		.rounded-corners(10px);
 		border: 3px @yellow solid;
+	}
+
+	.content {
+		border: none;
+	}
+
+	.content-intro {
+		margin-bottom: 5%;
 	}
 
 }

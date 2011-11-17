@@ -44,6 +44,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	<link rel="stylesheet" href="css/styles.css">
 	<link rel="stylesheet" href="css/1140.css">
 	<link rel="stylesheet" href="assets/francois-one-fontfacekit/stylesheet.css">
+	<link rel="stylesheet" href="assets/Komika-Title-fontfacekit/stylesheet.css">
 	<link rel="stylesheet" href="css/default-style.css">
 
 	<script src="js/libs/modernizr-2.0.min.js"></script>
@@ -57,49 +58,51 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 </head>
 <body>
 
-	<header class="skyline">
-		<div class="row">
-			<span class="points">+5 !</span>
-		</div>
-	</header>
 	
-		<article class="content">
+	<header class="points-container">
+		<span class="points">+5 !</span>
+	</header>
+
+	<div class="skyline"></div>
+	
+	<article>
+		
+		<div class="row">
+			<section class="content fivecol">
+				<header class="content-intro">
+					<h2>
+						Ready to take this whole<br />	&#8220;internet	&#8221;<br /> thing to the next level?
+					</h2>
+				</header>
+
+				<p class="content-about"><em>
+					<a href="http://onlyinpgh.com" title="Onlyinpgh" targe="_blank">OnlyinPgh</a> is building a new way for you to get into your favorite Scenes in Pittsburgh.</em>
+				</p>
+			</section> <!-- .content -->
+
+			<section class="announcement-form fivecol">
 			
-			<div class="row">
-				<section class="fivecol">
-					<header class="content-intro">
-						<h2>
-							Ready to take this whole<br />	&#8220;internet	&#8221;<br /> thing to the next level?
-						</h2>
-					</header>
-
-					<p>
-						<a href="http://onlyinpgh.com" title="Onlyinpgh" targe="_blank">OnlyinPgh</a> is building a new way for you to get into your favorite Scenes in Pittsburgh.
-					</p>
-				</section>
-
-				<section class="email-form sixcol last">
-					<hgroup>
-						<h3>Private Beta launching soon.</h3>
-						<h4>Signup now to be part of it.</h4>
-					</hgroup>
-					<?php if ($formStatus === 'SUBMITTED'): ?>
-						<p class="post-submit-thanks">Thanks! We'll be in touch!</p>
-					<?php else: ?>
-						<form method="post" id="email-form">
-							<?php $formKey->outputKey(); ?>
-							<input id="email-address" name="email-address" type="email" placeholder="Email">
-							<input class="submit-email" type="sumbit" value="Submit">
-						</form>
-						<?php if ($formStatus == 'ERROR'): ?>
-							<br />
-							<p class='post-submit-thanks'>Problem submitting e-mail. Try again later!</p>	
-						<?php endif; ?>
+				<h2>Private Beta launching soon.</h2>
+				<p class="content-about"><em>Signup now to be part of it.</em></p>
+				
+				<?php if ($formStatus === 'SUBMITTED'): ?>
+					<p class="post-submit-thanks">Thanks! We'll be in touch!</p>
+				<?php else: ?>
+					<form method="post" id="email-form">
+						<?php $formKey->outputKey(); ?>
+						<input id="email-address" name="email-address" type="email" placeholder="Email" />
+						<input type="submit" value="Submit" />
+					</form>
+					<?php if ($formStatus == 'ERROR'): ?>
+						<br />
+						<p class='post-submit-thanks'>Problem submitting e-mail. Try again later!</p>	
 					<?php endif; ?>
-				</section>
-			</div> <!-- .row -->
+				<?php endif; ?>
 
-		</article> <!-- .content -->
+			</section> <!-- .announcement-form -->
+		</div> <!-- .row -->
+
+	</article> <!-- .content -->
 
 
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>

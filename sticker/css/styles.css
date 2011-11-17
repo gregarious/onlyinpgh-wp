@@ -15,125 +15,145 @@ html, body {
 }
 body {
   text-align: center;
+  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
   background-color: #000;
+  color: #ffd94c;
 }
 h2 {
-  font-size: 2em;
-  color: #ffc900;
   font-family: 'FrancoisOneRegular', Arial, sans-serif;
   font-weight: normal;
-}
-h4 {
-  color: #ffc900;
   letter-spacing: 1px;
 }
+h3 {
+  font-family: 'FrancoisOneRegular', Arial, sans-serif;
+  font-weight: normal;
+  letter-spacing: 1px;
+  margin-bottom: 5%;
+}
 p {
-  color: #ffc900;
   font-size: 1.2em;
+  line-height: 1.4em;
 }
 p a, p a:hover, p a:visited {
   font-weight: bold;
-  color: #ffc900;
+  color: #ffd94c;
 }
-label, input, p {
-  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+p a:hover {
+  color: #fff;
 }
 input {
-  padding: 10px;
+  padding: 5px;
+  border: 3px #ffd94c solid;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
-  border: 3px #ffc900 solid;
 }
-#email-address {
+input[type="email"] {
   width: 70%;
+  float: left;
 }
-input:focus {
-  background-color: #fff;
-  border: 2px #b38d00 solid;
+input[type="email"]:focus {
+  border: 2px #ffc800 solid;
 }
-.submit-email {
-  padding: 1%;
-  width: 25%;
-  margin-left: 1%;
-  -webkit-border-radius: 10px;
-  -moz-border-radius: 10px;
-  border-radius: 10px;
+input[type="submit"] {
+  width: 20%;
   font-weight: bold;
-  background-color: #ffc900;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffc900), to(#ffe999));
+  background-color: #ffd94c;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffd94c), to(#fff9e5));
   /* Saf4+, Chrome */
 
-  background-image: -webkit-linear-gradient(top, #ffc900, #ffe999);
+  background-image: -webkit-linear-gradient(top, #ffd94c, #fff9e5);
   /* Chrome 10+, Saf5.1+, iOS 5+ */
 
-  background-image: -moz-linear-gradient(top, #ffc900, #ffe999);
+  background-image: -moz-linear-gradient(top, #ffd94c, #fff9e5);
   /* FF3.6 */
 
-  background-image: -ms-linear-gradient(top, #ffc900, #ffe999);
+  background-image: -ms-linear-gradient(top, #ffd94c, #fff9e5);
   /* IE10 */
 
-  background-image: -o-linear-gradient(top, #ffc900, #ffe999);
+  background-image: -o-linear-gradient(top, #ffd94c, #fff9e5);
   /* Opera 11.10+ */
 
-  background-image: linear-gradient(top, #ffc900, #ffe999);
+  background-image: linear-gradient(top, #ffd94c, #fff9e5);
   /*filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=@first, EndColorStr=@second); /* IE6-IE9 */
 
-  border: 2px #b38d00 solid;
+  float: right;
 }
-.submit-email:hover {
-  background-color: #ffe999;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#ffe999), to(#ffc900));
+input[type="submit"]:hover {
+  background-color: #fff9e5;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#fff9e5), to(#ffd94c));
   /* Saf4+, Chrome */
 
-  background-image: -webkit-linear-gradient(top, #ffe999, #ffc900);
+  background-image: -webkit-linear-gradient(top, #fff9e5, #ffd94c);
   /* Chrome 10+, Saf5.1+, iOS 5+ */
 
-  background-image: -moz-linear-gradient(top, #ffe999, #ffc900);
+  background-image: -moz-linear-gradient(top, #fff9e5, #ffd94c);
   /* FF3.6 */
 
-  background-image: -ms-linear-gradient(top, #ffe999, #ffc900);
+  background-image: -ms-linear-gradient(top, #fff9e5, #ffd94c);
   /* IE10 */
 
-  background-image: -o-linear-gradient(top, #ffe999, #ffc900);
+  background-image: -o-linear-gradient(top, #fff9e5, #ffd94c);
   /* Opera 11.10+ */
 
-  background-image: linear-gradient(top, #ffe999, #ffc900);
+  background-image: linear-gradient(top, #fff9e5, #ffd94c);
   /*filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=@first, EndColorStr=@second); /* IE6-IE9 */
 
 }
-.submit-email:active {
-  background-color: #665000;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#665000), to(#ffc900));
+input[type="submit"]:active {
+  background-color: #b28c00;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#b28c00), to(#ffd94c));
   /* Saf4+, Chrome */
 
-  background-image: -webkit-linear-gradient(top, #665000, #ffc900);
+  background-image: -webkit-linear-gradient(top, #b28c00, #ffd94c);
   /* Chrome 10+, Saf5.1+, iOS 5+ */
 
-  background-image: -moz-linear-gradient(top, #665000, #ffc900);
+  background-image: -moz-linear-gradient(top, #b28c00, #ffd94c);
   /* FF3.6 */
 
-  background-image: -ms-linear-gradient(top, #665000, #ffc900);
+  background-image: -ms-linear-gradient(top, #b28c00, #ffd94c);
   /* IE10 */
 
-  background-image: -o-linear-gradient(top, #665000, #ffc900);
+  background-image: -o-linear-gradient(top, #b28c00, #ffd94c);
   /* Opera 11.10+ */
 
-  background-image: linear-gradient(top, #665000, #ffc900);
+  background-image: linear-gradient(top, #b28c00, #ffd94c);
   /*filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=@first, EndColorStr=@second); /* IE6-IE9 */
 
 }
 .skyline {
-  background: #ffc900 url('../img/skyline.png') repeat-x bottom;
-  height: 40%;
+  background: #ffd94c url('../img/skyline.png') repeat-x bottom;
+  height: 25%;
   padding-top: 2%;
+  margin-bottom: 2%;
+}
+.points-container {
+  height: 20%;
+  background-color: #ffd94c;
 }
 .points {
   font-size: 8em;
-  text-align: left;
   color: #000;
-  font-family: 'FrancoisOneRegular', Arial, sans-serif;
-  font-weight: normal;
+  font-family: 'KomikaTitleRegular', Arial, sans-serif;
+  text-shadow: 3px 3px 0 #fff;
+}
+.content-about {
+  margin: auto;
+  padding-bottom: 5%;
+}
+.content {
+  margin: 0 0 0 8%;
+  padding-right: 1%;
+  border-right: 1px  #ccc dashed;
+}
+.content .content-about {
+  width: 70%;
+}
+.announcement-form {
+  margin: 0 8% 0 0;
+}
+.announcement-form p {
+  font-size: 1.2em;
 }
 .content-intro {
   margin-bottom: 10%;
@@ -144,11 +164,7 @@ input:focus {
 @media all and (max-width: 767px) {
   .skyline {
     background-image: url('../img/skyline_600.png');
-    height: 35%;
-    padding-left: 4%;
-  }
-  header {
-    padding-top: 8%;
+    height: 20%;
   }
   input {
     padding: 5px;
@@ -156,7 +172,13 @@ input:focus {
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     border-radius: 10px;
-    border: 3px #ffc900 solid;
+    border: 3px #ffd94c solid;
+  }
+  .content {
+    border: none;
+  }
+  .content-intro {
+    margin-bottom: 5%;
   }
 }
 /* ========================================== */
