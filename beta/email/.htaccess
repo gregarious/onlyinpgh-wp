@@ -1,0 +1,4 @@
+<Files sent.log>
+    order deny,allow
+    deny from all
+</Files>

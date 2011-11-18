@@ -1,8 +1,9 @@
-import smtplib, sys
+import smtplib, sys, os
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
+SENT_LOG_FILE = os.path.join(os.path.dirname(__file__),'sent.log')
 
 def main(to_address,textfile,htmlfile):
     from_address = "OnlyinPgh.com <contact@onlyinpgh.com>"
@@ -37,6 +38,12 @@ def main(to_address,textfile,htmlfile):
     # sendmail function takes 3 arguments: sender's address, recipient's address
     # and message to send - here it is sent as one string.
     s.sendmail(from_address, to_address, msg.as_string())
+
+    # record that the sending was successful
+    log_f = open(SENT_LOG_FILE,'a')
+    log_f.write(to_address+'\n')
+    log_f.close()
+
     s.quit()
 
 if __name__ == '__main__':
