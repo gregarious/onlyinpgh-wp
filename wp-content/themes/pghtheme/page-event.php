@@ -90,7 +90,7 @@ function updateEventAttendance(eid) {
 
 <?php if($lat && $long): ?>
 	jQuery(document).ready(function() {
-		initializeMap($lat,$long);
+		initializeMap(<?php echo $lat;?>,<?php echo $long;?>);
 	});
 <?php endif; ?>
 
