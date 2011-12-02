@@ -42,10 +42,9 @@ if (onSameDay($start_dt,$end_dt) == true) {
 
 <script type="text/javascript">
 
-function initializeMap() {
-
+function initializeMap(center_lat,center_long) {
 	map = new google.maps.Map(document.getElementById("map_canvas"), {
-		center: new google.maps.LatLng(<?php echo $lat . ', ' . $long; ?>),
+		center: new google.maps.LatLng(center_lat,center_long),
 		zoom: 15,
 		maxZoom: 18,
 		minZoom: 11,
@@ -57,7 +56,7 @@ function initializeMap() {
 	});
 
 	marker = new google.maps.Marker({  
-  		position: new google.maps.LatLng(<?php echo $lat . ', ' . $long;  ?>),  
+  		position: new google.maps.LatLng(center_lat,center_long),
   		map: map,  
   		title: '<?php echo $address; ?>',
   	});
@@ -89,9 +88,11 @@ function updateEventAttendance(eid) {
    	document.getElementById(eid + 'window').onclick = '';		
 }  
 
-jQuery(document).ready(function() {
-	initializeMap();
-});
+<?php if($lat && $long): ?>
+	jQuery(document).ready(function() {
+		initializeMap($lat,$long);
+	});
+<?php endif; ?>
 
 </script>
 
