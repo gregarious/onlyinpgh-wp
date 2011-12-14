@@ -127,7 +127,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 					<a href="https://twitter.com/onlyinpgh" class="twitter-follow-button" data-button="grey" data-text-color="#FFFFFF" data-link-color="#00AEFF">Follow @onlyinpgh</a>
 <script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
 
-					<div class="fb-like" data-href="http://onlyinpgh.com/sticker" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-action="recommend"></div>
+					<div class="fb-like" data-href="http://onlyinpgh.com/beta" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-action="recommend"></div>
 				</div>
 
 			</section> <!-- .announcement-form -->
