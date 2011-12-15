@@ -248,7 +248,8 @@ class EventSearcher {
 	// builds where and having clauses
 	private function buildWhere() {
 		$where_clauses = array();
-		
+		$where_clauses[] = 'e.invisible = 0';
+
 		// if querying by id
 		if($this->f_eid!==NULL) {
 			$where_clauses[] = 'e.id = :eid';
