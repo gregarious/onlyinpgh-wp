@@ -154,7 +154,7 @@ class EventSearcher {
 						'end_dt'		=> $dtend );
 
 			if($this->q_att) {
-				$new_event['attending'] = $row['identity_id']!==NULL;
+				$new_event['attending'] = $row['user_id']!==NULL;
 			}
 
 			if($this->q_loc) {
