@@ -2,6 +2,7 @@
 
 require_once 'etc/config.php';
 require_once 'include/eventsearcher.class.php';
+require_once 'include/oldeventsearcher.class.php';
 
 if(!function_exists('onSameDay')) {
 	function onSameDay($dt1,$dt2) {
@@ -21,16 +22,32 @@ if(!array_key_exists('eid',$_GET)) {
 }
 $eid = intval($_GET['eid']);
 
-$searcher = new EventSearcher();
+if($eid >= 17000) {
+	$searcher = new EventSearcher();
 
-$searcher->queryLocation();
-$searcher->queryOrganization();
-$searcher->setTimezone('US/Eastern');
+	$searcher->queryLocation();
+	$searcher->queryOrganization();
+	$searcher->setTimezone('US/Eastern');
 
-// WP/BP functions -- this means this PHP script won't work without WP calling it
-if( is_user_logged_in() ) {
-	$searcher->queryAttendance(bp_loggedin_user_id());
+	// WP/BP functions -- this means this PHP script won't work without WP calling it
+	if( is_user_logged_in() ) {
+		$searcher->queryAttendance(bp_loggedin_user_id());
+	}
+
+	$searcher->filterByEventId($eid);
+	$results = $searcher->runQuery(0,1);
 }
+else {
+	$queryer = new OldEventQuery();
 
-$searcher->filterByEventId($eid);
-$results = $searcher->runQuery(0,1);
+	$queryer->queryLocation();
+	$queryer->queryOrganization();
+	$queryer->setTimezone('US/Eastern');
+
+	// WP/BP functions -- this means this PHP script won't work without WP calling it
+	if( is_user_logged_in() ) {
+		$queryer->queryAttendance(bp_loggedin_user_id());
+	}
+
+	$results = $queryer->runQuery($eid);
+}

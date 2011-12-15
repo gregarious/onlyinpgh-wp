@@ -166,7 +166,7 @@ class EventSearcher {
 			if($this->q_org) {
 				$new_event['org_name'] = $row['organization_name'];
 				$new_event['org_url'] = $row['organization_link_url'];
-				$new_event['org_fancount'] = $row['organization_fan_count'];
+				$new_event['org_fancount'] = 0;	// this is useless
 			}
 
 			$all_events[] = $new_event;
@@ -192,9 +192,8 @@ class EventSearcher {
 							GROUP_CONCAT(m.meta_value) as categories";
 							
 		if($this->q_org||$this->f_kw!==NULL) {
-			$select .= ", o.name AS organization_name, 
-							o.url AS organization_link_url,
-							o.fan_count AS organization_fan_count";
+			$select .= ", i.name AS organization_name, 
+							o.url AS organization_link_url";
 		}
 
 		if($this->q_loc||$this->f_dist!==NULL||$this->f_hasgeocode!==NULL) {
@@ -221,7 +220,8 @@ class EventSearcher {
 
 		// if location is being queried
 		if($this->q_loc||$this->f_hasgeocode!==NULL||$this->f_dist!==NULL) {
-			$from .= " INNER JOIN events_location l ON (e.location_id = l.id)";
+			$from .= " INNER JOIN places_place p ON (e.place_id = p.id)";
+			$from .= " INNER JOIN places_location l ON (p.location_id = l.id)";
 		}
 
 		// if attendance information is needed
@@ -235,7 +235,8 @@ class EventSearcher {
 		// if organization info is needed
 		if($this->q_org||$this->f_kw!==NULL) {
 			$from .= " LEFT OUTER JOIN events_role ON (e.id = events_role.event_id AND events_role.role_name = 'creator')";
-			$from .= " LEFT OUTER JOIN events_organization o ON (events_role.organization_id = o.id)";
+			$from .= " LEFT OUTER JOIN identity_identity i ON (i.id = events_role.organization_id)";
+			$from .= " LEFT OUTER JOIN identity_organization o ON (i.id = o.identity_ptr_id)";
 		}
 
 		// ensure event types are always returned
