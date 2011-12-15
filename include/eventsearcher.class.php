@@ -154,7 +154,7 @@ class EventSearcher {
 						'end_dt'		=> $dtend );
 
 			if($this->q_att) {
-				$new_event['attending'] = $row['individual']!==NULL;
+				$new_event['attending'] = $row['identity_id']!==NULL;
 			}
 
 			if($this->q_loc) {
@@ -209,7 +209,7 @@ class EventSearcher {
 		}
 
 		if($this->q_att||$this->f_att!==NULL) {
-			$select .= ", a.individual";
+			$select .= ", a.identity_id";
 		}
 		return $select;
 	}
@@ -277,7 +277,7 @@ class EventSearcher {
 		}
 
 		if($this->f_att!==NULL) {
-			$where_clauses[] = "a.individual = :uid";
+			$where_clauses[] = "a.identity_id = :uid";
 			$this->query_args['uid'] = $this->query_uid;
 		}
 
