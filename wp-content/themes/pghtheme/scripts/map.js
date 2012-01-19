@@ -354,12 +354,12 @@ function updateEventResults(new_events,more_results) {
 
 // grabs event search options from form
 function extractSearchOptions() {
-	var region = 'all';
+	var region = document.getElementById('regionSelector').value;
 	var search = document.getElementById('keywordsearch').value;
-	var timespan_days = '7';
+	var timespan_days = parseInt(document.getElementById('timespanSelect').value);
 	var limitval = 30;
 
-	var bydatesearch = null;
+	var bydatesearch = document.getElementById('bydate').style.display == 'block';
 	var startdate, enddate;
 	if(bydatesearch) {
 		var today = new Date();
@@ -367,6 +367,10 @@ function extractSearchOptions() {
 		endday.setDate(today.getDate()+timespan_days);
 		startdate = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate();
 		enddate = endday.getFullYear() + "-" + (endday.getMonth()+1) + "-" + endday.getDate();	
+	}
+	else {
+		startdate = document.getElementById('startdate').value;
+     	enddate = document.getElementById('enddate').value;
 	}
 	
 	var latlng = region_coordinate_map[region];
@@ -382,14 +386,6 @@ function extractSearchOptions() {
 	return search_opts;
 }
 
-
-//Performs event search for each event category
-function typeButtonSearch(typebutton) {
-	var today = new Date();
-	var startdate = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate(); 
-	performEventSearch( {"startdate":startdate,"limit":50, "etype":typebutton} );
-}
-
 // Clears all event markers from map and collapses sidebar, replacing its contents with an optional string
 function clearEventResults(callback) {
 	if(infoWindowFocus == 'event') {
@@ -402,27 +398,6 @@ function clearEventResults(callback) {
 	content.slideUp('fast', function() {
 		content.html('');
 		return callback(); } );
-
-	jQuery('#sidebar-footer').html('');
-
-	// clear all event markers from map
-	for(var i = 0; i < event_instances.length; i++) {
-		if(event_instances[i].marker) event_instances[i].marker.setMap(null);
-	}
-	event_instances.length = 0;
-}
-
-function clearMarkers() {
-		if(infoWindowFocus == 'event') {
-		infoWindow.close();
-		infoWindowFocus = null;
-	}
-
-	// Slide results window up
-	content = jQuery('#sidebar-content');
-	content.slideUp('fast', function() {
-		content.html('');
-		 } );
 
 	jQuery('#sidebar-footer').html('');
 

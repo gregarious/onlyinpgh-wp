@@ -17,7 +17,6 @@
 	- 'userid' 		: id of user making the request (used to determine
 						value of attending in results)
 	- 'onlyattending' : if nonzero, only return results the given user is attending
-	- 'etype' : specific event category to search in 
 
 	Output JSON has the following type
 		{	more_results 	: boolean,
@@ -86,11 +85,6 @@ if(array_key_exists('onlyattending', $_GET)) {
 	if($_GET['onlyattending']) {
 		$searcher->filterByAttendance();
 	}
-}
-
-if(array_key_exists('etype', $_GET)) {
-	$eterms = str_getcsv($_GET['etype'],' ');
-	$searcher->filterByETypes($eterms);
 }
 
 $offset = 0;

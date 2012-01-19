@@ -16,7 +16,6 @@ class EventSearcher {
 		$this->f_edate = NULL;	// will be date string (no time) if set
 		$this->f_att = NULL;	// will be user id string if set
 		$this->f_kw = NULL;		// will be an array of keywords if set
-		$this->f_etype = NULL;  // will be an array of event types if set
 
 		$this->query_uid = NULL; // will be a user id if q_att/f_att is set
 		
@@ -80,13 +79,7 @@ class EventSearcher {
 	public function filterByKeywords($kw_array) {
 		$this->f_kw = $kw_array;
 	}
-	
-	public function filterByEType($etype) {
-		$this->filterByETypes(array($etype));	
-	}
-	public function filterByETypes($etype_array) {
-		$this->f_etype = $etype_array;	
-	}
+
 
 /* QUERY BUILDING 
 
@@ -161,7 +154,7 @@ class EventSearcher {
 						'end_dt'		=> $dtend );
 
 			if($this->q_att) {
-				$new_event['attending'] = $row['user_id']!==NULL;
+				$new_event['attending'] = $row['identity_id']!==NULL;
 			}
 
 			if($this->q_loc) {
@@ -174,11 +167,6 @@ class EventSearcher {
 				$new_event['org_name'] = $row['organization_name'];
 				$new_event['org_url'] = $row['organization_link_url'];
 				$new_event['org_fancount'] = 0;	// this is useless
-				// if no image in the event, try setting it to the organization avatar
-				if(!$new_event['image_url']) {
-					$new_event['image_url'] = $row['organization_avatar']
-				}
-
 			}
 
 			$all_events[] = $new_event;
@@ -205,8 +193,7 @@ class EventSearcher {
 							
 		if($this->q_org||$this->f_kw!==NULL) {
 			$select .= ", i.name AS organization_name, 
-							o.url AS organization_link_url,
-							i.avatar AS organization_avatar";
+							o.url AS organization_link_url";
 		}
 
 		if($this->q_loc||$this->f_dist!==NULL||$this->f_hasgeocode!==NULL) {
@@ -247,7 +234,7 @@ class EventSearcher {
 
 		// if organization info is needed
 		if($this->q_org||$this->f_kw!==NULL) {
-			$from .= " LEFT OUTER JOIN events_role ON (e.id = events_role.event_id AND events_role.role_type = 'host')";
+			$from .= " LEFT OUTER JOIN events_role ON (e.id = events_role.event_id AND events_role.role_name = 'creator')";
 			$from .= " LEFT OUTER JOIN identity_identity i ON (i.id = events_role.organization_id)";
 			$from .= " LEFT OUTER JOIN identity_organization o ON (i.id = o.identity_ptr_id)";
 		}
@@ -311,18 +298,6 @@ class EventSearcher {
 		if($this->f_dist!==NULL) {
 			$this->query_args['rad'] = $this->f_dist[2];
 			$having_clauses[] = "distance < :rad";
-		}
-
-		if($this->f_etype!==NULL) {
-			$eterm_clauses = array();
-			$i = 0;
-			foreach ($this->f_etype as $eterm) {
-				$eterm_clauses[] = "e.name rLIKE :keyword$i OR 
-									categories rLIKE :keyword$i";
-				$this->query_args["keyword$i"] = $eterm;
-				$i++;
-			}
-			$having_clauses[] = implode(' OR ', $eterm_clauses);
 		}
 
 		if($this->f_kw!==NULL) {

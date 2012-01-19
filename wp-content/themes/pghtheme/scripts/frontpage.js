@@ -33,13 +33,3 @@ jQuery(document).ready(function() {
 	initializeEventResults();
 
 });
-
-// Toggles the yellow highlite for the event type buttons
-jQuery(document).ready(function() {
-       jQuery('ul.eventbuttons').children().click(function(){
-       jQuery(this).addClass("eventbuttonsyellow");
-     });
-     jQuery('ul.eventbuttons li:last').click(function(){
-       	jQuery('ul.eventbuttons').children().removeClass('eventbuttonsyellow');
-       });
-     });
