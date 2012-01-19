@@ -204,7 +204,7 @@ class EventSearcher {
 		if($this->q_org||$this->f_kw!==NULL) {
 			$select .= ", i.name AS organization_name, 
 							o.url AS organization_link_url,
-							o.avatar AS organization_avatar";
+							i.avatar AS organization_avatar";
 		}
 
 		if($this->q_loc||$this->f_dist!==NULL||$this->f_hasgeocode!==NULL) {
@@ -245,7 +245,7 @@ class EventSearcher {
 
 		// if organization info is needed
 		if($this->q_org||$this->f_kw!==NULL) {
-			$from .= " LEFT OUTER JOIN events_role ON (e.id = events_role.event_id AND events_role.role_name = 'creator')";
+			$from .= " LEFT OUTER JOIN events_role ON (e.id = events_role.event_id AND events_role.role_type = 'host')";
 			$from .= " LEFT OUTER JOIN identity_identity i ON (i.id = events_role.organization_id)";
 			$from .= " LEFT OUTER JOIN identity_organization o ON (i.id = o.identity_ptr_id)";
 		}
