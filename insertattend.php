@@ -19,7 +19,7 @@ if (!$db_selected) {
 }
 
 // Search the rows in the markers table
-$query = sprintf("INSERT INTO hack_attendance (event_id, user_id) VALUES ('%s', '%s')", 
+$query = sprintf("INSERT INTO events_hackattendance (event_id, user_id) VALUES ('%s', '%s')", 
   mysql_real_escape_string($eventid),
   mysql_real_escape_string($userid));
 $result = mysql_query($query);

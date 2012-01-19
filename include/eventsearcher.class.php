@@ -240,7 +240,7 @@ class EventSearcher {
 			// if we're actually filtering by attendance, use an INNER JOIN to exclude
 			//  rows with no attendance by the user. otherwise, just do a LEFT OUTER
 			$join_type = ($this->f_att!==NULL) ? "INNER" : "LEFT OUTER";
-			$from .= " " . $join_type . " JOIN hack_attendance a ON (e.id = a.event_id)";
+			$from .= " " . $join_type . " JOIN events_hackattendance a ON (e.id = a.event_id)";
 		}
 
 		// if organization info is needed
