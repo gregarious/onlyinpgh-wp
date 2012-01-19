@@ -235,3 +235,39 @@ button:active, input[type=button]:active {
 .alignleft {
 	float: left;
 }
+
+
+/* Search buttons on home page */
+.eventbuttons {
+	margin: 0px;
+	padding: 0px;	
+}
+
+.buttonicon {
+	margin: 0px 0px -5px 0px;
+	padding: 0px;
+}
+
+.eventbuttons li {
+	display: inline;
+	color: #f0f0f0;
+	background-color: #666666;
+	margin: 0px 1px;
+	padding: 5px;
+	-moz-border-radius: 3px;
+	font-size: 12px;
+	letter-spacing: 1px;
+	text-transform: uppercase;
+	font-family: 'Francois One';
+	height: 25px;
+}
+
+.eventbuttons li:hover {	
+	background-color: #ffec4b;
+	color: #0f0f0f;
+}
+
+.eventbuttonsyellow {	
+	background-color: #ffec4b !important;
+	color: #0f0f0f !important;
+}
