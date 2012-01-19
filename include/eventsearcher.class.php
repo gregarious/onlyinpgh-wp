@@ -16,6 +16,7 @@ class EventSearcher {
 		$this->f_edate = NULL;	// will be date string (no time) if set
 		$this->f_att = NULL;	// will be user id string if set
 		$this->f_kw = NULL;		// will be an array of keywords if set
+		$this->f_etype = NULL;  // will be an array of event types if set
 
 		$this->query_uid = NULL; // will be a user id if q_att/f_att is set
 		
@@ -79,7 +80,13 @@ class EventSearcher {
 	public function filterByKeywords($kw_array) {
 		$this->f_kw = $kw_array;
 	}
-
+	
+	public function filterByEType($etype) {
+		$this->filterByETypes(array($etype));	
+	}
+	public function filterByETypes($etype_array) {
+		$this->f_etype = $etype_array;	
+	}
 
 /* QUERY BUILDING 
 
@@ -167,6 +174,9 @@ class EventSearcher {
 				$new_event['org_name'] = $row['organization_name'];
 				$new_event['org_url'] = $row['organization_link_url'];
 				$new_event['org_fancount'] = 0;	// this is useless
+				if(!$new_event['image_url']) {
+					$new_event['image_url'] = $row['organization_avatar'];
+				}
 			}
 
 			$all_events[] = $new_event;
@@ -193,7 +203,8 @@ class EventSearcher {
 							
 		if($this->q_org||$this->f_kw!==NULL) {
 			$select .= ", i.name AS organization_name, 
-							o.url AS organization_link_url";
+							o.url AS organization_link_url,
+							o.avatar AS organization_avatar";
 		}
 
 		if($this->q_loc||$this->f_dist!==NULL||$this->f_hasgeocode!==NULL) {
@@ -294,10 +305,23 @@ class EventSearcher {
 
 	function buildHaving() {
 		$having_clauses = array();
+		
 
 		if($this->f_dist!==NULL) {
 			$this->query_args['rad'] = $this->f_dist[2];
 			$having_clauses[] = "distance < :rad";
+		}
+
+		if($this->f_etype!==NULL) {
+			$eterm_clauses = array();
+			$i = 0;
+			foreach ($this->f_etype as $eterm) {
+				$eterm_clauses[] = "e.name rLIKE :keyword$i OR 
+									categories rLIKE :keyword$i";
+				$this->query_args["keyword$i"] = $eterm;
+				$i++;
+			}
+			$having_clauses[] = implode(' OR ', $eterm_clauses);
 		}
 
 		if($this->f_kw!==NULL) {
