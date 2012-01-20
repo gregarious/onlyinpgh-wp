@@ -160,6 +160,24 @@ class EventSearcher {
 						'start_dt'		=> $dtstart,
 						'end_dt'		=> $dtend );
 
+			if($this->f_etype && $new_event['categories']) {
+				// if there's a category filter, be sure the first one chosen is one of the filtered ones
+				shuffle($new_event['categories']);	// eliminate possible bias in primary category selection
+				$lower_etypes = array();
+				foreach($this->f_etype as $etype) {
+					$lower_etypes[] = strtolower($etype);
+				}
+				for($i = 0; $i < count($new_event['categories']); $i++) {
+					if(in_array(strtolower($new_event['categories'][$i]),$lower_etypes)) {
+						$tmp = $new_event['categories'][$i];
+						$new_event['categories'][$i] = $new_event['categories'][0];
+						$new_event['categories'][0] = $tmp;
+						$found = TRUE;
+						break;
+					}
+				}
+			}
+
 			if($this->q_att) {
 				$new_event['attending'] = $row['user_id']!==NULL;
 			}

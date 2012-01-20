@@ -89,8 +89,8 @@ if(array_key_exists('onlyattending', $_GET)) {
 }
 
 if(array_key_exists('etype', $_GET)) {
-	$eterms = str_getcsv($_GET['etype'],' ');
-	$searcher->filterByETypes($eterms);
+	$etype = $_GET['etype'];
+	$searcher->filterByEType($etype);
 }
 
 $offset = 0;
