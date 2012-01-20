@@ -5,9 +5,6 @@
 Template Name: Single Event
 */
 
-
-get_header(); 
-
 /* events.php has already been called in the header, but for whatever
 	Wordpressy reason its ouput $results var isn't available here. */
 require(ABSPATH . 'events.php'); // implicit is a requirement that GET has an eid entry
@@ -39,6 +36,8 @@ if (onSameDay($start_dt,$end_dt) == true) {
 }
 
 ?>
+
+<?php get_header(); ?>
 
 <script type="text/javascript">
 

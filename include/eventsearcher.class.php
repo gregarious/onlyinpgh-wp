@@ -122,7 +122,7 @@ class EventSearcher {
 					'ORDER BY e.dtend ASC, e.dtstart DESC' . ' ' .
 			 		"LIMIT $offset, " . ($limit+1);
 		 
-		 // connect to DB and run query
+		// connect to DB and run query
 		try {
 			$pdo = new PDO('mysql:host='.EVENTS_DB_HOST.';dbname='.EVENTS_DB_NAME, 
 							EVENTS_DB_USER, EVENTS_DB_PASSWORD);
@@ -231,8 +231,9 @@ class EventSearcher {
 
 		// if location is being queried
 		if($this->q_loc||$this->f_hasgeocode!==NULL||$this->f_dist!==NULL) {
-			$from .= " INNER JOIN places_place p ON (e.place_id = p.id)";
-			$from .= " INNER JOIN places_location l ON (p.location_id = l.id)";
+			$join_type = ($this->f_hasgeocode!==NULL||$this->f_dist!==NULL) ? "INNER" : "LEFT OUTER";
+			$from .= " " . $join_type . " JOIN places_place p ON (e.place_id = p.id)";
+			$from .= " " . $join_type . " JOIN places_location l ON (p.location_id = l.id)";
 		}
 
 		// if attendance information is needed
