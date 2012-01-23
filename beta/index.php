@@ -88,8 +88,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 	
 	<article class="main">
 		
-		<div class="row">
+		<div class="row content-container clearfix">
+
 			<section class="content fivecol">
+
 				<header class="content-intro">
 					<h2>
 						Ready to take this whole<br />&#8220;internet&#8221;<br /> thing to the next level?
@@ -97,43 +99,52 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 				</header>
 
 				<p class="content-about"><em>
-					<a href="http://onlyinpgh.com" title="Onlyinpgh" targe="_blank">OnlyinPgh</a> is building a new way for you to get into your favorite Scenes in Pittsburgh.</em>
+					<a href="http://onlyinpgh.com" title="Onlyinpgh" target="_blank">OnlyinPgh</a> is building Scenable, a new online platform for making it easier to connect to, participate in and interact with your local community. Check out our video to see what it's all about, or head to <a href="http://onlyinpgh.com/scenable">here</a> for more info.</em>
 				</p>
+
 			</section> <!-- .content -->
 
-			<section class="announcement-form fivecol">
-			
-				<div class="announcement row">
-					<h2>Private Beta launching soon.</h2>
-					<p class="content-about"><em>Signup now to be part of it.</em></p>
-				</div>
-				<div class="row clearfix">
-					<?php if ($formStatus === 'SUBMITTED'): ?>
-						<p class="post-submit-thanks">Thanks! We'll be in touch!</p>
-					<?php else: ?>
-						<form method="post" id="email-form">
-							<?php $formKey->outputKey(); ?>
-							<input id="email-address" name="email-address" type="email" placeholder="Email" />
-							<input type="submit" value="Submit" />
-						</form>
-						<?php if ($formStatus == 'ERROR'): ?>
-							<br />
-							<p class='post-submit-thanks'>Problem submitting e-mail. Try again later!</p>	
-						<?php endif; ?>
-					<?php endif; ?>
-				</div>
+			<section class="sixcol last" id="video">
 
-				<div class="social row">
-					<a href="https://twitter.com/onlyinpgh" class="twitter-follow-button" data-button="grey" data-text-color="#FFFFFF" data-link-color="#00AEFF">Follow @onlyinpgh</a>
-<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+				<iframe src="http://player.vimeo.com/video/35533040?title=0&amp;byline=0&amp;portrait=0" width="400" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 
-					<div class="fb-like" data-href="http://onlyinpgh.com/beta" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-action="recommend"></div>
-				</div>
+			</section>
 
-			</section> <!-- .announcement-form -->
 		</div> <!-- .row -->
 
-	</article> <!-- .content -->
+		<section class="announcement-form row clearfix">
+		
+			<div class="announcement row">
+				<h2>Private Beta launching soon.</h2>
+			</div>
+			<div class="row clearfix">
+				<p class="content-about"><em>Signup now to be part of it.</em></p>
+				<?php if ($formStatus === 'SUBMITTED'): ?>
+					<p class="post-submit-thanks">Thanks! We'll be in touch!</p>
+				<?php else: ?>
+					<form method="post" id="email-form">
+						<?php $formKey->outputKey(); ?>
+						<input id="email-address" name="email-address" type="email" placeholder="Email" />
+						<input type="submit" value="Submit" />
+					</form>
+					<?php if ($formStatus == 'ERROR'): ?>
+						<br />
+						<p class='post-submit-thanks'>Problem submitting e-mail. Try again later!</p>	
+					<?php endif; ?>
+				<?php endif; ?>
+			</div>
+
+			<div class="social row clearfix">
+				
+				<a href="https://twitter.com/onlyinpgh" class="twitter-follow-button" data-button="grey" data-text-color="#FFFFFF" data-link-color="#00AEFF">Follow @onlyinpgh</a>
+<script src="//platform.twitter.com/widgets.js" type="text/javascript"></script>
+
+				<div class="fb-like" data-href="http://onlyinpgh.com/beta" data-send="false" data-layout="button_count" data-show-faces="false" data-action="recommend"></div>
+			</div>
+
+		</section> <!-- .announcement-form -->
+
+	</article> <!-- .main -->
 
 	<!-- Start of StatCounter Code for Default Guide -->
 	<script type="text/javascript">

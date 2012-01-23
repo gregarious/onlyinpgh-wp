@@ -3,9 +3,6 @@
   font-family: 'FrancoisOneRegular', Arial, sans-serif;
   font-weight: normal;
 }
-.lucy {
-  font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
-}
 /* ============================== */
 /* ! Styles for desktop version   */
 /* ============================== */
@@ -18,6 +15,7 @@ body {
   font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
   background-color: #000;
   color: #ffd94c;
+  margin-bottom: 3%;
 }
 h1, h2 {
   font-family: 'FrancoisOneRegular', Arial, sans-serif;
@@ -31,15 +29,18 @@ h3 {
   margin-bottom: 5%;
 }
 p {
-  font-size: 1.2em;
-  line-height: 1.4em;
+  font-size: 1em;
+  line-height: 1.2em;
 }
 p a, p a:hover, p a:visited {
-  font-weight: bold;
   color: #ffd94c;
 }
 p a:hover {
   color: #fff;
+}
+form, .social.row {
+  margin: 3% auto 1% auto;
+  width: 60%;
 }
 input {
   padding: 5px;
@@ -79,7 +80,6 @@ input[type="submit"] {
   background-image: linear-gradient(top, #ffd94c, #fff9e5);
   /*filter: progid:DXImageTransform.Microsoft.gradient(startColorStr=@first, EndColorStr=@second); /* IE6-IE9 */
 
-  float: right;
 }
 input[type="submit"]:hover {
   background-color: #fff9e5;
@@ -147,28 +147,38 @@ input[type="submit"]:active {
   padding-bottom: 5%;
 }
 .content {
-  margin: 0 0 0 8%;
-  padding-right: 1%;
-  border-right: 1px  #ccc dashed;
+  margin: 0 0 0 2%;
 }
 .content .content-about {
-  width: 70%;
+  text-align: left;
+  text-indent: 10%;
+  width: 100%;
+}
+#video {
+  padding-left: 3%;
+  border-left: 1px #ccc dashed;
 }
 .announcement-form {
   margin: 0 8% 0 0;
+  width: 100%;
 }
-.announcement-form p {
+.announcement-form .content-about {
   font-size: 1.2em;
+  padding-bottom: 0;
 }
 .content-intro {
   margin-bottom: 10%;
 }
-.social.row {
-  margin-top: 5%;
+.content-container {
+  margin-bottom: 2%;
 }
-.twitter-follow-button {
+.social.row {
+  margin-bottom: 3em;
+}
+#widget, .fb-like, .twitter-follow-button {
   float: left;
-  margin-bottom: 5%;
+  margin: 0;
+  padding: 0;
 }
 /* ============================= */
 /* ! Styles for mobile version   */
@@ -178,6 +188,9 @@ input[type="submit"]:active {
     background-image: url('../img/skyline_600.png');
     height: 20%;
   }
+  form, .social.row {
+    width: 100%;
+  }
   input {
     padding: 5px;
     width: 10em;
@@ -186,17 +199,30 @@ input[type="submit"]:active {
     border-radius: 10px;
     border: 3px #ffd94c solid;
   }
-  .content {
+  p {
+    font-size: 1.1em;
+    line-height: 1.3em;
+  }
+  #video {
     border: none;
+    padding: 0;
+    margin: 0;
   }
   .content-intro {
     margin-bottom: 5%;
   }
-  .twitter-follow-button {
+  #widget, .fb-like, .twitter-follow-button {
     margin-bottom: 1%;
+  }
+  .main {
+    width: 80%;
+    margin: auto;
   }
 }
 @media screen and (max-width: 480px) {
+  .main {
+    width: 100%;
+  }
   .skyline {
     height: 34%;
   }
@@ -216,8 +242,8 @@ input[type="submit"]:active {
 /* ! Provide higher res assets for iPhone 4   */
 /* ========================================== */
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
-  /*	.logo {
-  		background: url(logo2x.jpg) no-repeat;
-  		background-size: 212px 303px;
-  	}*/
+  /*  .logo {
+      background: url(logo2x.jpg) no-repeat;
+      background-size: 212px 303px;
+    }*/
 }
