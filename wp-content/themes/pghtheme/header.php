@@ -240,11 +240,11 @@ for (i = 0; i < field.length; i++)
 
 						// *** STUPID BUDDYPRESS MUST HARCODE- change for dev/prod *** //
 						// If on the 'Scenes' page, highlight its menu item ?>
-						<a href="http://onlyinpgh.com/scenes/"> <?php
-						if ( is_page('scenes') ) { ?>
-							<li class="current_page_item menu-item scenes">Scenes</li><?php 
+						<a href="http://onlyinpgh.com/scenable/"> <?php
+						if ( is_page('scenable') ) { ?>
+							<li class="current_page_item menu-item scenes">Scenable</li><?php 
 						} else { ?>
-							<li class="menu-item scenes">Scenes</li><?php 
+							<li class="menu-item scenes">Scenable</li><?php 
 						} ?>
 						</a>
 
