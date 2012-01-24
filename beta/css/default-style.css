@@ -41,8 +41,8 @@ body, button, input, select, textarea { font-family: sans-serif;}
  * Also: hot pink!
  */
 
-::-moz-selection { background: #FFD94C; color: #000; text-shadow: none; }
-::selection { background: #FFD94C; color: #000; text-shadow: none; }
+::-moz-selection { background: #288CCC; color: #FFF; text-shadow: none; }
+::selection { background: #288CCC; color: #FFF; text-shadow: none; }
 
 
 /* =============================================================================
@@ -132,7 +132,6 @@ figure { margin: 0; }
    Forms
    ========================================================================== */
 
-form { margin: 0; }
 fieldset { border: 0; margin: 0; padding: 0; }
 
 /* 
