@@ -50,6 +50,8 @@
 require_once 'etc/config.php';
 require_once 'include/eventsearcher.class.php';
 
+$DAYTIME_CUTOFF = '09:00';	// anytime before 4am is considered part of the previous day (for now using 9 AM for utc)
+		
 // if key is in the array, returns the correspondingvalue
 // if it doesn't exist, returns NULL without a warning
 function safeLookup($key,$ar) {
@@ -71,11 +73,23 @@ if( array_key_exists('lat',$_GET) &&
 }
 
 if(array_key_exists('startdate', $_GET)) {
-	$searcher->filterByStartDate($_GET['startdate']);
+	$datestr = trim($_GET['startdate']);
+	// if no time in the string, use the beginning of the day
+	if(preg_match('/^\d+-\d+-\d+$/', $datestr))
+	{
+		$datestr = $datestr . ' ' . $DAYTIME_CUTOFF;
+	}
+	$searcher->filterByStartDate($datestr);
 }
 
 if(array_key_exists('enddate', $_GET)) {
-	$searcher->filterByEndDate($_GET['enddate']);
+	$datestr = trim($_GET['enddate']);
+	// if no time in the string, use the beginning of the day
+	if(preg_match('/^\d+-\d+-\d+$/', $datestr))
+	{
+		$datestr = $datestr . ' ' . $DAYTIME_CUTOFF;
+	}
+	$searcher->filterByEndDate($datestr);
 }
 
 if(array_key_exists('search_terms', $_GET)) {

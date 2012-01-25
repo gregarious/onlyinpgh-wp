@@ -3,7 +3,11 @@
 // Creates map and runs initial homepage load search
 function initializeUserEventResults(uid) {
 	var today = new Date();
-	var startdate = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate();
+	var startdate = today.getUTCFullYear() + '-' +
+	 				(today.getUTCMonth()+1) + '-' + 
+	 				today.getUTCDate() + ' ' + 
+	 				today.getUTCHours() + ':' + 
+	 				today.getUTCMinutes();
 	var uid = parseInt(document.getElementById("loggedinid").value);
 	
 	clearEventResults( function(){ 

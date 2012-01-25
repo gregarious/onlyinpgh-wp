@@ -3,9 +3,11 @@
 require_once('etc/config.php');
 require_once('include/eventsearcher.class.php');
 
+$DAYTIME_CUTOFF = '09:00';	// anytime before 4am is considered part of the previous day (for now using 9 AM for utc)
+
 class TwoWeekCalendar {
 	public function __construct($anchor_date_str) {
-		$this->anchor_dt = new DateTime($anchor_date_str);
+		$this->anchor_dt = new DateTime($anchor_date_str . ' ' . $DAYTIME_CUTOFF);
 
 		$iter_dt = clone $this->anchor_dt;
 		$day_interval = new DateInterval('P1D');

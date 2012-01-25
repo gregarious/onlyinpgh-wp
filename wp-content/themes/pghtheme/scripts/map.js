@@ -365,12 +365,16 @@ function extractSearchOptions() {
 		var today = new Date();
 		var endday = new Date();
 		endday.setDate(today.getDate()+timespan_days);
-		startdate = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + today.getDate();
-		enddate = endday.getFullYear() + "-" + (endday.getMonth()+1) + "-" + endday.getDate();	
-	}
-	else {
-		startdate = document.getElementById('startdate').value;
-     	enddate = document.getElementById('enddate').value;
+		startdate = today.getUTCFullYear() + "-" + 
+					(today.getUTCMonth()+1) + "-" + 
+					today.getUTCDate() + ' ' +
+					today.getUTCHours() + ':' + 
+					today.getUTCMinutes();
+		enddate = endday.getUTCFullYear() + "-" + 
+					(endday.getUTCMonth()+1) + "-" + 
+					endday.getUTCDate() + ' ' +
+					endday.getUTCHours() + ':' + 
+					endday.getUTCMinutes();	
 	}
 	
 	var latlng = region_coordinate_map[region];
@@ -384,6 +388,18 @@ function extractSearchOptions() {
 		search_opts['search_terms'] = search;
 	}
 	return search_opts;
+}
+
+
+//Performs event search for each event category
+function typeButtonSearch(typebutton) {
+	var today = new Date();
+	var startdate = today.getUTCFullYear() + '-' + 
+					(today.getUTCMonth()+1) + '-' + 
+					today.getUTCDate() + ' ' + 
+					today.getUTCHours() + ':' + 
+					today.getUTCMinutes(); 
+	performEventSearch( {"startdate":startdate,"limit":50, "etype":typebutton} );
 }
 
 // Clears all event markers from map and collapses sidebar, replacing its contents with an optional string

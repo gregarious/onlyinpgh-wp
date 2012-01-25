@@ -2,7 +2,6 @@
 
 class EventSearcher {
 	public function __construct($process_output=TRUE) {
-		$this->DAYTIME_CUTOFF = '08:00';	// anytime before 4am is considered part of the previous day (for now using 8 AM for utc)
 		$this->timezone = date_default_timezone_get();
 
 		$this->q_loc = FALSE;
@@ -56,12 +55,12 @@ class EventSearcher {
 		$this->f_eid = $eid;
 	}
 
-	// Must be in YYYY-MM-DD format
+	// Must be in YYYY-MM-DD format (optional hh:ii)
 	public function filterByStartDate($date) {
 		$this->f_sdate = $date;
 	}
 
-	// Must be in YYYY-MM-DD format
+	// Must be in YYYY-MM-DD format (optional hh:ii)
 	public function filterByEndDate($date) {
 		$this->f_edate = $date;	
 	}
@@ -290,16 +289,16 @@ class EventSearcher {
 			$where_clauses[] = 'e.dtend > :startdate';
 			$dt = new DateTime($this->f_sdate);
 			// automatically add the time cutoff
-			$this->query_args['startdate'] = $dt->format('Y-m-d') . ' ' . $this->DAYTIME_CUTOFF;
+			$this->query_args['startdate'] = $dt->format('Y-m-d H:i');
 		}
 
 		if($this->f_edate!==NULL) {
 			$where_clauses[] = 'e.dtstart < :enddate';
-			// if end date is D, we actually want to enclude events that start before the daytime cutoff on the next day
+			// if end date is D, we actually want to include events that start before the daytime cutoff on the next day
 			$dt = new DateTime($this->f_edate);
 			$dt->add(new DateInterval('P1D'));	// end time is officially 4:00 AM on 
 			// automatically add the time cutoff
-			$this->query_args['enddate'] = $dt->format('Y-m-d') . ' ' . $this->DAYTIME_CUTOFF;
+			$this->query_args['enddate'] = $dt->format('Y-m-d H:i');
 		}
 
 		if($this->f_hasgeocode!==NULL) {
