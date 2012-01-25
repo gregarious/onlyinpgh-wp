@@ -105,9 +105,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 			</section> <!-- .content -->
 
 			<section class="sixcol last" id="video">
-
-				<iframe src="http://player.vimeo.com/video/35533040?title=0&amp;byline=0&amp;portrait=0" width="400" height="300" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-
+				<iframe width="400" height="300" src="http://www.youtube.com/embed/2IEWG5HgBvg" frameborder="0" allowfullscreen></iframe>
 			</section>
 
 		</div> <!-- .row -->
