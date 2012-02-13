@@ -1,4 +1,4 @@
-
+// new
 var map;
 var infoWindow;
 var infoWindowFocus;	// will either be a marker type or 'event'
@@ -354,14 +354,14 @@ function updateEventResults(new_events,more_results) {
 
 // grabs event search options from form
 function extractSearchOptions() {
-	var region = document.getElementById('regionSelector').value;
+	var region = 'all';
 	var search = document.getElementById('keywordsearch').value;
 	var timespan_days = parseInt(document.getElementById('timespanSelect').value);
 	var limitval = 30;
 
-	var bydatesearch = document.getElementById('bydate').style.display == 'block';
+	var timespansearch = document.getElementById('bydate').style.display == 'block';
 	var startdate, enddate;
-	if(bydatesearch) {
+	if(timespansearch) {
 		var today = new Date();
 		var endday = new Date();
 		endday.setDate(today.getDate()+timespan_days);
@@ -375,6 +375,10 @@ function extractSearchOptions() {
 					endday.getUTCDate() + ' ' +
 					endday.getUTCHours() + ':' + 
 					endday.getUTCMinutes();	
+	}
+	else {	// else it should be a date picker search
+		startdate = document.getElementById('startdate').value;
+		enddate = document.getElementById('enddate').value;
 	}
 	
 	var latlng = region_coordinate_map[region];
@@ -390,10 +394,11 @@ function extractSearchOptions() {
 	return search_opts;
 }
 
-
 //Performs event search for each event category
 function typeButtonSearch(typebutton) {
 	var today = new Date();
+
+	var startdate = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate(); 
 	var startdate = today.getUTCFullYear() + '-' + 
 					(today.getUTCMonth()+1) + '-' + 
 					today.getUTCDate() + ' ' + 
@@ -414,6 +419,27 @@ function clearEventResults(callback) {
 	content.slideUp('fast', function() {
 		content.html('');
 		return callback(); } );
+
+	jQuery('#sidebar-footer').html('');
+
+	// clear all event markers from map
+	for(var i = 0; i < event_instances.length; i++) {
+		if(event_instances[i].marker) event_instances[i].marker.setMap(null);
+	}
+	event_instances.length = 0;
+}
+
+function clearMarkers() {
+		if(infoWindowFocus == 'event') {
+		infoWindow.close();
+		infoWindowFocus = null;
+	}
+
+	// Slide results window up
+	content = jQuery('#sidebar-content');
+	content.slideUp('fast', function() {
+		content.html('');
+		 } );
 
 	jQuery('#sidebar-footer').html('');
 

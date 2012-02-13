@@ -166,12 +166,17 @@ class EventSearcher {
 				foreach($this->f_etype as $etype) {
 					$lower_etypes[] = strtolower($etype);
 				}
+				// if($new_event['id']==17868) {
+				// 	print_r($new_event['categories']);
+				// 	print_r($lower_etypes);
+				// 	die();
+				// }
+				
 				for($i = 0; $i < count($new_event['categories']); $i++) {
 					if(in_array(strtolower($new_event['categories'][$i]),$lower_etypes)) {
 						$tmp = $new_event['categories'][$i];
 						$new_event['categories'][$i] = $new_event['categories'][0];
 						$new_event['categories'][0] = $tmp;
-						$found = TRUE;
 						break;
 					}
 				}
@@ -334,8 +339,7 @@ class EventSearcher {
 			$eterm_clauses = array();
 			$i = 0;
 			foreach ($this->f_etype as $eterm) {
-				$eterm_clauses[] = "e.name rLIKE :keyword$i OR 
-									categories rLIKE :keyword$i";
+				$eterm_clauses[] = "categories rLIKE :keyword$i";
 				$this->query_args["keyword$i"] = $eterm;
 				$i++;
 			}

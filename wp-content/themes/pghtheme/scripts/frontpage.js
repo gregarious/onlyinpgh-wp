@@ -33,7 +33,13 @@ jQuery(document).ready(function() {
 		jQuery('body').animate({scrollTop:0},1000);
 	});
 	
+    jQuery('ul.eventbuttons').children().click(function(){
+        jQuery('ul.eventbuttons').children().removeClass('eventbuttonsyellow');
+        jQuery(this).addClass("eventbuttonsyellow");
+    });
+
 	initializeMap();
 	initializeEventResults();
 
 });
+

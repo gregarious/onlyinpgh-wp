@@ -5,6 +5,7 @@
 
 #eventsearch_bar { 
 	width: 950px;
+	height: 100px;
 	padding:10px 0 0 10px;
 	background-color: #0f0f0f;
 	margin-left:10px;
@@ -18,7 +19,7 @@
 
 }
 
-#eventsearch_bar ul {
+#eventsearch_bar #dropdown_search ul {
     list-style-type: none;
     margin: 5px 0 0 0;
     padding: 10px 0;
@@ -36,16 +37,6 @@
 	padding: 0px;
 }
 
-#eventsearch_bar img {
-	padding: 0 0 0 2px;
-    display: inline-block;
-	float: left;
-}
-
-#eventsearch_bar img {
-	margin: 0px !important;
-	padding: 0px !important;
-}	
 
 #eventtypes input {
 	float: left;
