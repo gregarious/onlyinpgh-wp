@@ -356,7 +356,7 @@ function extractSearchOptions() {
 	var region = 'all';
 	var search = document.getElementById('keywordsearch').value;
 	var timespan_days = parseInt(document.getElementById('timespanSelect').value);
-	var limitval = 30;
+	var limitval = 40;
 
 	var timespansearch = document.getElementById('bydate').style.display == 'block';
 	var startdate, enddate;

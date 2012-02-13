@@ -9,7 +9,7 @@ function initializeEventResults() {
                     today.getUTCHours() + ':' +
                     today.getUTCMinutes();
 	clearEventResults( function(){ 
-		return performEventSearch( {"startdate":startdate,"limit":50} ); }
+		return performEventSearch( {"startdate":startdate,"limit":40} ); }
 		);
 }
 
