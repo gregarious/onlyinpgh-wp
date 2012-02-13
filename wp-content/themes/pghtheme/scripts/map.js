@@ -7,7 +7,6 @@ var visible_place_markers = [];		// maps { place-type : array of place icons }
 var event_instances = [];	// global array of event instance objects returned by searches
 var cached_search_opts = null;
 
-
 /** various lookup tables **/
 // specifies lat/long value of each option in the events seach dropdown box
 region_coordinate_map = { 'all' : 	[40.440318,-79.999218],
@@ -522,6 +521,10 @@ function createPlaceMarker(place,ltype) {
 	return marker;
 }
 
+function submitButtonClicked() {
+	jQuery('#show-all-button').click();
+}
+
 // User wants to run a new search using form parameters
 function newSearchRequested() {
 	var opts = extractSearchOptions();
@@ -546,7 +549,7 @@ function findMoreResults(num_results) {
 function submitonEnter(evt){
 	var charCode = (evt.which) ? evt.which : event.keyCode;
 	if(charCode == "13") {
-		newSearchRequested();
+		submitButtonClicked();
 	}
 }
 

@@ -36,7 +36,7 @@ get_header(); ?>
 					<input id="keywordsearch" style="margin: 0px 10px 0px 10px;" onkeydown="javascript:return submitonEnter(event);" size="30" type="text" value="Keyword search (optional)" onfocus="clearkeywordtip(this)" />
 				</li>
 			</ul>
-			<button class="submit-button alignright" onclick="newSearchRequested();clearChecks();jqCheckAll('event_types','events',1)">Submit</button>
+			<button class="submit-button alignright" onclick="submitButtonClicked();clearChecks();jqCheckAll('event_types','events',1)">Submit</button>
 		</div> <!-- #dropdown_search -->
 
 		<div id="placesearch">
@@ -50,7 +50,7 @@ get_header(); ?>
 				<li onclick="typeButtonClicked('arts')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/arts.png"> Arts</li>
 				<li onclick="typeButtonClicked('general fun')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/genfun.png"> General Fun</li>
 				<li onclick="typeButtonClicked('sports & outdoors')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/outdoors.png"> Sports & Outdoors</li>
-				<li class="eventbuttonsyellow" onclick="typeButtonClicked('show all')">Show All</li>
+				<li class="eventbuttonsyellow" id="show-all-button" onclick="typeButtonClicked('show all')">Show All</li>
 			</ul>	
 			<input id="eventtype" type="hidden" value="show all"/>
 		</div>
