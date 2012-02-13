@@ -42,16 +42,17 @@ get_header(); ?>
 		<div id="placesearch">
 			<p>Event<br>Types</p>
 			<ul class="eventbuttons">
-				<li onclick="clearMarkers(), typeButtonSearch('food & drink')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/food.png"> Food</li>
-				<li onclick="clearMarkers(), typeButtonSearch('shopping')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/retail.png"> Shopping</li>
-				<li onclick="clearMarkers(), typeButtonSearch('music')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/music.png"> Music</li>
-				<li onclick="clearMarkers(), typeButtonSearch('theater')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/theaterfilm.png"> Theater & Film</li>
-				<li onclick="clearMarkers(), typeButtonSearch('educational')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/education.png"> Education</li>
-				<li onclick="clearMarkers(), typeButtonSearch('arts')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/arts.png"> Arts</li>
-				<li onclick="clearMarkers(), typeButtonSearch('general fun')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/genfun.png"> General Fun</li>
-				<li onclick="clearMarkers(), typeButtonSearch('sports & outdoors')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/outdoors.png"> Sports & Outdoors</li>
-				<li class="eventbuttonsyellow" onclick="clearMarkers(), initializeEventResults()">Show All</li>
+				<li onclick="typeButtonClicked('food & drink')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/food.png"> Food</li>
+				<li onclick="typeButtonClicked('shopping')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/retail.png"> Shopping</li>
+				<li onclick="typeButtonClicked('music')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/music.png"> Music</li>
+				<li onclick="typeButtonClicked('theater')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/theaterfilm.png"> Theater & Film</li>
+				<li onclick="typeButtonClicked('educational')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/education.png"> Education</li>
+				<li onclick="typeButtonClicked('arts')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/arts.png"> Arts</li>
+				<li onclick="typeButtonClicked('general fun')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/genfun.png"> General Fun</li>
+				<li onclick="typeButtonClicked('sports & outdoors')"><img class="buttonicon" src="http://onlyinpgh.com/wp-content/themes/pghtheme/images/event_markers/outdoors.png"> Sports & Outdoors</li>
+				<li class="eventbuttonsyellow" onclick="typeButtonClicked('show all')">Show All</li>
 			</ul>	
+			<input id="eventtype" type="hidden" value="show all"/>
 		</div>
 	</div> <!-- #eventsearch_bar -->
 

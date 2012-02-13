@@ -339,8 +339,8 @@ class EventSearcher {
 			$eterm_clauses = array();
 			$i = 0;
 			foreach ($this->f_etype as $eterm) {
-				$eterm_clauses[] = "categories rLIKE :keyword$i";
-				$this->query_args["keyword$i"] = $eterm;
+				$eterm_clauses[] = "categories rLIKE :eterm$i";
+				$this->query_args["eterm$i"] = $eterm;
 				$i++;
 			}
 			$having_clauses[] = implode(' OR ', $eterm_clauses);

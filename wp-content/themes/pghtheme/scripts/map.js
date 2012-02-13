@@ -391,20 +391,19 @@ function extractSearchOptions() {
 	if( search !== 'Keyword search (optional)' && search != '' ) {
 		search_opts['search_terms'] = search;
 	}
+
+	var eventtype = document.getElementById('eventtype').value;
+	if(eventtype && eventtype !== 'show all') {
+		search_opts['etype'] = eventtype;
+	}
+
 	return search_opts;
 }
 
 //Performs event search for each event category
-function typeButtonSearch(typebutton) {
-	var today = new Date();
-
-	var startdate = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate(); 
-	var startdate = today.getUTCFullYear() + '-' + 
-					(today.getUTCMonth()+1) + '-' + 
-					today.getUTCDate() + ' ' + 
-					today.getUTCHours() + ':' + 
-					today.getUTCMinutes(); 
-	performEventSearch( {"startdate":startdate,"limit":50, "etype":typebutton} );
+function typeButtonClicked(typebutton) {
+	document.getElementById('eventtype').value = typebutton;
+	newSearchRequested();
 }
 
 // Clears all event markers from map and collapses sidebar, replacing its contents with an optional string
@@ -419,27 +418,6 @@ function clearEventResults(callback) {
 	content.slideUp('fast', function() {
 		content.html('');
 		return callback(); } );
-
-	jQuery('#sidebar-footer').html('');
-
-	// clear all event markers from map
-	for(var i = 0; i < event_instances.length; i++) {
-		if(event_instances[i].marker) event_instances[i].marker.setMap(null);
-	}
-	event_instances.length = 0;
-}
-
-function clearMarkers() {
-		if(infoWindowFocus == 'event') {
-		infoWindow.close();
-		infoWindowFocus = null;
-	}
-
-	// Slide results window up
-	content = jQuery('#sidebar-content');
-	content.slideUp('fast', function() {
-		content.html('');
-		 } );
 
 	jQuery('#sidebar-footer').html('');
 
