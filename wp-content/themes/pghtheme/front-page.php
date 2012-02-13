@@ -26,9 +26,9 @@ get_header(); ?>
 				<li style="margin: 0px; padding: 0px;">
 					<div id="datepicksearch" style="display: none;">
 						<p class="searchbar_header">Start:</p>
-						<input id="startdate" class="datepicker hasDatepicker" type="text">
+						<input id="startdate" class="datepicker" type="text">
 						<p class="searchbar_header">End:</p>
-						<input id="enddate" class="datepicker hasDatepicker" type="text">
+						<input id="enddate" class="datepicker" type="text">
 						<p class="advancesearch" onclick="hideSearch()">Basic Date Search</p>
 					</div>
 				</li>
